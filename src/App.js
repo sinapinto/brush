@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react'
+import Home from './Home'
+import Header from './Header'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 export default function App() {
-  let [count, setCount] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={() => setCount(count+1)}>click</button>
-        <p>Count: {count}</p>
-      </header>
-    </div>
-  );
-};
+    <Router>
+      <React.Fragment>
+        <Header />
+        <Route exact path="/" component={Home} />
+      </React.Fragment>
+    </Router>
+  )
+}
