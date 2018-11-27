@@ -1,19 +1,12 @@
+const auth = require('../middleware/authMiddleware')
+const ctrl = require('../controllers')
 const Router = require('koa-router')
 const router = new Router()
 
-router.post('/user/login', ctx => {
-    ctx.status = 200
-    ctx.type = 'json'
-    ctx.body = { ay: 'lmao' }
-})
+router.post('/users/login', ctrl.user.login)
+router.post('/users', ctrl.user.create)
 
-router.get('/user', ctx => {
-})
-
-router.post('/user', ctx => {
-})
-
-router.put('/user', ctx => {
-})
+router.get('/user', auth, ctrl.user.get)
+router.put('/user', auth, ctrl.user.update)
 
 module.exports = router.routes()
