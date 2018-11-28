@@ -1,7 +1,7 @@
-const userRouter = require('./userRouter')
+let userRouter = require('./userRouter')
 
-const Router = require('koa-router')
-const router = new Router({ prefix: '/api' })
+let Router = require('koa-router')
+let router = new Router({ prefix: '/api' })
 
 router.use(userRouter)
 

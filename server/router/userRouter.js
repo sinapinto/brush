@@ -1,12 +1,12 @@
-const auth = require('../middleware/authMiddleware')
-const user = require('../controllers/userController')
-const Router = require('koa-router')
-const router = new Router()
+let auth = require('../middleware/authMiddleware')
+let user = require('../controllers/userController')
+let Router = require('koa-router')
+let router = new Router()
 
 router.post('/users/login', user.login)
-router.post('/users', user.create)
+router.post('/users', user.post)
 
-router.get('/user', auth, user.getCurrent)
-router.put('/user', auth, user.update)
+router.get('/user', auth, user.get)
+router.put('/user', auth, user.put)
 
 module.exports = router.routes()

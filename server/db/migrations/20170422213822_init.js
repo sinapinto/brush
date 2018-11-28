@@ -3,12 +3,12 @@ exports.up = function (knex) {
 
     .createTable('users', function (table) {
       table.uuid('id').unique().primary().notNullable()
-      table.string('email').unique().notNullable()
       table.string('username').unique().notNullable()
-      table.string('image').defaultTo('')
+      table.string('avatar').defaultTo('')
       table.text('bio').defaultTo('')
       table.string('password').notNullable()
-      table.timestamps(true, true)
+      table.timestamp('createdAt').defaultTo(knex.fn.now())
+      table.timestamp('updatedAt').defaultTo(knex.fn.now())
     })
 
     .createTable('posts', function (table) {
@@ -19,7 +19,8 @@ exports.up = function (knex) {
       table.string('description').notNullable()
       table.uuid('author').notNullable().references('users.id')
         .onDelete('CASCADE')
-      table.timestamps(true, true)
+      table.timestamp('createdAt').defaultTo(knex.fn.now())
+      table.timestamp('updatedAt').defaultTo(knex.fn.now())
     })
 }
 

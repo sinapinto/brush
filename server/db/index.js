@@ -1,3 +1,3 @@
-const knex = require('knex')
+let knex = require('knex')
 
 module.exports = (env) => knex(require('./knexfile')[env])
