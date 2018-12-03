@@ -1,0 +1,6 @@
+.btn {
+  color: var(--font-color);
+  background: none;
+  padding: 8px;
+  cursor: pointer;
+}

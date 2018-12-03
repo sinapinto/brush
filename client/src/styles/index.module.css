@@ -1,0 +1,43 @@
+@import "./variables.css";
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, code, em, small, strong,
+b, u, i, ol, ul, li, button,
+fieldset, form, label,
+article, aside, footer, header,
+menu, nav, section, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
