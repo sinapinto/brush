@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import styles from './index.module.css'
 
-export default function Button({ style, children, type, ...rest }) {
+export default function Button({ type, invert, htmlType, children, ...rest }) {
+  let classes = classNames(styles.btn, styles[type], {
+    [styles.invert]: invert,
+  })
   return (
     <button
-      className={styles.btn}
-      style={style}
-      type={type}
+      className={classes}
+      type={htmlType}
       {...rest}
     >
       {children}
@@ -16,13 +19,14 @@ export default function Button({ style, children, type, ...rest }) {
 }
 
 Button.propTypes = {
-  style: PropTypes.object,
+  type: PropTypes.oneOf(['primary', 'default', 'ghost']),
+  invert: PropTypes.bool,
+  htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
   children: PropTypes.node,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  onClick: PropTypes.func,
 }
 
 Button.defaultProps = {
-  style: null,
-  type: 'button'
+  type: 'default',
+  invert: false,
+  htmlType: 'button'
 }

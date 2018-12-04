@@ -8,9 +8,9 @@
   height: 400px;
   margin: auto;
   overflow: auto;
-  box-shadow: 1px 2px 6px 0 rgba(0,0,0,0.1);
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+  border: 0;
+  border-radius: var(--border-radius-lg);
   -webkit-overflow-scrolling: touch;
   background: #fff;
   outline: none;

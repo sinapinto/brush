@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '../../components/Button'
 import styles from './index.module.css'
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      <button onClick={() => get('/api/')}>fetch</button>
+      <Button onClick={() => get('/api/')}>fetch</Button>
       <pre>{JSON.stringify(res, null, 4)}</pre>
     </div>
   )

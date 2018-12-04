@@ -1,6 +1,45 @@
 .btn {
-  color: var(--font-color);
-  background: none;
-  padding: 8px;
+  padding: 12px 22px;
+  font-weight: var(--fw-bold);
+  font-size: 14px;
   cursor: pointer;
+  border-width: 2px;
+  border-color: var(--color-primary);
+  border-radius: var(--border-radius);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.btn:not(.disabled):hover {
+  filter: brightness(95%);
+}
+
+.default {
+  background: none;
+  color: var(--color-primary);
+  border-style: none;
+}
+.default.invert {
+  color: #fff;
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-style: none;
+}
+.primary.invert {
+  background-color: #fff;
+  color: var(--color-primary);
+}
+
+.ghost {
+  background: none;
+  border-style: solid;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.ghost.invert {
+  border-color: #fff;
+  color: #fff;
 }

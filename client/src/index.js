@@ -1,14 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Routes from './routes.js'
+import App from './app.js'
 import * as serviceWorker from './serviceWorker'
 import './styles/index.module.css'
-
-let App = () => {
-  return (
-    <Routes />
-  );
-}
 
 ReactDOM.render(<App />, document.getElementById('app-root'))
 

@@ -1,16 +1,15 @@
 @import "./variables.css";
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
-  background: #fff;
+  background: #f7f7f7;
   color: #000;
   line-height: 1;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -32,6 +31,14 @@ menu, nav, section, summary {
 
 ul, ol {
   list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
 button:focus {

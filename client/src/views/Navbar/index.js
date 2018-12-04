@@ -11,10 +11,11 @@ export default function Navbar() {
   let [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
   return (
     <nav className={styles.navbar}>
+      <div className={styles.navbarContent}>
       <Link to="/" className={styles.logo}>brush</Link>
       <div>
-        <Button onClick={() => setIsLoginModalOpen(true)}>Log In</Button>
-        <Button onClick={() => setIsRegisterModalOpen(true)}>Sign Up</Button>
+        <Button invert onClick={() => setIsLoginModalOpen(true)}>Log In</Button>
+        <Button type="primary" invert onClick={() => setIsRegisterModalOpen(true)}>Sign Up</Button>
       </div>
       <Modal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)}>
         <LoginForm />
@@ -22,6 +23,7 @@ export default function Navbar() {
       <Modal isOpen={isRegisterModalOpen} onRequestClose={() => setIsRegisterModalOpen(false)}>
         <RegisterForm />
       </Modal>
+    </div>
     </nav>
   )
 }

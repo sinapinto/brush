@@ -5,7 +5,7 @@ import Home from './views/Home'
 
 let NotFound = () => <h1>not found</h1>
 
-export default function Routes() {
+export default function App() {
   return (
     <BrowserRouter>
       <React.Fragment>
