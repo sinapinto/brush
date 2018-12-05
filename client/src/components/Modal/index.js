@@ -12,9 +12,9 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
     >
       {hasCloseButton && (
         <div className={styles.top}>
-        <button className={styles.closeButton} onClick={otherProps.onRequestClose}>
-          ×
-        </button>
+          <button className={styles.closeButton} onClick={otherProps.onRequestClose}>
+            ×
+          </button>
         </div>
       )}
       {children}

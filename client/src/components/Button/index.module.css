@@ -1,7 +1,7 @@
 .btn {
-  padding: 12px 22px;
+  padding: 13px 25px 9px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   border-width: 2px;
   border-color: var(--color-primary);
