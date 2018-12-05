@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
+  margin-bottom: 40px;
 }
 
 .navbarContent {
@@ -13,11 +15,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 28px;
 }
 
 .logo {
   font-size: 24px;
-  font-weight: var(--fw-bold);
+  font-weight: 700;
   color: #fff;
   text-decoration: none;
+}
+
+.buttonWrap > * {
+  margin-left: 28px;
 }

@@ -14,5 +14,24 @@
   -webkit-overflow-scrolling: touch;
   background: #fff;
   outline: none;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  height: 32px;
+  margin: 6px 0;
+}
+
+.closeButton {
+  background: none;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--font-color-light);
+}
+
+.closeButton:hover {
+  filter: brightness(95%);
 }

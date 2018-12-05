@@ -1,14 +1,13 @@
 body {
-  --content-width: 900px;
-  --font-color: #333;
-  --background-color: #eee;
-
-  --fw-normal: 400;
-  --fw-medium: 500;
-  --fw-bold: 700;
-
   --color-primary: #33cdff;
 
+  --font-color: #898989;
+  --font-color-header: #5c5c5c;
+  --font-color-light: #c4c4c4;
+
+  --content-width: 1000px;
   --border-radius: 8px;
   --border-radius-lg: 16px;
+  --box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  --background-color: #eee;
 }
