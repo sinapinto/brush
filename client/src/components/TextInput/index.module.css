@@ -8,8 +8,16 @@
 
 .input:focus {
   outline: 0;
+  border-bottom-color: var(--color-primary);
 }
 
 ::placeholder, ::-webkit-input-placeholder {
   color: var(--font-color-light);
+}
+
+.disabled {
+  opacity: .8;
+  background: none;
+  cursor: not-allowed;
+  user-select: none;
 }

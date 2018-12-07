@@ -32,7 +32,8 @@ export default function AuthForm({ type, onChangeType }) {
         >
           Log In
         </Button>
-    </p>
+      </p>
+      <RegisterForm />
     </section>
   )
 }
@@ -45,9 +46,9 @@ AuthForm.propTypes = {
 function LoginForm() {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
+  let [isFetching, setIsFetching] = useState(false)
   let handleSubmit = (e) => {
     e.preventDefault()
-    console.log('submit', username, password);
   }
   let handleChange = (e) => {
     if (e.target.name === 'password') {
@@ -58,14 +59,85 @@ function LoginForm() {
   }
   return (
     <form className={styles.form} onSubmit={handleSubmit} onChange={handleChange} >
-      <TextInput placeholder="Username" name="username" />
+      <TextInput
+        placeholder="Username"
+        name="username"
+        disabled={isFetching}
+        autoComplete="username"
+      />
       <TextInput
         placeholder="Password"
         name="password"
         type="password"
-        autoComplete=""
+        autoComplete="new-password"
+        disabled={isFetching}
       />
-      <Button type="primary" htmlType="submit">Submit</Button>
+      <Button type="primary" htmlType="submit">Log In</Button>
+    </form>
+  )
+}
+
+function RegisterForm() {
+  let [username, setUsername] = useState('')
+  let [password, setPassword] = useState('')
+  let [error, setError] = useState()
+  let [isFetching, setIsFetching] = useState(false)
+
+  let handleSubmit = (e) => {
+    e.preventDefault()
+    setIsFetching(true)
+
+    fetch('/api/users', {
+      method: 'POST',
+      body: {
+        username,
+        password,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.errors.name)
+        }
+        setIsFetching(false)
+      })
+      .catch((err) => {
+        setError(err.message || 'An unknown error occured.')
+        setIsFetching(false)
+      })
+  }
+  let handleChange = (e) => {
+    // clear any errors
+    setError(null)
+    if (e.target.name === 'password') {
+      setPassword(e.target.value)
+    } else if (e.target.name === 'username') {
+      setUsername(e.target.value)
+    }
+  }
+  return (
+    <form className={styles.form} onSubmit={handleSubmit} onChange={handleChange} >
+      <TextInput
+        placeholder="Username"
+        name="username"
+        disabled={isFetching}
+        autoComplete="off"
+      />
+      <TextInput
+        placeholder="Password"
+        name="password"
+        type="password"
+        autoComplete="new-password"
+        disabled={isFetching}
+      />
+      <p className={styles.error}>{error || ''}</p>
+      <Button
+        type="primary"
+        htmlType="submit"
+        disabled={isFetching || !username || !password}
+      >
+        Sign Up
+      </Button>
     </form>
   )
 }

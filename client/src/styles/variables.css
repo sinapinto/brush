@@ -1,9 +1,24 @@
 body {
   --color-primary: #33cdff;
 
+  --grey-1: #fff;
+  --grey-2: #fafafa;
+  --grey-3: #f5f5f5;
+  --grey-4: #e8e8e8;
+  --grey-5: #d9d9d9;
+  --grey-6: #bfbfbf;
+  --grey-7: #8c8c8c;
+  --grey-8: #595959;
+  --grey-9: #262626;
+  --grey-10: #000;
+
+  --disabled-color: #8c8c8c;
+
   --font-color: #898989;
   --font-color-header: #5c5c5c;
   --font-color-light: #c4c4c4;
+
+  --color-error: #ca2727;
 
   --content-width: 1000px;
   --border-radius: 8px;

@@ -44,3 +44,9 @@
   border-color: #fff;
   color: #fff;
 }
+
+.disabled {
+  background-color: var(--disabled-color);
+  color: #fff;
+  cursor: not-allowed;
+}
