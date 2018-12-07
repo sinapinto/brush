@@ -8,6 +8,7 @@ let debug = require('debug')('app')
 let router = require('./router')
 let db = require('./db')
 let schemas = require('./schemas')
+let errorMiddleware = require('./middleware/errorMiddleware')
 
 let app = new Koa()
 
@@ -15,6 +16,7 @@ app.use(helmet())
 app.use(logger())
 app.use(bodyparser())
 
+app.use(errorMiddleware)
 app.use(router.routes())
 
 let PORT = process.env.PORT || 4000

@@ -16,23 +16,35 @@ export default function SignupForm({ className }) {
 
     fetch('/api/users', {
       method: 'POST',
-      body: {
-        username,
-        password,
+      headers: {
+        'Content-Type': 'application/json',
       },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.errors.name)
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
         }
+      }),
+    })
+      .then((res) => {
+        return res.json()
+          .then((json) => {
+            if (!res.ok) {
+              let errors = Object.values(json.errors)[0]
+              return Promise.reject(Array.isArray(errors) ? errors[0] : '')
+            }
+            return json
+          })
+      })
+      .then((res) => {
         setIsFetching(false)
       })
       .catch((err) => {
-        setError(err.message || 'An unknown error occured.')
+        setError(typeof err === 'string' ? err : 'An unknown error occured.')
         setIsFetching(false)
       })
   }
+
   let handleChange = (e) => {
     // clear any errors
     setError(null)
@@ -42,8 +54,9 @@ export default function SignupForm({ className }) {
       setUsername(e.target.value)
     }
   }
+
   return (
-    <form className={className} onSubmit={handleSubmit} onChange={handleChange} >
+    <form className={className} onSubmit={handleSubmit} onChange={handleChange}>
       <TextInput
         placeholder="Username"
         name="username"
