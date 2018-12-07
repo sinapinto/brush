@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../components/Button'
 import TextInput from '../../components/TextInput'
+import { signup } from './request'
 import styles from './LoginForm.module.css'
 
 export default function SignupForm({ className }) {
@@ -13,34 +14,14 @@ export default function SignupForm({ className }) {
   let handleSubmit = (e) => {
     e.preventDefault()
     setIsFetching(true)
-
-    fetch('/api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: {
-          username,
-          password,
-        }
-      }),
-    })
-      .then((res) => {
-        return res.json()
-          .then((json) => {
-            if (!res.ok) {
-              let errors = Object.values(json.errors)[0]
-              return Promise.reject(Array.isArray(errors) ? errors[0] : '')
-            }
-            return json
-          })
-      })
-      .then((res) => {
-        setIsFetching(false)
+    signup(username, password)
+      .then(() => {
+        setError(null)
       })
       .catch((err) => {
         setError(typeof err === 'string' ? err : 'An unknown error occured.')
+      })
+      .finally(() => {
         setIsFetching(false)
       })
   }
