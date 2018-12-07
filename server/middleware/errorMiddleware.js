@@ -28,7 +28,7 @@ async function errorMiddleware(ctx, next) {
 
     } else {
       debug(err.message, err.errno)
-      ctx.status = 400
+      ctx.status = 422
       ctx.body = { errors: {} }
     }
   }
