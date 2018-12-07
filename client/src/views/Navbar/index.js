@@ -14,7 +14,7 @@ export default function Navbar() {
       <Link to="/" className={styles.logo}>brush</Link>
       <div className={styles.buttonWrap}>
         <Button invert onClick={() => setActiveModal(modalState.LOGIN)}>Log In</Button>
-        <Button type="primary" invert onClick={() => setActiveModal(modalState.REGISTER)}>Sign Up</Button>
+        <Button type="primary" invert onClick={() => setActiveModal(modalState.SIGNUP)}>Sign Up</Button>
       </div>
       <Modal isOpen={activeModal !== modalState.CLOSED} onRequestClose={() => setActiveModal(modalState.CLOSED)}>
         <AuthForm type={activeModal} onChangeType={(type) => setActiveModal(type)} />

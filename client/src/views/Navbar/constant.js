@@ -1,6 +1,6 @@
 let modalState = {
   CLOSED: 'CLOSED',
   LOGIN: 'LOGIN',
-  REGISTER: 'REGISTER',
+  SIGNUP: 'SIGNUP',
 }
 export { modalState }
