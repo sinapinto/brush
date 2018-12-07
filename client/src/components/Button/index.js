@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './index.module.css'
 
-export default function Button({ type, invert, htmlType, children, ...rest }) {
-  let classes = classNames(styles.btn, styles[type], {
+export default function Button({ type, className, invert, htmlType, children, ...rest }) {
+  let classes = classNames(styles.btn, className, styles[type], {
     [styles.invert]: invert,
   })
   return (
     <button
+      {...rest}
       className={classes}
       type={htmlType}
-      {...rest}
     >
       {children}
     </button>
@@ -19,6 +19,7 @@ export default function Button({ type, invert, htmlType, children, ...rest }) {
 }
 
 Button.propTypes = {
+  className: PropTypes.string,
   type: PropTypes.oneOf(['primary', 'default', 'ghost']),
   invert: PropTypes.bool,
   htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
@@ -26,6 +27,7 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
+  className: null,
   type: 'default',
   invert: false,
   htmlType: 'button'

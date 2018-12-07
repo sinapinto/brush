@@ -1,0 +1,15 @@
+.input {
+  border: 0;
+  border-bottom: 2px solid var(--font-color-light);
+  color: var(--font-color);
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+::placeholder, ::-webkit-input-placeholder {
+  color: var(--font-color-light);
+}

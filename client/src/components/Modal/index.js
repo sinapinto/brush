@@ -8,16 +8,18 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
     <ReactModal
       {...otherProps}
       appElement={document.getElementById('app-root')}
-      className={styles.content}
+      className={styles.modal}
     >
-      {hasCloseButton && (
-        <div className={styles.top}>
+      <div className={styles.toolbar}>
+        {hasCloseButton && (
           <button className={styles.closeButton} onClick={otherProps.onRequestClose}>
             ×
           </button>
-        </div>
-      )}
-      {children}
+        )}
+      </div>
+      <div className={styles.content}>
+        {children}
+      </div>
     </ReactModal>
   )
 }
