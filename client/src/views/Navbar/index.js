@@ -5,15 +5,8 @@ import Button from '../../components/Button'
 import AuthForm from './AuthForm'
 import { modalState } from './constant'
 import { UserContext } from '../../context'
+import { logout } from '../../fetch/auth'
 import styles from './index.module.css'
-
-async function logout() {
-  return fetch('/api/users/logout', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-  })
-    .then(res => res.json())
-}
 
 export default function Navbar() {
   let [modalType, setModalType] = useState(modalState.CLOSED)

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../components/Button'
 import TextInput from '../../components/TextInput'
-import { signup } from './request'
+import { signup } from '../../fetch/auth'
 import styles from './LoginForm.module.css'
 
 export default function SignupForm({ className, onSuccess }) {

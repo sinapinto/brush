@@ -2,18 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './views/Navbar'
 import Home from './views/Home'
+import { fetchSignedInUser } from './fetch/auth'
 import { UserContext } from './context'
 
 let NotFound = () => <h1>not found</h1>
-
-async function fetchSignedInUser() {
-  return fetch('/api/user', {
-    method: 'GET',
-    headers: { 'content-type': 'application/json' },
-  })
-    .then(res => res.json())
-    .then(res => res.user)
-}
 
 export default function App() {
   let [signedInUser, setSignedInUser] = useState(null)

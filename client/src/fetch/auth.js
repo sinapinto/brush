@@ -51,3 +51,21 @@ export async function login(username, password) {
           })
       })
 }
+
+export async function logout() {
+  return fetch('/api/users/logout', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+  })
+    .then(res => res.json())
+}
+
+export async function fetchSignedInUser() {
+  return fetch('/api/user', {
+    method: 'GET',
+    headers: { 'content-type': 'application/json' },
+  })
+    .then(res => res.json())
+    .then(res => res.user)
+}
+
