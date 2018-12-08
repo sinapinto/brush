@@ -9,7 +9,7 @@ import styles from './AuthForm.module.css'
 
 export default function AuthForm({ type, onChangeType, onSuccess }) {
   return type === modalState.LOGIN ? (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <H level={2}>Log In</H>
       <p className={styles.p}>
         Don&apos;t have an account?
@@ -21,9 +21,9 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
         </Button>
       </p>
       <LoginForm className={styles.form} onSuccess={onSuccess} />
-    </section>
+    </div>
   ) : (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <H level={2}>Sign Up</H>
       <p className={styles.p}>
         Already have an account?
@@ -35,7 +35,7 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
         </Button>
       </p>
       <SignupForm className={styles.form} onSuccess={onSuccess} />
-    </section>
+    </div>
   )
 }
 

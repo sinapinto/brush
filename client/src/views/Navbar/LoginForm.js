@@ -39,7 +39,7 @@ export default function LoginForm({ className, onSuccess }) {
         placeholder="Username"
         name="username"
         disabled={isFetching}
-        autoComplete="username"
+        autoComplete="off"
       />
       <TextInput
         placeholder="Password"
