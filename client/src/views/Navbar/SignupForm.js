@@ -8,8 +8,8 @@ import styles from './LoginForm.module.css'
 export default function SignupForm({ className, onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
-  let [error, setError] = useState()
   let [isFetching, setIsFetching] = useState(false)
+  let [error, setError] = useState()
 
   let handleSubmit = (e) => {
     e.preventDefault()
@@ -25,7 +25,6 @@ export default function SignupForm({ className, onSuccess }) {
   }
 
   let handleChange = (e) => {
-    // clear any errors
     setError(null)
     if (e.target.name === 'password') {
       setPassword(e.target.value)
@@ -63,7 +62,7 @@ export default function SignupForm({ className, onSuccess }) {
 
 SignupForm.propTypes = {
   className: PropTypes.string,
-  onSuccess: PropTypes.func,
+  onSuccess: PropTypes.func.isRequired,
 }
 
 SignupForm.defaultProps = {

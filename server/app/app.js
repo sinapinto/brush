@@ -26,10 +26,6 @@ app.use(logger())
 app.use(bodyparser())
 app.use(session({ rolling: true }, app))
 
-app.use((ctx, next) => {
-  debug('session user ID:', ctx.session.userId)
-  return next()
-})
 app.use(errorMiddleware)
 app.use(router.routes())
 

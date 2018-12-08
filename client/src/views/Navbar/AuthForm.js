@@ -20,7 +20,7 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
           Sign Up
         </Button>
       </p>
-      <LoginForm className={styles.form} />
+      <LoginForm className={styles.form} onSuccess={onSuccess} />
     </section>
   ) : (
     <section className={styles.container}>
@@ -44,4 +44,3 @@ AuthForm.propTypes = {
   onChangeType: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
 }
-

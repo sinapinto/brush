@@ -30,6 +30,9 @@ async function errorMiddleware(ctx, next) {
       debug(err)
       ctx.status = err.status || 422
       ctx.body = { errors: {} }
+      if (err.path) {
+        ctx.body.errors[err.path] = [err.message]
+      }
     }
   }
 }
