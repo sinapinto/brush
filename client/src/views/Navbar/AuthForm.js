@@ -7,7 +7,7 @@ import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import styles from './AuthForm.module.css'
 
-export default function AuthForm({ type, onChangeType }) {
+export default function AuthForm({ type, onChangeType, onSuccess }) {
   return type === modalState.LOGIN ? (
     <section className={styles.container}>
       <H level={2}>Log In</H>
@@ -34,7 +34,7 @@ export default function AuthForm({ type, onChangeType }) {
           Log In
         </Button>
       </p>
-      <SignupForm className={styles.form} />
+      <SignupForm className={styles.form} onSuccess={onSuccess} />
     </section>
   )
 }
@@ -42,5 +42,6 @@ export default function AuthForm({ type, onChangeType }) {
 AuthForm.propTypes = {
   type: PropTypes.oneOf(Object.values(modalState)).isRequired,
   onChangeType: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
 }
 

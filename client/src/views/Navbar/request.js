@@ -20,7 +20,7 @@ export async function signup(username, password) {
               msg = msg.slice(0, 1).toUpperCase() + msg.slice(1)
               return Promise.reject(msg)
             }
-            return json
+            return json.user
           })
       })
 }

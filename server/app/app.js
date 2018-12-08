@@ -2,7 +2,6 @@ let path = require('path')
 let Koa = require('koa')
 let helmet = require('koa-helmet')
 let logger = require('koa-logger')
-let mount = require('koa-mount')
 let bodyparser = require('koa-bodyparser')
 let session = require('koa-session')
 let debug = require('debug')('app')
@@ -25,13 +24,12 @@ app.keys = config.keys
 app.use(helmet())
 app.use(logger())
 app.use(bodyparser())
-app.use(session({
-  autoCommit: true, /* automatically commit headers */
-  overwrite: true, /* can overwrite or not */
-  rolling: true, /* force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. */
-  renew: false, /* renew session when session is nearly expired, so we can always keep user logged in. */
-}, app))
+app.use(session({ rolling: true }, app))
 
+app.use((ctx, next) => {
+  debug('session user ID:', ctx.session.userId)
+  return next()
+})
 app.use(errorMiddleware)
 app.use(router.routes())
 

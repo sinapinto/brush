@@ -5,7 +5,7 @@ import TextInput from '../../components/TextInput'
 import { signup } from './request'
 import styles from './LoginForm.module.css'
 
-export default function SignupForm({ className }) {
+export default function SignupForm({ className, onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
   let [error, setError] = useState()
@@ -15,13 +15,11 @@ export default function SignupForm({ className }) {
     e.preventDefault()
     setIsFetching(true)
     signup(username, password)
-      .then(() => {
-        setError(null)
+      .then((user) => {
+        onSuccess(user)
       })
       .catch((err) => {
         setError(typeof err === 'string' ? err : 'An unknown error occured.')
-      })
-      .finally(() => {
         setIsFetching(false)
       })
   }
@@ -65,6 +63,7 @@ export default function SignupForm({ className }) {
 
 SignupForm.propTypes = {
   className: PropTypes.string,
+  onSuccess: PropTypes.func,
 }
 
 SignupForm.defaultProps = {

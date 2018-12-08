@@ -1,7 +1,16 @@
+let debug = require('debug')('app')
+
 async function authMiddleware(ctx, next) {
-  if (!ctx.user) {
-    // ctx.throw(401)
-  }
+  ctx.assert(ctx.session.userId, 401)
+  ctx.user = await ctx.db('users').first(
+    'id',
+    'username',
+    'bio',
+    'avatar',
+    'createdAt',
+    'updatedAt'
+  ).where('id', ctx.session.userId)
+
   return next()
 }
 

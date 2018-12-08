@@ -3,27 +3,39 @@ let bcrypt = require('bcrypt')
 let { omit } = require('../util')
 
 module.exports  = {
-  // POST /api/users/login
+  // POST /users/login
   async login(ctx) {
+    // let { user = {} } = ctx.request.body
+    // user = await ctx.schemas.user.validate(user, { abortEarly: false })
+    // user.password = await bcrypt.hash(user.password, 10)
+    // await ctx.db('users').insert(user)
+    // ctx.session.userId = user.id
+    // ctx.body = { user: omit(user, ['password']) }
   },
 
-  // POST /api/users
+  // POST /users/logout
+  async logout(ctx) {
+    ctx.session = null
+    ctx.body = {}
+  },
+
+  // POST /users
   async post(ctx) {
     let { user = {} } = ctx.request.body
     user.id = uuid()
     user = await ctx.schemas.user.validate(user, { abortEarly: false, context: { validatePassword: true } })
     user.password = await bcrypt.hash(user.password, 10)
     await ctx.db('users').insert(user)
+    ctx.session.userId = user.id
     ctx.body = { user: omit(user, ['password']) }
   },
 
-  // GET /api/user
+  // GET /user
   async get(ctx) {
-    let users = await ctx.db('users').select()
-    ctx.body = { users }
+    ctx.body = { user: ctx.user }
   },
 
-  // PUT /api/user
+  // PUT /user
   async put(ctx) {
   },
 }
