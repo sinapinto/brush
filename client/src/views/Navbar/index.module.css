@@ -6,7 +6,7 @@
   justify-content: center;
   background-color: var(--color-primary);
   box-shadow: var(--box-shadow);
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .navbarContent {

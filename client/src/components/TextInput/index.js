@@ -13,7 +13,7 @@ export default function TextInput({ className, disabled, ...otherProps }) {
       disabled={disabled}
       {...otherProps}
     />
-  );
+  )
 }
 
 TextInput.propTypes = {

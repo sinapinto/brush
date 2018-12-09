@@ -9,7 +9,7 @@ export default function Card({ className, children }) {
     <div className={classes}>
       {children}
     </div>
-  );
+  )
 }
 
 Card.propTypes = {

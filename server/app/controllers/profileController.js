@@ -6,7 +6,7 @@ module.exports  = {
     ctx.assert(username, 404)
     ctx.profile = await ctx.db('users')
       .first(
-        ...['id', 'avatar', 'bio', 'username'].map(f => `users.${f} as ${f}`),
+        ...['id', 'username', 'avatar', 'bio', 'createdAt'].map(f => `users.${f} as ${f}`),
         'followers.id as following'
       )
       .where('username', username)
@@ -16,11 +16,7 @@ module.exports  = {
       })
     ctx.assert(ctx.profile, 404)
     ctx.profile.following = ctx.profile.following || false
-
-    await next()
-    if (ctx.body.profile) {
-      ctx.body.profile = omit(ctx.body.profile, ['id'])
-    }
+    return next()
   },
 
   // GET /profiles/:username

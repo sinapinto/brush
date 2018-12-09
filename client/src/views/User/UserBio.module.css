@@ -1,3 +1,14 @@
 .container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.info {
+  width: 420px;
+}
+
+.avatar {
+  color: var(--slate);
 }

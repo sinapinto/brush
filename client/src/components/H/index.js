@@ -7,7 +7,7 @@ export default function H({ level, children }) {
     <h2 className={styles[`h${level}`]}>
       {children}
     </h2>
-  );
+  )
 }
 
 H.propTypes = {

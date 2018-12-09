@@ -1,22 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { formatDistance } from 'date-fns'
+import Icon from '../../components/Icon'
 import H from '../../components/H'
 import styles from './UserBio.module.css'
 
-function Avatar({ src }) {
-  return <div>{src}</div>
-}
-
 export default function UserBio({ user }) {
+  let startDate = formatDistance(new Date(user.createdAt), new Date(), { addSuffix: true })
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.info}>
         <H level={1}>{user.username}</H>
-        <H level={3}>{user.bio}</H>
+        <p>{user.bio}</p>
+        <p>Started brushing {startDate}</p>
       </div>
-      <Avatar src={user.avatar} />
+      <Icon name="grin" className={styles.avatar} size={64} />
     </div>
-  );
+  )
 }
 
 UserBio.propTypes = {

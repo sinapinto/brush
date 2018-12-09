@@ -25,7 +25,7 @@ export default function User({ match }) {
         )}
       </div>
     </Card>
-  );
+  )
 }
 
 User.propTypes = {
