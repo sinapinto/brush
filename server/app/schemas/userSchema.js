@@ -17,6 +17,7 @@ module.exports = yup.object().shape({
     }),
 
   bio: yup.string()
+    .max(100)
     .default('')
     .trim(),
 

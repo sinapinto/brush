@@ -13,7 +13,7 @@ export default function User({ match }) {
     getProfile(username)
       .then(user => setUser(user))
       .catch(user => setUser(null))
-  }, [])
+  }, [username])
 
   return (
     <Card>

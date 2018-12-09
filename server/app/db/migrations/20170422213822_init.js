@@ -22,10 +22,22 @@ exports.up = function (knex) {
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.timestamp('updatedAt').defaultTo(knex.fn.now())
     })
+
+    .createTable('followers', function (table) {
+      table.uuid('id').unique().primary().notNullable()
+      table.uuid('user').notNullable().references('users.id')
+        .onDelete('CASCADE')
+      table.uuid('follower').notNullable().references('users.id')
+        .onDelete('CASCADE')
+      table.unique(['user', 'follower'])
+      table.timestamps(true, true)
+    })
+
 }
 
 exports.down = function (knex) {
   return knex.schema
     .dropTableIfExists('users')
     .dropTableIfExists('posts')
+    .dropTableIfExists('followers')
 }

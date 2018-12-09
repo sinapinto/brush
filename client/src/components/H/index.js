@@ -12,7 +12,7 @@ export default function H({ level, children }) {
 
 H.propTypes = {
   level: PropTypes.oneOf([1, 2, 3, 4]),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 }
 
 H.defaultProps = {
