@@ -1,4 +1,7 @@
 .container {
+}
+
+.bioWrap {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,4 +14,8 @@
 
 .avatar {
   color: var(--slate);
+}
+
+.tabpane {
+  padding: 24px;
 }

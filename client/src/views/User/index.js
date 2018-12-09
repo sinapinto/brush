@@ -17,13 +17,11 @@ export default function User({ match }) {
 
   return (
     <Card>
-      <div className={styles.wrap}>
-        {user === null ? (
-          <div>user not found :0</div>
-        ) : (
-          <UserBio user={user} />
-        )}
-      </div>
+      {user === null ? (
+        <div>user not found :0</div>
+      ) : (
+        <UserBio user={user} />
+      )}
     </Card>
   )
 }

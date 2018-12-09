@@ -1,0 +1,23 @@
+.tabs {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+  padding: 20px 0 10px;
+  margin-left: 32px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: none;
+  cursor: pointer;
+  color: var(--font-color-light);
+  border-bottom: 4px solid transparent;
+}
+
+.tab.selected {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
