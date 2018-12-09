@@ -25,6 +25,10 @@
   text-decoration: none;
 }
 
+.buttonWrap {
+  opacity: .8;
+}
+
 .buttonWrap > * {
   margin-left: 28px;
 }

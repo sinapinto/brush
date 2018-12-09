@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Card from '../../components/Card'
 import UserBio from './UserBio'
-import styles from './index.module.css'
 import { getProfile } from '../../fetch/profile'
 
 export default function User({ match }) {

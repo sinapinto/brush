@@ -17,10 +17,6 @@ module.exports = yup.object().shape({
     .required()
     .trim(),
 
-  description: yup.string()
-    .required()
-    .trim(),
-
   favoritesCount: yup.number()
     .required()
     .default(0),

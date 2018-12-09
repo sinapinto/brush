@@ -23,12 +23,15 @@ export default function Navbar() {
         <Link to="/" className={styles.logo}>brush</Link>
         <div className={styles.buttonWrap}>
           {signedInUser ? (
-            <ButtonLink
-              invert
-              to={`/u/${signedInUser.username}`}
-            >
-              {signedInUser.username.slice(0, 16)}
-            </ButtonLink>
+            <React.Fragment>
+              <ButtonLink invert to="/create">Create</ButtonLink>
+              <ButtonLink
+                invert
+                to={`/u/${signedInUser.username}`}
+              >
+                {signedInUser.username.slice(0, 16)}
+              </ButtonLink>
+            </React.Fragment>
           ) : (
             <Button
               type="primary"

@@ -17,7 +17,6 @@ function getPosts(users) {
         title,
         slug: slug(title, { lower: true }),
         body: faker.lorem.sentences(10),
-        description: faker.lorem.sentences(2),
         createdAt: date,
         updatedAt: date
       }

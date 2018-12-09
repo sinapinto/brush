@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './views/Navbar'
 import Home from './views/Home'
 import User from './views/User'
+import Create from './views/Create'
 import { fetchSignedInUser } from './fetch/auth'
 import { UserContext } from './context'
 import styles from './app.module.css'
@@ -27,6 +28,7 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/u/:username" component={User} />
+              <Route path="/create" component={Create} />
               <Route component={NotFound} />
             </Switch>
           </div>

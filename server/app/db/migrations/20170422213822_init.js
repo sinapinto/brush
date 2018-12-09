@@ -16,8 +16,17 @@ exports.up = function (knex) {
       table.string('slug').unique().notNullable()
       table.string('title').notNullable()
       table.text('body').notNullable()
-      table.string('description').notNullable()
       table.uuid('author').notNullable().references('users.id')
+        .onDelete('CASCADE')
+      table.timestamp('createdAt').defaultTo(knex.fn.now())
+      table.timestamp('updatedAt').defaultTo(knex.fn.now())
+    })
+
+    .createTable('favorites', function (table) {
+      table.uuid('id').unique().primary().notNullable()
+      table.uuid('user').notNullable().references('users.id')
+        .onDelete('CASCADE')
+      table.uuid('post').notNullable().references('posts.id')
         .onDelete('CASCADE')
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.timestamp('updatedAt').defaultTo(knex.fn.now())
@@ -30,7 +39,8 @@ exports.up = function (knex) {
       table.uuid('follower').notNullable().references('users.id')
         .onDelete('CASCADE')
       table.unique(['user', 'follower'])
-      table.timestamps(true, true)
+      table.timestamp('createdAt').defaultTo(knex.fn.now())
+      table.timestamp('updatedAt').defaultTo(knex.fn.now())
     })
 
 }
