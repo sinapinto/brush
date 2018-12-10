@@ -7,8 +7,8 @@ exports.up = function (knex) {
       table.string('avatar').defaultTo('')
       table.text('bio').defaultTo('')
       table.string('password').notNullable()
-      table.timestamp('createdAt').defaultTo(knex.fn.now())
-      table.timestamp('updatedAt').defaultTo(knex.fn.now())
+      table.timestamp('createdAt')
+      table.timestamp('updatedAt')
     })
 
     .createTable('posts', function (table) {
@@ -18,8 +18,8 @@ exports.up = function (knex) {
       table.text('body').notNullable()
       table.uuid('author').notNullable().references('users.id')
         .onDelete('CASCADE')
-      table.timestamp('createdAt').defaultTo(knex.fn.now())
-      table.timestamp('updatedAt').defaultTo(knex.fn.now())
+      table.timestamp('createdAt')
+      table.timestamp('updatedAt')
     })
 
     .createTable('favorites', function (table) {
@@ -28,8 +28,8 @@ exports.up = function (knex) {
         .onDelete('CASCADE')
       table.uuid('post').notNullable().references('posts.id')
         .onDelete('CASCADE')
-      table.timestamp('createdAt').defaultTo(knex.fn.now())
-      table.timestamp('updatedAt').defaultTo(knex.fn.now())
+      table.timestamp('createdAt')
+      table.timestamp('updatedAt')
     })
 
     .createTable('followers', function (table) {
@@ -39,8 +39,8 @@ exports.up = function (knex) {
       table.uuid('follower').notNullable().references('users.id')
         .onDelete('CASCADE')
       table.unique(['user', 'follower'])
-      table.timestamp('createdAt').defaultTo(knex.fn.now())
-      table.timestamp('updatedAt').defaultTo(knex.fn.now())
+      table.timestamp('createdAt')
+      table.timestamp('updatedAt')
     })
 
 }

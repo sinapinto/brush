@@ -1,5 +1,5 @@
-let auth = require('../middleware/authMiddleware')
-let post = require('../controllers/postController')
+let auth = require('../../middleware/authMiddleware')
+let post = require('./controller')
 let Router = require('koa-router')
 let router = new Router()
 

@@ -1,5 +1,5 @@
 let yup = require('yup')
-let timeStampSchema = require('./timestampSchema')
+let { yupISODate } = require('../../util')
 
 module.exports = yup.object().shape({
   id: yup.string(),
@@ -26,6 +26,7 @@ module.exports = yup.object().shape({
     .default('')
     .trim(),
 
+  createdAt: yupISODate(),
+  updatedAt: yupISODate(),
 })
   .noUnknown()
-  .concat(timeStampSchema)

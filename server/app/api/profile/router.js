@@ -1,5 +1,5 @@
-let auth = require('../middleware/authMiddleware')
-let profile = require('../controllers/profileController')
+let auth = require('../../middleware/authMiddleware')
+let profile = require('./controller')
 let Router = require('koa-router')
 let router = new Router()
 

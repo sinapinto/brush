@@ -1,7 +1,6 @@
 let uuid = require('uuid')
 let slug = require('slug')
-let debug = require('debug')('app')
-let { pick } = require('../util')
+let { pick } = require('../../util')
 
 module.exports = {
   async bySlug(slug, ctx, next) {

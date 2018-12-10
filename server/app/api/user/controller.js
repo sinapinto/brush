@@ -1,8 +1,14 @@
 let uuid = require('uuid')
 let bcrypt = require('bcrypt')
-let { omit } = require('../util')
 
 module.exports  = {
+  async postprocess(ctx, next) {
+    await next()
+    if (ctx.body.user) {
+      delete ctx.body.user.password
+    }
+  },
+
   // POST /users/login
   async login(ctx) {
     let { user = {} } = ctx.request.body
@@ -14,7 +20,7 @@ module.exports  = {
       ctx.throw(422, 'Invalid username or password', { path: 'unknown' })
     }
     ctx.session.userId = cand.id
-    ctx.body = { user: omit(cand, ['password']) }
+    ctx.body = { user: cand }
   },
 
   // POST /users/logout
@@ -31,7 +37,7 @@ module.exports  = {
     user.password = await bcrypt.hash(user.password, 10)
     await ctx.db('users').insert(user)
     ctx.session.userId = user.id
-    ctx.body = { user: omit(user, ['password']) }
+    ctx.body = { user }
   },
 
   // GET /user

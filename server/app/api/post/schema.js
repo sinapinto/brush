@@ -1,5 +1,5 @@
 let yup = require('yup')
-let timeStampSchema = require('./timestampSchema')
+let { yupISODate } = require('../../util')
 
 module.exports = yup.object().shape({
   id: yup.string(),
@@ -20,6 +20,8 @@ module.exports = yup.object().shape({
   favoritesCount: yup.number()
     .required()
     .default(0),
+
+  createdAt: yupISODate(),
+  updatedAt: yupISODate(),
 })
   .noUnknown()
-  .concat(timeStampSchema)

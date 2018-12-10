@@ -1,5 +1,5 @@
 let uuid = require('uuid')
-let { omit } = require('../util')
+let { omit } = require('../../util')
 
 module.exports  = {
   async byUsername(username, ctx, next) {

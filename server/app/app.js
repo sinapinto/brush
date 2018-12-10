@@ -4,11 +4,10 @@ let helmet = require('koa-helmet')
 let logger = require('koa-logger')
 let bodyparser = require('koa-bodyparser')
 let session = require('koa-session')
-let debug = require('debug')('app')
-let router = require('./router')
+let api = require('./api')
 let db = require('./db')
-let schemas = require('./schemas')
 let errorMiddleware = require('./middleware/errorMiddleware')
+let debug = require('debug')('app')
 
 let config
 try {
@@ -27,12 +26,11 @@ app.use(bodyparser())
 app.use(session({ rolling: true }, app))
 
 app.use(errorMiddleware)
-app.use(router.routes())
+app.use(api(app))
 
 let PORT = process.env.PORT || 4000
 let ENV = process.env.NODE_ENV || 'development'
 
-app.context.schemas = schemas
 app.context.db = db(ENV)
 
 app.context.db.migrate.latest()
