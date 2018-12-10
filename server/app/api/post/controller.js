@@ -117,5 +117,5 @@ module.exports = {
   },
 
   async unfavorite(ctx) {
-  }
+  },
 }

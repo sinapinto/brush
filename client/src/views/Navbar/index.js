@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
+import Icon from '../../components/Icon'
 import AuthForm from './AuthForm'
 import { modalState } from './constant'
 import { UserContext } from '../../context'
@@ -24,11 +25,15 @@ export default function Navbar() {
         <div className={styles.buttonWrap}>
           {signedInUser ? (
             <React.Fragment>
-              <ButtonLink invert to="/create">Create</ButtonLink>
+              <ButtonLink invert to="/create">
+                <Icon name="plus" size={20} className={styles.btnIcon} />
+                Create
+              </ButtonLink>
               <ButtonLink
                 invert
                 to={`/u/${signedInUser.username}`}
               >
+                <Icon name="grin" size={20} className={styles.btnIcon} />
                 {signedInUser.username.slice(0, 16)}
               </ButtonLink>
             </React.Fragment>
