@@ -45,8 +45,7 @@ module.exports = {
     return next()
   },
 
-  // GET /posts
-  async get(ctx) {
+  async list(ctx) {
     let { user } = ctx
     let posts = await ctx.db('posts')
       .select(
@@ -83,8 +82,7 @@ module.exports = {
     ctx.body = { posts }
   },
 
-  // POST /posts
-  async post(ctx) {
+  async create(ctx) {
     let { post = {} } = ctx.request.body
     post.id = uuid()
     post.author = ctx.user.id
@@ -93,7 +91,7 @@ module.exports = {
     try {
       await ctx.db('posts').insert(post)
     } catch (err) {
-      // slug already exists. append an id
+      // slug already exists. append an id and retry
       if (err.errno === 19 || err.code === 23505) {
         article.slug = article.slug + '-' + uuid().slice(-6)
         await ctx.db('posts').insert(post)
@@ -105,26 +103,19 @@ module.exports = {
     ctx.body = { post }
   },
 
-  // GET /posts/:slug
-  async getOne(ctx) {
+  async detail(ctx) {
     ctx.body = { post: ctx.post }
   },
 
-  // PUT /posts/:slug
-  async put(ctx) {
+  async update(ctx) {
   },
 
-  // DELETE /posts/:slug
-  async del(ctx) {
+  async delete(ctx) {
   },
 
-  favorite: {
-    // POST /posts/:slug/favorite
-    async post(ctx) {
-    },
-
-    // DELETE /posts/:slug/favorite
-    async del(ctx) {
-    }
+  async favorite(ctx) {
   },
+
+  async unfavorite(ctx) {
+  }
 }

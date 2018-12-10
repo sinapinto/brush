@@ -1,14 +1,14 @@
 let auth = require('../../middleware/authMiddleware')
-let user = require('./controller')
+let ctrl = require('./controller')
 let Router = require('koa-router')
 let router = new Router()
 
-router.use(user.postprocess)
-router.post('/users/login', user.login)
-router.post('/users/logout', user.logout)
-router.post('/users', user.post) // create user
+router.use(ctrl.postprocess)
+router.post('/users/login', ctrl.login)
+router.post('/users/logout', ctrl.logout)
+router.post('/users', ctrl.create)
 
-router.get('/user', auth, user.get)
-router.put('/user', auth, user.put)
+router.get('/user', auth, ctrl.get)
+router.put('/user', auth, ctrl.update)
 
 module.exports = router.routes()

@@ -24,35 +24,32 @@ module.exports  = {
     ctx.body = { profile: ctx.profile }
   },
 
-  follow: {
-    // POST /profiles/:username/follow
-    async post(ctx) {
-      let { profile } = ctx
-      if (profile.following || ctx.user.username === profile.username) {
-        ctx.body = { profile }
-        return
-      }
-      await ctx.db('followers').insert({
-        id: uuid(),
-        user: profile.id,
-        follower: ctx.user.id,
-      })
-      profile.following = true
+  async follow(ctx) {
+    let { profile } = ctx
+    if (profile.following || ctx.user.username === profile.username) {
       ctx.body = { profile }
-    },
+      return
+    }
+    await ctx.db('followers').insert({
+      id: uuid(),
+      user: profile.id,
+      follower: ctx.user.id,
+    })
+    profile.following = true
+    ctx.body = { profile }
+  },
 
-    // DELETE /profiles/:username/follow
-    async del(ctx) {
-      let { profile } = ctx
-      if (!profile.following) {
-        ctx.body = { profile }
-        return
-      }
-      await ctx.db('followers')
-        .where({ user: profile.id, follower: ctx.user.id })
-        .del()
-      profile.following = false
+  // DELETE /profiles/:username/follow
+  async unfollow(ctx) {
+    let { profile } = ctx
+    if (!profile.following) {
       ctx.body = { profile }
-    },
-  }
+      return
+    }
+    await ctx.db('followers')
+      .where({ user: profile.id, follower: ctx.user.id })
+      .del()
+    profile.following = false
+    ctx.body = { profile }
+  },
 }

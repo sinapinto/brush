@@ -9,7 +9,6 @@ module.exports  = {
     }
   },
 
-  // POST /users/login
   async login(ctx) {
     let { user = {} } = ctx.request.body
     if (!user.username || !user.password) {
@@ -23,14 +22,12 @@ module.exports  = {
     ctx.body = { user: cand }
   },
 
-  // POST /users/logout
   async logout(ctx) {
     ctx.session = null
     ctx.body = {}
   },
 
-  // POST /users
-  async post(ctx) {
+  async create(ctx) {
     let { user = {} } = ctx.request.body
     user.id = uuid()
     user = await ctx.schemas.user.validate(user, { abortEarly: false, context: { validatePassword: true } })
@@ -40,12 +37,10 @@ module.exports  = {
     ctx.body = { user }
   },
 
-  // GET /user
   async get(ctx) {
     ctx.body = { user: ctx.user }
   },
 
-  // PUT /user
-  async put(ctx) {
+  async update(ctx) {
   },
 }
