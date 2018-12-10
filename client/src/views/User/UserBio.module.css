@@ -16,7 +16,12 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: slategray;
+  background: url(/avatar.jpg);
+  filter: brightness(118%);
+}
+
+.tabs {
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02));
 }
 
 .tabpane {

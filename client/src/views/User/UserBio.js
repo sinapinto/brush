@@ -24,7 +24,7 @@ export default function UserBio({ user }) {
         </div>
         <div className={styles.avatar} />
       </div>
-      <Tabs activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
+      <Tabs className={styles.tabs} activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
         <TabPane className={styles.tabpane} label="Posts" key={tab.POSTS}>posts</TabPane>
         <TabPane className={styles.tabpane} label="Followers" key={tab.FOLLOWERS}>followers</TabPane>
         <TabPane className={styles.tabpane} label="Following" key={tab.FOLLOWING}>following</TabPane>
