@@ -1,5 +1,6 @@
 let uuid = require('uuid')
 let slug = require('slug')
+let debug = require('debug')('app')
 let { pick } = require('../util')
 
 module.exports = {
@@ -47,6 +48,40 @@ module.exports = {
 
   // GET /posts
   async get(ctx) {
+    let { user } = ctx
+    let posts = await ctx.db('posts')
+      .select(
+        ...['id', 'title', 'body', 'slug'].map(f => `posts.${f} as ${f}`),
+        ...['id', 'username', 'avatar', 'bio', 'createdAt'].map(f => `users.${f} as author_${f}`),
+        'favorites.id as favorited',
+        'followers.id as author_following'
+      )
+      .orderBy('posts.createdAt', 'desc')
+      .leftJoin('users', 'posts.author', 'users.id')
+      .leftJoin('favorites', function () {
+        this.on('posts.id', '=', 'favorites.post')
+          .onIn('favorites.user', [user && user.id])
+      })
+      .leftJoin('followers', function () {
+        this.on('posts.author', '=', 'followers.user')
+          .onIn('followers.follower', [user && user.id])
+      })
+
+    // strip `author_` prefix from keys and move to `authors` property
+    posts = posts.map((post) => {
+      post = Object.entries(post).reduce((acc, [k, v]) => k.startsWith('author_') ? ({
+        ...acc,
+        author: { ...acc.author, [k.replace(/^author_/, '')]: v },
+      }) : ({
+        ...acc,
+        [k]: v,
+      }), { author: {} })
+      post.favorited = Boolean(post.favorited)
+      post.author.following = Boolean(post.author.following)
+      return post
+    })
+
+    ctx.body = { posts }
   },
 
   // POST /posts

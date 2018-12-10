@@ -24,3 +24,21 @@ export async function createPost(title, body) {
           })
       })
 }
+
+export async function listPosts(title, body) {
+  return fetch('/api/posts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json()
+          .then((json) => {
+            if (!res.ok) {
+              return Promise.reject(res)
+            }
+            return json.posts
+          })
+      })
+}
