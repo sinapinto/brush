@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { formatDistance } from 'date-fns'
-import Icon from '../../components/Icon'
 import H from '../../components/H'
 import Tabs, { TabPane } from '../../components/Tabs'
 import styles from './UserBio.module.css'
@@ -18,12 +17,12 @@ export default function UserBio({ user }) {
   return (
     <div className={styles.container}>
       <div className={styles.bioWrap}>
-        <div className={styles.info}>
+        <div className={styles.bio}>
           <H level={1}>{user.username}</H>
           <p>{user.bio}</p>
           <p>Started brushing {startDate}</p>
         </div>
-        <Icon name="grin" className={styles.avatar} size={64} />
+        <div className={styles.avatar} />
       </div>
       <Tabs activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
         <TabPane className={styles.tabpane} label="Posts" key={tab.POSTS}>posts</TabPane>

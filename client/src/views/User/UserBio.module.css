@@ -3,19 +3,22 @@
 
 .bioWrap {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 24px;
+  padding: 32px;
 }
 
-.info {
-  width: 420px;
+.bio {
+  flex: 1;
 }
 
 .avatar {
-  color: var(--slate);
+  flex-basis: 120px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: slategray;
 }
 
 .tabpane {
-  padding: 24px;
+  padding: 32px;
 }
