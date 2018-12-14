@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../components/Button'
-import H from '../../components/H'
+import { H2 } from '../../components/Text'
 import { modalState } from './constant'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
@@ -10,7 +10,7 @@ import styles from './AuthForm.module.css'
 export default function AuthForm({ type, onChangeType, onSuccess }) {
   return type === modalState.LOGIN ? (
     <div className={styles.container}>
-      <H level={2}>Log In</H>
+      <H2>Log In</H2>
       <p className={styles.p}>
         Don&apos;t have an account?
         <Button
@@ -24,7 +24,7 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
     </div>
   ) : (
     <div className={styles.container}>
-      <H level={2}>Sign Up</H>
+      <H2>Sign Up</H2>
       <p className={styles.p}>
         Already have an account?
         <Button

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Card from '../../components/Card'
-import H from '../../components/H'
+import { H1 } from '../../components/Text'
 import UserBio from './UserBio'
 import { getProfile } from '../../fetch/profile'
 
@@ -18,7 +18,7 @@ export default function User({ match }) {
   return (
     <Card>
       {user === null ? (
-        <H level={1}>This user does not exist :0</H>
+        <H1>This user does not exist :0</H1>
       ) : (
         <UserBio user={user} />
       )}

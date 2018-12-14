@@ -23,3 +23,10 @@
   font-size: 20px;
   line-height: 28px;
 }
+
+.p {
+  color: var(--font-color);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}

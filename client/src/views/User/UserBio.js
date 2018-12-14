@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { formatDistance } from 'date-fns'
-import H from '../../components/H'
+import { H1 } from '../../components/Text'
 import Tabs, { TabPane } from '../../components/Tabs'
 import styles from './UserBio.module.css'
 
@@ -18,7 +18,7 @@ export default function UserBio({ user }) {
     <div className={styles.container}>
       <div className={styles.bioWrap}>
         <div className={styles.bio}>
-          <H level={1}>{user.username}</H>
+          <H1>{user.username}</H1>
           <p>{user.bio}</p>
           <p>Started brushing {startDate}</p>
         </div>

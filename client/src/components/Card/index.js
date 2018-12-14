@@ -13,6 +13,6 @@ export default function Card({ className, children }) {
 }
 
 Card.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string,
 }

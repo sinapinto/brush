@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import H from '../../components/H'
 import Card from '../../components/Card'
+import PostPreview from './PostPreview'
 import { listPosts } from '../../fetch/post'
+import styles from './index.module.css'
 
 export default function Home() {
   let [posts, setPosts] = useState()
@@ -13,9 +14,8 @@ export default function Home() {
   }, [])
 
   return (
-    <Card>
-      <H level={1}>Home</H>
-      <pre>{JSON.stringify(posts, null, 2)}</pre>
+    <Card className={styles.card}>
+      {posts && posts.map((post) => <PostPreview key={post.id} {...post} />)}
     </Card>
   )
 }

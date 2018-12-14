@@ -21,7 +21,7 @@ export default function Button({ type, disabled, className, invert, htmlType, ch
 }
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['primary', 'default', 'ghost']),
+  type: PropTypes.oneOf(['primary', 'default', 'outline']),
   invert: PropTypes.bool,
   htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
   disabled: PropTypes.bool,
