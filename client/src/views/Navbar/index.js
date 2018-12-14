@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
+import PlusIcon from 'mdi-react/PlusIcon'
+import AccountIcon from 'mdi-react/AccountIcon'
 import { Link } from 'react-router-dom'
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
-import Icon from '../../components/Icon'
 import AuthForm from './AuthForm'
 import { modalState } from './constant'
 import { UserContext } from '../../context'
@@ -26,14 +27,14 @@ export default function Navbar() {
           {signedInUser ? (
             <React.Fragment>
               <ButtonLink invert to="/create">
-                <Icon name="plus" size={20} className={styles.btnIcon} />
+                <PlusIcon size={20} className={styles.btnIcon} />
                 Create
               </ButtonLink>
               <ButtonLink
                 invert
                 to={`/u/${signedInUser.username}`}
               >
-                <Icon name="grin" size={20} className={styles.btnIcon} />
+                <AccountIcon size={20} className={styles.btnIcon} />
                 {signedInUser.username.slice(0, 16)}
               </ButtonLink>
             </React.Fragment>
