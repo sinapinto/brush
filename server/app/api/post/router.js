@@ -3,16 +3,16 @@ let ctrl = require('./controller')
 let Router = require('koa-router')
 let router = new Router()
 
-router.param('slug', ctrl.bySlug)
+router.param('id', ctrl.byId)
 
 router.get('/posts', ctrl.list)
 router.post('/posts', auth, ctrl.create)
 
-router.get('/posts/:slug', ctrl.detail)
-router.put('/posts/:slug', auth, ctrl.update)
-router.del('/posts/:slug', auth, ctrl.delete)
+router.get('/posts/:id', ctrl.detail)
+router.put('/posts/:id', auth, ctrl.update)
+router.del('/posts/:id', auth, ctrl.delete)
 
-router.post('/posts/:slug/favorite', auth, ctrl.favorite)
-router.del('/posts/:slug/favorite', auth, ctrl.unfavorite)
+router.post('/posts/:id/favorite', auth, ctrl.favorite)
+router.del('/posts/:id/favorite', auth, ctrl.unfavorite)
 
 module.exports = router.routes()

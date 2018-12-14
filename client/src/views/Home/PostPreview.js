@@ -22,10 +22,9 @@ export default function PostPreview({ id, title, author }) {
 }
 
 PostPreview.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   following: PropTypes.bool,
   username: PropTypes.string,
-  body: PropTypes.string,
   favorited: PropTypes.bool,
   slug: PropTypes.string,
   title: PropTypes.string,

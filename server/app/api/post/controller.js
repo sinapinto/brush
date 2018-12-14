@@ -3,16 +3,16 @@ let slug = require('slug')
 let { pick } = require('../../util')
 
 module.exports = {
-  async bySlug(slug, ctx, next) {
+  async byId(id, ctx, next) {
     let { user } = ctx
-    ctx.assert(slug, 404)
+    ctx.assert(id, 404)
 
     let post = await ctx.db('posts')
       .first()
-      .where('slug', slug)
+      .where('id', id)
     ctx.assert(post, 404)
 
-    let author = await ctx.db('user')
+    let author = await ctx.db('users')
       .first('username', 'bio', 'avatar', 'id')
       .where('id', post.author)
 
@@ -49,7 +49,7 @@ module.exports = {
     let { user } = ctx
     let posts = await ctx.db('posts')
       .select(
-        ...['id', 'title', 'body', 'slug'].map(f => `posts.${f} as ${f}`),
+        ...['id', 'title', 'slug'].map(f => `posts.${f} as ${f}`),
         ...['id', 'username', 'avatar', 'bio', 'createdAt'].map(f => `users.${f} as author_${f}`),
         'favorites.id as favorited',
         'followers.id as author_following'

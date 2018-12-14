@@ -42,3 +42,21 @@ export async function listPosts(title, body) {
           })
       })
 }
+
+export async function getPost(id) {
+  return fetch(`/api/posts/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json()
+          .then((json) => {
+            if (!res.ok) {
+              return Promise.reject(res)
+            }
+            return json.post
+          })
+      })
+}

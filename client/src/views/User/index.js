@@ -5,9 +5,8 @@ import { H1 } from '../../components/Text'
 import UserBio from './UserBio'
 import { getProfile } from '../../fetch/profile'
 
-export default function User({ match }) {
+export default function User({ username }) {
   let [user, setUser] = useState({})
-  let { username } = match.params
 
   useEffect(() => {
     getProfile(username)
@@ -27,5 +26,5 @@ export default function User({ match }) {
 }
 
 User.propTypes = {
-  match: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
 }

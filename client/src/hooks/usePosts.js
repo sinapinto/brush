@@ -1,13 +1,34 @@
 import { useContext } from 'react'
 import { AppState } from '../context'
 
-export default function usePosts(defaultValue) {
+let byId = (arr) => {
+  return arr.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
+}
+
+export default function usePosts(id) {
   let { appState, setAppState } = useContext(AppState)
-  let { posts = defaultValue } = appState
+  let { postsById = {} } = appState
 
   let setPosts = (posts) => {
-    setAppState((state) => ({ ...state, posts }))
+    setAppState((state) => ({
+      ...state,
+      postsById: byId(posts),
+    }))
   }
 
-  return [posts, setPosts]
+  let setPost = (post) => {
+    setAppState((state) => ({
+      ...state,
+      postsById: {
+        ...state.postsById,
+        [post.id]: post,
+      },
+    }))
+  }
+
+  if (id) {
+    return [postsById[id], setPost]
+  }
+  // TODO: preserve order?
+  return [Object.values(postsById), setPosts]
 }

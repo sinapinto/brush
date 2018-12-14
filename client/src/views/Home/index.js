@@ -6,7 +6,7 @@ import usePosts from '../../hooks/usePosts'
 import styles from './index.module.css'
 
 export default function Home() {
-  let [posts, setPosts] = usePosts([])
+  let [posts = [], setPosts] = usePosts()
 
   useEffect(() => {
     listPosts()
