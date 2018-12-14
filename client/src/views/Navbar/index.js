@@ -6,16 +6,16 @@ import Modal from '../../components/Modal'
 import Button from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
 import AuthForm from './AuthForm'
-import { modalState } from './constant'
+import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import { UserContext } from '../../context'
 import styles from './index.module.css'
 
 export default function Navbar() {
-  let [modalType, setModalType] = useState(modalState.CLOSED)
+  let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
   let { signedInUser, setSignedInUser } = useContext(UserContext)
 
   let handleAuthSuccess = (user) => {
-    setModalType(modalState.CLOSED)
+    setActiveModal(MODAL_CLOSED)
     setSignedInUser(user)
   }
 
@@ -42,15 +42,15 @@ export default function Navbar() {
             <Button
               type="primary"
               invert
-              onClick={() => setModalType(modalState.SIGNUP)}
+              onClick={() => setActiveModal(MODAL_SIGNUP)}
             >
               Sign Up
             </Button>
           )}
         </div>
       </div>
-      <Modal isOpen={modalType !== modalState.CLOSED} onRequestClose={() => setModalType(modalState.CLOSED)}>
-        <AuthForm type={modalType} onChangeType={(type) => setModalType(type)} onSuccess={handleAuthSuccess} />
+      <Modal isOpen={activeModal !== MODAL_CLOSED} onRequestClose={() => setActiveModal(MODAL_CLOSED)}>
+        <AuthForm type={activeModal} onChangeType={(type) => setActiveModal(type)} onSuccess={handleAuthSuccess} />
       </Modal>
     </nav>
   )

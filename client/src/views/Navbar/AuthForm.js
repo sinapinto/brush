@@ -2,20 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../components/Button'
 import { H2 } from '../../components/Text'
-import { modalState } from './constant'
+import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import styles from './AuthForm.module.css'
 
 export default function AuthForm({ type, onChangeType, onSuccess }) {
-  return type === modalState.LOGIN ? (
+  return type === MODAL_LOGIN ? (
     <div className={styles.container}>
       <H2>Log In</H2>
       <p className={styles.p}>
-        Don&apos;t have an account?
+        Don't have an account?
         <Button
           className={styles.btn}
-          onClick={() => onChangeType(modalState.SIGNUP)}
+          onClick={() => onChangeType(MODAL_SIGNUP)}
         >
           Sign Up
         </Button>
@@ -29,7 +29,7 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
         Already have an account?
         <Button
           className={styles.btn}
-          onClick={() => onChangeType(modalState.LOGIN)}
+          onClick={() => onChangeType(MODAL_LOGIN)}
         >
           Log In
         </Button>
@@ -40,7 +40,7 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
 }
 
 AuthForm.propTypes = {
-  type: PropTypes.oneOf(Object.values(modalState)).isRequired,
+  type: PropTypes.oneOf([MODAL_CLOSED, MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
   onChangeType: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
 }
