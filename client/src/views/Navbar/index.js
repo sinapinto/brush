@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import PlusIcon from 'mdi-react/PlusIcon'
 import AccountIcon from 'mdi-react/AccountIcon'
 import { Link } from 'react-router-dom'
@@ -7,16 +7,16 @@ import Button from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
 import AuthForm from './AuthForm'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
-import { UserContext } from '../../context'
+import useSignedInUser from '../../hooks/useSignedInUser'
 import styles from './index.module.css'
 
 export default function Navbar() {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
-  let { signedInUser, setSignedInUser } = useContext(UserContext)
+  let [signedInUser, setSignedInUser] = useSignedInUser()
 
-  let handleAuthSuccess = (user) => {
+  let handleAuthSuccess = (signedInUser) => {
     setActiveModal(MODAL_CLOSED)
-    setSignedInUser(user)
+    setSignedInUser(signedInUser)
   }
 
   return (

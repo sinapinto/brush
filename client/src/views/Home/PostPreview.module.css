@@ -1,3 +1,13 @@
 .container {
   padding: 16px;
 }
+
+.h3link {
+  color: var(--font-color-header);
+  text-decoration: none;
+}
+
+.plink {
+  color: var(--font-color);
+  text-decoration: none;
+}

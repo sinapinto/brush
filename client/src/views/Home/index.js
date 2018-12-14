@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Card from '../../components/Card'
 import PostPreview from './PostPreview'
 import { listPosts } from '../../fetch/post'
+import usePosts from '../../hooks/usePosts'
 import styles from './index.module.css'
 
 export default function Home() {
-  let [posts, setPosts] = useState()
+  let [posts, setPosts] = usePosts([])
 
   useEffect(() => {
     listPosts()
@@ -15,7 +16,7 @@ export default function Home() {
 
   return (
     <Card className={styles.card}>
-      {posts && posts.map((post) => <PostPreview key={post.id} {...post} />)}
+      {posts.map((post) => <PostPreview key={post.id} {...post} />)}
     </Card>
   )
 }

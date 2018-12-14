@@ -1,13 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { H3 } from '../../components/Text'
+import { Link } from 'react-router-dom'
+import { H3, P } from '../../components/Text'
 import styles from './PostPreview.module.css'
 
-export default function PostPreview({ title, author }) {
+export default function PostPreview({ id, title, author }) {
   return (
     <div className={styles.container}>
-      <H3>{title}</H3>
-      <p>{author.username}</p>
+      <H3>
+        <Link to={`/p/${id}`} className={styles.h3link}>
+          {title}
+        </Link>
+      </H3>
+      <P>
+        <Link to={`/u/${author.username}`} className={styles.plink}>
+          {author.username}
+        </Link>
+      </P>
     </div>
   )
 }
