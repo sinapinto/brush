@@ -1,0 +1,44 @@
+{
+  "name": "microblog",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.9.4",
+    "date-fns": "^2.0.0-alpha.25",
+    "eslint-plugin-react-hooks": "0.0.0",
+    "mdi-react": "^5.1.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-modal": "^3.6.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "styled-components": "^4.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error"
+    }
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      "styled-components"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "proxy": "http://localhost:4000"
+}
