@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { AppState } from './context'
-import styles from './Debug.module.css'
+import styles from './DevTools.module.css'
 
 export default function Debug() {
   let { appState } = useContext(AppState)

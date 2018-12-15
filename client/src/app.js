@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Debug from './Debug'
+import DevTools from './util/DevTools'
 import Navbar from './views/Navbar'
 import Home from './views/Home'
 import User from './views/User'
 import Post from './views/Post'
 import Create from './views/Create'
 import { fetchSignedInUser } from './fetch/auth'
-import { AppState } from './context'
+import { AppState } from './util/context'
 import useSignedInUser from './hooks/useSignedInUser'
 import styles from './app.module.css'
 
@@ -44,7 +44,7 @@ export default function App() {
   let [appState, setAppState] = useState({})
   return (
     <AppState.Provider value={{ appState, setAppState }}>
-      <Debug />
+      <DevTools />
       <AppContent />
     </AppState.Provider>
   )

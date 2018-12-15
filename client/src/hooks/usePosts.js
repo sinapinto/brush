@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { AppState } from '../context'
+import { AppState } from '../util/context'
 
 let byId = (arr) => {
   return arr.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
