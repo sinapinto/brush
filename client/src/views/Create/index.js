@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Input, H2, Card } from '../../components/globals'
+import { Input, H2, Card, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
 import { createPost } from '../../fetch/post'
-import theme from '../../styles/theme'
 
 let Form = styled.form`
   padding: 24px;
@@ -13,12 +12,6 @@ let Form = styled.form`
   > * {
     margin-bottom: 32px;
   }
-`
-let ErrorMessage = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${theme.warn.default};
-  text-align: center;
 `
 
 export default function Create() {

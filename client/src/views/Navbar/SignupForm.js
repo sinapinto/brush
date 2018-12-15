@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from '../../components/Button'
-import { Input } from '../../components/globals'
+import { Input, ErrorMessage } from '../../components/globals'
 import { signup } from '../../fetch/auth'
-import { Form, ErrorMessage } from './style'
+import { Form } from './style'
 
 export default function SignupForm({ onSuccess }) {
   let [username, setUsername] = useState('')

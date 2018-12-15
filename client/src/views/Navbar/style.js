@@ -14,12 +14,6 @@ export let Form = styled.form`
     width: 300px;
   }
 `
-export let ErrorMessage = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${theme.warn.default};
-  text-align: center;
-`
 
 export let StyledNavbar = styled.nav`
   height: 60px;

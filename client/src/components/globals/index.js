@@ -73,3 +73,10 @@ export let Input = styled.input`
     color: ${theme.text.placeholder};
   }
 `
+
+export let ErrorMessage = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${theme.warn.default};
+  text-align: center;
+`

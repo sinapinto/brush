@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Input } from '../../components/globals'
+import { Input, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
-import { Form, ErrorMessage } from './style'
+import { Form } from './style'
 import { login } from '../../fetch/auth'
 
 export default function LoginForm({ onSuccess }) {
