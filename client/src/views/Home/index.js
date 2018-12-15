@@ -15,7 +15,7 @@ export default function Home() {
   }, [])
 
   return (
-    <Card className={styles.card}>
+    <Card className={styles.container}>
       {posts.map((post) => <PostPreview key={post.id} {...post} />)}
     </Card>
   )

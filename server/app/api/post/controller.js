@@ -1,6 +1,7 @@
 let uuid = require('uuid')
 let slug = require('slug')
 let { pick } = require('../../util')
+let debug = require('debug')('app')
 
 module.exports = {
   async byId(id, ctx, next) {
@@ -91,6 +92,7 @@ module.exports = {
     try {
       await ctx.db('posts').insert(post)
     } catch (err) {
+      debug(err)
       // slug already exists. append an id and retry
       if (err.errno === 19 || err.code === 23505) {
         article.slug = article.slug + '-' + uuid().slice(-6)

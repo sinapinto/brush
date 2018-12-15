@@ -18,6 +18,7 @@ exports.up = function (knex) {
       table.text('body').notNullable()
       table.uuid('author').notNullable().references('users.id')
         .onDelete('CASCADE')
+      table.integer('favoritesCount').notNullable().defaultTo(0)
       table.timestamp('createdAt')
       table.timestamp('updatedAt')
     })

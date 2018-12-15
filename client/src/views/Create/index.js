@@ -15,8 +15,6 @@ export default function Create() {
   let handleSubmit = (e) => {
     e.preventDefault()
     createPost(title, body)
-      .then(() => {
-      })
       .catch((err) => {
         setError(typeof err === 'string' ? err : 'An unknown error occured.')
         setIsFetching(false)
@@ -34,7 +32,4 @@ export default function Create() {
       </form>
     </Card>
   );
-}
-
-Create.propTypes = {
 }
