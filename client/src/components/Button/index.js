@@ -6,7 +6,7 @@ export let Button = styled.button`
   justify-content: center;
   align-items: center;
   padding: 13px 25px 9px;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 15px;
   cursor: pointer;
   border: 2px solid transparent;
