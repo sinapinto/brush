@@ -1,10 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react'
+import styled from 'styled-components'
 import { AppState } from './context'
-import styles from './DevTools.module.css'
 
-export default function Debug() {
+let StyledDevTools = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #fff;
+  border: 1px solid black;
+  height: 500px;
+  width: 500px;
+  overflow: auto;
+`
+
+function DevTools() {
   let { appState } = useContext(AppState)
-  let [isVisible, setIsVisible] = useState(true)
+  let [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     let handleKeyPress = (e) => {
@@ -20,8 +31,12 @@ export default function Debug() {
 
   if (!isVisible) return null
   return (
-    <div className={styles.debug}>
+    <StyledDevTools>
       <pre>{JSON.stringify(appState, null, 2)}</pre>
-    </div>
+    </StyledDevTools>
   )
 }
+
+export default process.env.NODE_ENV === 'development'
+  ? DevTools
+  : () => null

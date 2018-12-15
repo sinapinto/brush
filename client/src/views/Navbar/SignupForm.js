@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from '../../components/Button'
 import TextInput from '../../components/TextInput'
 import { signup } from '../../fetch/auth'
-import styles from './LoginForm.module.css'
+import ErrorMessage from './LoginForm'
 
 export default function SignupForm({ className, onSuccess }) {
   let [username, setUsername] = useState('')
@@ -48,7 +48,7 @@ export default function SignupForm({ className, onSuccess }) {
         autoComplete="new-password"
         disabled={isFetching}
       />
-      <p className={styles.error}>{error || ''}</p>
+      <ErrorMessage>{error || ''}</ErrorMessage>
       <Button
         type="primary"
         htmlType="submit"

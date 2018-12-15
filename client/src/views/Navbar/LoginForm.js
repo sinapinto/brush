@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import TextInput from '../../components/TextInput'
 import Button from '../../components/Button'
 import { login } from '../../fetch/auth'
-import styles from './LoginForm.module.css'
+
+export let ErrorMessage = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.warn.default};
+  text-align: center;
+`
 
 export default function LoginForm({ className, onSuccess }) {
   let [username, setUsername] = useState('')
@@ -48,7 +55,7 @@ export default function LoginForm({ className, onSuccess }) {
         autoComplete="new-password"
         disabled={isFetching}
       />
-      <p className={styles.error}>{error || ''}</p>
+      <ErrorMessage>{error || ''}</ErrorMessage>
       <Button
         type="primary"
         htmlType="submit"

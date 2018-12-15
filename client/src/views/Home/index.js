@@ -3,7 +3,6 @@ import Card from '../../components/Card'
 import PostPreview from './PostPreview'
 import { listPosts } from '../../fetch/post'
 import usePosts from '../../hooks/usePosts'
-import styles from './index.module.css'
 
 export default function Home() {
   let [posts = [], setPosts] = usePosts()
@@ -15,7 +14,7 @@ export default function Home() {
   }, [])
 
   return (
-    <Card className={styles.container}>
+    <Card>
       {posts.map((post) => <PostPreview key={post.id} {...post} />)}
     </Card>
   )

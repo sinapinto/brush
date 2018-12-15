@@ -1,18 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './index.module.css'
+import styled from 'styled-components'
 
-export default function Card({ className, children }) {
-  let classes = classNames(styles.card, className)
-  return (
-    <div className={classes}>
-      {children}
-    </div>
-  )
-}
-
-Card.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-}
+export default styled.div`
+  background: #fff;
+  box-shadow: 0 0 24px rgba(0,0,0,.04);
+  border-radius: 16px;
+  padding: 0;
+  margin: 0;
+`
