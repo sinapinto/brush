@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { formatDistance } from 'date-fns'
-import { H1 } from '../../components/Text'
+import { H1 } from '../../components/globals'
 import Tabs, { TabPane } from '../../components/Tabs'
 
 let tab = {
@@ -39,11 +39,11 @@ export default function UserBio({ user }) {
         <Bio>
           <H1>{user.username}</H1>
           <p>{user.bio}</p>
-          <p>Started brushing {startDate}</p>
+          <p>Joined {startDate}</p>
         </Bio>
         <Avatar />
       </BioWrap>
-      <Tabs styles={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02))' }} activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
+      <Tabs style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02))' }} activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
         <TabPane label="Posts" key={tab.POSTS}>posts</TabPane>
         <TabPane label="Followers" key={tab.FOLLOWERS}>followers</TabPane>
         <TabPane label="Following" key={tab.FOLLOWING}>following</TabPane>

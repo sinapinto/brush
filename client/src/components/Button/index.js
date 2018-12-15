@@ -1,38 +1,43 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './index.module.css'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
-export default function Button({ type, disabled, className, invert, htmlType, children, ...rest }) {
-  let classes = classNames(styles.btn, className, styles[type], {
-    [styles.invert]: invert,
-    [styles.disabled]: disabled,
-  })
-  return (
-    <button
-      {...rest}
-      className={classes}
-      disabled={disabled}
-      type={htmlType}
-    >
-      {children}
-    </button>
-  )
-}
+export let Button = styled.button`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 25px 9px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  background: ${theme.brand.default};
+  color: ${theme.text.reverse};
 
-Button.propTypes = {
-  type: PropTypes.oneOf(['primary', 'default', 'outline']),
-  invert: PropTypes.bool,
-  htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
-  disabled: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.node,
-}
+  &[disabled] {
+    background-color: ${theme.bg.inactive};
+    color: ${theme.text.alt};
+    cursor: not-allowed;
+  }
 
-Button.defaultProps = {
-  type: 'default',
-  invert: false,
-  htmlType: 'button',
-  disabled: false,
-  className: null,
-}
+  :hover:not([disabled]) {
+    filter: brightness(95%);
+  }
+
+  > svg {
+    margin-right: 4px;
+  }
+`
+
+export let OutlineButton = styled(Button)`
+  background: transparent;
+  color: ${theme.brand.default};
+  border: 2px solid ${theme.brand.default};
+`
+
+export let TextButton = styled(OutlineButton)`
+  border: none;
+  padding: 0px 12px;
+`

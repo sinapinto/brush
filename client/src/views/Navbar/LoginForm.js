@@ -1,18 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import TextInput from '../../components/TextInput'
-import Button from '../../components/Button'
+import { Input } from '../../components/globals'
+import { Button } from '../../components/Button'
+import { Form, ErrorMessage } from './style'
 import { login } from '../../fetch/auth'
 
-export let ErrorMessage = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.warn.default};
-  text-align: center;
-`
-
-export default function LoginForm({ className, onSuccess }) {
+export default function LoginForm({ onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
   let [isFetching, setIsFetching] = useState(false)
@@ -41,14 +34,16 @@ export default function LoginForm({ className, onSuccess }) {
   }
 
   return (
-    <form className={className} onSubmit={handleSubmit} onChange={handleChange} >
-      <TextInput
+    <Form onSubmit={handleSubmit} onChange={handleChange}>
+      <Input
+        type="text"
         placeholder="Username"
+        spellCheck={false}
         name="username"
         disabled={isFetching}
         autoComplete="off"
       />
-      <TextInput
+      <Input
         placeholder="Password"
         name="password"
         type="password"
@@ -63,15 +58,10 @@ export default function LoginForm({ className, onSuccess }) {
       >
         Log In
       </Button>
-    </form>
+    </Form>
   )
 }
 
 LoginForm.propTypes = {
-  className: PropTypes.string,
   onSuccess: PropTypes.func.isRequired,
-}
-
-LoginForm.defaultProps = {
-  className: null,
 }

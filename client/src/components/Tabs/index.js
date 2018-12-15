@@ -1,23 +1,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styles from './index.module.css'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
-export default function Tabs({ activeKey, onChange, className, children }) {
+let StyledTabs = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border-bottom: 1px solid #e8e8e8;
+`
+
+let Tab = styled.button`
+  padding: 20px 0 10px;
+  margin-left: 32px;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: none;
+  cursor: pointer;
+  color: ${props => props.isSelected
+    ? theme.brand.default
+    : theme.text.secondary};
+  border-bottom: ${props => props.isSelected
+    ? `4px solid ${theme.brand.default}`
+    : '4px solid transparent'};
+`
+
+export default function Tabs({ activeKey, onChange, children }) {
   return (
     <React.Fragment>
-      <div className={classNames(styles.tabs, className)}>
+      <StyledTabs>
         {React.Children.map(children, (pane) => (
-          <button
+          <Tab
             key={pane.key}
-            className={classNames(styles.tab, { [styles.selected]: pane.key === activeKey })}
+            isSelected={pane.key === activeKey}
             onClick={() => onChange(pane.key)}
           >
             {pane.props.label}
-          </button>
+          </Tab>
         ))}
-      </div>
-      <div className={styles.pane}>
+      </StyledTabs>
+      <div>
         {React.Children.map(children, (pane) =>
           pane.key === activeKey ? pane : null
         )}
@@ -29,16 +53,14 @@ export default function Tabs({ activeKey, onChange, className, children }) {
 Tabs.propTypes = {
   activeKey: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
   children: PropTypes.node,
 }
 
-export function TabPane({ className, children }) {
-  return <div className={className}>{children}</div>
+export function TabPane({ children }) {
+  return <div>{children}</div>
 }
 
 TabPane.propTypes = {
   label: PropTypes.string.isRequired,
-  className: PropTypes.string,
   children: PropTypes.node,
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Button from '../../components/Button'
-import TextInput from '../../components/TextInput'
+import { Button } from '../../components/Button'
+import { Input } from '../../components/globals'
 import { signup } from '../../fetch/auth'
-import ErrorMessage from './LoginForm'
+import { Form, ErrorMessage } from './style'
 
-export default function SignupForm({ className, onSuccess }) {
+export default function SignupForm({ onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
   let [isFetching, setIsFetching] = useState(false)
@@ -34,14 +34,16 @@ export default function SignupForm({ className, onSuccess }) {
   }
 
   return (
-    <form className={className} onSubmit={handleSubmit} onChange={handleChange}>
-      <TextInput
+    <Form onSubmit={handleSubmit} onChange={handleChange}>
+      <Input
+        type="text"
         placeholder="Username"
+        spellCheck={false}
         name="username"
         disabled={isFetching}
         autoComplete="off"
       />
-      <TextInput
+      <Input
         placeholder="Password"
         name="password"
         type="password"
@@ -56,15 +58,10 @@ export default function SignupForm({ className, onSuccess }) {
       >
         Sign Up
       </Button>
-    </form>
+    </Form>
   )
 }
 
 SignupForm.propTypes = {
-  className: PropTypes.string,
   onSuccess: PropTypes.func.isRequired,
-}
-
-SignupForm.defaultProps = {
-  className: null,
 }

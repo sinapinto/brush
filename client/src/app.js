@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import theme from './styles/theme'
+import styled from 'styled-components'
 import GlobalStyles from './styles/global.css.js'
 import DevTools from './util/DevTools'
 import Navbar from './views/Navbar'
@@ -32,23 +31,21 @@ function AppContent() {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <React.Fragment>
-          <Route component={Navbar} />
-          <GlobalStyles />
-          <Body>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/u/:username" render={({ match }) => <User username={match.params.username} />} />
-              <Route path="/p/:postId" render={({ match }) => <Post id={match.params.postId} />} />
-              <Route path="/create" component={Create} />
-              <Route component={NotFound} />
-            </Switch>
-          </Body>
-        </React.Fragment>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <React.Fragment>
+        <Route component={Navbar} />
+        <GlobalStyles />
+        <Body>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/u/:username" render={({ match }) => <User username={match.params.username} />} />
+            <Route path="/p/:postId" render={({ match }) => <Post id={match.params.postId} />} />
+            <Route path="/create" component={Create} />
+            <Route component={NotFound} />
+          </Switch>
+        </Body>
+      </React.Fragment>
+    </BrowserRouter>
   )
 }
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Card from '../../components/Card'
-import { H1 } from '../../components/Text'
+import { H1, Card } from '../../components/globals'
 import UserBio from './UserBio'
 import { getProfile } from '../../fetch/profile'
 

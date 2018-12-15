@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import theme from './theme'
 
 export default createGlobalStyle`
   @font-face {
@@ -35,7 +36,7 @@ export default createGlobalStyle`
 
   body {
     background: #f7f7f7;
-    color: ${({ theme }) => theme.text.default};
+    color: ${theme.text.default};
     font-family: 'DINNextRoundedLTPro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 14px;
     line-height: 22px;

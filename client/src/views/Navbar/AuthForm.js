@@ -1,41 +1,41 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Button from '../../components/Button'
-import { H2 } from '../../components/Text'
+import { TextButton } from '../../components/Button'
+import { P, H2 } from '../../components/globals'
 import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
-import styles from './AuthForm.module.css'
+
+let Container = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  ${P} {
+    margin: 16px 0;
+  }
+`
 
 export default function AuthForm({ type, onChangeType, onSuccess }) {
   return type === MODAL_LOGIN ? (
-    <div className={styles.container}>
+    <Container>
       <H2>Log In</H2>
-      <p className={styles.p}>
+      <P>
         Don't have an account?
-        <Button
-          className={styles.btn}
-          onClick={() => onChangeType(MODAL_SIGNUP)}
-        >
-          Sign Up
-        </Button>
-      </p>
-      <LoginForm className={styles.form} onSuccess={onSuccess} />
-    </div>
+        <TextButton onClick={() => onChangeType(MODAL_SIGNUP)}>Sign Up</TextButton>
+      </P>
+      <LoginForm onSuccess={onSuccess} />
+    </Container>
   ) : (
-    <div className={styles.container}>
+    <Container>
       <H2>Sign Up</H2>
-      <p className={styles.p}>
+      <P>
         Already have an account?
-        <Button
-          className={styles.btn}
-          onClick={() => onChangeType(MODAL_LOGIN)}
-        >
-          Log In
-        </Button>
-      </p>
-      <SignupForm className={styles.form} onSuccess={onSuccess} />
-    </div>
+        <TextButton onClick={() => onChangeType(MODAL_LOGIN)}>Log In</TextButton>
+      </P>
+      <SignupForm onSuccess={onSuccess} />
+    </Container>
   )
 }
 

@@ -22,7 +22,7 @@ export default {
     default: '#16171A',
     alt: '#828C99',
     reverse: '#FFFFFF',
-    placeholder: '#A3AFBF',
+    placeholder: '#BFBFBF',
     secondary: '#494C57',
   },
   success: {

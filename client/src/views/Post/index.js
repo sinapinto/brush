@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Card from '../../components/Card'
-import { H2, P } from '../../components/Text'
+import { H2, P, Card } from '../../components/globals'
 import { getPost } from '../../fetch/post'
 import usePosts from '../../hooks/usePosts'
 

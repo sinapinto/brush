@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Card from '../../components/Card'
+import { Card } from '../../components/globals'
 import PostPreview from './PostPreview'
 import { listPosts } from '../../fetch/post'
 import usePosts from '../../hooks/usePosts'
