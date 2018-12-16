@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import PlusIcon from 'mdi-react/PlusIcon'
-import AccountIcon from 'mdi-react/AccountIcon'
+import { TiPlus as PlusIcon } from 'react-icons/ti'
+import { TiUser as AccountIcon } from 'react-icons/ti'
 import Modal from '../../components/Modal'
 import { Button } from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'

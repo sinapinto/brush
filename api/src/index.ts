@@ -4,7 +4,7 @@ import * as express from 'express'
 import { buildSchema } from 'type-graphql'
 import { createConnection, getConnectionOptions } from 'typeorm'
 
-let startServer = async () => {
+;(async () => {
   let config = await getConnectionOptions(process.env.NODE_ENV)
   await createConnection({
     ...config,
@@ -22,11 +22,9 @@ let startServer = async () => {
     }),
   })
 
-  server.applyMiddleware({ app, cors: false }) // app is from an existing express app
+  server.applyMiddleware({ app, cors: false })
 
   app.listen({ port: 4000 }, () =>
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
   )
-}
-
-startServer()
+})()
