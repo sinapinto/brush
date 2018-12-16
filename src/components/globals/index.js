@@ -38,7 +38,7 @@ export let P = styled.p`
 
 export let Card = styled.div`
   background: #fff;
-  box-shadow: 0 0 24px rgba(0,0,0,.04);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.04);
   border-radius: 16px;
   padding: 16px;
   margin: 0;
@@ -52,7 +52,7 @@ export let Input = styled.input`
   line-height: 26px;
 
   &[disabled] {
-    opacity: .8;
+    opacity: 0.8;
     background: none;
     cursor: not-allowed;
     user-select: none;
