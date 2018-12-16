@@ -45,7 +45,7 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
           boxShadow: '0 2px 5px rgba(0,0,0,0.06)',
           border: '0',
           borderRadius: '16px',
-        }
+        },
       }}
     >
       <Toolbar>
@@ -53,9 +53,7 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
           <CloseButton onClick={otherProps.onRequestClose}>{'×'}</CloseButton>
         )}
       </Toolbar>
-      <ModalContent>
-        {children}
-      </ModalContent>
+      <ModalContent>{children}</ModalContent>
     </ReactModal>
   )
 }

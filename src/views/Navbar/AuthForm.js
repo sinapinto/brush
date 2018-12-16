@@ -23,7 +23,9 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
       <H2>Log In</H2>
       <P>
         Don't have an account?
-        <TextButton onClick={() => onChangeType(MODAL_SIGNUP)}>Sign Up</TextButton>
+        <TextButton onClick={() => onChangeType(MODAL_SIGNUP)}>
+          Sign Up
+        </TextButton>
       </P>
       <LoginForm onSuccess={onSuccess} />
     </Container>
@@ -32,7 +34,9 @@ export default function AuthForm({ type, onChangeType, onSuccess }) {
       <H2>Sign Up</H2>
       <P>
         Already have an account?
-        <TextButton onClick={() => onChangeType(MODAL_LOGIN)}>Log In</TextButton>
+        <TextButton onClick={() => onChangeType(MODAL_LOGIN)}>
+          Log In
+        </TextButton>
       </P>
       <SignupForm onSuccess={onSuccess} />
     </Container>

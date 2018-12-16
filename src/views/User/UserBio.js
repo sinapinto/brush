@@ -32,7 +32,9 @@ let Avatar = styled.div`
 
 export default function UserBio({ user }) {
   let [activeTab, setActiveTab] = useState(tab.POSTS)
-  let startDate = formatDistance(new Date(user.createdAt), new Date(), { addSuffix: true })
+  let startDate = formatDistance(new Date(user.createdAt), new Date(), {
+    addSuffix: true,
+  })
   return (
     <div>
       <BioWrap>
@@ -43,10 +45,23 @@ export default function UserBio({ user }) {
         </Bio>
         <Avatar />
       </BioWrap>
-      <Tabs style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02))' }} activeKey={activeTab} onChange={(key) => setActiveTab(key)}>
-        <TabPane label="Posts" key={tab.POSTS}>posts</TabPane>
-        <TabPane label="Followers" key={tab.FOLLOWERS}>followers</TabPane>
-        <TabPane label="Following" key={tab.FOLLOWING}>following</TabPane>
+      <Tabs
+        style={{
+          background:
+            'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02))',
+        }}
+        activeKey={activeTab}
+        onChange={key => setActiveTab(key)}
+      >
+        <TabPane label="Posts" key={tab.POSTS}>
+          posts
+        </TabPane>
+        <TabPane label="Followers" key={tab.FOLLOWERS}>
+          followers
+        </TabPane>
+        <TabPane label="Following" key={tab.FOLLOWING}>
+          following
+        </TabPane>
       </Tabs>
     </div>
   )

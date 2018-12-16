@@ -11,20 +11,20 @@ export default function LoginForm({ onSuccess }) {
   let [isFetching, setIsFetching] = useState(false)
   let [error, setError] = useState()
 
-  let handleSubmit = (e) => {
+  let handleSubmit = e => {
     e.preventDefault()
     setIsFetching(true)
     login(username, password)
-      .then((user) => {
+      .then(user => {
         onSuccess(user)
       })
-      .catch((err) => {
+      .catch(err => {
         setError(typeof err === 'string' ? err : 'An unknown error occured.')
         setIsFetching(false)
       })
   }
 
-  let handleChange = (e) => {
+  let handleChange = e => {
     setError(null)
     if (e.target.name === 'password') {
       setPassword(e.target.value)

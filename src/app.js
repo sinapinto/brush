@@ -38,8 +38,14 @@ function AppContent() {
         <Body>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/u/:username" render={({ match }) => <User username={match.params.username} />} />
-            <Route path="/p/:postId" render={({ match }) => <Post id={match.params.postId} />} />
+            <Route
+              path="/u/:username"
+              render={({ match }) => <User username={match.params.username} />}
+            />
+            <Route
+              path="/p/:postId"
+              render={({ match }) => <Post id={match.params.postId} />}
+            />
             <Route path="/create" component={Create} />
             <Route component={NotFound} />
           </Switch>

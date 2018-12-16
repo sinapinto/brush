@@ -19,19 +19,19 @@ let Tab = styled.button`
   text-transform: uppercase;
   background: none;
   cursor: pointer;
-  color: ${props => props.isSelected
-    ? theme.brand.default
-    : theme.text.secondary};
-  border-bottom: ${props => props.isSelected
-    ? `4px solid ${theme.brand.default}`
-    : '4px solid transparent'};
+  color: ${props =>
+    props.isSelected ? theme.brand.default : theme.text.secondary};
+  border-bottom: ${props =>
+    props.isSelected
+      ? `4px solid ${theme.brand.default}`
+      : '4px solid transparent'};
 `
 
 export default function Tabs({ activeKey, onChange, children }) {
   return (
     <React.Fragment>
       <StyledTabs>
-        {React.Children.map(children, (pane) => (
+        {React.Children.map(children, pane => (
           <Tab
             key={pane.key}
             isSelected={pane.key === activeKey}
@@ -42,7 +42,7 @@ export default function Tabs({ activeKey, onChange, children }) {
         ))}
       </StyledTabs>
       <div>
-        {React.Children.map(children, (pane) =>
+        {React.Children.map(children, pane =>
           pane.key === activeKey ? pane : null
         )}
       </div>

@@ -9,13 +9,15 @@ export default function Home() {
 
   useEffect(() => {
     listPosts()
-      .then((posts) => setPosts(posts))
+      .then(posts => setPosts(posts))
       .catch(console.error)
   }, [])
 
   return (
     <Card>
-      {posts.map((post) => <PostPreview key={post.id} {...post} />)}
+      {posts.map(post => (
+        <PostPreview key={post.id} {...post} />
+      ))}
     </Card>
   )
 }

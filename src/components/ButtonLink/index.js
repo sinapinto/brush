@@ -3,11 +3,20 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Button } from '../Button'
 
-function ButtonLink({ to, match, location, history, staticContext, onClick, children, ...rest }) {
+function ButtonLink({
+  to,
+  match,
+  location,
+  history,
+  staticContext,
+  onClick,
+  children,
+  ...rest
+}) {
   return (
     <Button
       {...rest}
-      onClick={(e) => {
+      onClick={e => {
         onClick(e)
         history.push(to)
       }}

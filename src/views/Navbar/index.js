@@ -7,13 +7,13 @@ import ButtonLink from '../../components/ButtonLink'
 import AuthForm from './AuthForm'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import useSignedInUser from '../../hooks/useSignedInUser'
-import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap }  from './style'
+import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
 export default function Navbar() {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
   let [signedInUser, setSignedInUser] = useSignedInUser()
 
-  let handleAuthSuccess = (signedInUser) => {
+  let handleAuthSuccess = signedInUser => {
     setActiveModal(MODAL_CLOSED)
     setSignedInUser(signedInUser)
   }
@@ -29,10 +29,7 @@ export default function Navbar() {
                 <PlusIcon size={20} />
                 Create
               </ButtonLink>
-              <ButtonLink
-                invert
-                to={`/u/${signedInUser.username}`}
-              >
+              <ButtonLink invert to={`/u/${signedInUser.username}`}>
                 <AccountIcon size={20} />
                 {signedInUser.username.slice(0, 16)}
               </ButtonLink>
@@ -48,8 +45,15 @@ export default function Navbar() {
           )}
         </ButtonWrap>
       </NavbarContent>
-      <Modal isOpen={activeModal !== MODAL_CLOSED} onRequestClose={() => setActiveModal(MODAL_CLOSED)}>
-        <AuthForm type={activeModal} onChangeType={(type) => setActiveModal(type)} onSuccess={handleAuthSuccess} />
+      <Modal
+        isOpen={activeModal !== MODAL_CLOSED}
+        onRequestClose={() => setActiveModal(MODAL_CLOSED)}
+      >
+        <AuthForm
+          type={activeModal}
+          onChangeType={type => setActiveModal(type)}
+          onSuccess={handleAuthSuccess}
+        />
       </Modal>
     </StyledNavbar>
   )

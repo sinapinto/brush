@@ -12,14 +12,10 @@ export default function PostPreview({ id, title, author }) {
   return (
     <Container>
       <H3>
-        <Link to={`/p/${id}`}>
-          {title}
-        </Link>
+        <Link to={`/p/${id}`}>{title}</Link>
       </H3>
       <P>
-        <Link to={`/u/${author.username}`}>
-          {author.username}
-        </Link>
+        <Link to={`/u/${author.username}`}>{author.username}</Link>
       </P>
     </Container>
   )

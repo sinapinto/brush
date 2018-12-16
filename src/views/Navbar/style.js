@@ -22,7 +22,7 @@ export let StyledNavbar = styled.nav`
   align-items: center;
   justify-content: center;
   background-color: ${theme.brand.default};
-  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
 `
 

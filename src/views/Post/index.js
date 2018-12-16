@@ -9,7 +9,7 @@ export default function Post({ id }) {
 
   useEffect(() => {
     getPost(id)
-      .then((post) => setPost(post))
+      .then(post => setPost(post))
       .catch(console.error)
   }, [])
 

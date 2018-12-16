@@ -7,11 +7,14 @@ import { getProfile } from '../../fetch/profile'
 export default function User({ username }) {
   let [user, setUser] = useState({})
 
-  useEffect(() => {
-    getProfile(username)
-      .then(user => setUser(user))
-      .catch(user => setUser(null))
-  }, [username])
+  useEffect(
+    () => {
+      getProfile(username)
+        .then(user => setUser(user))
+        .catch(user => setUser(null))
+    },
+    [username]
+  )
 
   return (
     <Card>

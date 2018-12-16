@@ -18,9 +18,9 @@ function DevTools() {
   let [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    let handleKeyPress = (e) => {
+    let handleKeyPress = e => {
       if (e.key === 'h') {
-        setIsVisible((state) => !state)
+        setIsVisible(state => !state)
       }
     }
     window.addEventListener('keypress', handleKeyPress)
@@ -37,6 +37,4 @@ function DevTools() {
   )
 }
 
-export default process.env.NODE_ENV === 'development'
-  ? DevTools
-  : () => null
+export default (process.env.NODE_ENV === 'development' ? DevTools : () => null)
