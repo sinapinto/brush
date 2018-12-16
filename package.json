@@ -9,6 +9,7 @@
     "date-fns": "^2.0.0-alpha.25",
     "eslint-plugin-react-hooks": "0.0.0",
     "express": "^4.16.4",
+    "graphql": "^14.0.2",
     "pg": "^7.7.1",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
@@ -17,7 +18,6 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "styled-components": "^4.1.2",
-    "type-graphql": "^0.15.0",
     "typeorm": "^0.2.9"
   },
   "devDependencies": {

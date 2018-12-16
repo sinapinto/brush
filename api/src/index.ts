@@ -1,7 +1,6 @@
 import 'reflect-metadata'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer, gql } from 'apollo-server-express'
 import * as express from 'express'
-import { buildSchema } from 'type-graphql'
 import { createConnection } from 'typeorm'
 import { User } from './entity/User'
 
@@ -17,22 +16,30 @@ createConnection({
   synchronize: true,
 })
   .then(async connection => {
-    let user = new User()
-    user.firstName = 'Timber'
-    user.lastName = 'Saw'
-    user.age = 25
-    await connection.manager.save(user)
-
     let app = express()
 
-    let server = new ApolloServer({
-      schema: await buildSchema({
-        resolvers: [],
-      }),
-      context: ({ req }: any) => ({
-        req,
-      }),
-    })
+    let typeDefs = gql`
+      type User {
+        id: ID
+        firstName: String
+        lastName: String
+        age: Float
+      }
+
+      type Query {
+        users: [User!]
+      }
+    `
+
+    let resolvers = {
+      Query: {
+        users: async () => {
+          return connection.manager.find(User)
+        },
+      },
+    }
+
+    let server = new ApolloServer({ typeDefs, resolvers })
 
     server.applyMiddleware({ app, cors: false })
 
