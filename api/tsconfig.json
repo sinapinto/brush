@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "declaration": false,
     "removeComments": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,

@@ -45,7 +45,7 @@ createConnection({
     let server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: ({ req, res }) => ({
+      context: ({ req, res }: any) => ({
         redis,
         url: req ? req.protocol + '://' + req.get('host') : '',
         req,
