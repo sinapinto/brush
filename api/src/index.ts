@@ -1,8 +1,18 @@
 import 'reflect-metadata'
-import { ApolloServer, gql } from 'apollo-server-express'
 import * as express from 'express'
+import * as session from 'express-session'
+import * as ConnectRedis from 'connect-redis'
+import * as Redis from 'ioredis'
+import { ApolloServer } from 'apollo-server-express'
 import { createConnection } from 'typeorm'
 import { User } from './entity/User'
+import { Post } from './entity/Post'
+import { typeDefs } from './schema'
+import { resolvers } from './resolvers'
+
+let redis = new Redis();
+let RedisStore = ConnectRedis(session)
+let redisStore = new RedisStore({ prefix: 'sess:' })
 
 createConnection({
   type: 'postgres',
@@ -11,37 +21,40 @@ createConnection({
   username: 'dev',
   password: 'dev',
   database: 'microblog2',
-  entities: [User],
+  entities: [User, Post],
   logging: true,
   synchronize: true,
 })
-  .then(async connection => {
+  .then(async () => {
     let app = express()
 
-    let typeDefs = gql`
-      type User {
-        id: ID
-        firstName: String
-        lastName: String
-        age: Float
-      }
+    app.use(
+      session({
+        store: redisStore,
+        secret: 'CHANGE ME',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          httpOnly: true,
+          secure: false,
+          maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+        }
+      })
+    );
 
-      type Query {
-        users: [User!]
-      }
-    `
+    let server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: ({ request, response }) => ({
+        redis,
+        url: request ? request.protocol + '://' + request.get('host') : '',
+        session: request ? request.session : undefined,
+        req: request,
+        res: response,
+      })
+    })
 
-    let resolvers = {
-      Query: {
-        users: async () => {
-          return connection.manager.find(User)
-        },
-      },
-    }
-
-    let server = new ApolloServer({ typeDefs, resolvers })
-
-    server.applyMiddleware({ app, cors: false })
+    server.applyMiddleware({ app })
 
     app.listen({ port: 4000 }, () =>
       console.log(

@@ -1,16 +1,41 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  Column,
+  BeforeInsert,
+} from 'typeorm'
+import { Min, Max } from 'class-validator'
+import * as bcrypt from 'bcrypt'
+import { Post } from './Post'
 
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn()
+@Entity('users')
+export class User extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
   id: number
 
   @Column()
-  firstName: string
+  @Min(1)
+  @Max(30)
+  username: string
 
   @Column()
-  lastName: string
+  @Min(4)
+  @Max(100)
+  password: string
 
-  @Column()
-  age: number
+  @Column({ default: '' })
+  avatar: string
+
+  @Column({ default: '' })
+  bio: string
+
+  @OneToMany(() => Post, post => post.author)
+  posts: Post[]
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }
