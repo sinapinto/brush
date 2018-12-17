@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
 import styled from 'styled-components'
 import GlobalStyles from './styles/global.css.js'
 import DevTools from './util/DevTools'
@@ -21,6 +23,8 @@ let Body = styled.div`
   padding: 24px;
 `
 
+let client = new ApolloClient({ uri: 'http://localhost:4000/graphql' })
+
 function AppContent() {
   let [, setSignedInUser] = useSignedInUser()
 
@@ -31,27 +35,29 @@ function AppContent() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <React.Fragment>
-        <Route component={Navbar} />
-        <GlobalStyles />
-        <Body>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route
-              path="/u/:username"
-              render={({ match }) => <User username={match.params.username} />}
-            />
-            <Route
-              path="/p/:postId"
-              render={({ match }) => <Post id={match.params.postId} />}
-            />
-            <Route path="/create" component={Create} />
-            <Route component={NotFound} />
-          </Switch>
-        </Body>
-      </React.Fragment>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <React.Fragment>
+          <Route component={Navbar} />
+          <GlobalStyles />
+          <Body>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route
+                path="/u/:username"
+                render={({ match }) => <User username={match.params.username} />}
+              />
+              <Route
+                path="/p/:postId"
+                render={({ match }) => <Post id={match.params.postId} />}
+              />
+              <Route path="/create" component={Create} />
+              <Route component={NotFound} />
+            </Switch>
+          </Body>
+        </React.Fragment>
+      </BrowserRouter>
+    </ApolloProvider>
   )
 }
 
