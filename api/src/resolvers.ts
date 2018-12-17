@@ -4,64 +4,59 @@ import { Post } from './entity/Post'
 import { User } from './entity/User'
 import { IResolver } from './types/graphql'
 
-type UserType = {
+interface UserInput {
   username: string,
   password: string,
 }
 
 export let resolvers: IResolver = {
   Query: {
-    me: async (_, __, { session }) => {
-      if (!session.userId) { return {} }
-      return User.findOne({ where: { id: session.userId } })
+    me: async (_, __, { req }) => {
+      if (!req.session.userId) { return {} }
+      return User.findOne({ where: { id: req.session.userId } })
     },
+
     user: async (_, { username }) => {
       return User.findOne({ where: { username } })
     },
+
     post: async (_, { id }) => {
       return Post.findOne(id)
     },
   },
   Mutation: {
-    login: async (_, { username, password }, { session, redis, req }) => {
+    login: async (_, { username, password }, { redis, req }) => {
       const user = await User.findOne({ where: { username } });
-      if (!user || !(await bcrypt.compare(user.password, password))) {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
         return false
       }
-
-      session.userId = user.id;
-      if (req.sessionID) {
-        await redis.lpush(`userSid:${user.id}`, req.sessionID);
-      }
-
+      req.session.userId = user.id;
+      await redis.lpush(`userSessions:${user.id}`, req.sessionID);
       return true
     },
-    logout: async (_, __, { session, redis }) => {
-      let { userId } = session
-      let sessionIds = await redis.lrange(`userSid:${userId}`, 0, -1);
+
+    logout: async (_, __, { redis, req }) => {
+      let { userId } = req.session
+      let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1);
       await Promise.all(sessionIds.map((sid: String) => redis.del(`sess:${sid}`)));
       return true
     },
-    register: async (_, { username, password }, { session }) => {
-      let user: UserType = { username, password }
 
+    register: async (_, user: UserInput, { req }) => {
       let errors = await validate(user)
       if (errors.length > 0) {
         return false
       }
-
-      let userAlreadyExists = await User.findOne({ where: { username }, select: ['id'] });
+      let userAlreadyExists = await User.findOne({ where: { username: user.username }, select: ['id'] });
       if (userAlreadyExists) {
         return false
       }
-
       let newUser =  User.create(user)
       await User.save(newUser)
-      if (session) {
-        session.userId = newUser.id
-      }
+      req.session.userId = newUser.id
       return true
     },
+
     createPost: async () => {
       return true
     },
