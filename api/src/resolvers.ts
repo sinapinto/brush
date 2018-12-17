@@ -7,8 +7,8 @@ import { IResolver } from './types/graphql'
 import { omit } from './util'
 
 interface UserInput {
-  username: string,
-  password: string,
+  username: string
+  password: string
 }
 
 export let resolvers: IResolver = {
@@ -29,19 +29,21 @@ export let resolvers: IResolver = {
   },
   Mutation: {
     login: async (_, { username, password }, { redis, req }) => {
-      const user = await User.findOne({ where: { username } });
+      const user = await User.findOne({ where: { username } })
       if (!user || !(await bcrypt.compare(password, user.password))) {
         return { success: false, message: 'wrong username or password' }
       }
-      req.session.userId = user.id;
-      await redis.lpush(`userSessions:${user.id}`, req.sessionID);
+      req.session.userId = user.id
+      await redis.lpush(`userSessions:${user.id}`, req.sessionID)
       return { success: true, message: '' }
     },
 
     logout: async (_, __, { redis, req }) => {
       let { userId } = req.session
-      let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1);
-      await Promise.all(sessionIds.map((sid: String) => redis.del(`sess:${sid}`)));
+      let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1)
+      await Promise.all(
+        sessionIds.map((sid: String) => redis.del(`sess:${sid}`))
+      )
       return { success: true, message: '' }
     },
 
@@ -50,11 +52,14 @@ export let resolvers: IResolver = {
       if (errors.length > 0) {
         return { success: false, message: 'invalid username or password' }
       }
-      let userAlreadyExists = await User.findOne({ where: { username: user.username }, select: ['id'] });
+      let userAlreadyExists = await User.findOne({
+        where: { username: user.username },
+        select: ['id'],
+      })
       if (userAlreadyExists) {
         return { success: false, message: 'username already taken' }
       }
-      let newUser =  User.create(user)
+      let newUser = User.create(user)
       await User.save(newUser)
       req.session.userId = newUser.id
       return { success: true, message: '', user: omit(newUser, ['password']) }
@@ -65,10 +70,10 @@ export let resolvers: IResolver = {
     },
   },
   MutationResponse: {
-    __resolveType: (obj) => {
+    __resolveType: obj => {
       if (obj.user) return 'User'
       if (obj.post) return 'Post'
       return null
-    }
-  }
+    },
+  },
 }

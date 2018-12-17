@@ -46,7 +46,7 @@
   "scripts": {
     "dev:web": "react-scripts start",
     "dev:api": "NODE_ENV=development ts-node --project api/tsconfig.json api/src/index.ts",
-    "prettier": "prettier --write 'src/**/*.js'"
+    "prettier": "prettier --write 'src/**/*.js' 'api/**/*.ts'"
   },
   "eslintConfig": {
     "extends": "react-app",

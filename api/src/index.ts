@@ -10,7 +10,7 @@ import { Post } from './entity/Post'
 import { typeDefs } from './schema'
 import { resolvers } from './resolvers'
 
-let redis = new Redis();
+let redis = new Redis()
 let RedisStore = ConnectRedis(session)
 let redisStore = new RedisStore({ prefix: 'sess:' })
 
@@ -37,10 +37,10 @@ createConnection({
         cookie: {
           httpOnly: true,
           secure: false,
-          maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
-        }
+          maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        },
       })
-    );
+    )
 
     let server = new ApolloServer({
       typeDefs,
@@ -50,7 +50,7 @@ createConnection({
         url: req ? req.protocol + '://' + req.get('host') : '',
         req,
         res,
-      })
+      }),
     })
 
     server.applyMiddleware({ app })
