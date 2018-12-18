@@ -20,15 +20,15 @@ export default function Navbar() {
           <NavbarContent>
             <LogoLink to="/">brush</LogoLink>
             <ButtonWrap>
-              {data && data.me ? (
+              {data && data.me && data.me.user ? (
                 <React.Fragment>
                   <ButtonLink invert to="/create">
                     <PlusIcon size={20} />
                     Create
                   </ButtonLink>
-                  <ButtonLink invert to={`/u/${data.me.username}`}>
+                  <ButtonLink invert to={`/u/${data.me.user.username}`}>
                     <AccountIcon size={20} />
-                    {data.me.username.slice(0, 16)}
+                    {data.me.user.username.slice(0, 16)}
                   </ButtonLink>
                 </React.Fragment>
               ) : (

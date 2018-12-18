@@ -1,4 +1,3 @@
-import { AuthenticationError } from 'apollo-server-express'
 import * as bcrypt from 'bcrypt'
 import { validate } from 'class-validator'
 import { Post } from './entity/Post'
@@ -15,8 +14,14 @@ export let resolvers: IResolver = {
   Query: {
     me: async (_, __, { req }) => {
       let { userId } = req.session
-      if (!userId) throw new AuthenticationError('not logged in')
-      return User.findOne({ where: { id: userId } })
+      if (!userId) {
+        return { success: false, message: 'not logged in' }
+      }
+      let user = await User.findOne({ where: { id: userId } })
+      if (!user) {
+        return { success: false, message: 'no user found' }
+      }
+      return { success: true, message: '', user }
     },
 
     user: async (_, { username }) => {
@@ -69,7 +74,7 @@ export let resolvers: IResolver = {
       return { success: true, message: '', post: {} }
     },
   },
-  MutationResponse: {
+  Response: {
     __resolveType: obj => {
       if (obj.user) return 'User'
       if (obj.post) return 'Post'

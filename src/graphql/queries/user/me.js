@@ -5,6 +5,10 @@ export let meQuery = gql`
     me {
       success
       message
+      user {
+        id
+        username
+      }
     }
   }
 `

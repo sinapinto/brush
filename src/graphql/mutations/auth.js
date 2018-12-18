@@ -5,6 +5,10 @@ export let registerUserMutation = gql`
     register(username: $username, password: $password) {
       success
       message
+      user {
+        id
+        username
+      }
     }
   }
 `

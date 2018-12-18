@@ -11,9 +11,9 @@ export default function SignupForm({ onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
 
-  let handleSubmit = (e, signup) => {
+  let handleSubmit = (e, register) => {
     e.preventDefault()
-    signup(username, password)
+    register({ variables: { username, password } })
   }
 
   let handleChange = e => {
@@ -29,8 +29,8 @@ export default function SignupForm({ onSuccess }) {
       mutation={registerUserMutation}
       refetchQueries={[{ query: meQuery }]}
     >
-      {(signup, { data, loading, error }) => (
-        <Form onSubmit={e => handleSubmit(e, signup)} onChange={handleChange}>
+      {(register, { data, loading, error }) => (
+        <Form onSubmit={e => handleSubmit(e, register)} onChange={handleChange}>
           <Input
             type="text"
             placeholder="Username"
