@@ -21,3 +21,12 @@ export let loginUserMutation = gql`
     }
   }
 `
+
+export let logoutUserMutation = gql`
+  mutation LogoutUser {
+    logout {
+      success
+      message
+    }
+  }
+`

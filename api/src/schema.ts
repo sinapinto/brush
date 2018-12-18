@@ -8,13 +8,18 @@ export let typeDefs = gql`
   }
 
   type Mutation {
-    login(username: String!, password: String!): Response!
-    logout: Response!
+    login(username: String!, password: String!): EmptyResponse!
+    logout: EmptyResponse!
     register(username: String!, password: String!): UserResponse!
     createPost(title: String!, body: String!): PostResponse!
   }
 
   interface Response {
+    success: Boolean!
+    message: String!
+  }
+
+  type EmptyResponse implements Response {
     success: Boolean!
     message: String!
   }

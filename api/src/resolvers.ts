@@ -3,7 +3,6 @@ import { validate } from 'class-validator'
 import { Post } from './entity/Post'
 import { User } from './entity/User'
 import { IResolver } from './types/graphql'
-import { omit } from './util'
 
 interface UserInput {
   username: string
@@ -39,6 +38,7 @@ export let resolvers: IResolver = {
         return { success: false, message: 'wrong username or password' }
       }
       req.session.userId = user.id
+      console.log('[redis] pushing user', user.id, 'sesion', req.sessionId)
       await redis.lpush(`userSessions:${user.id}`, req.sessionID)
       return { success: true, message: '' }
     },
@@ -46,9 +46,12 @@ export let resolvers: IResolver = {
     logout: async (_, __, { redis, req }) => {
       let { userId } = req.session
       let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1)
+      console.log('[redis] deleting user', userId, 'sessions', sessionIds)
       await Promise.all(
         sessionIds.map((sid: String) => redis.del(`sess:${sid}`))
       )
+      let destroySession = new Promise(resolve => req.session.destroy(resolve))
+      await destroySession
       return { success: true, message: '' }
     },
 
@@ -67,7 +70,7 @@ export let resolvers: IResolver = {
       let newUser = User.create(user)
       await User.save(newUser)
       req.session.userId = newUser.id
-      return { success: true, message: '', user: omit(newUser, ['password']) }
+      return { success: true, message: '', user: newUser }
     },
 
     createPost: async () => {

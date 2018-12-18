@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { TiPlus as PlusIcon } from 'react-icons/ti'
 import { TiUser as AccountIcon } from 'react-icons/ti'
+import { TiChevronRight as LogoutIcon } from 'react-icons/ti'
 import { meQuery } from '../../graphql/queries/user/me'
+import { logoutUserMutation } from '../../graphql/mutations/auth'
 import Modal from '../../components/Modal'
 import { Button } from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
@@ -30,6 +32,17 @@ export default function Navbar() {
                     <AccountIcon size={20} />
                     {data.me.user.username.slice(0, 16)}
                   </ButtonLink>
+                  <Mutation
+                    mutation={logoutUserMutation}
+                    refetchQueries={[{ query: meQuery }]}
+                  >
+                    {logout => (
+                      <Button type="primary" invert onClick={() => logout()}>
+                        <LogoutIcon size={20} />
+                        Log Out
+                      </Button>
+                    )}
+                  </Mutation>
                 </React.Fragment>
               ) : (
                 <Button
