@@ -4,14 +4,14 @@ export let typeDefs = gql`
   type Query {
     me: UserResponse!
     user(username: String!): UserResponse!
-    post(id: ID): PostResponse!
+    post(id: ID!): PostResponse!
   }
 
   type Mutation {
     login(username: String!, password: String!): EmptyResponse!
     logout: EmptyResponse!
     register(username: String!, password: String!): UserResponse!
-    createPost(title: String!, body: String!): PostResponse!
+    createPost(input: CreatePostInput!): PostResponse!
   }
 
   interface Response {
@@ -34,6 +34,11 @@ export let typeDefs = gql`
     success: Boolean!
     message: String!
     post: Post
+  }
+
+  type CreatePostInput {
+    title: String!
+    body: String!
   }
 
   type User {

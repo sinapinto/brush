@@ -9,6 +9,11 @@ interface UserInput {
   password: string
 }
 
+type CreatePostInput = {
+  title: string
+  body: string
+}
+
 export let resolvers: IResolver = {
   Query: {
     me: async (_, __, { req }) => {
@@ -25,6 +30,18 @@ export let resolvers: IResolver = {
 
     user: async (_, { username }) => {
       return User.findOne({ where: { username } })
+    },
+
+    createPost: async (_, input: CreatePostInput, { req }) => {
+      let post = Post.create(input)
+      post.author = req.session && req.session.userId || null
+      let errors = await validate(post)
+      if (errors.length > 0) {
+        console.log('errors: ', errors)
+        return { success: false, message: 'invalid post' }
+      }
+      await Post.save(post)
+      return { success: true, message: 'post created', post }
     },
 
     post: async (_, { id }) => {

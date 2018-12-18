@@ -5,6 +5,7 @@ import {
   Column,
   ManyToOne,
 } from 'typeorm'
+import { IsDefined } from 'class-validator'
 import { User } from './User'
 
 @Entity('posts')
@@ -19,5 +20,6 @@ export class Post extends BaseEntity {
   body: string
 
   @ManyToOne(() => User, user => user.posts)
+  @IsDefined()
   author: string
 }

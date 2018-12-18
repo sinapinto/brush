@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { Mutation } from 'apollo-react'
 import styled from 'styled-components'
 import { Input, H2, Card, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
-import { createPost } from '../../fetch/post'
+import { createPostMutation } from '../../graphql/mutations/post'
 
 let Form = styled.form`
   padding: 24px;
@@ -17,38 +18,37 @@ let Form = styled.form`
 export default function Create() {
   let [title, setTitle] = useState('')
   let [body, setBody] = useState('')
-  let [isFetching, setIsFetching] = useState(false)
-  let [error, setError] = useState()
 
-  let handleSubmit = e => {
+  let handleSubmit = (e, createPost) => {
     e.preventDefault()
-    createPost(title, body).catch(err => {
-      setError(typeof err === 'string' ? err : 'An unknown error occured.')
-      setIsFetching(false)
-    })
+    createPost({ variables: { title, body } })
   }
 
   return (
-    <Card>
-      <Form onSubmit={handleSubmit}>
-        <H2>Create</H2>
-        <Input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="Body"
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        <ErrorMessage>{error}</ErrorMessage>
-        <Button type="primary" htmlType="submit" disabled={isFetching}>
-          Create
-        </Button>
-      </Form>
-    </Card>
+    <Mutation mutation={createPostMutation}>
+      {(createPost, { error, loading }) => (
+        <Card>
+          <Form onSubmit={e => handleSubmit(e, createPost)}>
+            <H2>Create</H2>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Body"
+              value={body}
+              onChange={e => setBody(e.target.value)}
+            />
+            <ErrorMessage>{error}</ErrorMessage>
+            <Button type="primary" htmlType="submit" disabled={loading}>
+              Create
+            </Button>
+          </Form>
+        </Card>
+      )}
+    </Mutation>
   )
 }
