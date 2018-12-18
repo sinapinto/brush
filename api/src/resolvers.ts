@@ -2,12 +2,8 @@ import * as bcrypt from 'bcrypt'
 import { validate } from 'class-validator'
 import { Post } from './entity/Post'
 import { User } from './entity/User'
+import { UserError } from './util'
 import { IResolver } from './types/graphql'
-
-interface UserInput {
-  username: string
-  password: string
-}
 
 type CreatePostInput = {
   input: {
@@ -18,88 +14,87 @@ type CreatePostInput = {
 
 export let resolvers: IResolver = {
   Query: {
-    me: async (_, __, { req }) => {
-      let { userId } = req.session
+    me: async (_, __, { session }) => {
+      let { userId } = session
       if (!userId) {
-        return { success: false, message: 'not logged in' }
+        return new UserError('not logged in')
       }
       let user = await User.findOne({ where: { id: userId } })
       if (!user) {
-        return { success: false, message: 'no user found' }
+        return new UserError('no user found')
       }
-      return { success: true, message: '', user }
+      return user
     },
 
     user: async (_, { username }) => {
       return User.findOne({ where: { username } })
     },
 
-    post: async (_, { id }) => {
+    getPost: async (_, { id }) => {
       return Post.findOne(id)
+    },
+
+    getPosts: async () => {
+      return Post.find()
     },
   },
 
   Mutation: {
-    login: async (_, { username, password }, { redis, req }) => {
+    login: async (_, { username, password }, { redis, session }) => {
       const user = await User.findOne({ where: { username } })
       if (!user || !(await bcrypt.compare(password, user.password))) {
-        return { success: false, message: 'wrong username or password' }
+        return new UserError('wrong username or password')
       }
-      req.session.userId = user.id
-      console.log('[redis] pushing user', user.id, 'sesion', req.sessionId)
-      await redis.lpush(`userSessions:${user.id}`, req.sessionID)
-      return { success: true, message: '' }
+      session.userId = user.id
+      console.log('[redis] pushing user', user.id, 'sesion', session.id)
+      await redis.lpush(`userSessions:${user.id}`, session.id)
+      return user
     },
 
-    logout: async (_, __, { redis, req }) => {
-      let { userId } = req.session
+    logout: async (_, __, { redis, session }) => {
+      let { userId } = session
       let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1)
       console.log('[redis] deleting user', userId, 'sessions', sessionIds)
       await Promise.all(
         sessionIds.map((sid: String) => redis.del(`sess:${sid}`))
       )
-      let destroySession = new Promise(resolve => req.session.destroy(resolve))
+      let destroySession = new Promise(resolve => session.destroy(resolve))
       await destroySession
-      return { success: true, message: '' }
+      return true
     },
 
-    register: async (_, args: UserInput, { req }) => {
+    register: async (_, args, { session }) => {
       let user = User.create(args)
       let errors = await validate(user)
       if (errors.length > 0) {
         console.log('errors: ', errors)
-        return { success: false, message: 'invalid username or password' }
+        return new UserError('invalid username or password')
       }
       let userAlreadyExists = await User.findOne({
         where: { username: user.username },
         select: ['id'],
       })
       if (userAlreadyExists) {
-        return { success: false, message: 'username already taken' }
+        return new UserError('username already taken')
       }
       await User.save(user)
-      req.session.userId = user.id
-      return { success: true, message: '', user }
+      session.userId = user.id
+      return user
     },
 
-    createPost: async (_, args: CreatePostInput, { req }) => {
+    createPost: async (_, args: CreatePostInput, { session }) => {
+      if (!session || !session.userId) {
+        return new UserError('unauthorized')
+      }
       let post = Post.create(args.input)
-      post.author = (req.session && req.session.userId) || null
+      post.author = session.userId
       let errors = await validate(post)
       if (errors.length > 0) {
         console.log('errors: ', errors)
-        return { success: false, message: 'invalid post' }
+        return new UserError('invalid post')
       }
       await Post.save(post)
-      return { success: true, message: 'post created', post }
-    },
-  },
-
-  Response: {
-    __resolveType: obj => {
-      if (obj.user) return 'User'
-      if (obj.post) return 'Post'
-      return null
+      return post
     },
   },
 }

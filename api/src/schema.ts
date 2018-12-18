@@ -2,38 +2,17 @@ import { gql } from 'apollo-server-express'
 
 export let typeDefs = gql`
   type Query {
-    me: UserResponse!
-    user(username: String!): UserResponse!
-    post(id: ID!): PostResponse!
+    me: User
+    user(username: String!): User
+    getPost(id: ID!): Post
+    getPosts(pageSize: Int, after: String): [Post!]
   }
 
   type Mutation {
-    login(username: String!, password: String!): EmptyResponse!
-    logout: EmptyResponse!
-    register(username: String!, password: String!): UserResponse!
-    createPost(input: CreatePostInput!): PostResponse!
-  }
-
-  interface Response {
-    success: Boolean!
-    message: String!
-  }
-
-  type EmptyResponse implements Response {
-    success: Boolean!
-    message: String!
-  }
-
-  type UserResponse implements Response {
-    success: Boolean!
-    message: String!
-    user: User
-  }
-
-  type PostResponse implements Response {
-    success: Boolean!
-    message: String!
-    post: Post
+    login(username: String!, password: String!): User
+    logout: Boolean
+    register(username: String!, password: String!): User
+    createPost(input: CreatePostInput!): Post
   }
 
   input CreatePostInput {
@@ -46,6 +25,7 @@ export let typeDefs = gql`
     username: String
     avatar: String
     bio: String
+    posts: [Post]
     createdAt: String
     updatedAt: String
   }

@@ -22,15 +22,15 @@ export default function Navbar() {
           <NavbarContent>
             <LogoLink to="/">brush</LogoLink>
             <ButtonWrap>
-              {data && data.me && data.me.user ? (
+              {data && data.me && data.me.id ? (
                 <React.Fragment>
                   <ButtonLink invert to="/create">
                     <PlusIcon size={20} />
                     Create
                   </ButtonLink>
-                  <ButtonLink invert to={`/u/${data.me.user.username}`}>
+                  <ButtonLink invert to={`/u/${data.me.username}`}>
                     <AccountIcon size={20} />
-                    {data.me.user.username.slice(0, 16)}
+                    {data.me.username.slice(0, 16)}
                   </ButtonLink>
                   <Mutation
                     mutation={logoutUserMutation}
