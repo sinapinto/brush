@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Mutation } from 'apollo-react'
+import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import { Input, H2, Card, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
@@ -21,7 +21,8 @@ export default function Create() {
 
   let handleSubmit = (e, createPost) => {
     e.preventDefault()
-    createPost({ variables: { title, body } })
+    let input = { title, body }
+    createPost({ variables: { input } })
   }
 
   return (

@@ -10,8 +10,10 @@ interface UserInput {
 }
 
 type CreatePostInput = {
-  title: string
-  body: string
+  input: {
+    title: string
+    body: string
+  }
 }
 
 export let resolvers: IResolver = {
@@ -32,22 +34,11 @@ export let resolvers: IResolver = {
       return User.findOne({ where: { username } })
     },
 
-    createPost: async (_, input: CreatePostInput, { req }) => {
-      let post = Post.create(input)
-      post.author = req.session && req.session.userId || null
-      let errors = await validate(post)
-      if (errors.length > 0) {
-        console.log('errors: ', errors)
-        return { success: false, message: 'invalid post' }
-      }
-      await Post.save(post)
-      return { success: true, message: 'post created', post }
-    },
-
     post: async (_, { id }) => {
       return Post.findOne(id)
     },
   },
+
   Mutation: {
     login: async (_, { username, password }, { redis, req }) => {
       const user = await User.findOne({ where: { username } })
@@ -91,10 +82,19 @@ export let resolvers: IResolver = {
       return { success: true, message: '', user }
     },
 
-    createPost: async () => {
-      return { success: true, message: '', post: {} }
+    createPost: async (_, args: CreatePostInput, { req }) => {
+      let post = Post.create(args.input)
+      post.author = (req.session && req.session.userId) || null
+      let errors = await validate(post)
+      if (errors.length > 0) {
+        console.log('errors: ', errors)
+        return { success: false, message: 'invalid post' }
+      }
+      await Post.save(post)
+      return { success: true, message: 'post created', post }
     },
   },
+
   Response: {
     __resolveType: obj => {
       if (obj.user) return 'User'

@@ -36,7 +36,7 @@ export let typeDefs = gql`
     post: Post
   }
 
-  type CreatePostInput {
+  input CreatePostInput {
     title: String!
     body: String!
   }

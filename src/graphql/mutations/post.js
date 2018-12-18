@@ -9,11 +9,13 @@ let postInfoFragment = gql`
 `
 
 export let createPostMutation = gql`
-  mutation CreatePost($input: CreatePostInput) {
+  mutation CreatePost($input: CreatePostInput!) {
     createPost(input: $input) {
       success
       message
-      ...postInfo
+      post {
+        ...postInfo
+      }
     }
   }
   ${postInfoFragment}
