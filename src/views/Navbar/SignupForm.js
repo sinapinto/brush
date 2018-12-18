@@ -4,8 +4,8 @@ import { Mutation } from 'react-apollo'
 import { Button } from '../../components/Button'
 import { Input, ErrorMessage } from '../../components/globals'
 import { Form } from './style'
-import { registerUserMutation } from '../../graphql/mutations/auth'
-import { meQuery } from '../../graphql/queries/user/me'
+import { registerUserMutation } from '../../graphql/mutations/user'
+import { meQuery } from '../../graphql/queries/user'
 
 export default function SignupForm({ onSuccess }) {
   let [username, setUsername] = useState('')
