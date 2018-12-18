@@ -1,31 +1,22 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Mutation } from 'react-apollo'
 import { Input, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
 import { Form } from './style'
-import { login } from '../../fetch/auth'
+import { loginUserMutation } from '../../graphql/mutations/auth'
+import { meQuery } from '../../graphql/queries/user/me'
 
 export default function LoginForm({ onSuccess }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
-  let [isFetching, setIsFetching] = useState(false)
-  let [error, setError] = useState()
 
-  let handleSubmit = e => {
+  let handleSubmit = (e, login) => {
     e.preventDefault()
-    setIsFetching(true)
-    login(username, password)
-      .then(user => {
-        onSuccess(user)
-      })
-      .catch(err => {
-        setError(typeof err === 'string' ? err : 'An unknown error occured.')
-        setIsFetching(false)
-      })
+    login({ variables: { username, password } })
   }
 
   let handleChange = e => {
-    setError(null)
     if (e.target.name === 'password') {
       setPassword(e.target.value)
     } else if (e.target.name === 'username') {
@@ -34,31 +25,38 @@ export default function LoginForm({ onSuccess }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} onChange={handleChange}>
-      <Input
-        type="text"
-        placeholder="Username"
-        spellCheck={false}
-        name="username"
-        disabled={isFetching}
-        autoComplete="off"
-      />
-      <Input
-        placeholder="Password"
-        name="password"
-        type="password"
-        autoComplete="new-password"
-        disabled={isFetching}
-      />
-      <ErrorMessage>{error || ''}</ErrorMessage>
-      <Button
-        type="primary"
-        htmlType="submit"
-        disabled={isFetching || !username || !password}
-      >
-        Log In
-      </Button>
-    </Form>
+    <Mutation
+      mutation={loginUserMutation}
+      refetchQueries={[{ query: meQuery }]}
+    >
+      {(login, { data, loading, error }) => (
+        <Form onSubmit={e => handleSubmit(e, login)} onChange={handleChange}>
+          <Input
+            type="text"
+            placeholder="Username"
+            spellCheck={false}
+            name="username"
+            disabled={loading}
+            autoComplete="off"
+          />
+          <Input
+            placeholder="Password"
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            disabled={loading}
+          />
+          <ErrorMessage>{error || ''}</ErrorMessage>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={loading || !username || !password}
+          >
+            Log In
+          </Button>
+        </Form>
+      )}
+    </Mutation>
   )
 }
 
