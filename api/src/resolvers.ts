@@ -55,9 +55,11 @@ export let resolvers: IResolver = {
       return { success: true, message: '' }
     },
 
-    register: async (_, user: UserInput, { req }) => {
+    register: async (_, args: UserInput, { req }) => {
+      let user = User.create(args)
       let errors = await validate(user)
       if (errors.length > 0) {
+        console.log('errors: ', errors)
         return { success: false, message: 'invalid username or password' }
       }
       let userAlreadyExists = await User.findOne({
@@ -67,10 +69,9 @@ export let resolvers: IResolver = {
       if (userAlreadyExists) {
         return { success: false, message: 'username already taken' }
       }
-      let newUser = User.create(user)
-      await User.save(newUser)
-      req.session.userId = newUser.id
-      return { success: true, message: '', user: newUser }
+      await User.save(user)
+      req.session.userId = user.id
+      return { success: true, message: '', user }
     },
 
     createPost: async () => {

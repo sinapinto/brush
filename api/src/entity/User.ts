@@ -6,7 +6,7 @@ import {
   Column,
   BeforeInsert,
 } from 'typeorm'
-import { Min, Max } from 'class-validator'
+import { Length } from 'class-validator'
 import * as bcrypt from 'bcrypt'
 import { Post } from './Post'
 
@@ -16,13 +16,11 @@ export class User extends BaseEntity {
   id: number
 
   @Column()
-  @Min(1)
-  @Max(30)
+  @Length(1, 30)
   username: string
 
   @Column()
-  @Min(4)
-  @Max(100)
+  @Length(4, 100)
   password: string
 
   @Column({ default: '' })
