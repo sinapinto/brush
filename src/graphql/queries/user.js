@@ -1,3 +1,4 @@
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 export let meQuery = gql`
@@ -8,3 +9,9 @@ export let meQuery = gql`
     }
   }
 `
+
+export let getCurrentUser = graphql(meQuery, {
+  props: ({ data }) => ({
+    currentUser: data.me,
+  }),
+})

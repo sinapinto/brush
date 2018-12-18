@@ -1,3 +1,4 @@
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 export let registerUserMutation = gql`
@@ -23,3 +24,11 @@ export let logoutUserMutation = gql`
     logout
   }
 `
+
+export let logoutUser = graphql(logoutUserMutation, {
+  props: ({ mutate }) => ({
+    logoutUser: () => {
+      mutate()
+    },
+  }),
+})
