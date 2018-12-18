@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Mutation } from 'react-apollo'
+import { compose } from 'react-apollo'
+
+import { loginUser } from '../../graphql/mutations/user'
+import { getCurrentUser } from '../../graphql/queries/user'
 import { Input, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
 import { Form } from './style'
-import { loginUserMutation } from '../../graphql/mutations/user'
-import { meQuery } from '../../graphql/queries/user'
 
-export default function LoginForm({ onSuccess }) {
+function LoginForm({ loading, onSuccess, currentUser, loginUser }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
 
-  let handleSubmit = (e, login) => {
+  let handleSubmit = e => {
     e.preventDefault()
-    login({ variables: { username, password } })
+    loginUser({ username, password })
   }
 
   let handleChange = e => {
@@ -25,41 +26,41 @@ export default function LoginForm({ onSuccess }) {
   }
 
   return (
-    <Mutation
-      mutation={loginUserMutation}
-      refetchQueries={[{ query: meQuery }]}
-    >
-      {(login, { data, loading, error }) => (
-        <Form onSubmit={e => handleSubmit(e, login)} onChange={handleChange}>
-          <Input
-            type="text"
-            placeholder="Username"
-            spellCheck={false}
-            name="username"
-            disabled={loading}
-            autoComplete="off"
-          />
-          <Input
-            placeholder="Password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            disabled={loading}
-          />
-          <ErrorMessage>{error || ''}</ErrorMessage>
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={loading || !username || !password}
-          >
-            Log In
-          </Button>
-        </Form>
-      )}
-    </Mutation>
+    <Form onSubmit={handleSubmit} onChange={handleChange}>
+      <Input
+        type="text"
+        placeholder="Username"
+        spellCheck={false}
+        name="username"
+        disabled={loading}
+        autoComplete="off"
+      />
+      <Input
+        placeholder="Password"
+        name="password"
+        type="password"
+        autoComplete="new-password"
+        disabled={loading}
+      />
+      <ErrorMessage>{''}</ErrorMessage>
+      <Button
+        type="primary"
+        htmlType="submit"
+        disabled={loading || !username || !password}
+      >
+        Log In
+      </Button>
+    </Form>
   )
 }
 
 LoginForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  currentUser: PropTypes.object,
 }
+
+export default compose(
+  loginUser,
+  getCurrentUser
+)(LoginForm)
