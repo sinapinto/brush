@@ -15,9 +15,11 @@ function AuthForm({ type, loading, onSuccess, currentUser, loginUser }) {
 
   let handleSubmit = e => {
     e.preventDefault()
-    type === MODAL_LOGIN
-      ? loginUser({ username, password })
-      : registerUser({ username, password })
+    if (type === MODAL_LOGIN) {
+      loginUser({ username, password })
+    } else {
+      registerUser({ username, password })
+    }
   }
 
   let handleChange = e => {

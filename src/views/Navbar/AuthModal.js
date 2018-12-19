@@ -25,20 +25,18 @@ export default function AuthModal({
   onChangeType,
   onSuccess,
 }) {
+  let title = type === MODAL_LOGIN ? 'Log In' : 'Sign Up'
+  let subtitle =
+    type === MODAL_LOGIN ? "Don't have an account?" : 'Already have an account?'
+  let otherType = type === MODAL_LOGIN ? MODAL_SIGNUP : MODAL_LOGIN
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
-        <H2>{type === MODAL_LOGIN ? 'Log In' : 'Sign Up'}</H2>
+        <H2>{title}</H2>
         <P>
-          {type === MODAL_LOGIN
-            ? "Don't have an account?"
-            : 'Already have an account?'}
-          <TextButton
-            onClick={() =>
-              onChangeType(type === MODAL_LOGIN ? MODAL_SIGNUP : MODAL_LOGIN)
-            }
-          >
-            {type === MODAL_LOGIN ? 'Sign Up' : 'Log In'}
+          {subtitle}
+          <TextButton onClick={() => onChangeType(otherType)}>
+            {title}
           </TextButton>
         </P>
         <AuthForm type={type} onSuccess={onSuccess} />
