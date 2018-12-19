@@ -8,18 +8,23 @@ import { Button } from '../../components/Button'
 import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants'
 import { Form } from './style'
 
-function AuthForm({ type, loading, onSuccess, loginUser, registerUser }) {
+function AuthForm({ type, onSuccess, loginUser, registerUser }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
+  let [isLoading, setIsLoading] = useState(false)
 
   let handleSubmit = e => {
     e.preventDefault()
+    setIsLoading(true)
     let mutate = type === MODAL_LOGIN ? loginUser : registerUser
-    mutate({ username, password }).then(() => {
-      onSuccess()
-      // TODO: get rid of this
-      window.location.reload()
-    })
+    mutate({ username, password })
+      .then(() => {
+        setIsLoading(false)
+        onSuccess()
+        // TODO: get rid of this
+        window.location.reload()
+      })
+      .finally(() => setIsLoading(false))
   }
 
   let handleChange = e => {
@@ -37,7 +42,7 @@ function AuthForm({ type, loading, onSuccess, loginUser, registerUser }) {
         placeholder="Username"
         spellCheck={false}
         name="username"
-        disabled={loading}
+        disabled={isLoading}
         autoComplete="off"
       />
       <Input
@@ -45,13 +50,13 @@ function AuthForm({ type, loading, onSuccess, loginUser, registerUser }) {
         name="password"
         type="password"
         autoComplete="new-password"
-        disabled={loading}
+        disabled={isLoading}
       />
       <ErrorMessage>{''}</ErrorMessage>
       <Button
         type="primary"
         htmlType="submit"
-        disabled={loading || !username || !password}
+        disabled={isLoading || !username || !password}
       >
         {type === MODAL_LOGIN ? 'Log In' : 'Sign Up'}
       </Button>
