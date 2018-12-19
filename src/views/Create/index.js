@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals'
@@ -17,7 +18,7 @@ let Form = styled.form`
   }
 `
 
-function Create({ createPost }) {
+function Create({ history, createPost }) {
   let [title, setTitle] = useState('')
   let [body, setBody] = useState('')
   let [isLoading, setIsLoading] = useState(false)
@@ -25,7 +26,10 @@ function Create({ createPost }) {
   let handleSubmit = (e, createPost) => {
     setIsLoading(true)
     e.preventDefault()
-    createPost({ title, body }).finally(() => setIsLoading(false))
+    createPost({ title, body }).then(({ data }) => {
+      setIsLoading(false)
+      history.push(`/p/${data.createPost.id}`)
+    })
   }
 
   return (
@@ -55,6 +59,10 @@ function Create({ createPost }) {
 
 Create.propTypes = {
   createPost: PropTypes.func.isRequired,
+  history: PropTypes.object,
 }
 
-export default compose(createPost)(Create)
+export default compose(
+  withRouter,
+  createPost
+)(Create)
