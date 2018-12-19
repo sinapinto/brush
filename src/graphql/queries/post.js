@@ -27,3 +27,19 @@ export let getPosts = graphql(getPostsQuery, {
     },
   }),
 });
+
+export let getPostByIdQuery = gql`
+  query GetPostById($id: ID!) {
+    getPost(id: $id) {
+      id
+      title
+      body
+      createdAt
+      updatedAt
+      author {
+        id
+        username
+      }
+    }
+  }
+`;
