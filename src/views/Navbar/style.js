@@ -43,5 +43,7 @@ export let LogoLink = styled(Link)`
 `
 
 export let ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
   margin-left: 28px;
 `
