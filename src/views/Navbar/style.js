@@ -37,7 +37,7 @@ export let NavbarContent = styled.div`
 
 export let LogoLink = styled(Link)`
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 900;
   color: #fff;
   text-decoration: none;
 `
