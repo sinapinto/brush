@@ -33,7 +33,11 @@ export default function AuthModal({
           {type === MODAL_LOGIN
             ? "Don't have an account?"
             : 'Already have an account?'}
-          <TextButton onClick={() => onChangeType(MODAL_SIGNUP)}>
+          <TextButton
+            onClick={() =>
+              onChangeType(type === MODAL_LOGIN ? MODAL_SIGNUP : MODAL_LOGIN)
+            }
+          >
             {type === MODAL_LOGIN ? 'Sign Up' : 'Log In'}
           </TextButton>
         </P>
