@@ -12,7 +12,7 @@ import ButtonLink from '../../components/ButtonLink'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
-function Navbar({ logoutUser, currentUser, loading, error }) {
+function Navbar({ logoutUser, currentUser }) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
   return (
     <StyledNavbar>

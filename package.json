@@ -62,7 +62,7 @@
       "react-app"
     ],
     "plugins": [
-      "styled-components"
+      "babel-plugin-styled-components"
     ]
   },
   "browserslist": [

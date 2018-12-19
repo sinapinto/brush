@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export let typeDefs = gql`
   type Query {
-    me: User
+    currentUser: User
     user(username: String!): User
     getPost(id: ID!): Post
     getPosts(pageSize: Int, after: String): [Post!]

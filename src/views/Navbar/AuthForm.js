@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { compose } from 'react-apollo'
 
 import { loginUser, registerUser } from '../../graphql/mutations/user'
-import { getCurrentUser } from '../../graphql/queries/user'
 import { Input, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
-import { MODAL_LOGIN, MODAL_SIGNUP } from './constants'
+import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants'
 import { Form } from './style'
 
-function AuthForm({ type, loading, onSuccess, currentUser, loginUser }) {
+function AuthForm({ type, loading, onSuccess, loginUser, registerUser }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
 
@@ -60,15 +59,13 @@ function AuthForm({ type, loading, onSuccess, currentUser, loginUser }) {
 }
 
 AuthForm.propTypes = {
-  type: PropTypes.oneOf([MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
+  type: PropTypes.oneOf([MODAL_CLOSED, MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
   onSuccess: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
 }
 
 export default compose(
   loginUser,
-  registerUser,
-  getCurrentUser
+  registerUser
 )(AuthForm)

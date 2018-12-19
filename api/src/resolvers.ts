@@ -14,7 +14,7 @@ type CreatePostInput = {
 
 export let resolvers: IResolver = {
   Query: {
-    me: async (_, __, { session }) => {
+    currentUser: async (_, __, { session }) => {
       let { userId } = session
       if (!userId) {
         return new UserError('not logged in')

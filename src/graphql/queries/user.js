@@ -1,17 +1,17 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-export let meQuery = gql`
-  query Me {
-    me {
+export let currentUserQuery = gql`
+  query CurrentUser {
+    currentUser {
       id
       username
     }
   }
 `
 
-export let getCurrentUser = graphql(meQuery, {
+export let getCurrentUser = graphql(currentUserQuery, {
   props: ({ data }) => ({
-    currentUser: data.me,
+    currentUser: data.currentUser,
   }),
 })
