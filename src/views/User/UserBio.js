@@ -32,7 +32,7 @@ let Avatar = styled.div`
 
 export default function UserBio({ user }) {
   let [activeTab, setActiveTab] = useState(tab.POSTS)
-  let startDate = formatDistance(new Date(user.createdAt), new Date(), {
+  let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
   })
   return (
