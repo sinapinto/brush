@@ -1,50 +1,72 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { TextButton } from '../../components/Button'
-import { P, H2 } from '../../components/globals'
-import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants'
-import LoginForm from './LoginForm'
-import SignupForm from './SignupForm'
+import { compose } from 'react-apollo'
 
-let Container = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+import { loginUser, registerUser } from '../../graphql/mutations/user'
+import { getCurrentUser } from '../../graphql/queries/user'
+import { Input, ErrorMessage } from '../../components/globals'
+import { Button } from '../../components/Button'
+import { MODAL_LOGIN, MODAL_SIGNUP } from './constants'
+import { Form } from './style'
 
-  ${P} {
-    margin: 16px 0;
+function AuthForm({ type, loading, onSuccess, currentUser, loginUser }) {
+  let [username, setUsername] = useState('')
+  let [password, setPassword] = useState('')
+
+  let handleSubmit = e => {
+    e.preventDefault()
+    type === MODAL_LOGIN
+      ? loginUser({ username, password })
+      : registerUser({ username, password })
   }
-`
 
-export default function AuthForm({ type, onChangeType, onSuccess }) {
-  return type === MODAL_LOGIN ? (
-    <Container>
-      <H2>Log In</H2>
-      <P>
-        Don't have an account?
-        <TextButton onClick={() => onChangeType(MODAL_SIGNUP)}>
-          Sign Up
-        </TextButton>
-      </P>
-      <LoginForm onSuccess={onSuccess} />
-    </Container>
-  ) : (
-    <Container>
-      <H2>Sign Up</H2>
-      <P>
-        Already have an account?
-        <TextButton onClick={() => onChangeType(MODAL_LOGIN)}>
-          Log In
-        </TextButton>
-      </P>
-      <SignupForm onSuccess={onSuccess} />
-    </Container>
+  let handleChange = e => {
+    if (e.target.name === 'password') {
+      setPassword(e.target.value)
+    } else if (e.target.name === 'username') {
+      setUsername(e.target.value)
+    }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} onChange={handleChange}>
+      <Input
+        type="text"
+        placeholder="Username"
+        spellCheck={false}
+        name="username"
+        disabled={loading}
+        autoComplete="off"
+      />
+      <Input
+        placeholder="Password"
+        name="password"
+        type="password"
+        autoComplete="new-password"
+        disabled={loading}
+      />
+      <ErrorMessage>{''}</ErrorMessage>
+      <Button
+        type="primary"
+        htmlType="submit"
+        disabled={loading || !username || !password}
+      >
+        {type === MODAL_LOGIN ? 'Log In' : 'Sign Up'}
+      </Button>
+    </Form>
   )
 }
 
 AuthForm.propTypes = {
-  type: PropTypes.oneOf([MODAL_CLOSED, MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
-  onChangeType: PropTypes.func.isRequired,
+  type: PropTypes.oneOf([MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
   onSuccess: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  currentUser: PropTypes.object,
 }
+
+export default compose(
+  loginUser,
+  registerUser,
+  getCurrentUser
+)(AuthForm)

@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { getCurrentUser } from '../queries/user'
 
 let registerUserMutation = gql`
   mutation RegisterUser($username: String!, $password: String!) {
@@ -18,6 +19,7 @@ export let registerUser = graphql(registerUserMutation, {
           username: username,
           password: password,
         },
+        refetchQueries: [{ query: getCurrentUser }],
       })
     },
   }),
@@ -40,6 +42,7 @@ export let loginUser = graphql(loginUserMutation, {
           username: username,
           password: password,
         },
+        refetchQueries: [{ query: getCurrentUser }],
       })
     },
   }),
@@ -54,7 +57,9 @@ let logoutUserMutation = gql`
 export let logoutUser = graphql(logoutUserMutation, {
   props: ({ mutate }) => ({
     logoutUser: () => {
-      mutate()
+      mutate({
+        refetchQueries: [{ query: getCurrentUser }],
+      })
     },
   }),
 })

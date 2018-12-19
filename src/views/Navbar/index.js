@@ -6,14 +6,13 @@ import { TiUser as AccountIcon } from 'react-icons/ti'
 
 import { logoutUser } from '../../graphql/mutations/user'
 import { getCurrentUser } from '../../graphql/queries/user'
-import Modal from '../../components/Modal'
+import AuthModal from './AuthModal'
 import { Button } from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
-import AuthForm from './AuthForm'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
-function Navbar({ logoutUser, currentUser, loading, data, error, refetch }) {
+function Navbar({ logoutUser, currentUser, loading, error }) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
   return (
     <StyledNavbar>
@@ -33,7 +32,6 @@ function Navbar({ logoutUser, currentUser, loading, data, error, refetch }) {
               <Button type="primary" invert onClick={() => logoutUser()}>
                 Log Out
               </Button>
-              )}
             </React.Fragment>
           ) : (
             <Button
@@ -46,19 +44,13 @@ function Navbar({ logoutUser, currentUser, loading, data, error, refetch }) {
           )}
         </ButtonWrap>
       </NavbarContent>
-      <Modal
+      <AuthModal
         isOpen={activeModal !== MODAL_CLOSED}
         onRequestClose={() => setActiveModal(MODAL_CLOSED)}
-      >
-        <AuthForm
-          type={activeModal}
-          onChangeType={type => setActiveModal(type)}
-          onSuccess={() => {
-            setActiveModal(MODAL_CLOSED)
-            refetch()
-          }}
-        />
-      </Modal>
+        type={activeModal}
+        onChangeType={type => setActiveModal(type)}
+        onSuccess={() => setActiveModal(MODAL_CLOSED)}
+      />
     </StyledNavbar>
   )
 }
