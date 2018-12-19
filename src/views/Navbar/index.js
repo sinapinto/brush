@@ -5,16 +5,19 @@ import { TiPlus as PlusIcon } from 'react-icons/ti'
 import { TiUser as AccountIcon } from 'react-icons/ti'
 
 import { logoutUser } from '../../graphql/mutations/user'
-import { getCurrentUser } from '../../graphql/queries/user'
+import withCurrentUser from '../../util/withCurrentUser'
 import AuthModal from './AuthModal'
 import { Button } from '../../components/Button'
 import ButtonLink from '../../components/ButtonLink'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
-function Navbar({ logoutUser, currentUser }) {
+function Navbar({ logoutUser, isLoadingCurrentUser, currentUser }) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
   console.log('nav render')
+  if (isLoadingCurrentUser) {
+    return <div>loading current user....</div>
+  }
   return (
     <StyledNavbar>
       <NavbarContent>
@@ -30,7 +33,11 @@ function Navbar({ logoutUser, currentUser }) {
                 <AccountIcon size={20} />
                 {currentUser.username.slice(0, 16)}
               </ButtonLink>
-              <Button type="primary" invert onClick={() => logoutUser()}>
+              <Button
+                type="primary"
+                invert
+                onClick={() => logoutUser().catch(() => {})}
+              >
                 Log Out
               </Button>
             </React.Fragment>
@@ -59,9 +66,10 @@ function Navbar({ logoutUser, currentUser }) {
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
+  isLoadingCurrentUser: PropTypes.bool,
 }
 
 export default compose(
   logoutUser,
-  getCurrentUser
+  withCurrentUser
 )(Navbar)

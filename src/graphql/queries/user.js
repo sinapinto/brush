@@ -10,8 +10,4 @@ export let currentUserQuery = gql`
   }
 `
 
-export let getCurrentUser = graphql(currentUserQuery, {
-  props: ({ data }) => ({
-    currentUser: data.currentUser,
-  }),
-})
+export let getCurrentUser = graphql(currentUserQuery)
