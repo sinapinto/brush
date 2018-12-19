@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Mutation } from 'react-apollo'
+import PropTypes from 'prop-types'
+import { compose } from 'react-apollo'
 import styled from 'styled-components'
+
 import { Input, H2, Card, ErrorMessage } from '../../components/globals'
 import { Button } from '../../components/Button'
-import { createPostMutation } from '../../graphql/mutations/post'
+import { createPost } from '../../graphql/mutations/post'
 
 let Form = styled.form`
   padding: 24px;
@@ -15,41 +17,44 @@ let Form = styled.form`
   }
 `
 
-export default function Create() {
+function Create({ createPost }) {
   let [title, setTitle] = useState('')
   let [body, setBody] = useState('')
+  let [isLoading, setIsLoading] = useState(false)
 
   let handleSubmit = (e, createPost) => {
+    setIsLoading(true)
     e.preventDefault()
-    let input = { title, body }
-    createPost({ variables: { input } })
+    createPost({ title, body }).finally(() => setIsLoading(false))
   }
 
   return (
-    <Mutation mutation={createPostMutation}>
-      {(createPost, { error, loading }) => (
-        <Card>
-          <Form onSubmit={e => handleSubmit(e, createPost)}>
-            <H2>Create</H2>
-            <Input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-            <Input
-              type="text"
-              placeholder="Body"
-              value={body}
-              onChange={e => setBody(e.target.value)}
-            />
-            <ErrorMessage>{error}</ErrorMessage>
-            <Button type="primary" htmlType="submit" disabled={loading}>
-              Create
-            </Button>
-          </Form>
-        </Card>
-      )}
-    </Mutation>
+    <Card>
+      <Form onSubmit={e => handleSubmit(e, createPost)}>
+        <H2>Create</H2>
+        <Input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Body"
+          value={body}
+          onChange={e => setBody(e.target.value)}
+        />
+        <ErrorMessage>{''}</ErrorMessage>
+        <Button type="primary" htmlType="submit" disabled={isLoading}>
+          Create
+        </Button>
+      </Form>
+    </Card>
   )
 }
+
+Create.propTypes = {
+  createPost: PropTypes.func.isRequired,
+}
+
+export default compose(createPost)(Create)

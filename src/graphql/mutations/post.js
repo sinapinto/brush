@@ -1,3 +1,4 @@
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 let postInfoFragment = gql`
@@ -8,13 +9,25 @@ let postInfoFragment = gql`
   }
 `
 
-export let createPostMutation = gql`
+let createPostMutation = gql`
   mutation CreatePost($input: CreatePostInput!) {
     createPost(input: $input) {
-      post {
-        ...postInfo
-      }
+      ...postInfo
     }
   }
   ${postInfoFragment}
 `
+
+export let createPost = graphql(createPostMutation, {
+  props: ({ mutate }) => ({
+    createPost: ({ title, body }) =>
+      mutate({
+        variables: {
+          input: {
+            title: title,
+            body: body,
+          },
+        },
+      }),
+  }),
+})

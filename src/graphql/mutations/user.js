@@ -35,14 +35,13 @@ let loginUserMutation = gql`
 
 export let loginUser = graphql(loginUserMutation, {
   props: ({ mutate }) => ({
-    loginUser: async ({ username, password }) => {
-      return mutate({
+    loginUser: ({ username, password }) =>
+      mutate({
         variables: {
           username: username,
           password: password,
         },
-      })
-    },
+      }),
   }),
 })
 
@@ -56,7 +55,7 @@ export let logoutUser = graphql(logoutUserMutation, {
   props: ({ mutate }) => ({
     logoutUser: async () => {
       await mutate()
-      await client.resetStore() // purge apollo cache
+      return client.resetStore() // purge apollo cache
     },
   }),
 })
