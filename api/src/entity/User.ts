@@ -5,6 +5,8 @@ import {
   OneToMany,
   Column,
   BeforeInsert,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm'
 import { Length } from 'class-validator'
 import * as bcrypt from 'bcrypt'
@@ -28,6 +30,12 @@ export class User extends BaseEntity {
 
   @Column({ default: '' })
   bio: string
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @UpdateDateColumn()
+  updatedAt: Date
 
   @OneToMany(() => Post, post => post.author)
   posts: Post[]
