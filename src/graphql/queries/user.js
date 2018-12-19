@@ -19,6 +19,8 @@ let userByUsernameQuery = gql`
       username
       avatar
       bio
+      updatedAt
+      createdAt
     }
   }
 `

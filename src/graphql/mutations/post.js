@@ -6,6 +6,8 @@ let postInfoFragment = gql`
     id
     title
     body
+    updatedAt
+    createdAt
   }
 `
 
