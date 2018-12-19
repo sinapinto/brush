@@ -14,6 +14,7 @@ import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
 function Navbar({ logoutUser, currentUser }) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
+  console.log('nav render')
   return (
     <StyledNavbar>
       <NavbarContent>

@@ -51,7 +51,13 @@ createConnection({
       }),
     })
 
-    server.applyMiddleware({ app })
+    server.applyMiddleware({
+      app,
+      cors: {
+        credentials: true,
+        origin: '*',
+      },
+    })
 
     app.listen({ port: 4000 }, () =>
       console.log(

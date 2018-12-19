@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import styled from 'styled-components'
+
+import { client } from './graphql'
 import GlobalStyles from './styles/global.css.js'
 import Navbar from './views/Navbar'
 import Home from './views/Home'
@@ -17,8 +18,6 @@ let Body = styled.div`
   box-sizing: border-box;
   padding: 24px;
 `
-
-let client = new ApolloClient({ uri: 'http://localhost:3000/graphql' })
 
 function AppContent() {
   return (

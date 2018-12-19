@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { client } from '../index'
 import { currentUserQuery } from '../queries/user'
 
 let registerUserMutation = gql`
@@ -19,7 +20,7 @@ export let registerUser = graphql(registerUserMutation, {
           username: username,
           password: password,
         },
-        refetchQueries: [{ query: currentUserQuery }],
+        refetchQueries: () => [{ query: currentUserQuery }],
       })
     },
   }),
@@ -56,10 +57,9 @@ let logoutUserMutation = gql`
 
 export let logoutUser = graphql(logoutUserMutation, {
   props: ({ mutate }) => ({
-    logoutUser: () => {
-      mutate({
-        refetchQueries: [{ query: currentUserQuery }],
-      })
+    logoutUser: async () => {
+      await mutate()
+      await client.resetStore() // purge apollo cache
     },
   }),
 })
