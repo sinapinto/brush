@@ -24,7 +24,7 @@ export class Post extends BaseEntity {
 
   @ManyToOne(() => User, user => user.posts)
   @IsDefined()
-  author: string;
+  author: User;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -36,6 +36,6 @@ export class Post extends BaseEntity {
 
   @AfterLoad()
   addCursor() {
-    this.cursor = String(this.createdAt);
+    this.cursor = String(this.id);
   }
 }

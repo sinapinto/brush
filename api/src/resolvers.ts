@@ -38,7 +38,11 @@ export let resolvers: IResolver = {
     getPosts: async (
       _,
       { pageSize = 20, cursor }: { pageSize: number; cursor: string }
-    ) => {
+    ): Promise<{
+      posts: Array<Post>;
+      cursor: string | null;
+      hasMore: boolean;
+    }> => {
       let allPosts = await Post.find();
       let posts = paginateResults({
         results: allPosts,
@@ -47,7 +51,7 @@ export let resolvers: IResolver = {
       });
       return {
         posts,
-        cursor: posts.length ? posts[posts.length - 1] : null,
+        cursor: posts.length ? posts[posts.length - 1].cursor : null,
         hasMore: posts.length
           ? posts[posts.length - 1].cursor !==
             allPosts[allPosts.length - 1].cursor
@@ -104,7 +108,11 @@ export let resolvers: IResolver = {
         return new AuthenticationError('Not logged in');
       }
       let post = Post.create(args.input);
-      post.author = session.userId;
+      let user = await User.findOne({ where: { id: session.userId } });
+      if (!user) {
+        return new UserInputError(`No user found with id ${session.userId}`);
+      }
+      post.author = user;
       let errors = await validate(post);
       if (errors.length > 0) {
         console.log('errors: ', errors);
