@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { H1, Card } from '../../components/globals'
+import { compose } from 'react-apollo'
+
+import { Card } from '../../components/globals'
+import { userByUsername } from '../../graphql/queries/user'
 import UserBio from './UserBio'
-import { getProfile } from '../../fetch/profile'
 
-export default function User({ username }) {
-  let [user, setUser] = useState({})
-
-  useEffect(
-    () => {
-      getProfile(username)
-        .then(user => setUser(user))
-        .catch(user => setUser(null))
-    },
-    [username]
-  )
-
-  return (
-    <Card>
-      {user === null ? (
-        <H1>This user does not exist :0</H1>
-      ) : (
-        <UserBio user={user} />
-      )}
-    </Card>
-  )
+function User({ username, data }) {
+  return <Card>{data.user && <UserBio user={data.user} />}</Card>
 }
 
 User.propTypes = {
   username: PropTypes.string.isRequired,
+  data: PropTypes.object,
 }
+
+export default compose(userByUsername)(User)
