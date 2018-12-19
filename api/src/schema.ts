@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'apollo-server-express';
 
 export let typeDefs = gql`
   type Query {
@@ -44,4 +44,4 @@ export let typeDefs = gql`
     createdAt: String
     updatedAt: String
   }
-`
+`;

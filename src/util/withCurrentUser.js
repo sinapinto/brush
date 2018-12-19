@@ -1,18 +1,18 @@
-import React from 'react'
-import { compose } from 'react-apollo'
-import { getCurrentUser } from '../graphql/queries/user'
+import React from 'react';
+import { compose } from 'react-apollo';
+import { getCurrentUser } from '../graphql/queries/user';
 
 function CurrentUserComponent(props) {
   let {
     data: { currentUser, networkStatus },
     children,
-  } = props
+  } = props;
 
-  let isLoading = networkStatus === 1 || networkStatus === 2
-  return children && children({ currentUser, isLoading })
+  let isLoading = networkStatus === 1 || networkStatus === 2;
+  return children && children({ currentUser, isLoading });
 }
 
-let CurrentUser = compose(getCurrentUser)(CurrentUserComponent)
+let CurrentUser = compose(getCurrentUser)(CurrentUserComponent);
 
 export default function withCurrentUser(Component) {
   return props => {
@@ -25,9 +25,9 @@ export default function withCurrentUser(Component) {
               currentUser={currentUser || null}
               isLoadingCurrentUser={isLoading}
             />
-          )
+          );
         }}
       </CurrentUser>
-    )
-  }
+    );
+  };
 }

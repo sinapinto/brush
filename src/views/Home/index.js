@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card } from '../../components/globals'
+import React from 'react';
+import { Card } from '../../components/globals';
 
 export default function Home() {
-  return <Card>home</Card>
+  return <Card>home</Card>;
 }

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 export let Button = styled.button`
   display: inline-flex;
@@ -29,15 +29,15 @@ export let Button = styled.button`
   > svg {
     margin-right: 4px;
   }
-`
+`;
 
 export let OutlineButton = styled(Button)`
   background: transparent;
   color: ${theme.brand.default};
   border: 2px solid ${theme.brand.default};
-`
+`;
 
 export let TextButton = styled(OutlineButton)`
   border: none;
   padding: 0px 12px;
-`
+`;

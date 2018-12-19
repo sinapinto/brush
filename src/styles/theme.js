@@ -39,4 +39,4 @@ export default {
     wash: '#FFEDF6',
     border: '#FFCCE5',
   },
-}
+};

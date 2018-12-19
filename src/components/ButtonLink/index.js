@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
-import { Button } from '../Button'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { Button } from '../Button';
 
 function ButtonLink({
   to,
@@ -17,13 +17,13 @@ function ButtonLink({
     <Button
       {...rest}
       onClick={e => {
-        onClick(e)
-        history.push(to)
+        onClick(e);
+        history.push(to);
       }}
     >
       {children}
     </Button>
-  )
+  );
 }
 
 ButtonLink.propTypes = {
@@ -34,10 +34,10 @@ ButtonLink.propTypes = {
   staticContext: PropTypes.object,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
-}
+};
 
 ButtonLink.defaultProps = {
   onClick: () => {},
-}
+};
 
-export default withRouter(ButtonLink)
+export default withRouter(ButtonLink);

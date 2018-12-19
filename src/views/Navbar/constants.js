@@ -1,3 +1,3 @@
-export let MODAL_CLOSED = 'MODAL_CLOSED'
-export let MODAL_LOGIN = 'MODAL_LOGIN'
-export let MODAL_SIGNUP = 'MODAL_SIGNUP'
+export let MODAL_CLOSED = 'MODAL_CLOSED';
+export let MODAL_LOGIN = 'MODAL_LOGIN';
+export let MODAL_SIGNUP = 'MODAL_SIGNUP';

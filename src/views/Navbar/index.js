@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { compose } from 'react-apollo'
-import { TiPlus as PlusIcon } from 'react-icons/ti'
-import { TiUser as AccountIcon } from 'react-icons/ti'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { compose } from 'react-apollo';
+import { TiPlus as PlusIcon } from 'react-icons/ti';
+import { TiUser as AccountIcon } from 'react-icons/ti';
 
-import { logoutUser } from '../../graphql/mutations/user'
-import withCurrentUser from '../../util/withCurrentUser'
-import AuthModal from './AuthModal'
-import { Button } from '../../components/Button'
-import ButtonLink from '../../components/ButtonLink'
-import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
-import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
+import { logoutUser } from '../../graphql/mutations/user';
+import withCurrentUser from '../../util/withCurrentUser';
+import AuthModal from './AuthModal';
+import { Button } from '../../components/Button';
+import ButtonLink from '../../components/ButtonLink';
+import { MODAL_CLOSED, MODAL_SIGNUP } from './constants';
+import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style';
 
 function Navbar({ logoutUser, currentUser }) {
-  let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
+  let [activeModal, setActiveModal] = useState(MODAL_CLOSED);
   return (
     <StyledNavbar>
       <NavbarContent>
@@ -56,15 +56,15 @@ function Navbar({ logoutUser, currentUser }) {
         onSuccess={() => setActiveModal(MODAL_CLOSED)}
       />
     </StyledNavbar>
-  )
+  );
 }
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
-}
+};
 
 export default compose(
   logoutUser,
   withCurrentUser
-)(Navbar)
+)(Navbar);

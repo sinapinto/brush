@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 export let Form = styled.form`
   width: 100%;
@@ -13,7 +13,7 @@ export let Form = styled.form`
     margin-bottom: 24px;
     width: 300px;
   }
-`
+`;
 
 export let StyledNavbar = styled.nav`
   height: 60px;
@@ -24,7 +24,7 @@ export let StyledNavbar = styled.nav`
   background-color: ${theme.brand.default};
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
-`
+`;
 
 export let NavbarContent = styled.div`
   width: 100%;
@@ -33,17 +33,17 @@ export let NavbarContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 28px;
-`
+`;
 
 export let LogoLink = styled(Link)`
   font-size: 24px;
   font-weight: 900;
   color: #fff;
   text-decoration: none;
-`
+`;
 
 export let ButtonWrap = styled.div`
   display: flex;
   align-items: center;
   margin-left: 28px;
-`
+`;

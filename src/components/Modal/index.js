@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import ReactModal from 'react-modal'
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
+import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 let CloseButton = styled.button`
   background: none;
@@ -15,18 +15,18 @@ let CloseButton = styled.button`
   :hover {
     filter: brightness(95%);
   }
-`
+`;
 
 let Toolbar = styled.div`
   display: flex;
   justify-content: flex-end;
   height: 30px;
   padding: 15px 15px 0 15px;
-`
+`;
 
 let ModalContent = styled.div`
   padding: 16px;
-`
+`;
 
 export default function Modal({ children, hasCloseButton, ...otherProps }) {
   return (
@@ -55,7 +55,7 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
       </Toolbar>
       <ModalContent>{children}</ModalContent>
     </ReactModal>
-  )
+  );
 }
 
 Modal.propTypes = {
@@ -63,8 +63,8 @@ Modal.propTypes = {
   hasCloseButton: PropTypes.bool,
   isOpen: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func,
-}
+};
 
 Modal.defaultProps = {
   hasCloseButton: true,
-}
+};

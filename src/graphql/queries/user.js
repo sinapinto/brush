@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 export let currentUserQuery = gql`
   query CurrentUser {
@@ -8,9 +8,9 @@ export let currentUserQuery = gql`
       username
     }
   }
-`
+`;
 
-export let getCurrentUser = graphql(currentUserQuery)
+export let getCurrentUser = graphql(currentUserQuery);
 
 let userByUsernameQuery = gql`
   query UserByUsername($username: String!) {
@@ -23,6 +23,6 @@ let userByUsernameQuery = gql`
       createdAt
     }
   }
-`
+`;
 
-export let userByUsername = graphql(userByUsernameQuery)
+export let userByUsername = graphql(userByUsernameQuery);

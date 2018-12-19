@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import theme from './theme'
+import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 export default createGlobalStyle`
   *, *:before, *:after {
@@ -55,4 +55,4 @@ export default createGlobalStyle`
     color: currentColor;
     text-decoration: none;
   }
-`
+`;

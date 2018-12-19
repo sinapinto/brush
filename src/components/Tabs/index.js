@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 let StyledTabs = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 1px solid #e8e8e8;
-`
+`;
 
 let Tab = styled.button`
   padding: 20px 0 10px;
@@ -25,7 +25,7 @@ let Tab = styled.button`
     props.isSelected
       ? `4px solid ${theme.brand.default}`
       : '4px solid transparent'};
-`
+`;
 
 export default function Tabs({ activeKey, onChange, children }) {
   return (
@@ -47,20 +47,20 @@ export default function Tabs({ activeKey, onChange, children }) {
         )}
       </div>
     </React.Fragment>
-  )
+  );
 }
 
 Tabs.propTypes = {
   activeKey: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   children: PropTypes.node,
-}
+};
 
 export function TabPane({ children }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 
 TabPane.propTypes = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
-}
+};

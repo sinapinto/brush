@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import { formatDistance } from 'date-fns'
-import { H1 } from '../../components/globals'
-import Tabs, { TabPane } from '../../components/Tabs'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { formatDistance } from 'date-fns';
+import { H1 } from '../../components/globals';
+import Tabs, { TabPane } from '../../components/Tabs';
 
 let tab = {
   POSTS: '0',
   FOLLOWERS: '1',
   FOLLOWING: '2',
-}
+};
 
 let BioWrap = styled.div`
   display: flex;
   align-items: center;
   padding: 32px;
-`
+`;
 
 let Bio = styled.div`
   flex: 1;
-`
+`;
 
 let Avatar = styled.div`
   flex-basis: 120px;
@@ -28,13 +28,13 @@ let Avatar = styled.div`
   border-radius: 50%;
   background: url(/avatar.jpg);
   filter: brightness(118%);
-`
+`;
 
 export default function UserBio({ user }) {
-  let [activeTab, setActiveTab] = useState(tab.POSTS)
+  let [activeTab, setActiveTab] = useState(tab.POSTS);
   let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
-  })
+  });
   return (
     <div>
       <BioWrap>
@@ -64,9 +64,9 @@ export default function UserBio({ user }) {
         </TabPane>
       </Tabs>
     </div>
-  )
+  );
 }
 
 UserBio.propTypes = {
   user: PropTypes.object,
-}
+};

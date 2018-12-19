@@ -7,41 +7,41 @@ import {
   BeforeInsert,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm'
-import { Length } from 'class-validator'
-import * as bcrypt from 'bcrypt'
-import { Post } from './Post'
+} from 'typeorm';
+import { Length } from 'class-validator';
+import * as bcrypt from 'bcrypt';
+import { Post } from './Post';
 
 @Entity('users')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id: number;
 
   @Column()
   @Length(1, 30)
-  username: string
+  username: string;
 
   @Column()
   @Length(4, 100)
-  password: string
+  password: string;
 
   @Column({ default: '' })
-  avatar: string
+  avatar: string;
 
   @Column({ default: '' })
-  bio: string
+  bio: string;
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt: Date;
 
   @OneToMany(() => Post, post => post.author)
-  posts: Post[]
+  posts: Post[];
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10);
   }
 }
