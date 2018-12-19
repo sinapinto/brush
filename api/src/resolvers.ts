@@ -61,24 +61,16 @@ export let resolvers: IResolver = {
   },
 
   Mutation: {
-    login: async (_, { username, password }, { redis, session }) => {
+    login: async (_, { username, password }, { session }) => {
       const user = await User.findOne({ where: { username } });
       if (!user || !(await bcrypt.compare(password, user.password))) {
         return new UserInputError('Wrong username or password');
       }
       session.userId = user.id;
-      console.log('[redis] pushing user', user.id, 'sesion', session.id);
-      await redis.lpush(`userSessions:${user.id}`, session.id);
       return user;
     },
 
-    logout: async (_, __, { redis, session }) => {
-      let { userId } = session;
-      let sessionIds = await redis.lrange(`userSessions:${userId}`, 0, -1);
-      console.log('[redis] deleting user', userId, 'sessions', sessionIds);
-      await Promise.all(
-        sessionIds.map((sid: String) => redis.del(`sess:${sid}`))
-      );
+    logout: async (_, __, { session }) => {
       let destroySession = new Promise(resolve => session.destroy(resolve));
       await destroySession;
       return true;
