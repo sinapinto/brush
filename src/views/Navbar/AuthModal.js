@@ -36,7 +36,7 @@ export default function AuthModal({
         <P>
           {subtitle}
           <TextButton onClick={() => onChangeType(otherType)}>
-            {title}
+            {type === MODAL_LOGIN ? 'Sign Up' : 'Log In'}
           </TextButton>
         </P>
         <AuthForm type={type} onSuccess={onSuccess} />
