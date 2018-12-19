@@ -10,8 +10,8 @@ export let typeDefs = gql`
 
   type Mutation {
     login(username: String!, password: String!): User
-    logout: Boolean
     register(username: String!, password: String!): User
+    logout: Boolean
     createPost(input: CreatePostInput!): Post
   }
 

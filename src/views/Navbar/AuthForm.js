@@ -14,11 +14,12 @@ function AuthForm({ type, loading, onSuccess, loginUser, registerUser }) {
 
   let handleSubmit = e => {
     e.preventDefault()
-    if (type === MODAL_LOGIN) {
-      loginUser({ username, password })
-    } else {
-      registerUser({ username, password })
-    }
+    let mutate = type === MODAL_LOGIN ? loginUser : registerUser
+    mutate({ username, password }).then(() => {
+      onSuccess()
+      // TODO: get rid of this
+      window.location.reload()
+    })
   }
 
   let handleChange = e => {

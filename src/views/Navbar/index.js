@@ -12,12 +12,8 @@ import ButtonLink from '../../components/ButtonLink'
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants'
 import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style'
 
-function Navbar({ logoutUser, isLoadingCurrentUser, currentUser }) {
+function Navbar({ logoutUser, currentUser }) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED)
-  console.log('nav render')
-  if (isLoadingCurrentUser) {
-    return <div>loading current user....</div>
-  }
   return (
     <StyledNavbar>
       <NavbarContent>
@@ -66,7 +62,6 @@ function Navbar({ logoutUser, isLoadingCurrentUser, currentUser }) {
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
-  isLoadingCurrentUser: PropTypes.bool,
 }
 
 export default compose(
