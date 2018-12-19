@@ -6,28 +6,36 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm'
-import { IsDefined } from 'class-validator'
-import { User } from './User'
+  AfterLoad,
+} from 'typeorm';
+import { IsDefined } from 'class-validator';
+import { User } from './User';
 
 @Entity('posts')
 export class Post extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id: number;
 
   @Column()
-  title: string
+  title: string;
 
   @Column('text')
-  body: string
+  body: string;
 
   @ManyToOne(() => User, user => user.posts)
   @IsDefined()
-  author: string
+  author: string;
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt: Date;
+
+  cursor: string;
+
+  @AfterLoad()
+  addCursor() {
+    this.cursor = String(this.createdAt);
+  }
 }

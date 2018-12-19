@@ -5,7 +5,7 @@ export let typeDefs = gql`
     currentUser: User
     user(username: String!): User
     getPost(id: ID!): Post
-    getPosts(pageSize: Int, after: String): [Post!]
+    getPosts(pageSize: Int, after: String): PaginatedPosts!
   }
 
   type Mutation {
@@ -13,6 +13,12 @@ export let typeDefs = gql`
     register(username: String!, password: String!): User
     logout: Boolean
     createPost(input: CreatePostInput!): Post
+  }
+
+  type PaginatedPosts {
+    cursor: String!
+    hasMore: Boolean!
+    posts: [Post]!
   }
 
   input CreatePostInput {
