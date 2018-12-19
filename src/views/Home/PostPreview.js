@@ -15,7 +15,7 @@ export default function PostPreview({ id, title, author }) {
         <Link to={`/p/${id}`}>{title}</Link>
       </H3>
       <P>
-        <Link to={`/u/${author.username}`}>{author.username}</Link>
+        {author && <Link to={`/u/${author.username}`}>{author.username}</Link>}
       </P>
     </Container>
   );
@@ -23,16 +23,8 @@ export default function PostPreview({ id, title, author }) {
 
 PostPreview.propTypes = {
   id: PropTypes.string.isRequired,
-  following: PropTypes.bool,
-  username: PropTypes.string,
-  favorited: PropTypes.bool,
-  slug: PropTypes.string,
   title: PropTypes.string,
   author: PropTypes.shape({
-    id: PropTypes.string,
     username: PropTypes.string,
-    avatar: PropTypes.string,
-    bio: PropTypes.string,
-    createdAt: PropTypes.string,
   }),
 };

@@ -16,7 +16,7 @@ export let typeDefs = gql`
   }
 
   type PaginatedPosts {
-    cursor: String!
+    cursor: String
     hasMore: Boolean!
     posts: [Post]!
   }

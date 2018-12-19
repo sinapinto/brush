@@ -37,7 +37,7 @@ export let resolvers: IResolver = {
 
     getPosts: async (
       _,
-      { pageSize = 20, cursor }: { pageSize: number; cursor: string }
+      { pageSize, cursor }: { pageSize: number; cursor: string }
     ): Promise<{
       posts: Array<Post>;
       cursor: string | null;
@@ -46,7 +46,7 @@ export let resolvers: IResolver = {
       let allPosts = await Post.find();
       let posts = paginateResults({
         results: allPosts,
-        pageSize,
+        pageSize: pageSize || 20,
         cursor,
       });
       return {
@@ -110,8 +110,18 @@ export let resolvers: IResolver = {
         console.log('errors: ', errors);
         return new UserInputError('Invalid post');
       }
+
       await Post.save(post);
       return post;
     },
   },
+
+  // Post: {
+  //   author: async post => {
+  //     console.log('author', post);
+  //     if (!post.author) return null;
+  //     let author = await User.findOne({ where: { id: post.author } });
+  //     return author || null;
+  //   },
+  // },
 };
