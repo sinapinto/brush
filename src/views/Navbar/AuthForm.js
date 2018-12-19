@@ -12,19 +12,28 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }) {
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
   let [isLoading, setIsLoading] = useState(false)
+  let [error, setError] = useState('')
 
   let handleSubmit = e => {
     e.preventDefault()
     setIsLoading(true)
     let mutate = type === MODAL_LOGIN ? loginUser : registerUser
     mutate({ username, password })
-      .then(() => {
+      .then(data => {
         setIsLoading(false)
+        setError('')
         onSuccess()
         // TODO: get rid of this
         window.location.reload()
       })
-      .finally(() => setIsLoading(false))
+      .catch(e => {
+        if (e.graphQLErrors) {
+          setError(e.graphQLErrors[0].message)
+        } else {
+          setError('uknown error')
+        }
+        setIsLoading(false)
+      })
   }
 
   let handleChange = e => {
@@ -52,7 +61,7 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }) {
         autoComplete="new-password"
         disabled={isLoading}
       />
-      <ErrorMessage>{''}</ErrorMessage>
+      <ErrorMessage>{error}</ErrorMessage>
       <Button
         type="primary"
         htmlType="submit"

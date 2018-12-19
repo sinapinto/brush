@@ -17,11 +17,11 @@ export let resolvers: IResolver = {
     currentUser: async (_, __, { session }) => {
       let { userId } = session
       if (!userId) {
-        return new AuthenticationError('not logged in')
+        return new AuthenticationError('Not logged in')
       }
       let user = await User.findOne({ where: { id: userId } })
       if (!user) {
-        return new UserInputError('no user found')
+        return new UserInputError(`No user found with id ${userId}`)
       }
       return user
     },
@@ -43,7 +43,7 @@ export let resolvers: IResolver = {
     login: async (_, { username, password }, { redis, session }) => {
       const user = await User.findOne({ where: { username } })
       if (!user || !(await bcrypt.compare(password, user.password))) {
-        return new UserInputError('wrong username or password')
+        return new UserInputError('Wrong username or password')
       }
       session.userId = user.id
       console.log('[redis] pushing user', user.id, 'sesion', session.id)
@@ -68,14 +68,14 @@ export let resolvers: IResolver = {
       let errors = await validate(user)
       if (errors.length > 0) {
         console.log('errors: ', errors)
-        return new UserInputError('invalid username or password')
+        return new UserInputError('Invalid username or password')
       }
       let userAlreadyExists = await User.findOne({
         where: { username: user.username },
         select: ['id'],
       })
       if (userAlreadyExists) {
-        return new UserInputError('username already taken')
+        return new UserInputError('Username already taken')
       }
       await User.save(user)
       session.userId = user.id
@@ -84,14 +84,14 @@ export let resolvers: IResolver = {
 
     createPost: async (_, args: CreatePostInput, { session }) => {
       if (!session || !session.userId) {
-        return new AuthenticationError('not logged in')
+        return new AuthenticationError('Not logged in')
       }
       let post = Post.create(args.input)
       post.author = session.userId
       let errors = await validate(post)
       if (errors.length > 0) {
         console.log('errors: ', errors)
-        return new UserInputError('invalid post')
+        return new UserInputError('Invalid post')
       }
       await Post.save(post)
       return post

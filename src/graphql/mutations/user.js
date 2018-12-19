@@ -21,6 +21,7 @@ let registerUserMutation = gql`
 `
 
 export let registerUser = graphql(registerUserMutation, {
+  options: { errorPolicy: 'all' },
   props: ({ mutate }) => ({
     registerUser: async ({ username, password }) => {
       return mutate({
@@ -43,6 +44,7 @@ let loginUserMutation = gql`
 `
 
 export let loginUser = graphql(loginUserMutation, {
+  options: { errorPolicy: 'all' },
   props: ({ mutate }) => ({
     loginUser: ({ username, password }) =>
       mutate({
