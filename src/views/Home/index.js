@@ -9,13 +9,9 @@ function Home() {
   return (
     <Card>
       <Query query={getPostsQuery}>
-        {({ data }, loading, error) => {
+        {({ data, loading, error }) => {
           if (loading) return 'Loading..';
           if (error) return <p>{JSON.stringify(data.error, null, 2)}</p>;
-
-          if (!data.getPosts || !data.getPosts.posts) {
-            return <pre>no data</pre>;
-          }
           return (
             <pre>
               {data.getPosts.posts.map(post => (
