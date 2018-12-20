@@ -130,8 +130,8 @@ export let resolvers: IResolver = {
   },
 
   Post: {
-    author: async post => {
-      return User.findOne(post.authorId);
+    author: async (post, _, { userLoader }) => {
+      return userLoader.load(post.authorId);
     },
   },
 };

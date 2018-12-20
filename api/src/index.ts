@@ -9,6 +9,7 @@ import { User } from './entity/User';
 import { Post } from './entity/Post';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
+import { createUserLoader } from './loaders/userLoader';
 
 let redis = new Redis();
 let RedisStore = ConnectRedis(session);
@@ -49,6 +50,7 @@ createConnection({
       context: ({ req }: any) => ({
         redis,
         session: req.session,
+        userLoader: createUserLoader(),
       }),
     });
 

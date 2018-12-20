@@ -15,6 +15,7 @@
     "body-parser": "^1.18.3",
     "class-validator": "^0.9.1",
     "connect-redis": "^3.4.0",
+    "dataloader": "^1.4.0",
     "date-fns": "^2.0.0-alpha.25",
     "eslint-plugin-react-hooks": "0.0.0",
     "express": "^4.16.4",
