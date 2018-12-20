@@ -20,7 +20,7 @@ export let resolvers: IResolver = {
       if (!userId) {
         return new AuthenticationError('Not logged in');
       }
-      let user = await User.findOne({ where: { id: userId } });
+      let user = await User.findOne(userId);
       if (!user) {
         return new UserInputError(`No user found with id ${userId}`);
       }
@@ -100,7 +100,7 @@ export let resolvers: IResolver = {
         return new AuthenticationError('Not logged in');
       }
       let post = Post.create(args.input);
-      let user = await User.findOne({ where: { id: session.userId } });
+      let user = await User.findOne(session.userId);
       if (!user) {
         return new UserInputError(`No user found with id ${session.userId}`);
       }
