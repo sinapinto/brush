@@ -19,7 +19,7 @@ function Home() {
                   key={post.id}
                   id={post.id}
                   title={post.title}
-                  username={post.username}
+                  author={post.author}
                 />
               ))}
             </pre>

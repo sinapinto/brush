@@ -118,13 +118,18 @@ export let resolvers: IResolver = {
 
   User: {
     posts: async user => {
-      return Post.find({ where: { author: user.id } });
+      let u = await User.findOne(user.id, { relations: ['posts'] });
+      if (!u) {
+        console.log(`couldnt find user ${user.id}`);
+        return null;
+      }
+      return u.posts;
     },
   },
 
   Post: {
     author: async post => {
-      return User.findOne({ where: { id: post.authorId } });
+      return User.findOne(post.authorId);
     },
   },
 };
