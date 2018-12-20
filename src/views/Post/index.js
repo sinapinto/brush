@@ -17,7 +17,7 @@ export default function Post({ id }) {
             <div>
               <H2>{post.title}</H2>
               <P>{post.body}</P>
-              <P>{post.author}</P>
+              <P>By {post.author.username}</P>
             </div>
           );
         }}

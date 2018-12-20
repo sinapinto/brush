@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
 import { H1 } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
+import PostPreview from '../Home/PostPreview';
 
 let tab = {
   POSTS: '0',
@@ -54,7 +55,9 @@ export default function UserBio({ user }) {
         onChange={key => setActiveTab(key)}
       >
         <TabPane label="Posts" key={tab.POSTS}>
-          posts
+          {user.posts.map(post => (
+            <PostPreview key={post.id} {...post} />
+          ))}
         </TabPane>
         <TabPane label="Followers" key={tab.FOLLOWERS}>
           followers
