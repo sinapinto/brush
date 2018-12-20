@@ -6,11 +6,5 @@ export let postInfoFragment = gql`
     title
     body
     updatedAt
-    author {
-      id
-      username
-      bio
-      avatar
-    }
   }
 `;

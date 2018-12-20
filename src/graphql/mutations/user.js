@@ -1,15 +1,7 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { client } from '../index';
-
-let userInfoFragment = gql`
-  fragment userInfo on User {
-    id
-    username
-    updatedAt
-    createdAt
-  }
-`;
+import { userInfoFragment } from '../fragments/user';
 
 let registerUserMutation = gql`
   mutation RegisterUser($username: String!, $password: String!) {
