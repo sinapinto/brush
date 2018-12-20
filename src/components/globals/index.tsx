@@ -30,7 +30,7 @@ export let H4 = styled.h4`
 `;
 
 export let P = styled.p`
-  color: ${theme.text.primary};
+  color: ${theme.text.default};
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -47,7 +47,7 @@ export let Card = styled.div`
 export let Input = styled.input`
   border: 0;
   border-bottom: 2px solid #c4c4c4;
-  color: ${theme.text.primary};
+  color: ${theme.text.default};
   font-size: 22px;
   line-height: 26px;
 

@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { toIdValue } from 'apollo-utilities';
 
-let cache = new InMemoryCache({
+let cache: any = new InMemoryCache({
   cacheRedirects: {
     Query: {
       getPost: (_, { id }) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
@@ -28,11 +27,22 @@ let ModalContent = styled.div`
   padding: 16px;
 `;
 
-export default function Modal({ children, hasCloseButton, ...otherProps }) {
+type Props = {
+  children: React.ReactNode;
+  hasCloseButton: boolean;
+  onRequestClose: (e: React.MouseEvent<any>) => void;
+  isOpen: boolean;
+};
+
+export default function Modal({
+  children,
+  hasCloseButton,
+  ...otherProps
+}: Props & ReactModal.Props) {
   return (
     <ReactModal
       {...otherProps}
-      appElement={document.getElementById('app-root')}
+      appElement={document.getElementById('app-root') as HTMLElement}
       style={{
         content: {
           top: '50%',
@@ -57,13 +67,6 @@ export default function Modal({ children, hasCloseButton, ...otherProps }) {
     </ReactModal>
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  hasCloseButton: PropTypes.bool,
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func,
-};
 
 Modal.defaultProps = {
   hasCloseButton: true,

@@ -4,7 +4,7 @@ import { ApolloProvider } from 'react-apollo';
 import styled from 'styled-components';
 
 import { client } from './graphql';
-import GlobalStyles from './styles/global.css.js';
+import GlobalStyles from './styles/globalStyles';
 import Navbar from './views/Navbar';
 import Home from './views/Home';
 import User from './views/User';

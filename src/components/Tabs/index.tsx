@@ -10,7 +10,7 @@ let StyledTabs = styled.div`
   border-bottom: 1px solid #e8e8e8;
 `;
 
-let Tab = styled.button`
+let Tab = styled('button')<{ isSelected: boolean }>`
   padding: 20px 0 10px;
   margin-left: 32px;
   font-size: 15px;
@@ -27,13 +27,22 @@ let Tab = styled.button`
       : '4px solid transparent'};
 `;
 
-export default function Tabs({ activeKey, onChange, children }) {
+export default function Tabs({
+  activeKey,
+  onChange,
+  children,
+}: {
+  // TODO: proper typing
+  activeKey: string;
+  onChange: any;
+  children: any;
+}) {
   return (
     <React.Fragment>
       <StyledTabs>
         {React.Children.map(children, pane => (
           <Tab
-            key={pane.key}
+            key={pane.key as string}
             isSelected={pane.key === activeKey}
             onClick={() => onChange(pane.key)}
           >
@@ -56,7 +65,7 @@ Tabs.propTypes = {
   children: PropTypes.node,
 };
 
-export function TabPane({ children }) {
+export function TabPane({ children }: { children: React.ReactNode }) {
   return <div>{children}</div>;
 }
 
