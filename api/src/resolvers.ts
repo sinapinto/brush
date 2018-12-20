@@ -116,12 +116,15 @@ export let resolvers: IResolver = {
     },
   },
 
-  // Post: {
-  //   author: async post => {
-  //     console.log('author', post);
-  //     if (!post.author) return null;
-  //     let author = await User.findOne({ where: { id: post.author } });
-  //     return author || null;
-  //   },
-  // },
+  User: {
+    posts: async user => {
+      return Post.find({ where: { author: user.id } });
+    },
+  },
+
+  Post: {
+    author: async post => {
+      return User.findOne({ where: { id: post.authorId } });
+    },
+  },
 };

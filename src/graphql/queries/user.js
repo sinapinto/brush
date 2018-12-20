@@ -21,6 +21,11 @@ let userByUsernameQuery = gql`
       bio
       updatedAt
       createdAt
+      posts {
+        id
+        title
+        createdAt
+      }
     }
   }
 `;

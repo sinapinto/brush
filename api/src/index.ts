@@ -23,6 +23,7 @@ createConnection({
   database: 'microblog2',
   entities: [User, Post],
   logging: true,
+  // dropSchema: true,
   synchronize: true,
 })
   .then(async () => {

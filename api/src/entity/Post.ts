@@ -22,6 +22,9 @@ export class Post extends BaseEntity {
   @Column('text')
   body: string;
 
+  @Column('uuid')
+  authorId: string;
+
   @ManyToOne(() => User, user => user.posts)
   @IsDefined()
   author: User;
