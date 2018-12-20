@@ -1,15 +1,6 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-
-let postInfoFragment = gql`
-  fragment postInfo on Post {
-    id
-    title
-    body
-    updatedAt
-    createdAt
-  }
-`;
+import { postInfoFragment } from '../fragments/post';
 
 let createPostMutation = gql`
   mutation CreatePost($input: CreatePostInput!) {

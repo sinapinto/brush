@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { postInfoFragment } from '../fragments/post';
 
 export let getPostsQuery = gql`
   query GetPosts($pageSize: Int, $after: String) {
@@ -7,16 +8,11 @@ export let getPostsQuery = gql`
       cursor
       hasMore
       posts {
-        id
-        title
-        body
-        author {
-          id
-          username
-        }
+        ...postInfo
       }
     }
   }
+  ${postInfoFragment}
 `;
 
 export let getPosts = graphql(getPostsQuery, {
@@ -31,15 +27,8 @@ export let getPosts = graphql(getPostsQuery, {
 export let getPostByIdQuery = gql`
   query GetPostById($id: ID!) {
     getPost(id: $id) {
-      id
-      title
-      body
-      createdAt
-      updatedAt
-      author {
-        id
-        username
-      }
+      ...postInfo
     }
   }
+  ${postInfoFragment}
 `;
