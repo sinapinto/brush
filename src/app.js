@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import styled from 'styled-components';
@@ -10,7 +10,6 @@ import Home from './views/Home';
 import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
-import { AppState } from './util/context';
 
 let Body = styled.div`
   max-width: 1000px;
@@ -19,7 +18,7 @@ let Body = styled.div`
   padding: 24px;
 `;
 
-function AppContent() {
+export default function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
@@ -46,14 +45,5 @@ function AppContent() {
         </React.Fragment>
       </BrowserRouter>
     </ApolloProvider>
-  );
-}
-
-export default function App() {
-  let [appState, setAppState] = useState({});
-  return (
-    <AppState.Provider value={{ appState, setAppState }}>
-      <AppContent />
-    </AppState.Provider>
   );
 }
