@@ -15,7 +15,9 @@ export default function PostPreview({ id, title, author }) {
         <Link to={`/p/${id}`}>{title}</Link>
       </H3>
       <P>
-        <Link to={`/u/${author.username}`}>By {author.username}</Link>
+        {author && (
+          <Link to={`/u/${author.username}`}>By {author.username}</Link>
+        )}
       </P>
     </Container>
   );

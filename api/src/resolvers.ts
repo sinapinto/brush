@@ -43,7 +43,9 @@ export let resolvers: IResolver = {
       cursor: string | null;
       hasMore: boolean;
     }> => {
-      let allPosts = await Post.find();
+      let allPosts = await Post.find({
+        order: { createdAt: 'DESC' },
+      });
       let posts = paginateResults({
         results: allPosts,
         pageSize: pageSize || 20,
