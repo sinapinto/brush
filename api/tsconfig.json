@@ -1,28 +1,19 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
     "lib": ["es6", "es2017"],
-    "sourceMap": true,
-    "outDir": "./dist",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": false,
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": false,
-    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "rootDir": "src"
+    "emitDecoratorMetadata": true,
+    "noEmit": true
   },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "include": ["src"]
 }
