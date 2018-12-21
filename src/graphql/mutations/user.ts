@@ -1,7 +1,8 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { client } from '../index';
 import { userInfoFragment } from '../fragments/user';
+import { RegisterUserVariables } from './__generated__/RegisterUser';
+import { LoginUserVariables } from './__generated__/LoginUser';
 
 let registerUserMutation = gql`
   mutation RegisterUser($username: String!, $password: String!) {
@@ -14,8 +15,8 @@ let registerUserMutation = gql`
 
 export let registerUser = graphql(registerUserMutation, {
   options: { errorPolicy: 'all' },
-  props: ({ mutate }) => ({
-    registerUser: async ({ username, password }) => {
+  props: ({ mutate }: any) => ({
+    registerUser: async ({ username, password }: RegisterUserVariables) => {
       return mutate({
         variables: {
           username: username,
@@ -37,8 +38,8 @@ let loginUserMutation = gql`
 
 export let loginUser = graphql(loginUserMutation, {
   options: { errorPolicy: 'all' },
-  props: ({ mutate }) => ({
-    loginUser: ({ username, password }) =>
+  props: ({ mutate }: any) => ({
+    loginUser: ({ username, password }: LoginUserVariables) =>
       mutate({
         variables: {
           username: username,
@@ -48,17 +49,8 @@ export let loginUser = graphql(loginUserMutation, {
   }),
 });
 
-let logoutUserMutation = gql`
+export let logoutUserMutation = gql`
   mutation LogoutUser {
     logout
   }
 `;
-
-export let logoutUser = graphql(logoutUserMutation, {
-  props: ({ mutate }) => ({
-    logoutUser: async () => {
-      await mutate();
-      return client.resetStore(); // purge apollo cache
-    },
-  }),
-});

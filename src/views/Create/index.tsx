@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals';
-import { getPostsQuery } from '../../queries/post';
+import { getPostsQuery } from '../../graphql/queries/post';
 import { Button } from '../../components/Button';
 import {
   CreatePostMutation,
@@ -19,7 +19,7 @@ function Create({ history }: Props) {
   let [body, setBody] = useState('');
   let [isLoading, setIsLoading] = useState(false);
 
-  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, mutate) => {
+  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, mutate: any) => {
     setIsLoading(true);
     e.preventDefault();
     mutate({
@@ -27,17 +27,17 @@ function Create({ history }: Props) {
         title,
         body,
       },
-      update: (proxy: DataProxy, response: { data: Response }) => {
-        let data;
-        try {
-          data = proxy.readQuery({ query: getPostsQuery });
-        } catch (e) {
-          // have never run `getPostsQuery` before
-          return;
-        }
-        data.getPosts.posts.unshift(response.data.createPost);
-        proxy.writeQuery({ query: getPostsQuery, data });
-      },
+      // update: (proxy, response: { data: Response }) => {
+      //   let data;
+      //   try {
+      //     data = proxy.readQuery({ query: getPostsQuery });
+      //   } catch (e) {
+      //     // have never run `getPostsQuery` before
+      //     return;
+      //   }
+      //   data.getPosts.posts.unshift(response.data.createPost);
+      //   proxy.writeQuery({ query: getPostsQuery, data });
+      // },
     }).then(({ data }: any) => {
       setIsLoading(false);
       history.push(`/p/${data.createPost.id}`);
