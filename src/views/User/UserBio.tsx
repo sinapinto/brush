@@ -11,7 +11,7 @@ enum Tab {
   Following,
 }
 
-export default function UserBio({ user }: { user: any }) {
+const UserBio: React.FunctionComponent<{ user: any }> = ({ user }) => {
   let [activeTab, setActiveTab] = useState(Tab.Posts);
   let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
@@ -41,7 +41,7 @@ export default function UserBio({ user }: { user: any }) {
       </Tabs>
     </div>
   );
-}
+};
 
 let BioWrap = styled.div`
   display: flex;
@@ -61,3 +61,5 @@ let Avatar = styled.div`
   background: url(/avatar.jpg);
   filter: brightness(118%);
 `;
+
+export default UserBio;

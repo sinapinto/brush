@@ -23,12 +23,7 @@ export const User: React.FunctionComponent<UserProps> = ({ username }) => {
           if (loading) return 'loading';
           if (error) return 'error';
           if (!data) return 'no data';
-          return (
-            <>
-              <h1>{username}</h1>
-              {data.user && <UserBio user={data.user} />}
-            </>
-          );
+          return data.user && <UserBio user={data.user} />;
         }}
       </UserQuery>
     </Card>
