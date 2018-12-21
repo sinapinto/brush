@@ -1,3 +1,3 @@
 # microblog
 
-a microscopic weblog for the world wide web
+WIP: a microscopic weblog
