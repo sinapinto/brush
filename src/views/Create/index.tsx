@@ -1,26 +1,44 @@
 import React, { useState } from 'react';
-import { compose } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals';
+import { getPostsQuery } from '../../queries/post';
 import { Button } from '../../components/Button';
-import { createPost } from '../../graphql/mutations/post';
+import {
+  CreatePostMutation,
+  createPostMutation,
+} from '../../graphql/mutations/post';
 
 interface Props {
   history: any;
-  createPost: any;
 }
 
-function Create({ history, createPost }: Props) {
+function Create({ history }: Props) {
   let [title, setTitle] = useState('');
   let [body, setBody] = useState('');
   let [isLoading, setIsLoading] = useState(false);
 
-  let handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, mutate) => {
     setIsLoading(true);
     e.preventDefault();
-    createPost({ title, body }).then(({ data }: any) => {
+    mutate({
+      variables: {
+        title,
+        body,
+      },
+      update: (proxy: DataProxy, response: { data: Response }) => {
+        let data;
+        try {
+          data = proxy.readQuery({ query: getPostsQuery });
+        } catch (e) {
+          // have never run `getPostsQuery` before
+          return;
+        }
+        data.getPosts.posts.unshift(response.data.createPost);
+        proxy.writeQuery({ query: getPostsQuery, data });
+      },
+    }).then(({ data }: any) => {
       setIsLoading(false);
       history.push(`/p/${data.createPost.id}`);
     });
@@ -28,25 +46,29 @@ function Create({ history, createPost }: Props) {
 
   return (
     <Card>
-      <Form onSubmit={handleSubmit}>
-        <H2>Create</H2>
-        <Input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="Body"
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        <ErrorMessage>{''}</ErrorMessage>
-        <Button type="primary" disabled={isLoading}>
-          Create
-        </Button>
-      </Form>
+      <CreatePostMutation mutation={createPostMutation}>
+        {mutate => (
+          <Form onSubmit={e => handleSubmit(e, mutate)}>
+            <H2>Create</H2>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Body"
+              value={body}
+              onChange={e => setBody(e.target.value)}
+            />
+            <ErrorMessage>{''}</ErrorMessage>
+            <Button type="primary" disabled={isLoading}>
+              Create
+            </Button>
+          </Form>
+        )}
+      </CreatePostMutation>
     </Card>
   );
 }
@@ -60,7 +82,4 @@ let Form = styled.form`
   }
 `;
 
-export default compose(
-  withRouter,
-  createPost
-)(Create);
+export default withRouter(Create);

@@ -12,7 +12,7 @@ export let currentUserQuery = gql`
 
 export let getCurrentUser = graphql(currentUserQuery);
 
-let userByUsernameQuery = gql`
+export let userByUsernameQuery = gql`
   query UserByUsername($username: String!) {
     user(username: $username) {
       id
@@ -29,5 +29,3 @@ let userByUsernameQuery = gql`
     }
   }
 `;
-
-export let userByUsername = graphql(userByUsernameQuery);

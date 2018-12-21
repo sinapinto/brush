@@ -2,16 +2,20 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 import { Card } from '../../components/globals';
-import { getPostsQuery } from '../../graphql/queries/post';
+import { getPostsQuery as QUERY } from '../../graphql/queries/post';
 import PostPreview from './PostPreview';
+import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
-function Home() {
+class PostsQuery extends Query<GetPosts> {}
+
+export const Home: React.FunctionComponent = () => {
   return (
     <Card>
-      <Query query={getPostsQuery}>
+      <PostsQuery query={QUERY}>
         {({ data, loading, error }) => {
           if (loading) return 'Loading..';
-          if (error) return <p>{JSON.stringify(data.error, null, 2)}</p>;
+          if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
+          if (!data) return <div>no data</div>;
           return (
             <pre>
               {data.getPosts.posts.map((post: any) => (
@@ -25,9 +29,9 @@ function Home() {
             </pre>
           );
         }}
-      </Query>
+      </PostsQuery>
     </Card>
   );
-}
+};
 
 export default Home;

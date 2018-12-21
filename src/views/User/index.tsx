@@ -1,22 +1,38 @@
 import React from 'react';
-import { compose } from 'react-apollo';
+import { Query } from 'react-apollo';
 
 import { Card } from '../../components/globals';
-import { userByUsername } from '../../graphql/queries/user';
 import UserBio from './UserBio';
+import { userByUsernameQuery as QUERY } from '../../graphql/queries/user';
+import {
+  UserByUsername,
+  UserByUsernameVariables,
+} from '../../graphql/queries/__generated__/UserByUsername';
 
-interface Props {
+class UserQuery extends Query<UserByUsername, UserByUsernameVariables> {}
+
+interface UserProps {
   username: string;
-  data?: any;
 }
 
-function User({ username, data }: Props) {
+export const User: React.FunctionComponent<UserProps> = ({ username }) => {
   return (
     <Card>
-      <h1>{username}</h1>
-      {data.user && <UserBio user={data.user} />}
+      <UserQuery query={QUERY} variables={{ username }}>
+        {({ data, loading, error }) => {
+          if (loading) return 'loading';
+          if (error) return 'error';
+          if (!data) return 'no data';
+          return (
+            <>
+              <h1>{username}</h1>
+              {data.user && <UserBio user={data.user} />}
+            </>
+          );
+        }}
+      </UserQuery>
     </Card>
   );
-}
+};
 
-export default compose(userByUsername)(User);
+export default User;

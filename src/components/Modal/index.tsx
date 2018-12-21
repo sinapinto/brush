@@ -36,7 +36,7 @@ type Props = {
 
 export default function Modal({
   children,
-  hasCloseButton,
+  hasCloseButton = true,
   ...otherProps
 }: Props & ReactModal.Props) {
   return (
@@ -67,7 +67,3 @@ export default function Modal({
     </ReactModal>
   );
 }
-
-Modal.defaultProps = {
-  hasCloseButton: true,
-};
