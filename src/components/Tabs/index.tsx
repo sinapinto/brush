@@ -8,37 +8,45 @@ type TabsProps = {
   children: any;
 };
 
-export default function Tabs({ activeKey, onChange, children }: TabsProps) {
+const Tabs: React.FunctionComponent<TabsProps> = ({
+  activeKey,
+  onChange,
+  children,
+}) => {
   return (
     <React.Fragment>
       <StyledTabs>
-        {React.Children.map(children, pane => (
+        {React.Children.map(children, tabPane => (
           <Tab
-            key={pane.key as string}
-            isSelected={pane.key === activeKey}
-            onClick={() => onChange(pane.key as string)}
+            key={tabPane.key as string}
+            isSelected={tabPane.key === activeKey}
+            onClick={() => onChange(tabPane.key)}
           >
-            {pane.props.label}
+            {tabPane.props.label}
           </Tab>
         ))}
       </StyledTabs>
       <div>
-        {React.Children.map(children, pane =>
-          pane.key === activeKey ? pane : null
+        {React.Children.map(children, tabPane =>
+          tabPane.key === activeKey ? tabPane : null
         )}
       </div>
     </React.Fragment>
   );
-}
-
-type TabPaneProps = {
-  children: React.ReactNode;
-  label: string;
 };
 
-export function TabPane({ children, label, ...rest }: TabPaneProps) {
+type TabPaneProps = {
+  label: string;
+  key: string;
+};
+
+export const TabPane: React.FunctionComponent<TabPaneProps> = ({
+  children,
+  label,
+  ...rest
+}) => {
   return <div {...rest}>{children}</div>;
-}
+};
 
 let StyledTabs = styled.div`
   width: 100%;
@@ -63,3 +71,5 @@ let Tab = styled('button')<{ isSelected: boolean }>`
       ? `4px solid ${theme.brand.default}`
       : '4px solid transparent'};
 `;
+
+export default Tabs;

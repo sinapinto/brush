@@ -6,9 +6,9 @@ import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../Home/PostPreview';
 
 enum Tab {
-  Posts,
-  Followers,
-  Following,
+  Posts = 'Posts',
+  Followers = 'Followers',
+  Following = 'Following',
 }
 
 const UserBio: React.FunctionComponent<{ user: any }> = ({ user }) => {
