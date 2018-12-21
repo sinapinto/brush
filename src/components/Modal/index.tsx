@@ -29,7 +29,7 @@ let ModalContent = styled.div`
 
 type Props = {
   children: React.ReactNode;
-  hasCloseButton: boolean;
+  hasCloseButton?: boolean;
   onRequestClose: (e: React.MouseEvent<any>) => void;
   isOpen: boolean;
 };

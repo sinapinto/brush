@@ -1,7 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
+
+type TabsProps = {
+  activeKey: any;
+  onChange: (key: any) => void;
+  children: any;
+};
+
+export default function Tabs({ activeKey, onChange, children }: TabsProps) {
+  return (
+    <React.Fragment>
+      <StyledTabs>
+        {React.Children.map(children, pane => (
+          <Tab
+            key={pane.key as string}
+            isSelected={pane.key === activeKey}
+            onClick={() => onChange(pane.key as string)}
+          >
+            {pane.props.label}
+          </Tab>
+        ))}
+      </StyledTabs>
+      <div>
+        {React.Children.map(children, pane =>
+          pane.key === activeKey ? pane : null
+        )}
+      </div>
+    </React.Fragment>
+  );
+}
+
+type TabPaneProps = {
+  children: React.ReactNode;
+  label: string;
+};
+
+export function TabPane({ children, label, ...rest }: TabPaneProps) {
+  return <div {...rest}>{children}</div>;
+}
 
 let StyledTabs = styled.div`
   width: 100%;
@@ -26,50 +63,3 @@ let Tab = styled('button')<{ isSelected: boolean }>`
       ? `4px solid ${theme.brand.default}`
       : '4px solid transparent'};
 `;
-
-export default function Tabs({
-  activeKey,
-  onChange,
-  children,
-}: {
-  // TODO: proper typing
-  activeKey: string;
-  onChange: any;
-  children: any;
-}) {
-  return (
-    <React.Fragment>
-      <StyledTabs>
-        {React.Children.map(children, pane => (
-          <Tab
-            key={pane.key as string}
-            isSelected={pane.key === activeKey}
-            onClick={() => onChange(pane.key)}
-          >
-            {pane.props.label}
-          </Tab>
-        ))}
-      </StyledTabs>
-      <div>
-        {React.Children.map(children, pane =>
-          pane.key === activeKey ? pane : null
-        )}
-      </div>
-    </React.Fragment>
-  );
-}
-
-Tabs.propTypes = {
-  activeKey: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
-
-export function TabPane({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
-}
-
-TabPane.propTypes = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node,
-};

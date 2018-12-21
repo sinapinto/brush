@@ -1,18 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 
 import { Card } from '../../components/globals';
 import { userByUsername } from '../../graphql/queries/user';
 import UserBio from './UserBio';
 
-function User({ username, data }) {
-  return <Card>{data.user && <UserBio user={data.user} />}</Card>;
+interface Props {
+  username: string;
+  data?: any;
 }
 
-User.propTypes = {
-  username: PropTypes.string.isRequired,
-  data: PropTypes.object,
-};
+function User({ username, data }: Props) {
+  return (
+    <Card>
+      <h1>{username}</h1>
+      {data.user && <UserBio user={data.user} />}
+    </Card>
+  );
+}
 
 export default compose(userByUsername)(User);

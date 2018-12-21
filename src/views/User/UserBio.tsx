@@ -1,16 +1,47 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
 import { H1 } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../Home/PostPreview';
 
-let tab = {
-  POSTS: '0',
-  FOLLOWERS: '1',
-  FOLLOWING: '2',
-};
+enum Tab {
+  Posts,
+  Followers,
+  Following,
+}
+
+export default function UserBio({ user }: { user: any }) {
+  let [activeTab, setActiveTab] = useState(Tab.Posts);
+  let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
+    addSuffix: true,
+  });
+  return (
+    <div>
+      <BioWrap>
+        <Bio>
+          <H1>{user.username}</H1>
+          <p>{user.bio}</p>
+          <p>Joined {startDate}</p>
+        </Bio>
+        <Avatar />
+      </BioWrap>
+      <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
+        <TabPane label="Posts" key={Tab.Posts}>
+          {user.posts.map((post: any) => (
+            <PostPreview key={post.id} {...post} />
+          ))}
+        </TabPane>
+        <TabPane label="Followers" key={Tab.Followers}>
+          followers
+        </TabPane>
+        <TabPane label="Following" key={Tab.Following}>
+          following
+        </TabPane>
+      </Tabs>
+    </div>
+  );
+}
 
 let BioWrap = styled.div`
   display: flex;
@@ -30,46 +61,3 @@ let Avatar = styled.div`
   background: url(/avatar.jpg);
   filter: brightness(118%);
 `;
-
-export default function UserBio({ user }) {
-  let [activeTab, setActiveTab] = useState(tab.POSTS);
-  let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
-    addSuffix: true,
-  });
-  return (
-    <div>
-      <BioWrap>
-        <Bio>
-          <H1>{user.username}</H1>
-          <p>{user.bio}</p>
-          <p>Joined {startDate}</p>
-        </Bio>
-        <Avatar />
-      </BioWrap>
-      <Tabs
-        style={{
-          background:
-            'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.02))',
-        }}
-        activeKey={activeTab}
-        onChange={key => setActiveTab(key)}
-      >
-        <TabPane label="Posts" key={tab.POSTS}>
-          {user.posts.map(post => (
-            <PostPreview key={post.id} {...post} />
-          ))}
-        </TabPane>
-        <TabPane label="Followers" key={tab.FOLLOWERS}>
-          followers
-        </TabPane>
-        <TabPane label="Following" key={tab.FOLLOWING}>
-          following
-        </TabPane>
-      </Tabs>
-    </div>
-  );
-}
-
-UserBio.propTypes = {
-  user: PropTypes.object,
-};

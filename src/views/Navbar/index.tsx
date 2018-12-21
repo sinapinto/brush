@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 import { TiPlus as PlusIcon } from 'react-icons/ti';
 import { TiUser as AccountIcon } from 'react-icons/ti';
@@ -12,7 +11,12 @@ import ButtonLink from '../../components/ButtonLink';
 import { MODAL_CLOSED, MODAL_SIGNUP } from './constants';
 import { StyledNavbar, NavbarContent, LogoLink, ButtonWrap } from './style';
 
-function Navbar({ logoutUser, currentUser }) {
+interface Props {
+  logoutUser: () => any;
+  currentUser: any;
+}
+
+function Navbar({ logoutUser, currentUser }: Props) {
   let [activeModal, setActiveModal] = useState(MODAL_CLOSED);
   return (
     <StyledNavbar>
@@ -21,28 +25,20 @@ function Navbar({ logoutUser, currentUser }) {
         <ButtonWrap>
           {currentUser ? (
             <React.Fragment>
-              <ButtonLink invert to="/create">
+              <ButtonLink to="/create">
                 <PlusIcon size={20} />
                 Create
               </ButtonLink>
-              <ButtonLink invert to={`/u/${currentUser.username}`}>
+              <ButtonLink to={`/u/${currentUser.username}`}>
                 <AccountIcon size={20} />
                 {currentUser.username.slice(0, 16)}
               </ButtonLink>
-              <Button
-                type="primary"
-                invert
-                onClick={() => logoutUser().catch(() => {})}
-              >
+              <Button onClick={() => logoutUser().catch(() => {})}>
                 Log Out
               </Button>
             </React.Fragment>
           ) : (
-            <Button
-              type="primary"
-              invert
-              onClick={() => setActiveModal(MODAL_SIGNUP)}
-            >
+            <Button onClick={() => setActiveModal(MODAL_SIGNUP)}>
               Sign Up
             </Button>
           )}
@@ -58,11 +54,6 @@ function Navbar({ logoutUser, currentUser }) {
     </StyledNavbar>
   );
 }
-
-Navbar.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
-};
 
 export default compose(
   logoutUser,

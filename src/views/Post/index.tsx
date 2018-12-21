@@ -1,11 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
 import { H2, P, Card } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
 
-export default function Post({ id }) {
+type Props = {
+  id: string;
+};
+
+export default function Post({ id }: Props) {
   return (
     <Card>
       <Query query={getPostByIdQuery} variables={{ id }}>
@@ -25,7 +28,3 @@ export default function Post({ id }) {
     </Card>
   );
 }
-
-Post.propTypes = {
-  id: PropTypes.string.isRequired,
-};

@@ -1,22 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import Modal from '../../components/Modal';
 import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
 import { P, H2 } from '../../components/globals';
-import { MODAL_CLOSED, MODAL_LOGIN, MODAL_SIGNUP } from './constants';
+import { MODAL_LOGIN, MODAL_SIGNUP } from './constants';
 
-let Container = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-
-  ${P} {
-    margin: 16px 0;
-  }
-`;
+interface Props {
+  type: string;
+  onChangeType: (t: string) => void;
+  onRequestClose: () => void;
+  onSuccess: () => void;
+}
 
 export default function AuthModal({
   isOpen,
@@ -24,7 +20,7 @@ export default function AuthModal({
   type,
   onChangeType,
   onSuccess,
-}) {
+}: Props & ReactModal.Props) {
   let title = type === MODAL_LOGIN ? 'Log In' : 'Sign Up';
   let subtitle =
     type === MODAL_LOGIN
@@ -47,10 +43,11 @@ export default function AuthModal({
   );
 }
 
-AuthModal.propTypes = {
-  isOpen: PropTypes.bool,
-  onRequestClose: PropTypes.func,
-  type: PropTypes.oneOf([MODAL_CLOSED, MODAL_SIGNUP, MODAL_LOGIN]).isRequired,
-  onChangeType: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired,
-};
+let Container = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  ${P} {
+    margin: 16px 0;
+  }
+`;

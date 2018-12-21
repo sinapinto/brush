@@ -14,7 +14,7 @@ function Home() {
           if (error) return <p>{JSON.stringify(data.error, null, 2)}</p>;
           return (
             <pre>
-              {data.getPosts.posts.map(post => (
+              {data.getPosts.posts.map((post: any) => (
                 <PostPreview
                   key={post.id}
                   id={post.id}

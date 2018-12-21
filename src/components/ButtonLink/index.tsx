@@ -7,7 +7,7 @@ interface Props {
   location: any;
   match: any;
   to: any;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 }
 
@@ -16,7 +16,7 @@ function ButtonLink({ to, history, onClick, children, ...rest }: Props) {
     <Button
       {...rest}
       onClick={e => {
-        onClick(e);
+        onClick && onClick(e);
         history.push(to);
       }}
     >

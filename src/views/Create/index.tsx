@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,25 +7,20 @@ import { Input, H2, Card, ErrorMessage } from '../../components/globals';
 import { Button } from '../../components/Button';
 import { createPost } from '../../graphql/mutations/post';
 
-let Form = styled.form`
-  padding: 24px;
-  display: flex;
-  flex-flow: column nowrap;
+interface Props {
+  history: any;
+  createPost: any;
+}
 
-  > * {
-    margin-bottom: 32px;
-  }
-`;
-
-function Create({ history, createPost }) {
+function Create({ history, createPost }: Props) {
   let [title, setTitle] = useState('');
   let [body, setBody] = useState('');
   let [isLoading, setIsLoading] = useState(false);
 
-  let handleSubmit = (e, createPost) => {
+  let handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    createPost({ title, body }).then(({ data }) => {
+    createPost({ title, body }).then(({ data }: any) => {
       setIsLoading(false);
       history.push(`/p/${data.createPost.id}`);
     });
@@ -34,7 +28,7 @@ function Create({ history, createPost }) {
 
   return (
     <Card>
-      <Form onSubmit={e => handleSubmit(e, createPost)}>
+      <Form onSubmit={handleSubmit}>
         <H2>Create</H2>
         <Input
           type="text"
@@ -49,7 +43,7 @@ function Create({ history, createPost }) {
           onChange={e => setBody(e.target.value)}
         />
         <ErrorMessage>{''}</ErrorMessage>
-        <Button type="primary" htmlType="submit" disabled={isLoading}>
+        <Button type="primary" disabled={isLoading}>
           Create
         </Button>
       </Form>
@@ -57,10 +51,14 @@ function Create({ history, createPost }) {
   );
 }
 
-Create.propTypes = {
-  createPost: PropTypes.func.isRequired,
-  history: PropTypes.object,
-};
+let Form = styled.form`
+  padding: 24px;
+  display: flex;
+  flex-flow: column nowrap;
+  > * {
+    margin-bottom: 32px;
+  }
+`;
 
 export default compose(
   withRouter,
