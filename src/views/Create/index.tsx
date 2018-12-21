@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Mutation } from 'react-apollo';
+import { Mutation, FetchResult } from 'react-apollo';
 import styled from 'styled-components';
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals';
@@ -11,6 +11,7 @@ import {
   CreatePost,
   CreatePostVariables,
 } from '../../graphql/mutations/__generated__/CreatePost';
+import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
 class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 
@@ -30,17 +31,17 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
       <CreatePostMutation
         mutation={createPostMutation}
         variables={{ input: { title, body } }}
-        update={(proxy, response: any) => {
-          let data;
+        update={(proxy, response: FetchResult) => {
           try {
-            data = proxy.readQuery({ query: getPostsQuery });
+            const data: GetPosts | null = proxy.readQuery({
+              query: getPostsQuery,
+            });
+            if (data && data.getPosts && response.data) {
+              data.getPosts.posts.unshift(response.data.createPost);
+              proxy.writeQuery({ query: getPostsQuery, data });
+            }
           } catch (e) {
             // have never run `getPostsQuery` before
-            return;
-          }
-          if (response.data) {
-            data.getPosts.posts.unshift(response.data.createPost);
-            proxy.writeQuery({ query: getPostsQuery, data });
           }
         }}
       >
