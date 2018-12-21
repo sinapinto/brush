@@ -1,54 +1,51 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals';
-import { getPostsQuery } from '../../graphql/queries/post';
 import { Button } from '../../components/Button';
+import { createPostMutation } from '../../graphql/mutations/post';
+import { getPostsQuery } from '../../graphql/queries/post';
 import {
-  CreatePostMutation,
-  createPostMutation,
-} from '../../graphql/mutations/post';
+  CreatePost,
+  CreatePostVariables,
+} from '../../graphql/mutations/__generated__/CreatePost';
 
-interface Props {
-  history: any;
-}
+class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 
-function Create({ history }: Props) {
+const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   let [title, setTitle] = useState('');
   let [body, setBody] = useState('');
-  let [isLoading, setIsLoading] = useState(false);
 
-  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, mutate: any) => {
-    setIsLoading(true);
+  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, createPost: any) => {
     e.preventDefault();
-    mutate({
-      variables: {
-        title,
-        body,
-      },
-      // update: (proxy, response: { data: Response }) => {
-      //   let data;
-      //   try {
-      //     data = proxy.readQuery({ query: getPostsQuery });
-      //   } catch (e) {
-      //     // have never run `getPostsQuery` before
-      //     return;
-      //   }
-      //   data.getPosts.posts.unshift(response.data.createPost);
-      //   proxy.writeQuery({ query: getPostsQuery, data });
-      // },
-    }).then(({ data }: any) => {
-      setIsLoading(false);
+    createPost().then(({ data }: any) => {
       history.push(`/p/${data.createPost.id}`);
     });
   };
 
   return (
     <Card>
-      <CreatePostMutation mutation={createPostMutation}>
-        {mutate => (
-          <Form onSubmit={e => handleSubmit(e, mutate)}>
+      <CreatePostMutation
+        mutation={createPostMutation}
+        variables={{ input: { title, body } }}
+        update={(proxy, response: any) => {
+          let data;
+          try {
+            data = proxy.readQuery({ query: getPostsQuery });
+          } catch (e) {
+            // have never run `getPostsQuery` before
+            return;
+          }
+          if (response.data) {
+            data.getPosts.posts.unshift(response.data.createPost);
+            proxy.writeQuery({ query: getPostsQuery, data });
+          }
+        }}
+      >
+        {(createPost, { loading, error }) => (
+          <Form onSubmit={e => handleSubmit(e, createPost)}>
             <H2>Create</H2>
             <Input
               type="text"
@@ -62,8 +59,8 @@ function Create({ history }: Props) {
               value={body}
               onChange={e => setBody(e.target.value)}
             />
-            <ErrorMessage>{''}</ErrorMessage>
-            <Button type="primary" disabled={isLoading}>
+            <ErrorMessage>{error && JSON.stringify(error)}</ErrorMessage>
+            <Button type="primary" disabled={loading}>
               Create
             </Button>
           </Form>
@@ -71,7 +68,7 @@ function Create({ history }: Props) {
       </CreatePostMutation>
     </Card>
   );
-}
+};
 
 let Form = styled.form`
   padding: 24px;
