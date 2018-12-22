@@ -16,17 +16,16 @@ class CurrentUserQuery extends Query<CurrentUser> {}
 const Navbar: React.FunctionComponent = () => {
   const [activeModal, setActiveModal] = useState(ModalType.Closed);
   return (
-    <CurrentUserQuery query={QUERY}>
+    <CurrentUserQuery query={QUERY} errorPolicy="ignore">
       {({ data, loading }) => {
         return (
           <StyledNavbar>
             <NavbarContent>
               <LogoLink to="/">microblog</LogoLink>
               <ButtonWrap>
-                {!loading &&
-                data &&
-                data.currentUser &&
-                data.currentUser.username ? (
+                {loading ? null : data &&
+                  data.currentUser &&
+                  data.currentUser.username ? (
                   <React.Fragment>
                     <ButtonLink to="/create">
                       <PlusIcon size={20} />

@@ -82,6 +82,7 @@ export const resolvers: IResolver = {
       const errors = await validate(user);
       if (errors.length > 0) {
         console.log('errors: ', errors);
+        // TODO: better error message...
         return new UserInputError('Invalid username or password');
       }
       const userAlreadyExists = await User.findOne({
