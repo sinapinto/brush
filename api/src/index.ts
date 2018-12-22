@@ -1,4 +1,8 @@
 import 'reflect-metadata';
+require('dotenv').config();
+if (!process.env.SESSION_SECRET) {
+  throw 'you need to configure SESSION_SECRET in .env';
+}
 import * as express from 'express';
 import * as session from 'express-session';
 import * as ConnectRedis from 'connect-redis';
@@ -17,14 +21,13 @@ const redisStore = new RedisStore({ prefix: 'sess:' });
 
 createConnection({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'dev',
-  password: 'dev',
-  database: 'microblog2',
+  host: <string>process.env.PG_HOST,
+  port: Number(<string>process.env.PG_PORT),
+  username: <string>process.env.PG_USERNAME,
+  password: <string>process.env.PG_PASSWORD,
+  database: <string>process.env.PG_DATABASE,
   entities: [User, Post],
   logging: true,
-  // dropSchema: true,
   synchronize: true,
 })
   .then(async () => {
@@ -33,7 +36,7 @@ createConnection({
     app.use(
       session({
         store: redisStore,
-        secret: 'CHANGE ME',
+        secret: <string>process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {
