@@ -18,8 +18,8 @@ type UserBioProps = {
 };
 
 const UserBio: React.FunctionComponent<UserBioProps> = ({ user }) => {
-  let [activeTab, setActiveTab] = useState(Tab.Posts);
-  let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
+  const [activeTab, setActiveTab] = useState(Tab.Posts);
+  const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
   });
   return (
@@ -49,17 +49,17 @@ const UserBio: React.FunctionComponent<UserBioProps> = ({ user }) => {
   );
 };
 
-let BioWrap = styled.div`
+const BioWrap = styled.div`
   display: flex;
   align-items: center;
   padding: 32px;
 `;
 
-let Bio = styled.div`
+const Bio = styled.div`
   flex: 1;
 `;
 
-let Avatar = styled.div`
+const Avatar = styled.div`
   flex-basis: 120px;
   width: 120px;
   height: 120px;

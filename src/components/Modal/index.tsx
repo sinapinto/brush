@@ -44,7 +44,7 @@ const Modal: React.FunctionComponent<ModalProps> = ({
   );
 };
 
-let CloseButton = styled.button`
+const CloseButton = styled.button`
   background: none;
   cursor: pointer;
   font-size: 32px;
@@ -57,14 +57,14 @@ let CloseButton = styled.button`
   }
 `;
 
-let Toolbar = styled.div`
+const Toolbar = styled.div`
   display: flex;
   justify-content: flex-end;
   height: 30px;
   padding: 15px 15px 0 15px;
 `;
 
-let ModalContent = styled.div`
+const ModalContent = styled.div`
   padding: 16px;
 `;
 

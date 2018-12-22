@@ -48,14 +48,14 @@ export const TabPane: React.FunctionComponent<TabPaneProps> = ({
   return <div {...rest}>{children}</div>;
 };
 
-let StyledTabs = styled.div`
+const StyledTabs = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 1px solid #e8e8e8;
 `;
 
-let Tab = styled('button')<{ isSelected: boolean }>`
+const Tab = styled('button')<{ isSelected: boolean }>`
   padding: 20px 0 10px;
   margin-left: 32px;
   font-size: 15px;

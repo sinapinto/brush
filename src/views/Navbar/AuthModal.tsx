@@ -26,12 +26,12 @@ export default function AuthModal({
   onChangeType,
   onSuccess,
 }: Props & ReactModal.Props) {
-  let title = type === ModalType.Login ? 'Log In' : 'Sign Up';
-  let subtitle =
+  const title = type === ModalType.Login ? 'Log In' : 'Sign Up';
+  const subtitle =
     type === ModalType.Login
       ? "Don't have an account?"
       : 'Already have an account?';
-  let otherType = type === ModalType.Login ? ModalType.Signup : ModalType.Login;
+  const otherType = type === ModalType.Login ? ModalType.Signup : ModalType.Login;
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
@@ -48,7 +48,7 @@ export default function AuthModal({
   );
 }
 
-let Container = styled.div`
+const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;

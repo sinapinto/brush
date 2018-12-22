@@ -1,8 +1,8 @@
-import 'reflect-metadata';
 require('dotenv').config();
 if (!process.env.SESSION_SECRET) {
   throw 'you need to configure SESSION_SECRET in .env';
 }
+import 'reflect-metadata';
 import * as express from 'express';
 import * as session from 'express-session';
 import * as ConnectRedis from 'connect-redis';
