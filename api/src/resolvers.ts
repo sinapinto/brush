@@ -5,15 +5,9 @@ import { Post } from './entity/Post';
 import { User } from './entity/User';
 import { IResolver } from './types/graphql';
 import { paginateResults } from './utils';
+import { CreatePostInput } from '../../__generated__/globalTypes';
 
-type CreatePostInput = {
-  input: {
-    title: string;
-    body: string;
-  };
-};
-
-export let resolvers: IResolver = {
+export const resolvers: IResolver = {
   Query: {
     currentUser: async (_, __, { session }) => {
       const { userId } = session;
@@ -97,7 +91,7 @@ export let resolvers: IResolver = {
       return user;
     },
 
-    createPost: async (_, args: CreatePostInput, { session }) => {
+    createPost: async (_, args: { input: CreatePostInput }, { session }) => {
       if (!session || !session.userId) {
         return new AuthenticationError('Not logged in');
       }

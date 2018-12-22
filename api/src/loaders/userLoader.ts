@@ -5,5 +5,5 @@ const batchGetUser = (ids: string[]) => {
   return User.findByIds(ids);
 };
 
-export let createUserLoader = () =>
+export const createUserLoader = () =>
   new DataLoader((ids: string[]) => batchGetUser(ids));

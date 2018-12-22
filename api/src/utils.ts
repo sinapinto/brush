@@ -4,7 +4,7 @@ interface PaginateInput<T> {
   cursor: string;
 }
 
-export let paginateResults = <T>({
+export const paginateResults = <T>({
   results,
   pageSize,
   cursor,
