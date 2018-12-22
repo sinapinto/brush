@@ -14,7 +14,7 @@ import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 class CurrentUserQuery extends Query<CurrentUser> {}
 
 const Navbar: React.FunctionComponent = () => {
-  let [activeModal, setActiveModal] = useState(ModalType.Closed);
+  const [activeModal, setActiveModal] = useState(ModalType.Closed);
   return (
     <CurrentUserQuery query={QUERY}>
       {({ data, loading, error }) => {

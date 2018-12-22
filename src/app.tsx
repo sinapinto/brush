@@ -11,7 +11,7 @@ import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
 
-let Body = styled.div`
+const Body = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   box-sizing: border-box;

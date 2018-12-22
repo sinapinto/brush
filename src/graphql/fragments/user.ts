@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export let userInfoFragment = gql`
+export const userInfoFragment = gql`
   fragment userInfo on User {
     id
     username

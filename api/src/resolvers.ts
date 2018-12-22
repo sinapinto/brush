@@ -16,11 +16,11 @@ type CreatePostInput = {
 export let resolvers: IResolver = {
   Query: {
     currentUser: async (_, __, { session }) => {
-      let { userId } = session;
+      const { userId } = session;
       if (!userId) {
         return new AuthenticationError('Not logged in');
       }
-      let user = await User.findOne(userId);
+      const user = await User.findOne(userId);
       if (!user) {
         return new UserInputError(`No user found with id ${userId}`);
       }
@@ -43,10 +43,10 @@ export let resolvers: IResolver = {
       cursor: string | null;
       hasMore: boolean;
     }> => {
-      let allPosts = await Post.find({
+      const allPosts = await Post.find({
         order: { createdAt: 'DESC' },
       });
-      let posts = paginateResults({
+      const posts = paginateResults({
         results: allPosts,
         pageSize: pageSize || 20,
         cursor,
@@ -73,19 +73,19 @@ export let resolvers: IResolver = {
     },
 
     logout: async (_, __, { session }) => {
-      let destroySession = new Promise(resolve => session.destroy(resolve));
+      const destroySession = new Promise(resolve => session.destroy(resolve));
       await destroySession;
       return true;
     },
 
     register: async (_, args, { session }) => {
-      let user = User.create(args);
-      let errors = await validate(user);
+      const user = User.create(args);
+      const errors = await validate(user);
       if (errors.length > 0) {
         console.log('errors: ', errors);
         return new UserInputError('Invalid username or password');
       }
-      let userAlreadyExists = await User.findOne({
+      const userAlreadyExists = await User.findOne({
         where: { username: user.username },
         select: ['id'],
       });
@@ -101,13 +101,13 @@ export let resolvers: IResolver = {
       if (!session || !session.userId) {
         return new AuthenticationError('Not logged in');
       }
-      let post = Post.create(args.input);
-      let user = await User.findOne(session.userId);
+      const post = Post.create(args.input);
+      const user = await User.findOne(session.userId);
       if (!user) {
         return new UserInputError(`No user found with id ${session.userId}`);
       }
       post.author = user;
-      let errors = await validate(post);
+      const errors = await validate(post);
       if (errors.length > 0) {
         console.log('errors: ', errors);
         return new UserInputError('Invalid post');
@@ -120,7 +120,7 @@ export let resolvers: IResolver = {
 
   User: {
     posts: async user => {
-      let u = await User.findOne(user.id, { relations: ['posts'] });
+      const u = await User.findOne(user.id, { relations: ['posts'] });
       if (!u) {
         console.log(`couldnt find user ${user.id}`);
         return null;

@@ -11,9 +11,9 @@ import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { createUserLoader } from './loaders/userLoader';
 
-let redis = new Redis();
-let RedisStore = ConnectRedis(session);
-let redisStore = new RedisStore({ prefix: 'sess:' });
+const redis = new Redis();
+const RedisStore = ConnectRedis(session);
+const redisStore = new RedisStore({ prefix: 'sess:' });
 
 createConnection({
   type: 'postgres',
@@ -28,7 +28,7 @@ createConnection({
   synchronize: true,
 })
   .then(async () => {
-    let app = express();
+    const app = express();
 
     app.use(
       session({
@@ -44,7 +44,7 @@ createConnection({
       })
     );
 
-    let server = new ApolloServer({
+    const server = new ApolloServer({
       typeDefs,
       resolvers,
       context: ({ req }: any) => ({

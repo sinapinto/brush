@@ -12,7 +12,7 @@ export let paginateResults = <T>({
   if (pageSize < 1) return [];
   if (!cursor) return results.slice(0, pageSize);
 
-  let cursorIndex = results.findIndex((item: any) => {
+  const cursorIndex = results.findIndex((item: any) => {
     return item.cursor ? cursor === item.cursor : false;
   });
 

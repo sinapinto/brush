@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { postInfoFragment } from '../fragments/post';
 import { userInfoFragment } from '../fragments/user';
 
-export let getPostsQuery = gql`
+export const getPostsQuery = gql`
   query GetPosts($pageSize: Int, $after: String) {
     getPosts(pageSize: $pageSize, after: $after) {
       cursor
@@ -20,7 +20,7 @@ export let getPostsQuery = gql`
   ${userInfoFragment}
 `;
 
-export let getPosts = graphql(getPostsQuery, {
+export const getPosts = graphql(getPostsQuery, {
   options: props => ({
     variables: {
       // pageSize: props.pageSize,
@@ -29,7 +29,7 @@ export let getPosts = graphql(getPostsQuery, {
   }),
 });
 
-export let getPostByIdQuery = gql`
+export const getPostByIdQuery = gql`
   query GetPostById($id: ID!) {
     getPost(id: $id) {
       ...postInfo

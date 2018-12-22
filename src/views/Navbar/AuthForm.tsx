@@ -15,15 +15,15 @@ interface Props {
 }
 
 function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
-  let [username, setUsername] = useState('');
-  let [password, setPassword] = useState('');
-  let [isLoading, setIsLoading] = useState(false);
-  let [error, setError] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  let handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    let mutate = type === ModalType.Login ? loginUser : registerUser;
+    const mutate = type === ModalType.Login ? loginUser : registerUser;
     mutate({ username, password })
       .then((data: any) => {
         setIsLoading(false);
@@ -42,7 +42,7 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
       });
   };
 
-  let handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     if (e.target.name === 'password') {
       setPassword(e.target.value);
     } else if (e.target.name === 'username') {

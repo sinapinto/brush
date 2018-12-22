@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-export let Button = styled.button`
+export const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -31,13 +31,13 @@ export let Button = styled.button`
   }
 `;
 
-export let OutlineButton = styled(Button)`
+export const OutlineButton = styled(Button)`
   background: transparent;
   color: ${theme.brand.default};
   border: 2px solid ${theme.brand.default};
 `;
 
-export let TextButton = styled(OutlineButton)`
+export const TextButton = styled(OutlineButton)`
   border: none;
   padding: 0px 12px;
 `;

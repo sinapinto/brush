@@ -4,7 +4,7 @@ import { userInfoFragment } from '../fragments/user';
 import { RegisterUserVariables } from './__generated__/RegisterUser';
 import { LoginUserVariables } from './__generated__/LoginUser';
 
-let registerUserMutation = gql`
+const registerUserMutation = gql`
   mutation RegisterUser($username: String!, $password: String!) {
     register(username: $username, password: $password) {
       ...userInfo
@@ -13,7 +13,7 @@ let registerUserMutation = gql`
   ${userInfoFragment}
 `;
 
-export let registerUser = graphql(registerUserMutation, {
+export const registerUser = graphql(registerUserMutation, {
   options: { errorPolicy: 'all' },
   props: ({ mutate }: any) => ({
     registerUser: async ({ username, password }: RegisterUserVariables) => {
@@ -27,7 +27,7 @@ export let registerUser = graphql(registerUserMutation, {
   }),
 });
 
-let loginUserMutation = gql`
+const loginUserMutation = gql`
   mutation LoginUser($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       ...userInfo
@@ -36,7 +36,7 @@ let loginUserMutation = gql`
   ${userInfoFragment}
 `;
 
-export let loginUser = graphql(loginUserMutation, {
+export const loginUser = graphql(loginUserMutation, {
   options: { errorPolicy: 'all' },
   props: ({ mutate }: any) => ({
     loginUser: ({ username, password }: LoginUserVariables) =>
@@ -49,7 +49,7 @@ export let loginUser = graphql(loginUserMutation, {
   }),
 });
 
-export let logoutUserMutation = gql`
+export const logoutUserMutation = gql`
   mutation LogoutUser {
     logout
   }

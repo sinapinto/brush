@@ -1,7 +1,7 @@
 import * as DataLoader from 'dataloader';
 import { User } from '../entity/User';
 
-let batchGetUser = (ids: string[]) => {
+const batchGetUser = (ids: string[]) => {
   return User.findByIds(ids);
 };
 

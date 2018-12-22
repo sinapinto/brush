@@ -15,7 +15,7 @@ export default function Post({ id }: Props) {
         {({ data, loading, error }) => {
           if (loading) return 'Loading...';
           if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
-          let post = data.getPost;
+          const post = data.getPost;
           return (
             <div>
               <H2>{post.title}</H2>

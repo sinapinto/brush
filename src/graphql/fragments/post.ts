@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export let postInfoFragment = gql`
+export const postInfoFragment = gql`
   fragment postInfo on Post {
     id
     title

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-export let Form = styled.form`
+export const Form = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,7 +15,7 @@ export let Form = styled.form`
   }
 `;
 
-export let StyledNavbar = styled.nav`
+export const StyledNavbar = styled.nav`
   height: 60px;
   width: 100%;
   display: flex;
@@ -26,7 +26,7 @@ export let StyledNavbar = styled.nav`
   margin-bottom: 16px;
 `;
 
-export let NavbarContent = styled.div`
+export const NavbarContent = styled.div`
   width: 100%;
   max-width: 1000px;
   display: flex;
@@ -35,14 +35,14 @@ export let NavbarContent = styled.div`
   margin: 0 28px;
 `;
 
-export let LogoLink = styled(Link)`
+export const LogoLink = styled(Link)`
   font-size: 24px;
   font-weight: 900;
   color: #fff;
   text-decoration: none;
 `;
 
-export let ButtonWrap = styled.div`
+export const ButtonWrap = styled.div`
   display: flex;
   align-items: center;
   margin-left: 28px;

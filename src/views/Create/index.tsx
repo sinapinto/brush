@@ -16,10 +16,10 @@ import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 
 const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
-  let [title, setTitle] = useState('');
-  let [body, setBody] = useState('');
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
-  let handleSubmit = (e: React.FormEvent<HTMLFormElement>, createPost: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, createPost: any) => {
     e.preventDefault();
     createPost().then(({ data }: any) => {
       history.push(`/p/${data.createPost.id}`);
@@ -71,7 +71,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   );
 };
 
-let Form = styled.form`
+const Form = styled.form`
   padding: 24px;
   display: flex;
   flex-flow: column nowrap;

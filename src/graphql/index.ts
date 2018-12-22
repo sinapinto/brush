@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { toIdValue } from 'apollo-utilities';
 
-let cache: any = new InMemoryCache({
+const cache: any = new InMemoryCache({
   cacheRedirects: {
     Query: {
       getPost: (_, { id }) => {
@@ -17,7 +17,7 @@ let cache: any = new InMemoryCache({
   },
 });
 
-export let client = new ApolloClient({
+export const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
