@@ -8,6 +8,7 @@ export const Button = styled.button`
   padding: 13px 25px 9px;
   font-weight: 900;
   font-size: 15px;
+  font-style: normal;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 8px;
@@ -18,7 +19,7 @@ export const Button = styled.button`
 
   &[disabled] {
     background-color: ${theme.bg.inactive};
-    color: ${theme.text.alt};
+    color: ${theme.text.default};
     cursor: not-allowed;
   }
 
@@ -43,5 +44,5 @@ export const TextButton = styled(OutlineButton)`
 `;
 
 export const CTAButton = styled(Button)`
-  background: ${theme.success.alt};
+  background: ${theme.success.default};
 `;

@@ -50,6 +50,7 @@ export const Input = styled.input`
   color: ${theme.text.default};
   font-size: 22px;
   line-height: 26px;
+  padding: 8px 0;
 
   &[disabled] {
     opacity: 0.8;

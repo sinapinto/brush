@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
-import { P, H2 } from '../../components/globals';
+import { P, H2, Input } from '../../components/globals';
+import theme from '../../styles/theme';
 
 interface Props {
   type: ModalType;
@@ -31,7 +32,8 @@ export default function AuthModal({
     type === ModalType.Login
       ? "Don't have an account?"
       : 'Already have an account?';
-  const otherType = type === ModalType.Login ? ModalType.Signup : ModalType.Login;
+  const otherType =
+    type === ModalType.Login ? ModalType.Signup : ModalType.Login;
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
@@ -52,7 +54,15 @@ const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  ${H2} {
+    font-style: italic;
+  }
   ${P} {
     margin: 16px 0;
+    font-style: italic;
+    color: ${theme.text.alt};
+  }
+  ${Input} {
+    background-color: ${theme.bg.wash};
   }
 `;
