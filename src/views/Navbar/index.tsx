@@ -17,25 +17,24 @@ const Navbar: React.FunctionComponent = () => {
   const [activeModal, setActiveModal] = useState(ModalType.Closed);
   return (
     <CurrentUserQuery query={QUERY}>
-      {({ data, loading, error }) => {
-        if (loading) return 'loading';
-        if (error) return 'error';
-        if (!data) return 'no data';
-        const { currentUser } = data;
+      {({ data, loading }) => {
         return (
           <StyledNavbar>
             <NavbarContent>
               <LogoLink to="/">microblog</LogoLink>
               <ButtonWrap>
-                {currentUser && currentUser.username ? (
+                {!loading &&
+                data &&
+                data.currentUser &&
+                data.currentUser.username ? (
                   <React.Fragment>
                     <ButtonLink to="/create">
                       <PlusIcon size={20} />
                       Create
                     </ButtonLink>
-                    <ButtonLink to={`/u/${currentUser.username}`}>
+                    <ButtonLink to={`/u/${data.currentUser.username}`}>
                       <AccountIcon size={20} />
-                      {currentUser.username.slice(0, 16)}
+                      {data.currentUser.username.slice(0, 16)}
                     </ButtonLink>
                     <LogoutButton />
                   </React.Fragment>
