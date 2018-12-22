@@ -5,8 +5,8 @@ import { H3, P } from '../../components/globals';
 
 type PostPreviewProps = {
   id: string;
-  title?: string;
-  author?: {
+  title: string;
+  author: {
     username: string;
   };
 };

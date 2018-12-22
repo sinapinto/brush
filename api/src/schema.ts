@@ -18,7 +18,7 @@ export const typeDefs = gql`
   type PaginatedPosts {
     cursor: String
     hasMore: Boolean!
-    posts: [Post]!
+    posts: [Post!]!
   }
 
   input CreatePostInput {

@@ -4,7 +4,7 @@ import { formatDistance } from 'date-fns';
 
 import { H1 } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
-import PostPreview from '../Home/PostPreview';
+import PostPreview from '../../partial/PostPreview';
 import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
 
 enum Tab {
@@ -35,7 +35,7 @@ const UserBio: React.FunctionComponent<UserBioProps> = ({ user }) => {
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
         <TabPane label="Posts" key={Tab.Posts}>
           {user.posts.map(post => (
-            <PostPreview key={post.id} {...post} />
+            <PostPreview key={post.id} {...post} author={user} />
           ))}
         </TabPane>
         <TabPane label="Followers" key={Tab.Followers}>

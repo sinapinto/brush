@@ -26,7 +26,7 @@ export interface GetPosts_getPosts {
   __typename: "PaginatedPosts";
   cursor: string | null;
   hasMore: boolean;
-  posts: (GetPosts_getPosts_posts | null)[];
+  posts: GetPosts_getPosts_posts[];
 }
 
 export interface GetPosts {
