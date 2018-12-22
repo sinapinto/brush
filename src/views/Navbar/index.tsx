@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Query } from 'react-apollo';
-import { TiPlus as PlusIcon } from 'react-icons/ti';
-import { TiUser as AccountIcon } from 'react-icons/ti';
+import { MdCreate as CreateIcon } from 'react-icons/md';
+import { MdPerson as AccountIcon } from 'react-icons/md';
 
 import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
@@ -28,7 +28,7 @@ const Navbar: React.FunctionComponent = () => {
                   data.currentUser.username ? (
                   <React.Fragment>
                     <ButtonLink to="/create">
-                      <PlusIcon size={20} />
+                      <CreateIcon size={20} />
                       Create
                     </ButtonLink>
                     <ButtonLink to={`/u/${data.currentUser.username}`}>

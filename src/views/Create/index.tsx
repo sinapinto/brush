@@ -4,7 +4,7 @@ import { Mutation, FetchResult } from 'react-apollo';
 import styled from 'styled-components';
 
 import { Input, H2, Card, ErrorMessage } from '../../components/globals';
-import { Button } from '../../components/Button';
+import { CTAButton } from '../../components/Button';
 import { createPostMutation } from '../../graphql/mutations/post';
 import { getPostsQuery } from '../../graphql/queries/post';
 import {
@@ -64,9 +64,9 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
               onChange={e => setBody(e.target.value)}
             />
             <ErrorMessage>{error && JSON.stringify(error)}</ErrorMessage>
-            <Button type="button" disabled={loading}>
+            <CTAButton type="button" disabled={loading}>
               Create
-            </Button>
+            </CTAButton>
           </Form>
         )}
       </CreatePostMutation>

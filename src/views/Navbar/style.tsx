@@ -39,7 +39,10 @@ export const LogoLink = styled(Link)`
   font-size: 24px;
   font-weight: 900;
   color: #fff;
-  text-decoration: none;
+  text-decoration: underline;
+  :hover {
+    filter: brightness(95%);
+  }
 `;
 
 export const ButtonWrap = styled.div`
