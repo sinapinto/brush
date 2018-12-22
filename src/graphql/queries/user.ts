@@ -1,4 +1,3 @@
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const currentUserQuery = gql`
@@ -9,8 +8,6 @@ export const currentUserQuery = gql`
     }
   }
 `;
-
-export const getCurrentUser = graphql(currentUserQuery);
 
 export const userByUsernameQuery = gql`
   query UserByUsername($username: String!) {
