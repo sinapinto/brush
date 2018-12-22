@@ -19,7 +19,10 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, createPost: any) => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    createPost: any
+  ) => {
     e.preventDefault();
     createPost().then(({ data }: any) => {
       history.push(`/p/${data.createPost.id}`);
@@ -61,7 +64,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
               onChange={e => setBody(e.target.value)}
             />
             <ErrorMessage>{error && JSON.stringify(error)}</ErrorMessage>
-            <Button type="primary" disabled={loading}>
+            <Button type="button" disabled={loading}>
               Create
             </Button>
           </Form>

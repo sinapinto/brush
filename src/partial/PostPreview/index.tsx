@@ -22,9 +22,7 @@ const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
         <Link to={`/p/${id}`}>{title}</Link>
       </H3>
       <P>
-        {author && (
-          <Link to={`/u/${author.username}`}>By {author.username}</Link>
-        )}
+        <Link to={`/u/${author.username}`}>By {author.username}</Link>
       </P>
     </Container>
   );

@@ -3,7 +3,7 @@ import { compose } from 'react-apollo';
 
 import { loginUser, registerUser } from '../../graphql/mutations/user';
 import { Input, ErrorMessage } from '../../components/globals';
-import { Button } from '../../components/Button';
+import { CTAButton } from '../../components/Button';
 import { ModalType } from './AuthModal';
 import { Form } from './style';
 
@@ -68,9 +68,9 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
         disabled={isLoading}
       />
       <ErrorMessage>{error}</ErrorMessage>
-      <Button type="primary" disabled={isLoading || !username || !password}>
+      <CTAButton type="submit" disabled={isLoading || !username || !password}>
         {type === ModalType.Login ? 'Log In' : 'Sign Up'}
-      </Button>
+      </CTAButton>
     </Form>
   );
 }

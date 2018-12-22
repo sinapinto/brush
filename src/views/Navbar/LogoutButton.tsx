@@ -12,7 +12,7 @@ const LogoutButton: React.FunctionComponent = () => {
   return (
     <LogoutUserMutation mutation={MUTATION}>
       {mutate => (
-        <Button onClick={() => mutate().then(() => client.resetStore())}>
+        <Button type="button" onClick={() => mutate().then(() => client.resetStore())}>
           Log Out
         </Button>
       )}

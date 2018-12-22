@@ -17,7 +17,7 @@ export const Home: React.FunctionComponent = () => {
           if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
           if (!data) return <div>no data</div>;
           return (
-            <pre>
+            <div>
               {data.getPosts.posts.map(post => (
                 <PostPreview
                   key={post.id}
@@ -26,7 +26,7 @@ export const Home: React.FunctionComponent = () => {
                   author={post.author}
                 />
               ))}
-            </pre>
+            </div>
           );
         }}
       </PostsQuery>

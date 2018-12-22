@@ -7,9 +7,9 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #f7f7f7;
+    background: ${theme.bg.default};
     color: ${theme.text.default};
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 14px;
     line-height: 22px;
     -webkit-font-smoothing: antialiased;

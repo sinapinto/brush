@@ -38,7 +38,10 @@ const Navbar: React.FunctionComponent = () => {
                     <LogoutButton />
                   </React.Fragment>
                 ) : (
-                  <Button onClick={() => setActiveModal(ModalType.Signup)}>
+                  <Button
+                    type="button"
+                    onClick={() => setActiveModal(ModalType.Signup)}
+                  >
                     Sign Up
                   </Button>
                 )}

@@ -41,3 +41,7 @@ export const TextButton = styled(OutlineButton)`
   border: none;
   padding: 0px 12px;
 `;
+
+export const CTAButton = styled(Button)`
+  background: ${theme.success.alt};
+`;
