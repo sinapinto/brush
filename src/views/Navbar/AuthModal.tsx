@@ -5,13 +5,18 @@ import Modal from '../../components/Modal';
 import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
 import { P, H2 } from '../../components/globals';
-import { MODAL_LOGIN, MODAL_SIGNUP } from './constants';
 
 interface Props {
-  type: string;
-  onChangeType: (t: string) => void;
+  type: ModalType;
+  onChangeType: (t: ModalType) => void;
   onRequestClose: () => void;
   onSuccess: () => void;
+}
+
+export enum ModalType {
+  Closed,
+  Login,
+  Signup,
 }
 
 export default function AuthModal({
@@ -21,12 +26,12 @@ export default function AuthModal({
   onChangeType,
   onSuccess,
 }: Props & ReactModal.Props) {
-  let title = type === MODAL_LOGIN ? 'Log In' : 'Sign Up';
+  let title = type === ModalType.Login ? 'Log In' : 'Sign Up';
   let subtitle =
-    type === MODAL_LOGIN
+    type === ModalType.Login
       ? "Don't have an account?"
       : 'Already have an account?';
-  let otherType = type === MODAL_LOGIN ? MODAL_SIGNUP : MODAL_LOGIN;
+  let otherType = type === ModalType.Login ? ModalType.Signup : ModalType.Login;
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
@@ -34,7 +39,7 @@ export default function AuthModal({
         <P>
           {subtitle}
           <TextButton onClick={() => onChangeType(otherType)}>
-            {type === MODAL_LOGIN ? 'Sign Up' : 'Log In'}
+            {type === ModalType.Login ? 'Sign Up' : 'Log In'}
           </TextButton>
         </P>
         <AuthForm type={type} onSuccess={onSuccess} />
