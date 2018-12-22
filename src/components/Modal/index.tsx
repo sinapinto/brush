@@ -61,11 +61,10 @@ const Toolbar = styled.div`
   display: flex;
   justify-content: flex-end;
   height: 30px;
-  padding: 15px 15px 0 15px;
 `;
 
 const ModalContent = styled.div`
-  padding: 16px;
+  padding: 0 16px 16px;
 `;
 
 export default Modal;

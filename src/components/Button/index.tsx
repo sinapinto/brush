@@ -5,7 +5,7 @@ export const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 13px 25px 9px;
+  padding: 12px 24px 12px;
   font-weight: 900;
   font-size: 15px;
   font-style: normal;
@@ -19,7 +19,7 @@ export const Button = styled.button`
 
   &[disabled] {
     background-color: ${theme.bg.inactive};
-    color: ${theme.text.default};
+    color: ${theme.text.inactive};
     cursor: not-allowed;
   }
 

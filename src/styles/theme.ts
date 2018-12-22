@@ -11,10 +11,11 @@ export default {
   },
   text: {
     default: '#16171A',
-    alt: '#777777',
-    reverse: '#FFFFFF',
-    placeholder: '#BFBFBF',
     secondary: '#494C57',
+    alt: '#777777',
+    inactive: '#B1B1B1',
+    placeholder: '#BFBFBF',
+    reverse: '#FFFFFF',
   },
   success: {
     default: '#a6d500',
