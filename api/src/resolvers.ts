@@ -3,9 +3,14 @@ import * as bcrypt from 'bcrypt';
 import { validate } from 'class-validator';
 import { Post } from './entity/Post';
 import { User } from './entity/User';
-import { IResolver } from './types/graphql';
 import { paginateResults } from './utils';
 import { CreatePostInput } from '../../__generated__/globalTypes';
+
+interface IResolver {
+  [key: string]: {
+    [key: string]: (parent: any, args: any, context: any, info: any) => any;
+  };
+}
 
 export const resolvers: IResolver = {
   Query: {
