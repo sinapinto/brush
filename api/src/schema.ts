@@ -28,20 +28,20 @@ export const typeDefs = gql`
 
   type User {
     id: ID!
-    username: String
-    avatar: String
-    bio: String
-    posts: [Post]
-    createdAt: String
-    updatedAt: String
+    username: String!
+    avatar: String!
+    bio: String!
+    posts: [Post!]!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type Post {
     id: ID!
-    title: String
-    body: String
-    author: User
-    createdAt: String
-    updatedAt: String
+    title: String!
+    body: String!
+    author: User!
+    createdAt: String!
+    updatedAt: String!
   }
 `;

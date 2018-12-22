@@ -4,6 +4,7 @@ import { formatDistance } from 'date-fns';
 import { H1 } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../Home/PostPreview';
+import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
 
 enum Tab {
   Posts = 'Posts',
@@ -11,7 +12,11 @@ enum Tab {
   Following = 'Following',
 }
 
-const UserBio: React.FunctionComponent<{ user: any }> = ({ user }) => {
+type UserBioProps = {
+  user: UserByUsername_user;
+};
+
+const UserBio: React.FunctionComponent<UserBioProps> = ({ user }) => {
   let [activeTab, setActiveTab] = useState(Tab.Posts);
   let startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
@@ -28,7 +33,7 @@ const UserBio: React.FunctionComponent<{ user: any }> = ({ user }) => {
       </BioWrap>
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
         <TabPane label="Posts" key={Tab.Posts}>
-          {user.posts.map((post: any) => (
+          {user.posts.map(post => (
             <PostPreview key={post.id} {...post} />
           ))}
         </TabPane>

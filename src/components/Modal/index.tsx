@@ -3,42 +3,18 @@ import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-let CloseButton = styled.button`
-  background: none;
-  cursor: pointer;
-  font-size: 32px;
-  line-height: 15px;
-  font-weight: 500;
-  color: ${theme.text.secondary};
-
-  :hover {
-    filter: brightness(95%);
-  }
-`;
-
-let Toolbar = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  height: 30px;
-  padding: 15px 15px 0 15px;
-`;
-
-let ModalContent = styled.div`
-  padding: 16px;
-`;
-
-type Props = {
+type ModalProps = {
   children: React.ReactNode;
   hasCloseButton?: boolean;
-  onRequestClose: (e: React.MouseEvent<any>) => void;
+  onRequestClose: () => void;
   isOpen: boolean;
 };
 
-export default function Modal({
+const Modal: React.FunctionComponent<ModalProps> = ({
   children,
   hasCloseButton = true,
   ...otherProps
-}: Props & ReactModal.Props) {
+}) => {
   return (
     <ReactModal
       {...otherProps}
@@ -66,4 +42,30 @@ export default function Modal({
       <ModalContent>{children}</ModalContent>
     </ReactModal>
   );
-}
+};
+
+let CloseButton = styled.button`
+  background: none;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 15px;
+  font-weight: 500;
+  color: ${theme.text.secondary};
+
+  :hover {
+    filter: brightness(95%);
+  }
+`;
+
+let Toolbar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 30px;
+  padding: 15px 15px 0 15px;
+`;
+
+let ModalContent = styled.div`
+  padding: 16px;
+`;
+
+export default Modal;

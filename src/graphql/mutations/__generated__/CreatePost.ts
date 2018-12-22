@@ -10,18 +10,18 @@ import { CreatePostInput } from "./../../../../__generated__/globalTypes";
 export interface CreatePost_createPost_author {
   __typename: "User";
   id: string;
-  username: string | null;
-  bio: string | null;
-  avatar: string | null;
+  username: string;
+  bio: string;
+  avatar: string;
 }
 
 export interface CreatePost_createPost {
   __typename: "Post";
   id: string;
-  title: string | null;
-  body: string | null;
-  updatedAt: string | null;
-  author: CreatePost_createPost_author | null;
+  title: string;
+  body: string;
+  updatedAt: string;
+  author: CreatePost_createPost_author;
 }
 
 export interface CreatePost {

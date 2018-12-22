@@ -8,18 +8,18 @@
 export interface GetPosts_getPosts_posts_author {
   __typename: "User";
   id: string;
-  username: string | null;
-  bio: string | null;
-  avatar: string | null;
+  username: string;
+  bio: string;
+  avatar: string;
 }
 
 export interface GetPosts_getPosts_posts {
   __typename: "Post";
   id: string;
-  title: string | null;
-  body: string | null;
-  updatedAt: string | null;
-  author: GetPosts_getPosts_posts_author | null;
+  title: string;
+  body: string;
+  updatedAt: string;
+  author: GetPosts_getPosts_posts_author;
 }
 
 export interface GetPosts_getPosts {

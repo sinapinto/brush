@@ -4,11 +4,11 @@ import { Query } from 'react-apollo';
 import { H2, P, Card } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
 
-type Props = {
+type PostProps = {
   id: string;
 };
 
-export default function Post({ id }: Props) {
+const Post: React.FunctionComponent<PostProps> = ({ id }) => {
   return (
     <Card>
       <Query query={getPostByIdQuery} variables={{ id }}>
@@ -27,4 +27,6 @@ export default function Post({ id }: Props) {
       </Query>
     </Card>
   );
-}
+};
+
+export default Post;

@@ -8,9 +8,9 @@
 export interface RegisterUser_register {
   __typename: "User";
   id: string;
-  username: string | null;
-  bio: string | null;
-  avatar: string | null;
+  username: string;
+  bio: string;
+  avatar: string;
 }
 
 export interface RegisterUser {

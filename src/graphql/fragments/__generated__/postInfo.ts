@@ -8,7 +8,7 @@
 export interface postInfo {
   __typename: "Post";
   id: string;
-  title: string | null;
-  body: string | null;
-  updatedAt: string | null;
+  title: string;
+  body: string;
+  updatedAt: string;
 }

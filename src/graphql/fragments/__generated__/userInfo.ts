@@ -8,7 +8,7 @@
 export interface userInfo {
   __typename: "User";
   id: string;
-  username: string | null;
-  bio: string | null;
-  avatar: string | null;
+  username: string;
+  bio: string;
+  avatar: string;
 }

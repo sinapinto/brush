@@ -11,14 +11,7 @@ import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
 
-const Body = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 24px;
-`;
-
-export default function App() {
+const App: React.FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
@@ -46,4 +39,13 @@ export default function App() {
       </BrowserRouter>
     </ApolloProvider>
   );
-}
+};
+
+const Body = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 24px;
+`;
+
+export default App;

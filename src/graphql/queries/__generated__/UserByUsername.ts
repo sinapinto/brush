@@ -8,19 +8,19 @@
 export interface UserByUsername_user_posts {
   __typename: "Post";
   id: string;
-  title: string | null;
-  createdAt: string | null;
+  title: string;
+  createdAt: string;
 }
 
 export interface UserByUsername_user {
   __typename: "User";
   id: string;
-  username: string | null;
-  avatar: string | null;
-  bio: string | null;
-  updatedAt: string | null;
-  createdAt: string | null;
-  posts: (UserByUsername_user_posts | null)[] | null;
+  username: string;
+  avatar: string;
+  bio: string;
+  updatedAt: string;
+  createdAt: string;
+  posts: UserByUsername_user_posts[];
 }
 
 export interface UserByUsername {

@@ -8,7 +8,7 @@
 export interface CurrentUser_currentUser {
   __typename: "User";
   id: string;
-  username: string | null;
+  username: string;
 }
 
 export interface CurrentUser {

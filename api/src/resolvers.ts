@@ -122,7 +122,7 @@ export const resolvers: IResolver = {
       const u = await User.findOne(user.id, { relations: ['posts'] });
       if (!u) {
         console.log(`couldnt find user ${user.id}`);
-        return null;
+        return [];
       }
       return u.posts;
     },
