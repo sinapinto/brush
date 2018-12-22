@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 
-import { H1 } from '../../components/globals';
+import { H1, BlankSlate } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partial/PostPreview';
 import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
@@ -34,15 +34,19 @@ const UserBio: React.FunctionComponent<UserBioProps> = ({ user }) => {
       </BioWrap>
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
         <TabPane label="Posts" key={Tab.Posts}>
-          {user.posts.map(post => (
-            <PostPreview key={post.id} {...post} author={user} />
-          ))}
+          {user.posts.length ? (
+            user.posts.map(post => (
+              <PostPreview key={post.id} {...post} author={user} />
+            ))
+          ) : (
+            <BlankSlate>No posts.</BlankSlate>
+          )}
         </TabPane>
         <TabPane label="Followers" key={Tab.Followers}>
-          followers
+          <BlankSlate>Nobody.</BlankSlate>
         </TabPane>
         <TabPane label="Following" key={Tab.Following}>
-          following
+          <BlankSlate>Nobody.</BlankSlate>
         </TabPane>
       </Tabs>
     </div>
@@ -57,6 +61,9 @@ const BioWrap = styled.div`
 
 const Bio = styled.div`
   flex: 1;
+  ${H1} {
+    font-style: italic;
+  }
 `;
 
 const Avatar = styled.div`

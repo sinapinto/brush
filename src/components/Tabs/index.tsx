@@ -60,7 +60,7 @@ const Tab = styled('button')<{ isSelected: boolean }>`
   margin-left: 32px;
   font-size: 15px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   background: none;
   cursor: pointer;

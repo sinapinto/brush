@@ -29,6 +29,12 @@ export const H4 = styled.h4`
   line-height: 28px;
 `;
 
+export const BlankSlate = styled(H4)`
+  text-align: center;
+  color: ${theme.text.placeholder};
+  margin: 48px 0;
+`;
+
 export const P = styled.p`
   color: ${theme.text.default};
   font-weight: 400;
