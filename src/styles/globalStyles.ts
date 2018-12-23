@@ -31,10 +31,6 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  ul, ol {
-    list-style: none;
-  }
-
   button,
   input,
   select,

@@ -33,6 +33,7 @@ export const BlankSlate = styled(H4)`
   text-align: center;
   color: ${theme.text.placeholder};
   margin: 48px 0;
+  user-select: none;
 `;
 
 export const P = styled.p`

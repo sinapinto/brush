@@ -52,7 +52,6 @@ const StyledTabs = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  border-bottom: 1px solid #e8e8e8;
 `;
 
 const Tab = styled('button')<{ isSelected: boolean }>`
