@@ -53,20 +53,23 @@ export default class TextEditor extends React.Component {
   render() {
     return (
       <div>
-        <Toolbar>
-          {this.renderMarkButton('bold')}
-          {this.renderMarkButton('italic')}
-          {this.renderMarkButton('underlined')}
-          {this.renderMarkButton('code')}
-          {this.renderBlockButton('heading-one')}
-          {this.renderBlockButton('heading-two')}
-          {this.renderBlockButton('block-quote')}
-          {this.renderBlockButton('numbered-list')}
-          {this.renderBlockButton('bulleted-list')}
-        </Toolbar>
+        {!this.props.readOnly && (
+          <Toolbar>
+            {this.renderMarkButton('bold')}
+            {this.renderMarkButton('italic')}
+            {this.renderMarkButton('underlined')}
+            {this.renderMarkButton('code')}
+            {this.renderBlockButton('heading-one')}
+            {this.renderBlockButton('heading-two')}
+            {this.renderBlockButton('block-quote')}
+            {this.renderBlockButton('numbered-list')}
+            {this.renderBlockButton('bulleted-list')}
+          </Toolbar>
+        )}
         <Editor
           spellCheck
           autoFocus
+          readOnly={this.props.readOnly}
           placeholder={this.props.placeholder}
           ref={this.ref}
           value={this.props.value}
@@ -224,7 +227,8 @@ export default class TextEditor extends React.Component {
 }
 
 TextEditor.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   value: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
+  readOnly: PropTypes.bool,
 };

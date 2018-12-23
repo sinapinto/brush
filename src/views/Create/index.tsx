@@ -4,7 +4,7 @@ import { Mutation, FetchResult } from 'react-apollo';
 import styled from 'styled-components';
 import { Value } from 'slate';
 
-import TextEditor from './TextEditor';
+import TextEditor from '../../components/TextEditor';
 import { Input, Card, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
 import { createPostMutation } from '../../graphql/mutations/post';
@@ -39,6 +39,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
           input: { title, body: JSON.stringify(editorValue.toJSON()) },
         }}
         update={(proxy, response: FetchResult) => {
+          localStorage.removeItem('draft');
           try {
             const data: GetPosts | null = proxy.readQuery({
               query: getPostsQuery,

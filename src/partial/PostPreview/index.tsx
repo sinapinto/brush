@@ -30,6 +30,9 @@ const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
 
 const Container = styled.div`
   padding: 16px;
+  ${H3} {
+    font-style: italic;
+  }
 `;
 
 export default PostPreview;
