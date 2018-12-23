@@ -13,6 +13,7 @@ export const typeDefs = gql`
     register(username: String!, password: String!): User
     logout: Boolean
     createPost(input: CreatePostInput!): Post
+    deletePost(id: ID!): Boolean
   }
 
   type PaginatedPosts {

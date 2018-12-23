@@ -15,3 +15,9 @@ export const createPostMutation = gql`
   ${postInfoFragment}
   ${userInfoFragment}
 `;
+
+export const deletePostMutation = gql`
+  mutation DeletePost($id: ID!) {
+    deletePost(id: $id)
+  }
+`;

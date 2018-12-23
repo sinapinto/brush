@@ -1,4 +1,8 @@
-import { AuthenticationError, UserInputError } from 'apollo-server-express';
+import {
+  ForbiddenError,
+  AuthenticationError,
+  UserInputError,
+} from 'apollo-server-express';
 import * as bcrypt from 'bcrypt';
 import { validate } from 'class-validator';
 import { Post } from './entity/Post';
@@ -112,9 +116,24 @@ export const resolvers: IResolver = {
         console.log('errors: ', errors);
         return new UserInputError('Invalid post');
       }
-
       await Post.save(post);
       return post;
+    },
+
+    deletePost: async (_, { id }, { session }) => {
+      if (!session || !session.userId) {
+        return new AuthenticationError('Not logged in');
+      }
+      const post = await Post.findOne(id);
+      console.log('deleting post', post);
+      if (!post) {
+        return new UserInputError('Post not found');
+      }
+      if (post.authorId !== session.userId) {
+        return new ForbiddenError('You are not the author of this post');
+      }
+      await Post.delete(id);
+      return true;
     },
   },
 
