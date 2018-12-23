@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 
-import { Card } from '../../components/globals';
+import { BlankSlate, Card } from '../../components/globals';
 import { getPostsQuery as QUERY } from '../../graphql/queries/post';
 import PostPreview from '../../partial/PostPreview';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
@@ -16,9 +16,13 @@ export const Home: React.FunctionComponent = () => {
           if (loading) return 'Loading..';
           if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
           if (!data) return <div>no data</div>;
+          let { posts } = data.getPosts;
+          if (!posts.length) {
+            return <BlankSlate>Nothing here yet..</BlankSlate>;
+          }
           return (
-            <div>
-              {data.getPosts.posts.map(post => (
+            <>
+              {posts.map(post => (
                 <PostPreview
                   key={post.id}
                   id={post.id}
@@ -26,7 +30,7 @@ export const Home: React.FunctionComponent = () => {
                   author={post.author}
                 />
               ))}
-            </div>
+            </>
           );
         }}
       </PostsQuery>

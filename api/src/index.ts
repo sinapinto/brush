@@ -29,6 +29,7 @@ createConnection({
   entities: [User, Post],
   logging: true,
   synchronize: true,
+  // dropSchema: true,
 })
   .then(async () => {
     const app = express();

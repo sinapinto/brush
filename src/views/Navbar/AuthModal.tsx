@@ -44,7 +44,7 @@ export default function AuthModal({
             {type === ModalType.Login ? 'Sign Up' : 'Log In'}
           </TextButton>
         </P>
-        <AuthForm type={type} onSuccess={onSuccess} />
+        <AuthForm key={type} type={type} onSuccess={onSuccess} />
       </Container>
     </Modal>
   );
