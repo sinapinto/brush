@@ -29,6 +29,19 @@ export const H4 = styled.h4`
   line-height: 28px;
 `;
 
+export const H1i = styled(H1)`
+  font-style: italic;
+`;
+export const H2i = styled(H2)`
+  font-style: italic;
+`;
+export const H3i = styled(H3)`
+  font-style: italic;
+`;
+export const H4i = styled(H4)`
+  font-style: italic;
+`;
+
 export const BlankSlate = styled(H4)`
   text-align: center;
   color: ${theme.text.placeholder};

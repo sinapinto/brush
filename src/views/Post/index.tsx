@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { Value } from 'slate';
 
 import TextEditor from '../../components/TextEditor';
-import { H2, P, Card } from '../../components/globals';
+import { H2i, P, Card } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
 
 type PostProps = {
@@ -21,7 +21,7 @@ const Post: React.FunctionComponent<PostProps> = ({ id }) => {
           const editorValue = Value.fromJSON(JSON.parse(post.body));
           return (
             <>
-              <H2>{post.title}</H2>
+              <H2i>{post.title}</H2i>
               <TextEditor readOnly value={editorValue} />
               <P>By {post.author.username}</P>
             </>
