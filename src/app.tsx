@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
 import { client } from './graphql';
@@ -14,29 +15,31 @@ import Create from './views/Create';
 const App: React.FunctionComponent = () => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <React.Fragment>
-          <GlobalStyles />
-          <Route component={Navbar} />
-          <Body>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route
-                path="/u/:username"
-                render={({ match }) => (
-                  <User username={match.params.username} />
-                )}
-              />
-              <Route
-                path="/p/:postId"
-                render={({ match }) => <Post id={match.params.postId} />}
-              />
-              <Route path="/create" component={Create} />
-              <Route render={() => <h1>not found</h1>} />
-            </Switch>
-          </Body>
-        </React.Fragment>
-      </BrowserRouter>
+      <ApolloHooksProvider client={client}>
+        <BrowserRouter>
+          <React.Fragment>
+            <GlobalStyles />
+            <Route component={Navbar} />
+            <Body>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route
+                  path="/u/:username"
+                  render={({ match }) => (
+                    <User username={match.params.username} />
+                  )}
+                />
+                <Route
+                  path="/p/:postId"
+                  render={({ match }) => <Post id={match.params.postId} />}
+                />
+                <Route path="/create" component={Create} />
+                <Route render={() => <h1>not found</h1>} />
+              </Switch>
+            </Body>
+          </React.Fragment>
+        </BrowserRouter>
+      </ApolloHooksProvider>
     </ApolloProvider>
   );
 };
