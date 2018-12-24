@@ -1,5 +1,5 @@
 import * as DataLoader from 'dataloader';
-import { User } from '../entity/User';
+import { User } from '../entities/User';
 
 const batchGetUser = (ids: string[]) => {
   return User.findByIds(ids);

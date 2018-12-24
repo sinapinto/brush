@@ -5,8 +5,8 @@ import {
 } from 'apollo-server-express';
 import * as bcrypt from 'bcrypt';
 import { validate } from 'class-validator';
-import { Post } from './entity/Post';
-import { User } from './entity/User';
+import { Post } from './entities/Post';
+import { User } from './entities/User';
 import { paginateResults } from './utils';
 import { CreatePostInput } from '../../__generated__/globalTypes';
 
