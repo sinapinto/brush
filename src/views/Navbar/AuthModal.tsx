@@ -59,7 +59,4 @@ const Container = styled.div`
     font-style: italic;
     color: ${theme.text.alt};
   }
-  ${Input}:focus {
-    background-color: ${theme.bg.wash};
-  }
 `;

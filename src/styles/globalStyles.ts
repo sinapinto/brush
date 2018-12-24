@@ -51,4 +51,11 @@ export default createGlobalStyle`
     color: currentColor;
     text-decoration: none;
   }
+
+  ::selection {
+    background: ${theme.brand.highlight};
+  }
+  ::-moz-selection {
+    background: ${theme.brand.highlight};
+  }
 `;

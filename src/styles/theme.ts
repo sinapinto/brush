@@ -2,12 +2,12 @@ export default {
   bg: {
     default: '#FFFFFF',
     reverse: '#16171A',
-    wash: '#feffd3',
     border: '#ECECEC',
     inactive: '#ECECEC',
   },
   brand: {
     default: '#000000',
+    highlight: '#fdff98',
   },
   text: {
     default: '#16171A',

@@ -51,7 +51,7 @@ const CloseButton = styled.button`
   line-height: 15px;
   font-weight: 500;
   color: ${theme.text.secondary};
-
+  user-select: none;
   :hover {
     filter: brightness(95%);
   }
