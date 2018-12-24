@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 
 import { BlankSlate, Card } from '../../components/globals';
 import { getPostsQuery as QUERY } from '../../graphql/queries/post';
-import PostPreview from '../../partial/PostPreview';
+import PostPreview from '../../partials/PostPreview';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
 class PostsQuery extends Query<GetPosts> {}

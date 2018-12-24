@@ -4,7 +4,7 @@ import { formatDistance } from 'date-fns';
 
 import { H1, BlankSlate } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
-import PostPreview from '../../partial/PostPreview';
+import PostPreview from '../../partials/PostPreview';
 import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
 
 enum Tab {
