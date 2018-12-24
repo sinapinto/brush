@@ -3,14 +3,13 @@ import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-type ModalProps = {
-  children: React.ReactNode;
+type Props = {
   hasCloseButton?: boolean;
   onRequestClose: () => void;
   isOpen: boolean;
 };
 
-const Modal: React.FunctionComponent<ModalProps> = ({
+const Modal: React.FunctionComponent<Props> = ({
   children,
   hasCloseButton = true,
   ...otherProps

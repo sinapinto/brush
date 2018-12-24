@@ -68,7 +68,6 @@ export default class TextEditor extends React.Component {
         )}
         <Editor
           spellCheck
-          autoFocus
           readOnly={this.props.readOnly}
           placeholder={this.props.placeholder}
           ref={this.ref}

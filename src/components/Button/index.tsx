@@ -32,6 +32,10 @@ export const Button = styled.button`
   }
 `;
 
+export const DangerousButton = styled(Button)`
+  background: ${theme.warn.default};
+`;
+
 export const OutlineButton = styled(Button)`
   background: transparent;
   color: ${theme.brand.default};

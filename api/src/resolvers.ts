@@ -125,7 +125,6 @@ export const resolvers: IResolver = {
         return new AuthenticationError('Not logged in');
       }
       const post = await Post.findOne(id);
-      console.log('deleting post', post);
       if (!post) {
         return new UserInputError('Post not found');
       }
