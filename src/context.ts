@@ -4,7 +4,7 @@ import { CurrentUser_currentUser } from './graphql/queries/__generated__/Current
 type CurrentUser = {
   currentUser: CurrentUser_currentUser | null;
   loading: boolean;
-  refetch: () => void
+  refetch: () => void;
 };
 
 export const CurrentUserContext = React.createContext<CurrentUser>({

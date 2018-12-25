@@ -13,7 +13,6 @@ export const Button = styled.button`
   border: 2px solid transparent;
   border-radius: 8px;
   white-space: nowrap;
-  text-transform: uppercase;
   background: ${theme.brand.default};
   color: ${theme.text.reverse};
 

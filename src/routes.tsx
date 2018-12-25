@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
@@ -12,6 +12,7 @@ import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
 import Settings from './views/Settings';
+import { Spinner } from './components/globals';
 
 const Routes: React.FunctionComponent = () => {
   const { data, loading, refetch } = useQuery<CurrentUser>(currentUserQuery, {
@@ -19,6 +20,13 @@ const Routes: React.FunctionComponent = () => {
     errorPolicy: 'ignore',
   });
   const currentUser = loading ? null : data.currentUser;
+
+  const protect = (Comp: React.ComponentType) => {
+    if (loading) return () => <Spinner />;
+    if (!currentUser) return () => <Redirect to="/" />;
+    return () => <Comp />;
+  };
+
   return (
     <CurrentUserContext.Provider value={{ currentUser, loading, refetch }}>
       <BrowserRouter>
@@ -27,7 +35,7 @@ const Routes: React.FunctionComponent = () => {
           <Main>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/settings" component={Settings} />
+              <Route path="/settings" render={protect(Settings)} />
               <Route
                 path="/u/:username"
                 render={({ match }) => (
@@ -38,7 +46,7 @@ const Routes: React.FunctionComponent = () => {
                 path="/p/:postId"
                 render={({ match }) => <Post id={match.params.postId} />}
               />
-              <Route path="/create" component={Create} />
+              <Route path="/create" render={protect(Create)} />
               <Route render={() => <h1>not found</h1>} />
             </Switch>
           </Main>

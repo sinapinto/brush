@@ -47,7 +47,6 @@ export const BlankSlate = styled(H4)`
   color: ${theme.text.placeholder};
   margin: 24px 0;
   font-style: italic;
-  user-select: none;
 `;
 
 export const P = styled.p`
