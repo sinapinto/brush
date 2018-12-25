@@ -3,13 +3,13 @@ import { Query } from 'react-apollo';
 
 import { Card } from '../../components/globals';
 import UserBio from './UserBio';
-import { userByUsernameQuery as QUERY } from '../../graphql/queries/user';
+import { getUserByUsernameQuery as QUERY } from '../../graphql/queries/user';
 import {
-  UserByUsername,
-  UserByUsernameVariables,
-} from '../../graphql/queries/__generated__/UserByUsername';
+  GetUserByUsername,
+  GetUserByUsernameVariables,
+} from '../../graphql/queries/__generated__/GetUserByUsername';
 
-class UserQuery extends Query<UserByUsername, UserByUsernameVariables> {}
+class UserQuery extends Query<GetUserByUsername, GetUserByUsernameVariables> {}
 
 interface UserProps {
   username: string;

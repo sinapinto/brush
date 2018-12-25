@@ -2,17 +2,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: UserByUsername
+// GraphQL query operation: GetUserByUsername
 // ====================================================
 
-export interface UserByUsername_user_posts {
+export interface GetUserByUsername_user_posts {
   __typename: "Post";
   id: string;
   title: string;
   createdAt: string;
 }
 
-export interface UserByUsername_user {
+export interface GetUserByUsername_user {
   __typename: "User";
   id: string;
   username: string;
@@ -20,15 +20,14 @@ export interface UserByUsername_user {
   bio: string;
   subscribed: boolean;
   isSubscriber: boolean;
-  updatedAt: string;
   createdAt: string;
-  posts: UserByUsername_user_posts[];
+  posts: GetUserByUsername_user_posts[];
 }
 
-export interface UserByUsername {
-  user: UserByUsername_user | null;
+export interface GetUserByUsername {
+  user: GetUserByUsername_user | null;
 }
 
-export interface UserByUsernameVariables {
+export interface GetUserByUsernameVariables {
   username: string;
 }

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { userInfoFragment } from '../fragments/user';
 
 export const currentUserQuery = gql`
   query CurrentUser {
@@ -9,8 +10,8 @@ export const currentUserQuery = gql`
   }
 `;
 
-export const userByUsernameQuery = gql`
-  query UserByUsername($username: String!) {
+export const getUserByUsernameQuery = gql`
+  query GetUserByUsername($username: String!) {
     user(username: $username) {
       id
       username
@@ -26,4 +27,28 @@ export const userByUsernameQuery = gql`
       }
     }
   }
+`;
+
+export const getSubscribersByUsername = gql`
+  query GetSubscribersByUsername($username: String!) {
+    user(username: $username) {
+      id
+      subscribers {
+        ...userInfo
+      }
+    }
+  }
+  ${userInfoFragment}
+`;
+
+export const getSubscriptionsByUsername = gql`
+  query GetSubscriptionsByUsername($username: String!) {
+    user(username: $username) {
+      id
+      subscriptions {
+        ...userInfo
+      }
+    }
+  }
+  ${userInfoFragment}
 `;

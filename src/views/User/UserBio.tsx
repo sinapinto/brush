@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 
+import FollowersPane from './FollowersPane';
+import FollowingPane from './FollowingPane';
 import { currentUserQuery } from '../../graphql/queries/user';
 import FollowButton from './FollowButton';
 import { H1, P, BlankSlate } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
-import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
+import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
 enum Tab {
@@ -18,11 +20,11 @@ enum Tab {
 }
 
 type Props = {
-  user: UserByUsername_user;
+  user: GetUserByUsername_user;
 };
 
 const UserBio: React.FunctionComponent<Props> = ({ user }) => {
-  const { data } = useQuery<CurrentUser>(currentUserQuery);
+  const { data } = useQuery<CurrentUser>(currentUserQuery, { suspend: false });
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
@@ -51,10 +53,14 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
           )}
         </TabPane>
         <TabPane label="Followers" key={Tab.Followers}>
-          <BlankSlate>Nobody.</BlankSlate>
+          <Suspense fallback={<div>loading</div>}>
+            <FollowersPane username={user.username} />
+          </Suspense>
         </TabPane>
         <TabPane label="Following" key={Tab.Following}>
-          <BlankSlate>Nobody.</BlankSlate>
+          <Suspense fallback={<div>loading</div>}>
+            <FollowingPane username={user.username} />
+          </Suspense>
         </TabPane>
       </Tabs>
     </>
