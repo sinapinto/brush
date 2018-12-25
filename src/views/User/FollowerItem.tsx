@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import FollowButton from './FollowButton';
@@ -26,7 +27,7 @@ const FollowerItem: React.FunctionComponent<Props> = ({
       <UserContainer>
         <Avatar />
         <UserInfo>
-          <Username>{username}</Username>
+          <UsernameLink to={`/u/${username}`}>{username}</UsernameLink>
           <Bio>{bio || 'dummy bio.......'}</Bio>
         </UserInfo>
       </UserContainer>
@@ -64,7 +65,7 @@ const UserInfo = styled.div`
   flex-direction: column;
 `;
 
-const Username = styled.span`
+const UsernameLink = styled(Link)`
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
