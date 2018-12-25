@@ -4,10 +4,10 @@ import { userInfoFragment } from '../fragments/user';
 export const currentUserQuery = gql`
   query CurrentUser {
     currentUser {
-      id
-      username
+      ...userInfo
     }
   }
+  ${userInfoFragment}
 `;
 
 export const getUserByUsernameQuery = gql`

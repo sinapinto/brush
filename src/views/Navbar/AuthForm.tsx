@@ -36,7 +36,7 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
         if (e.graphQLErrors) {
           setError(e.graphQLErrors[0].message);
         } else {
-          setError('uknown error');
+          setError('An unexpected error occured. Try again.');
         }
         setIsLoading(false);
       });

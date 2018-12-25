@@ -1,19 +1,18 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useContext } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
 
+import { CurrentUserContext } from '../../context';
 import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
-import { currentUserQuery } from '../../graphql/queries/user';
 import FollowButton from './FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
 import { H1, P, BlankSlate, Spinner } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
-import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
 enum Tab {
   Posts = 'Posts',
@@ -26,7 +25,7 @@ type Props = {
 };
 
 const UserBio: React.FunctionComponent<Props> = ({ user }) => {
-  const { data } = useQuery<CurrentUser>(currentUserQuery, { suspend: false });
+  const { currentUser } = useContext(CurrentUserContext);
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
@@ -38,7 +37,7 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
           <H1>{user.username}</H1>
           <p>{user.bio}</p>
           <P>Joined {startDate}</P>
-          {data && data.currentUser && data.currentUser.id !== user.id ? (
+          {currentUser && currentUser.id !== user.id ? (
             <FollowButton isFollowing={user.subscribed} userId={user.id} />
           ) : (
             <OutlineButtonLink to="/settings">
