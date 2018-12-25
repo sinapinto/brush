@@ -14,13 +14,13 @@ import Create from './views/Create';
 import Settings from './views/Settings';
 
 const Routes: React.FunctionComponent = () => {
-  const { data, loading } = useQuery<CurrentUser>(currentUserQuery, {
+  const { data, loading, refetch } = useQuery<CurrentUser>(currentUserQuery, {
     suspend: false,
     errorPolicy: 'ignore',
   });
   const currentUser = loading ? null : data.currentUser;
   return (
-    <CurrentUserContext.Provider value={{ currentUser, loading }}>
+    <CurrentUserContext.Provider value={{ currentUser, loading, refetch }}>
       <BrowserRouter>
         <>
           <Route component={Navbar} />
