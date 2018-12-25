@@ -16,7 +16,8 @@ export const userByUsernameQuery = gql`
       username
       avatar
       bio
-      updatedAt
+      subscribed
+      isSubscriber
       createdAt
       posts {
         id

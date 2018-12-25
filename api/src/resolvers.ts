@@ -7,25 +7,20 @@ import * as bcrypt from 'bcrypt';
 import { validate } from 'class-validator';
 import { Post } from './entities/Post';
 import { User } from './entities/User';
-import { paginateResults } from './utils';
+import { paginateResults, IResolver } from './utils';
 import { CreatePostInput } from '../../__generated__/globalTypes';
-
-interface IResolver {
-  [key: string]: {
-    [key: string]: (parent: any, args: any, context: any, info: any) => any;
-  };
-}
 
 export const resolvers: IResolver = {
   Query: {
-    currentUser: async (_, __, { session }) => {
-      const { userId } = session;
-      if (!userId) {
+    currentUser: async (_, __, { res, session }) => {
+      if (!session.userId) {
         return new AuthenticationError('Not logged in');
       }
-      const user = await User.findOne(userId);
+      const user = await User.findOne(session.userId);
       if (!user) {
-        return new UserInputError(`No user found with id ${userId}`);
+        await new Promise(resolve => session.destroy(resolve));
+        res.clearCookie('sid');
+        return new UserInputError(`No user found with id ${session.userId}`);
       }
       return user;
     },
@@ -75,9 +70,10 @@ export const resolvers: IResolver = {
       return user;
     },
 
-    logout: async (_, __, { session }) => {
+    logout: async (_, __, { res, session }) => {
       const destroySession = new Promise(resolve => session.destroy(resolve));
       await destroySession;
+      res.clearCookie('sid');
       return true;
     },
 
@@ -102,18 +98,17 @@ export const resolvers: IResolver = {
     },
 
     createPost: async (_, args: { input: CreatePostInput }, { session }) => {
-      if (!session || !session.userId) {
+      if (!session.userId) {
         return new AuthenticationError('Not logged in');
       }
       const post = Post.create(args.input);
       const user = await User.findOne(session.userId);
       if (!user) {
-        return new UserInputError(`No user found with id ${session.userId}`);
+        return new UserInputError('User not found');
       }
       post.author = user;
       const errors = await validate(post);
       if (errors.length > 0) {
-        console.log('errors: ', errors);
         return new UserInputError('Invalid post');
       }
       await Post.save(post);
@@ -121,7 +116,7 @@ export const resolvers: IResolver = {
     },
 
     deletePost: async (_, { id }, { session }) => {
-      if (!session || !session.userId) {
+      if (!session.userId) {
         return new AuthenticationError('Not logged in');
       }
       const post = await Post.findOne(id);
@@ -134,16 +129,77 @@ export const resolvers: IResolver = {
       await Post.delete(id);
       return true;
     },
+
+    subscribeToUser: async (_, { id }, { session }) => {
+      if (!session.userId) {
+        return new AuthenticationError('Not logged in');
+      }
+      if (id === session.userId) {
+        return new UserInputError('You cannot subscribe to yourself');
+      }
+      const user = await User.findOne(session.userId, {
+        relations: ['subscriptions'],
+      });
+      const target = await User.findOne(id);
+      if (!target || !user) {
+        return new UserInputError('User not found');
+      }
+      user.subscriptions.push(target);
+      console.log('new subs', user.subscriptions);
+      await User.save(user);
+      return target;
+    },
+
+    unsubscribeToUser: async (_, { id }, { session }) => {
+      if (!session.userId) {
+        return new AuthenticationError('Not logged in');
+      }
+      if (id === session.userId) {
+        return new UserInputError('You cannot unsubscribe to yourself');
+      }
+      const user = await User.findOne(session.userId, {
+        relations: ['subscriptions'],
+      });
+      const target = await User.findOne(id);
+      if (!target || !user) {
+        return new UserInputError('User not found');
+      }
+      user.subscriptions = user.subscriptions.filter(u => u.id !== target.id);
+      await User.save(user);
+      return target;
+    },
   },
 
   User: {
     posts: async user => {
       const u = await User.findOne(user.id, { relations: ['posts'] });
-      if (!u) {
-        console.log(`couldnt find user ${user.id}`);
-        return [];
-      }
-      return u.posts;
+      return u!.posts;
+    },
+
+    subscriptions: async user => {
+      const u = await User.findOne(user.id, { relations: ['subscriptions'] });
+      return u!.subscriptions;
+    },
+
+    subscribers: async user => {
+      const u = await User.findOne(user.id, { relations: ['subscribers'] });
+      return u!.subscribers;
+    },
+
+    subscribed: async (user, _, { session }) => {
+      if (!session.userId) return false;
+      const me = await User.findOne(session.userId, {
+        relations: ['subscriptions'],
+      });
+      return me!.subscriptions.some(s => s.id === user.id);
+    },
+
+    isSubscriber: async (user, _, { session }) => {
+      if (!session.userId) return false;
+      const me = await User.findOne(session.userId, {
+        relations: ['subscribers'],
+      });
+      return me!.subscribers.some(s => s.id === user.id);
     },
   },
 

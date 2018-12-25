@@ -18,6 +18,8 @@ export interface UserByUsername_user {
   username: string;
   avatar: string;
   bio: string;
+  subscribed: boolean;
+  isSubscriber: boolean;
   updatedAt: string;
   createdAt: string;
   posts: UserByUsername_user_posts[];

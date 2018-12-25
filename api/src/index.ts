@@ -14,6 +14,7 @@ import { Post } from './entities/Post';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { createUserLoader } from './loaders/userLoader';
+import { TContext } from './utils';
 
 const redis = new Redis();
 const RedisStore = ConnectRedis(session);
@@ -45,14 +46,16 @@ createConnection({
           secure: false,
           maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         },
+        name: 'sid',
       })
     );
 
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: ({ req }: any) => ({
+      context: ({ req, res }: any): TContext => ({
         redis,
+        res,
         session: req.session,
         userLoader: createUserLoader(),
       }),

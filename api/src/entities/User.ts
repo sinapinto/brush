@@ -3,10 +3,12 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   OneToMany,
+  ManyToMany,
   Column,
   BeforeInsert,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinTable,
 } from 'typeorm';
 import { Length } from 'class-validator';
 import * as bcrypt from 'bcrypt';
@@ -15,7 +17,7 @@ import { Post } from './Post';
 @Entity('users')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   @Length(1, 30)
@@ -37,8 +39,16 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  // TODO: lazy relations
   @OneToMany(() => Post, post => post.author)
   posts: Post[];
+
+  @ManyToMany(() => User, u => u.subscribers)
+  @JoinTable()
+  subscriptions: User[];
+
+  @ManyToMany(() => User, u => u.subscriptions)
+  subscribers: User[];
 
   @BeforeInsert()
   async hashPassword() {

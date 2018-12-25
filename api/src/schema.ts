@@ -14,6 +14,8 @@ export const typeDefs = gql`
     logout: Boolean
     createPost(input: CreatePostInput!): Post
     deletePost(id: ID!): Boolean
+    subscribeToUser(id: ID!): User
+    unsubscribeToUser(id: ID!): User
   }
 
   type PaginatedPosts {
@@ -33,6 +35,10 @@ export const typeDefs = gql`
     avatar: String!
     bio: String!
     posts: [Post!]!
+    subscriptions: [User!]!
+    subscribers: [User!]!
+    subscribed: Boolean! # am I subscribed to this user
+    isSubscriber: Boolean! # are they subscribed to me
     createdAt: String!
     updatedAt: String!
   }

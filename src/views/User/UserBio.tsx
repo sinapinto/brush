@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 
 import { currentUserQuery } from '../../graphql/queries/user';
-import { H1, BlankSlate } from '../../components/globals';
+import FollowButton from './FollowButton';
+import { H1, P, BlankSlate } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
 import { UserByUsername_user } from '../../graphql/queries/__generated__/UserByUsername';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
-import { Button } from '../../components/Button';
 
 enum Tab {
   Posts = 'Posts',
@@ -27,16 +27,16 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
   const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
   });
-  const isOwnProfile =
-    data && data.currentUser && data.currentUser.id === user.id;
   return (
-    <div>
+    <>
       <BioWrap>
         <Bio>
           <H1>{user.username}</H1>
           <p>{user.bio}</p>
-          <p>Joined {startDate}</p>
-          {!isOwnProfile && <Button>Follow</Button>}
+          <P>Joined {startDate}</P>
+          {data && data.currentUser && data.currentUser.id !== user.id && (
+            <FollowButton isFollowing={user.subscribed} userId={user.id} />
+          )}
         </Bio>
         <Avatar />
       </BioWrap>
@@ -57,7 +57,7 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
           <BlankSlate>Nobody.</BlankSlate>
         </TabPane>
       </Tabs>
-    </div>
+    </>
   );
 };
 
@@ -71,6 +71,9 @@ const Bio = styled.div`
   flex: 1;
   ${H1} {
     font-style: italic;
+  }
+  ${P} {
+    margin-bottom: 24px;
   }
 `;
 

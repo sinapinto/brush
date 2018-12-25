@@ -54,3 +54,23 @@ export const logoutUserMutation = gql`
     logout
   }
 `;
+
+export const subscribeToUserMutation = gql`
+  mutation SubscribeToUserMutation($userId: ID!) {
+    subscribeToUser(id: $userId) {
+      id
+      subscribed
+      isSubscriber
+    }
+  }
+`;
+
+export const unsubscribeToUserMutation = gql`
+  mutation UnsubscribeToUserMutation($userId: ID!) {
+    unsubscribeToUser(id: $userId) {
+      id
+      subscribed
+      isSubscriber
+    }
+  }
+`;

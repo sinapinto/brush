@@ -14,7 +14,7 @@ import { User } from './User';
 @Entity('posts')
 export class Post extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   title: string;
