@@ -45,7 +45,7 @@ export const H4i = styled(H4)`
 export const BlankSlate = styled(H4)`
   text-align: center;
   color: ${theme.text.placeholder};
-  margin: 48px 0;
+  margin: 24px 0;
   font-style: italic;
   user-select: none;
 `;
@@ -101,4 +101,30 @@ export const ErrorMessage = styled.p`
   font-weight: 600;
   color: ${theme.warn.default};
   text-align: center;
+`;
+
+export const Spinner = styled.span`
+  width: 64px;
+  height: 64px;
+  :after {
+    content: ' ';
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px;
+    border-style: solid;
+    border-color: ${theme.brand.default} transparent ${theme.brand.default}
+      transparent;
+    animation: spinner 1s linear infinite;
+  }
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;

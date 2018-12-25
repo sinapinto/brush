@@ -7,7 +7,7 @@ import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
 import { currentUserQuery } from '../../graphql/queries/user';
 import FollowButton from './FollowButton';
-import { H1, P, BlankSlate } from '../../components/globals';
+import { H1, P, BlankSlate, Spinner } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
@@ -53,12 +53,12 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
           )}
         </TabPane>
         <TabPane label="Followers" key={Tab.Followers}>
-          <Suspense fallback={<div>loading</div>}>
+          <Suspense fallback={<Spinner />}>
             <FollowersPane username={user.username} />
           </Suspense>
         </TabPane>
         <TabPane label="Following" key={Tab.Following}>
-          <Suspense fallback={<div>loading</div>}>
+          <Suspense fallback={<Spinner />}>
             <FollowingPane username={user.username} />
           </Suspense>
         </TabPane>

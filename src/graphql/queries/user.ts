@@ -35,6 +35,7 @@ export const getSubscribersByUsername = gql`
       id
       subscribers {
         ...userInfo
+        subscribed
       }
     }
   }
@@ -47,6 +48,7 @@ export const getSubscriptionsByUsername = gql`
       id
       subscriptions {
         ...userInfo
+        subscribed
       }
     }
   }

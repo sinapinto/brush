@@ -11,6 +11,7 @@ export interface GetSubscribersByUsername_user_subscribers {
   username: string;
   bio: string;
   avatar: string;
+  subscribed: boolean;
 }
 
 export interface GetSubscribersByUsername_user {

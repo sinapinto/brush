@@ -45,7 +45,7 @@ export const TabPane: React.FunctionComponent<TabPaneProps> = ({
   label,
   ...rest
 }) => {
-  return <div {...rest}>{children}</div>;
+  return <StyledTabPane {...rest}>{children}</StyledTabPane>;
 };
 
 const StyledTabs = styled.div`
@@ -56,7 +56,7 @@ const StyledTabs = styled.div`
 
 const Tab = styled('button')<{ isSelected: boolean }>`
   padding: 20px 0 10px;
-  margin-left: 32px;
+  margin-right: 32px;
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
@@ -69,6 +69,12 @@ const Tab = styled('button')<{ isSelected: boolean }>`
     props.isSelected
       ? `4px solid ${theme.brand.default}`
       : '4px solid transparent'};
+  &:not(:first-child) {
+  }
+`;
+
+const StyledTabPane = styled.div`
+  min-height: 64px;
 `;
 
 export default Tabs;

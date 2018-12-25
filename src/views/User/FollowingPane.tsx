@@ -25,11 +25,17 @@ const FollowingPane: React.FunctionComponent<Props> = ({ username }) => {
   if (!data || !data.user || !data.user.subscriptions.length)
     return <BlankSlate>Nobody.</BlankSlate>;
   return (
-    <>
+    <div>
       {data.user.subscriptions.map(sub => (
-        <FollowerItem key={sub.id} username={sub.username} bio={sub.bio} />
+        <FollowerItem
+          key={sub.id}
+          id={sub.id}
+          username={sub.username}
+          bio={sub.bio}
+          isFollowing={sub.subscribed}
+        />
       ))}
-    </>
+    </div>
   );
 };
 

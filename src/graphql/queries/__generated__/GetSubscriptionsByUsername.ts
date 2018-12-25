@@ -11,6 +11,7 @@ export interface GetSubscriptionsByUsername_user_subscriptions {
   username: string;
   bio: string;
   avatar: string;
+  subscribed: boolean;
 }
 
 export interface GetSubscriptionsByUsername_user {
