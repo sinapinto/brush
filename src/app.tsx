@@ -11,6 +11,7 @@ import Home from './views/Home';
 import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
+import Settings from './views/Settings';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FunctionComponent = () => {
             <Body>
               <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/settings" component={Settings} />
                 <Route
                   path="/u/:username"
                   render={({ match }) => (

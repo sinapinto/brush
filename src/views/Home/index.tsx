@@ -14,15 +14,13 @@ export const Home: React.FunctionComponent = () => {
       <PostsQuery query={QUERY}>
         {({ data, loading, error }) => {
           if (loading) return 'Loading..';
-          if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
-          if (!data) return <div>no data</div>;
-          let { posts } = data.getPosts;
-          if (!posts.length) {
+          if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+          if (!data || !data.getPosts || !data.getPosts.posts.length) {
             return <BlankSlate>Nothing here yet..</BlankSlate>;
           }
           return (
             <>
-              {posts.map(post => (
+              {data.getPosts.posts.map(post => (
                 <PostPreview
                   key={post.id}
                   id={post.id}

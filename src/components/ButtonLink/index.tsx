@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button } from '../Button';
+import { Button, OutlineButton } from '../Button';
 
 type Props = {
   history: any;
@@ -25,4 +25,25 @@ function ButtonLink({ to, history, onClick, children, ...rest }: Props) {
   );
 }
 
+function OutlineButtonLinkComp({
+  to,
+  history,
+  onClick,
+  children,
+  ...rest
+}: Props) {
+  return (
+    <OutlineButton
+      {...rest}
+      onClick={e => {
+        onClick && onClick(e);
+        history.push(to);
+      }}
+    >
+      {children}
+    </OutlineButton>
+  );
+}
+
 export default withRouter<Props>(ButtonLink);
+export const OutlineButtonLink = withRouter<Props>(OutlineButtonLinkComp);

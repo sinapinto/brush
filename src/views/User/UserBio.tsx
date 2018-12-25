@@ -2,11 +2,13 @@ import React, { Suspense, useState } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
+import { MdSettings as SettingsIcon } from 'react-icons/md';
 
 import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
 import { currentUserQuery } from '../../graphql/queries/user';
 import FollowButton from './FollowButton';
+import { OutlineButtonLink } from '../../components/ButtonLink';
 import { H1, P, BlankSlate, Spinner } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
@@ -36,8 +38,13 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
           <H1>{user.username}</H1>
           <p>{user.bio}</p>
           <P>Joined {startDate}</P>
-          {data && data.currentUser && data.currentUser.id !== user.id && (
+          {data && data.currentUser && data.currentUser.id !== user.id ? (
             <FollowButton isFollowing={user.subscribed} userId={user.id} />
+          ) : (
+            <OutlineButtonLink to="/settings">
+              <SettingsIcon size={20} />
+              Settings
+            </OutlineButtonLink>
           )}
         </Bio>
         <Avatar />
