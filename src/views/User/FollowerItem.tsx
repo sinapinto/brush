@@ -1,7 +1,11 @@
 import React from 'react';
+import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
-import theme from '../../styles/theme';
+
 import FollowButton from './FollowButton';
+import theme from '../../styles/theme';
+import { currentUserQuery } from '../../graphql/queries/user';
+import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
 type Props = {
   id: string;
@@ -16,6 +20,7 @@ const FollowerItem: React.FunctionComponent<Props> = ({
   bio,
   isFollowing,
 }) => {
+  const { data } = useQuery<CurrentUser>(currentUserQuery, { suspend: false });
   return (
     <Container>
       <UserContainer>
@@ -25,7 +30,9 @@ const FollowerItem: React.FunctionComponent<Props> = ({
           <Bio>{bio || 'dummy bio.......'}</Bio>
         </UserInfo>
       </UserContainer>
-      <FollowButton isFollowing={isFollowing} userId={id} />
+      {data && data.currentUser && data.currentUser.id !== id && (
+        <FollowButton isFollowing={isFollowing} userId={id} />
+      )}
     </Container>
   );
 };
