@@ -4,6 +4,7 @@ import {
   UserInputError,
 } from 'apollo-server-express';
 import * as bcrypt from 'bcrypt';
+import { Not } from 'typeorm';
 import { validate } from 'class-validator';
 import { Post } from './entities/Post';
 import { User } from './entities/User';
@@ -190,7 +191,7 @@ export const resolvers: IResolver = {
         return new UserInputError('Invalid username');
       }
       const userAlreadyExists = await User.findOne({
-        where: { username: user.username },
+        where: { username: user.username, id: Not(user.id) },
         select: ['id'],
       });
       if (userAlreadyExists) {
