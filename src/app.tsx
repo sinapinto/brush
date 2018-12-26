@@ -5,6 +5,7 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 import Routes from './routes';
 import { client } from './graphql';
+import ErrorBoundary from './components/ErrorBoundary';
 import GlobalStyles from './styles/globalStyles';
 
 const App: React.FunctionComponent = () => {
@@ -12,7 +13,9 @@ const App: React.FunctionComponent = () => {
     <ApolloProvider client={client}>
       <ApolloHooksProvider client={client}>
         <GlobalStyles />
-        <Routes />
+        <ErrorBoundary>
+          <Routes />
+        </ErrorBoundary>
       </ApolloHooksProvider>
     </ApolloProvider>
   );
