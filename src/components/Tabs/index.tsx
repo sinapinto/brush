@@ -15,7 +15,7 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
 }) => {
   return (
     <React.Fragment>
-      <StyledTabs>
+      <TabContainer>
         {React.Children.map(children, tabPane => (
           <Tab
             key={tabPane.key as string}
@@ -25,7 +25,7 @@ const Tabs: React.FunctionComponent<TabsProps> = ({
             {tabPane.props.label}
           </Tab>
         ))}
-      </StyledTabs>
+      </TabContainer>
       <div>
         {React.Children.map(children, tabPane =>
           tabPane.key === activeKey ? tabPane : null
@@ -48,7 +48,7 @@ export const TabPane: React.FunctionComponent<TabPaneProps> = ({
   return <StyledTabPane {...rest}>{children}</StyledTabPane>;
 };
 
-const StyledTabs = styled.div`
+const TabContainer = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;

@@ -95,6 +95,13 @@ export const Input = styled.input`
   }
 `;
 
+export const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: ${theme.text.inactive};
+`;
+
 export const ErrorMessage = styled.p`
   font-size: 14px;
   font-weight: 600;
