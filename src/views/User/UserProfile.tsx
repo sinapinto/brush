@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
 
+import theme from '../../styles/theme';
 import { CurrentUserContext } from '../../context';
 import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
@@ -23,7 +24,7 @@ type Props = {
   user: GetUserByUsername_user;
 };
 
-const UserBio: React.FunctionComponent<Props> = ({ user }) => {
+const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
@@ -31,10 +32,10 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
   });
   return (
     <>
-      <BioWrap>
-        <Bio>
+      <ProfileContainer>
+        <BioContainer>
           <H1>{user.username}</H1>
-          <p>{user.bio}</p>
+          <Bio>{user.bio}</Bio>
           <P>Joined {startDate}</P>
           {currentUser && currentUser.id !== user.id ? (
             <FollowButton isFollowing={user.subscribed} userId={user.id} />
@@ -44,9 +45,9 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
               Settings
             </OutlineButtonLink>
           )}
-        </Bio>
+        </BioContainer>
         <Avatar />
-      </BioWrap>
+      </ProfileContainer>
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
         <TabPane label="Posts" key={Tab.Posts}>
           {user.posts.length ? (
@@ -72,13 +73,13 @@ const UserBio: React.FunctionComponent<Props> = ({ user }) => {
   );
 };
 
-const BioWrap = styled.div`
+const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 32px;
 `;
 
-const Bio = styled.div`
+const BioContainer = styled.div`
   flex: 1;
   ${H1} {
     font-style: italic;
@@ -97,4 +98,11 @@ const Avatar = styled.div`
   filter: brightness(118%);
 `;
 
-export default UserBio;
+const Bio = styled.span`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${theme.text.secondary};
+`;
+
+export default UserProfile;

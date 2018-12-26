@@ -28,7 +28,7 @@ const FollowerItem: React.FunctionComponent<Props> = ({
         <Avatar />
         <UserInfo>
           <UsernameLink to={`/u/${username}`}>{username}</UsernameLink>
-          <Bio>{bio || 'dummy bio.......'}</Bio>
+          <Bio>{bio}</Bio>
         </UserInfo>
       </UserContainer>
       {data && data.currentUser && data.currentUser.id !== id && (

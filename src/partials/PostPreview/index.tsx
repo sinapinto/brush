@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { H3, P } from '../../components/globals';
+import { H3i, P } from '../../components/globals';
 
 type PostPreviewProps = {
   id: string;
@@ -18,11 +18,11 @@ const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
 }) => {
   return (
     <Container>
-      <H3>
+      <H3i>
         <Link to={`/p/${id}`}>{title}</Link>
-      </H3>
+      </H3i>
       <P>
-        <Link to={`/u/${author.username}`}>By {author.username}</Link>
+        <Link to={`/u/${author.username}`}>{author.username}</Link>
       </P>
     </Container>
   );
@@ -30,9 +30,6 @@ const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
 
 const Container = styled.div`
   padding: 16px;
-  ${H3} {
-    font-style: italic;
-  }
 `;
 
 export default PostPreview;

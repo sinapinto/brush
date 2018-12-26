@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 import { Card } from '../../components/globals';
-import UserBio from './UserBio';
+import UserProfile from './UserProfile';
 import { getUserByUsernameQuery as QUERY } from '../../graphql/queries/user';
 import {
   GetUserByUsername,
@@ -23,7 +23,7 @@ export const User: React.FunctionComponent<UserProps> = ({ username }) => {
           if (loading) return 'loading';
           if (error) return 'error';
           if (!data || !data.user) return 'no data';
-          return <UserBio user={data.user} />;
+          return <UserProfile user={data.user} />;
         }}
       </UserQuery>
     </Card>
