@@ -182,6 +182,20 @@ export const resolvers: IResolver = {
       }
       user.username = args.input.username;
       user.bio = args.input.bio;
+
+      const errors = await validate(user);
+      if (errors.length > 0) {
+        console.log('errors: ', errors);
+        // TODO: better error message...
+        return new UserInputError('Invalid username');
+      }
+      const userAlreadyExists = await User.findOne({
+        where: { username: user.username },
+        select: ['id'],
+      });
+      if (userAlreadyExists) {
+        return new UserInputError('Username already taken');
+      }
       await User.save(user);
       return user;
     },
