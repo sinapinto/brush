@@ -1,37 +1,31 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from 'react-apollo-hooks';
 
 import { BlankSlate, Card } from '../../components/globals';
-import { getPostsQuery as QUERY } from '../../graphql/queries/post';
+import { getPostsQuery } from '../../graphql/queries/post';
 import PostPreview from '../../partials/PostPreview';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
-class PostsQuery extends Query<GetPosts> {}
-
 export const Home: React.FunctionComponent = () => {
+  const { data } = useQuery<GetPosts>(getPostsQuery, {
+    variables: { pageSize: 25 },
+  });
   return (
     <Card>
-      <PostsQuery query={QUERY}>
-        {({ data, loading, error }) => {
-          if (loading) return 'Loading..';
-          if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
-          if (!data || !data.getPosts || !data.getPosts.posts.length) {
-            return <BlankSlate>Nothing here yet..</BlankSlate>;
-          }
-          return (
-            <>
-              {data.getPosts.posts.map(post => (
-                <PostPreview
-                  key={post.id}
-                  id={post.id}
-                  title={post.title}
-                  author={post.author}
-                />
-              ))}
-            </>
-          );
-        }}
-      </PostsQuery>
+      {!data.getPosts || !data.getPosts.posts.length ? (
+        <BlankSlate>Nothing here yet..</BlankSlate>
+      ) : (
+        <>
+          {data.getPosts.posts.map(post => (
+            <PostPreview
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              author={post.author}
+            />
+          ))}
+        </>
+      )}
     </Card>
   );
 };

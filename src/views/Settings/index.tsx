@@ -10,17 +10,13 @@ import {
 } from '../../graphql/queries/__generated__/GetUserByUsername';
 
 const Settings = () => {
-  const { currentUser, loading: loadingCurrentUser } = useContext(
-    CurrentUserContext
+  const { currentUser } = useContext(CurrentUserContext);
+  const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
+    getUserByUsernameQuery,
+    {
+      variables: { username: currentUser!.username },
+    }
   );
-  const { data, loading } = useQuery<
-    GetUserByUsername,
-    GetUserByUsernameVariables
-  >(getUserByUsernameQuery, {
-    suspend: false,
-    variables: { username: currentUser!.username },
-  });
-  if (loadingCurrentUser || loading) return <Spinner />;
   return (
     <Card>
       {data.user && (

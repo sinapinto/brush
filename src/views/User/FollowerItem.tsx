@@ -21,7 +21,7 @@ const FollowerItem: React.FunctionComponent<Props> = ({
   bio,
   isFollowing,
 }) => {
-  const { data } = useQuery<CurrentUser>(currentUserQuery, { suspend: false });
+  const { data } = useQuery<CurrentUser>(currentUserQuery);
   return (
     <Container>
       <UserContainer>

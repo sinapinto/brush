@@ -22,7 +22,7 @@ const FollowingPane: React.FunctionComponent<Props> = ({ username }) => {
       username,
     },
   });
-  if (!data || !data.user || !data.user.subscriptions.length)
+  if (!data.user || !data.user.subscriptions.length)
     return <BlankSlate>This user isn't following anyone</BlankSlate>;
   return (
     <div>

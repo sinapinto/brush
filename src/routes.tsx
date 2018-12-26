@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
+import ErrorBoundary from './components/ErrorBoundary';
 import { currentUserQuery } from './graphql/queries/user';
 import { CurrentUser } from './graphql/queries/__generated__/CurrentUser';
 import { CurrentUserContext } from './context';
@@ -12,7 +13,11 @@ import User from './views/User';
 import Post from './views/Post';
 import Create from './views/Create';
 import Settings from './views/Settings';
-import { Spinner } from './components/globals';
+import { Spinner, ErrorMessage } from './components/globals';
+
+const ErrorFallback = () => {
+  return <ErrorMessage>An unexpected error occured.</ErrorMessage>;
+};
 
 const Routes: React.FunctionComponent = () => {
   const { data, loading, refetch } = useQuery<CurrentUser>(currentUserQuery, {
@@ -33,22 +38,26 @@ const Routes: React.FunctionComponent = () => {
         <>
           <Route component={Navbar} />
           <Main>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/settings" render={protect(Settings)} />
-              <Route
-                path="/u/:username"
-                render={({ match }) => (
-                  <User username={match.params.username} />
-                )}
-              />
-              <Route
-                path="/p/:postId"
-                render={({ match }) => <Post id={match.params.postId} />}
-              />
-              <Route path="/create" render={protect(Create)} />
-              <Route render={() => <h1>not found</h1>} />
-            </Switch>
+            <ErrorBoundary fallback={ErrorFallback}>
+              <Suspense fallback={<Spinner />}>
+                <Switch>
+                  <Route path="/" exact component={Home} />
+                  <Route path="/settings" render={protect(Settings)} />
+                  <Route
+                    path="/u/:username"
+                    render={({ match }) => (
+                      <User username={match.params.username} />
+                    )}
+                  />
+                  <Route
+                    path="/p/:postId"
+                    render={({ match }) => <Post id={match.params.postId} />}
+                  />
+                  <Route path="/create" render={protect(Create)} />
+                  <Route render={() => <h1>not found</h1>} />
+                </Switch>
+              </Suspense>
+            </ErrorBoundary>
           </Main>
         </>
       </BrowserRouter>

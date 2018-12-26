@@ -22,7 +22,7 @@ const FollowersPane: React.FunctionComponent<Props> = ({ username }) => {
       username,
     },
   });
-  if (!data || !data.user || !data.user.subscribers.length)
+  if (!data.user || !data.user.subscribers.length)
     return <BlankSlate>This user has no followers</BlankSlate>;
   return (
     <div>
