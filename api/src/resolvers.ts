@@ -8,7 +8,10 @@ import { validate } from 'class-validator';
 import { Post } from './entities/Post';
 import { User } from './entities/User';
 import { paginateResults, IResolver } from './utils';
-import { CreatePostInput } from '../../__generated__/globalTypes';
+import {
+  CreatePostInput,
+  EditProfileInput,
+} from '../../__generated__/globalTypes';
 
 export const resolvers: IResolver = {
   Query: {
@@ -167,6 +170,20 @@ export const resolvers: IResolver = {
       user.subscriptions = user.subscriptions.filter(u => u.id !== target.id);
       await User.save(user);
       return target;
+    },
+
+    editProfile: async (_, args: { input: EditProfileInput }, { session }) => {
+      if (!session.userId) {
+        return new AuthenticationError('Not logged in');
+      }
+      const user = await User.findOne(session.userId);
+      if (!user) {
+        return new UserInputError('User not found');
+      }
+      user.username = args.input.username;
+      user.bio = args.input.bio;
+      await User.save(user);
+      return user;
     },
   },
 

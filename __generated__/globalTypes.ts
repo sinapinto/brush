@@ -10,6 +10,11 @@ export interface CreatePostInput {
   body: string;
 }
 
+export interface EditProfileInput {
+  username: string;
+  bio: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

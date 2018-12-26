@@ -16,12 +16,18 @@ export const typeDefs = gql`
     deletePost(id: ID!): Boolean
     subscribeToUser(id: ID!): User
     unsubscribeToUser(id: ID!): User
+    editProfile(input: EditProfileInput!): User
   }
 
   type PaginatedPosts {
     cursor: String
     hasMore: Boolean!
     posts: [Post!]!
+  }
+
+  input EditProfileInput {
+    username: String!
+    bio: String!
   }
 
   input CreatePostInput {

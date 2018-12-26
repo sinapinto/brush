@@ -74,3 +74,13 @@ export const unsubscribeToUserMutation = gql`
     }
   }
 `;
+
+export const editProfileMutation = gql`
+  mutation EditProfileMutation($input: EditProfileInput!) {
+    editProfile(input: $input) {
+      id
+      bio
+      username
+    }
+  }
+`;

@@ -9,6 +9,8 @@ export interface CurrentUser_currentUser {
   __typename: "User";
   id: string;
   username: string;
+  bio: string;
+  avatar: string;
 }
 
 export interface CurrentUser {

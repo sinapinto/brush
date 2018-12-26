@@ -1,5 +1,4 @@
 import React, { Suspense, useState, useContext } from 'react';
-import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
