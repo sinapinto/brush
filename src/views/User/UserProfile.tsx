@@ -49,7 +49,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
                 <PostPreview key={post.id} {...post} author={user} />
               ))
             ) : (
-              <BlankSlate>No posts.</BlankSlate>
+              <BlankSlate>This user hasn't posted anything</BlankSlate>
             )}
           </TabPane>
           <TabPane label="Followers" key={Tab.Followers}>

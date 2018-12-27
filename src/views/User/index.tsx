@@ -9,11 +9,11 @@ import {
   GetUserByUsernameVariables,
 } from '../../graphql/queries/__generated__/GetUserByUsername';
 
-interface UserProps {
+interface Props {
   username: string;
 }
 
-export const User: React.FunctionComponent<UserProps> = ({ username }) => {
+export const User: React.FunctionComponent<Props> = ({ username }) => {
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
     {
