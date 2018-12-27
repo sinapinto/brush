@@ -45,7 +45,7 @@ export const H4i = styled(H4)`
 export const BlankSlate = styled(H4)`
   text-align: center;
   color: ${theme.text.placeholder};
-  margin: 24px 0;
+  margin: 48px 0;
   font-style: italic;
 `;
 

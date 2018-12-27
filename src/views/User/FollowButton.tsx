@@ -28,7 +28,7 @@ const FollowButton: React.FunctionComponent<Props> = ({
   return (
     <Btn
       onClick={() => (isFollowing ? unsubscribe() : subscribe())}
-      style={{ width: '160px' }}
+      style={{ width: '150px' }}
     >
       {isFollowing ? <UnfollowIcon size={20} /> : <FollowIcon size={20} />}
       {isFollowing ? 'Unfollow' : 'Follow'}

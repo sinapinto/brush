@@ -71,13 +71,17 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
 const Container = styled.div`
   display: flex;
   ${Card} {
+    display: flex;
+    flex-flow: column;
     flex-grow: 1;
+    padding: 0;
   }
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   width: 260px;
   align-items: center;
   padding: 32px;
