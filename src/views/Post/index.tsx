@@ -27,14 +27,14 @@ import {
   DeletePost,
 } from '../../graphql/mutations/__generated__/DeletePost';
 
-type PostProps = {
+type Props = {
   id: string;
 };
 
 class GetPostByIdQuery extends Query<GetPostById, GetPostByIdVariables> {}
 class DeletePostMutation extends Mutation<DeletePost, DeletePostVariables> {}
 
-const Post: React.FunctionComponent<PostProps> = ({ id }) => {
+const Post: React.FunctionComponent<Props> = ({ id }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   return (

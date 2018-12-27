@@ -20,7 +20,11 @@ export const User: React.FunctionComponent<UserProps> = ({ username }) => {
       variables: { username },
     }
   );
-  return <Card>{data.user && <UserProfile user={data.user} />}</Card>;
+  return (
+    <Card>
+      {data.user && <UserProfile key={data.user.id} user={data.user} />}
+    </Card>
+  );
 };
 
 export default User;

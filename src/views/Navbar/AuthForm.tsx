@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { compose } from 'react-apollo';
 
-import { CurrentUserContext } from '../../context';
 import { loginUser, registerUser } from '../../graphql/mutations/user';
 import { Input, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
@@ -16,7 +15,6 @@ interface Props {
 }
 
 function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
-  const { refetch } = useContext(CurrentUserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +28,6 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
       .then((data: any) => {
         setIsLoading(false);
         setError('');
-        refetch();
         onSuccess();
       })
       .catch((e: any) => {

@@ -8,8 +8,11 @@ import {
   GetUserByUsernameVariables,
   GetUserByUsername,
 } from '../../graphql/queries/__generated__/GetUserByUsername';
+import { CurrentUser_currentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
-const Settings = () => {
+type Props = {};
+
+const Settings: React.FunctionComponent<Props> = () => {
   const { currentUser } = useContext(CurrentUserContext);
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
