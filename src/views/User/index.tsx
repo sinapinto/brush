@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
-import { Card } from '../../components/globals';
+import { Card, BlankSlate } from '../../components/globals';
 import UserProfile from './UserProfile';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
 import {
@@ -22,7 +22,11 @@ export const User: React.FunctionComponent<UserProps> = ({ username }) => {
   );
   return (
     <Card>
-      {data.user && <UserProfile key={data.user.id} user={data.user} />}
+      {data.user ? (
+        <UserProfile key={data.user.id} user={data.user} />
+      ) : (
+        <BlankSlate>This user doesn't exist</BlankSlate>
+      )}
     </Card>
   );
 };
