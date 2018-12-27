@@ -6,8 +6,7 @@ import {
   CurrentUser_currentUser,
 } from '../graphql/queries/__generated__/CurrentUser';
 
-export const useCurrentUser = (opts?: { suspend?: boolean }) => {
-  opts = opts || {};
+export const useCurrentUser = (opts: { suspend?: boolean } = {}) => {
   const { data, refetch } = useQuery<CurrentUser>(currentUserQuery, {
     errorPolicy: 'ignore',
     ...opts,

@@ -20,13 +20,11 @@ export const User: React.FunctionComponent<UserProps> = ({ username }) => {
       variables: { username },
     }
   );
-  return (
+  return data.user ? (
+    <UserProfile key={data.user.id} user={data.user} />
+  ) : (
     <Card>
-      {data.user ? (
-        <UserProfile key={data.user.id} user={data.user} />
-      ) : (
-        <BlankSlate>This user doesn't exist</BlankSlate>
-      )}
+      <BlankSlate>This user doesn't exist</BlankSlate>
     </Card>
   );
 };
