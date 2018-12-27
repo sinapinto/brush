@@ -11,7 +11,7 @@ export const Home: React.FunctionComponent = () => {
     variables: { pageSize: 25 },
   });
   return (
-    <Card>
+    <Card padding="0">
       {!data.getPosts || !data.getPosts.posts.length ? (
         <BlankSlate>Nothing here yet..</BlankSlate>
       ) : (

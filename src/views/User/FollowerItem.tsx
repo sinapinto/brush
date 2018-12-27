@@ -43,7 +43,13 @@ const Container = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin: 48px;
+  padding: 24px 40px;
+  :first-child {
+    padding-top: 40px;
+  }
+  :last-child {
+    padding-bottom: 40px;
+  }
 `;
 
 const UserContainer = styled.div`
@@ -53,8 +59,8 @@ const UserContainer = styled.div`
 `;
 
 const Avatar = styled.div`
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   margin-right: 24px;
   border-radius: 50%;
   background: skyblue;

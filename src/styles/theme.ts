@@ -1,12 +1,11 @@
 export default {
   bg: {
     default: '#FFFFFF',
-    reverse: '#16171A',
     border: '#ECECEC',
     inactive: '#ECECEC',
   },
   brand: {
-    default: '#000000',
+    default: '#1F1F1F',
     highlight: '#fdff98',
   },
   text: {
@@ -18,7 +17,7 @@ export default {
     reverse: '#FFFFFF',
   },
   success: {
-    default: '#a6d500',
+    default: '#A6D500',
   },
   warn: {
     default: '#C21F3A',

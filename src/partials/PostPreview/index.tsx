@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { H3i, P } from '../../components/globals';
 
-type PostPreviewProps = {
+type Props = {
   id: string;
   title: string;
   author: {
@@ -11,11 +11,7 @@ type PostPreviewProps = {
   };
 };
 
-const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
-  id,
-  title,
-  author,
-}) => {
+const PostPreview: React.FunctionComponent<Props> = ({ id, title, author }) => {
   return (
     <Container>
       <H3i>
@@ -29,7 +25,13 @@ const PostPreview: React.FunctionComponent<PostPreviewProps> = ({
 };
 
 const Container = styled.div`
-  padding: 16px;
+  padding: 24px 40px;
+  :first-child {
+    padding-top: 40px;
+  }
+  :last-child {
+    padding-bottom: 40px;
+  }
 `;
 
 export default PostPreview;

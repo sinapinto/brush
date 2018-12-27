@@ -56,11 +56,11 @@ export const P = styled.p`
   line-height: 24px;
 `;
 
-export const Card = styled.div`
+export const Card = styled.div<{ padding?: string }>`
   background: #fff;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.04);
   border-radius: 16px;
-  padding: 16px;
+  padding: ${props => ('padding' in props ? props.padding : '16px')};
   margin: 0;
 `;
 
@@ -136,7 +136,7 @@ export const Spinner = styled.span<SpinnerProps>`
     width: ${props => (props.size === 'small' ? '24px' : '46px')};
     height: ${props => (props.size === 'small' ? '24px' : '46px')};
     border-radius: 50%;
-    border-width: 4px;
+    border-width: ${props => (props.size === 'small' ? '3px' : '6px')};
     border-style: solid;
     border-color: ${theme.brand.default} transparent ${theme.brand.default}
       transparent;
