@@ -59,12 +59,12 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
           )}
         </TabPane>
         <TabPane label="Followers" key={Tab.Followers}>
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<Spinner size="small" />}>
             <FollowersPane username={user.username} />
           </Suspense>
         </TabPane>
         <TabPane label="Following" key={Tab.Following}>
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<Spinner size="small" />}>
             <FollowingPane username={user.username} />
           </Suspense>
         </TabPane>

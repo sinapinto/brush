@@ -3,7 +3,7 @@ import { useQuery } from 'react-apollo-hooks';
 import SettingsForm from './SettingsForm';
 import { CurrentUserContext } from '../../context';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
-import { Spinner, Card } from '../../components/globals';
+import { Card } from '../../components/globals';
 import {
   GetUserByUsernameVariables,
   GetUserByUsername,

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import theme from '../../styles/theme';
 
 export const H1 = styled.h1`
@@ -109,28 +109,37 @@ export const ErrorMessage = styled.p`
   text-align: center;
 `;
 
-export const Spinner = styled.span`
-  width: 64px;
-  height: 64px;
+type SpinnerProps = {
+  size?: 'small' | 'large'; // "large" by default
+};
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Spinner = styled.span<SpinnerProps>`
+  width: ${props => (props.size === 'small' ? '42px' : '64px')};
+  height: ${props => (props.size === 'small' ? '42px' : '64px')};
   :after {
     content: ' ';
-    display: block;
-    width: 46px;
-    height: 46px;
-    margin: 1px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: ${props => (props.size === 'small' ? '-21px' : '-42px')};
+    margin-left: ${props => (props.size === 'small' ? '-21px' : '-42px')};
+    width: ${props => (props.size === 'small' ? '24px' : '46px')};
+    height: ${props => (props.size === 'small' ? '24px' : '46px')};
     border-radius: 50%;
-    border: 5px;
+    border-width: 4px;
     border-style: solid;
     border-color: ${theme.brand.default} transparent ${theme.brand.default}
       transparent;
-    animation: spinner 1s linear infinite;
-  }
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    animation: ${spin} 2s linear infinite;
   }
 `;

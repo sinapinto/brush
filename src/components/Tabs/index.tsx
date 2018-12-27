@@ -75,6 +75,7 @@ const Tab = styled('button')<{ isSelected: boolean }>`
 
 const StyledTabPane = styled.div`
   min-height: 64px;
+  position: relative;
 `;
 
 export default Tabs;
