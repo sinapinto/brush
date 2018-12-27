@@ -1,16 +1,10 @@
 import React, { Suspense } from 'react';
 import { RouteProps } from 'react-router';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
+import { useCurrentUser } from './utils/useCurrentUser';
 import ErrorBoundary from './components/ErrorBoundary';
-import { currentUserQuery } from './graphql/queries/user';
-import {
-  CurrentUser,
-  CurrentUser_currentUser,
-} from './graphql/queries/__generated__/CurrentUser';
-import { CurrentUserContext } from './context';
 import { Spinner, ErrorMessage } from './components/globals';
 import Navbar from './views/Navbar';
 
@@ -24,22 +18,12 @@ const ErrorFallback = () => (
   <ErrorMessage>An unexpected error occured.</ErrorMessage>
 );
 
-const requireAuth = (Component: React.ComponentType<any>) => {
-  const C = ({ ...props }) => {
-    const {
-      data: { currentUser },
-      refetch,
-    } = useQuery<CurrentUser>(currentUserQuery, {
-      errorPolicy: 'ignore',
-    });
-    if (!currentUser) return <Redirect to="/" />;
-    return (
-      <CurrentUserContext.Provider value={{ currentUser, refetch }}>
-        <Component {...props} />
-      </CurrentUserContext.Provider>
-    );
+const requireAuth = (Comp: React.ComponentType<any>) => {
+  const C = () => {
+    const { currentUser } = useCurrentUser();
+    return currentUser ? <Comp /> : <Redirect to="/" />;
   };
-  C.displayName = 'RequireAuthHOC';
+  C.displayName = 'requireAuth';
   return C;
 };
 

@@ -1,10 +1,10 @@
-import React, { Suspense, useState, useContext } from 'react';
+import React, { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
 
 import theme from '../../styles/theme';
-import { CurrentUserContext } from '../../context';
+import { useCurrentUser } from '../../utils/useCurrentUser';
 import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
 import FollowButton from './FollowButton';
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useCurrentUser();
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   const startDate = formatDistance(new Date(+user.createdAt), new Date(), {
     addSuffix: true,
@@ -37,7 +37,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
           <H1>{user.username}</H1>
           <Bio>{user.bio}</Bio>
           <P>Joined {startDate}</P>
-          {currentUser && currentUser.id !== user.id ? (
+          {!currentUser ? null : currentUser.id !== user.id ? (
             <FollowButton isFollowing={user.subscribed} userId={user.id} />
           ) : (
             <OutlineButtonLink to="/settings">

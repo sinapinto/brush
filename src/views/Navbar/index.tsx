@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo-hooks';
 import { MdCreate as CreateIcon } from 'react-icons/md';
 import { MdPerson as AccountIcon } from 'react-icons/md';
 
+import { useCurrentUser } from '../../utils/useCurrentUser';
 import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
@@ -12,21 +13,14 @@ import { currentUserQuery } from '../../graphql/queries/user';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
 const Navbar: React.FunctionComponent = () => {
-  const {
-    data: { currentUser },
-    loading,
-    refetch,
-  } = useQuery<CurrentUser>(currentUserQuery, {
-    suspend: false,
-    errorPolicy: 'ignore',
-  });
+  const { currentUser, refetch } = useCurrentUser({ suspend: false });
   const [activeModal, setActiveModal] = useState(ModalType.Closed);
   return (
     <StyledNavbar>
       <NavbarContent>
         <LogoLink to="/">microblog</LogoLink>
         <ButtonWrap>
-          {loading ? null : currentUser ? (
+          {currentUser ? (
             <>
               <ButtonLink to="/create">
                 <CreateIcon size={20} />

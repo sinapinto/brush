@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import SettingsForm from './SettingsForm';
-import { CurrentUserContext } from '../../context';
+import { useCurrentUser } from '../../utils/useCurrentUser';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
 import { Card } from '../../components/globals';
 import {
@@ -13,7 +13,7 @@ import { CurrentUser_currentUser } from '../../graphql/queries/__generated__/Cur
 type Props = {};
 
 const Settings: React.FunctionComponent<Props> = () => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useCurrentUser();
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
     {

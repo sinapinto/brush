@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import { Value } from 'slate';
 import { MdDelete } from 'react-icons/md';
@@ -15,7 +15,7 @@ import {
   BlankSlate,
   ErrorMessage,
 } from '../../components/globals';
-import { CurrentUserContext } from '../../context';
+import { useCurrentUser } from '../../utils/useCurrentUser';
 import { getPostByIdQuery } from '../../graphql/queries/post';
 import {
   GetPostById,
@@ -35,7 +35,7 @@ class GetPostByIdQuery extends Query<GetPostById, GetPostByIdVariables> {}
 class DeletePostMutation extends Mutation<DeletePost, DeletePostVariables> {}
 
 const Post: React.FunctionComponent<Props> = ({ id }) => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useCurrentUser();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   return (
     <Card>
