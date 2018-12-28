@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { compose } from 'react-apollo';
+import styled from 'styled-components';
 
 import { loginUser, registerUser } from '../../graphql/mutations/user';
 import { Input, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
 import { ModalType } from './AuthModal';
-import { Form } from './style';
 
 interface Props {
   type: ModalType;
@@ -72,6 +72,19 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
     </Form>
   );
 }
+
+const Form = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+
+  > *:not(:last-child) {
+    margin-bottom: 24px;
+    width: 300px;
+  }
+`;
 
 export default compose(
   loginUser,

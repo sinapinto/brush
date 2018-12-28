@@ -86,6 +86,9 @@ const ProfileContainer = styled.div`
   align-items: center;
   padding: 32px;
   padding-left: 0;
+  > button {
+    width: 100%;
+  }
 `;
 
 const Bio = styled.span`
