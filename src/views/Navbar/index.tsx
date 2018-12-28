@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { MdCreate as CreateIcon } from 'react-icons/md';
 import { MdPerson as AccountIcon } from 'react-icons/md';
 
+import SearchBar from './SearchBar';
 import { useCurrentUser } from '../../utils/useCurrentUser';
 import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
@@ -21,6 +22,7 @@ const Navbar: React.FunctionComponent = () => {
     <Container>
       <NavbarContainer>
         <LogoLink to="/">microblog</LogoLink>
+        <SearchBar />
         {currentUser ? (
           <ButtonContainer>
             <ButtonLink to="/create">

@@ -6,7 +6,8 @@ export default {
   },
   brand: {
     default: '#1F1F1F',
-    highlight: '#fdff98',
+    alt: '#3A3A3A',
+    highlight: '#FDFF98',
   },
   text: {
     default: '#16171A',
