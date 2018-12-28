@@ -31,6 +31,7 @@ export class User extends BaseEntity {
   avatar: string;
 
   @Column({ default: '' })
+  @Length(0, 100)
   bio: string;
 
   @CreateDateColumn()

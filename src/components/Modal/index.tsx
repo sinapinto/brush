@@ -9,6 +9,8 @@ type Props = {
   isOpen: boolean;
 };
 
+const appRoot = document.getElementById('app-root') as HTMLElement;
+
 const Modal: React.FunctionComponent<Props> = ({
   children,
   hasCloseButton = true,
@@ -17,7 +19,7 @@ const Modal: React.FunctionComponent<Props> = ({
   return (
     <ReactModal
       {...otherProps}
-      appElement={document.getElementById('app-root') as HTMLElement}
+      appElement={appRoot}
       style={{
         content: {
           top: '50%',
@@ -49,7 +51,7 @@ const CloseButton = styled.button`
   font-size: 32px;
   line-height: 15px;
   font-weight: 500;
-  color: ${theme.text.secondary};
+  color: ${theme.text.alt};
   user-select: none;
   :hover {
     filter: brightness(95%);

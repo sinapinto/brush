@@ -4,7 +4,7 @@ import { Value } from 'slate';
 import styled from 'styled-components';
 
 import DeleteButton from './DeleteButton';
-import { H2i, H4, P, ErrorMessage } from '../../components/globals';
+import { H1i, H4, P, ErrorMessage } from '../../components/globals';
 import TextEditor from '../../components/TextEditor';
 import { GetPostById_getPost } from '../../graphql/queries/__generated__/GetPostById';
 
@@ -21,7 +21,7 @@ const Post: React.FunctionComponent<Props> = ({ post }) => {
   return (
     <>
       <HeaderWrap>
-        <H2i>{post.title}</H2i>
+        <H1i>{post.title}</H1i>
         {isAuthor && <DeleteButton postId={post.id} />}
       </HeaderWrap>
       <TextEditor readOnly value={editorValue} />

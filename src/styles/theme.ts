@@ -11,7 +11,7 @@ export default {
   text: {
     default: '#16171A',
     secondary: '#494C57',
-    alt: '#777777',
+    alt: '#B1B1B1',
     inactive: '#B1B1B1',
     placeholder: '#BFBFBF',
     reverse: '#FFFFFF',

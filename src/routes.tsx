@@ -32,7 +32,7 @@ const Routes = () => {
     <BrowserRouter>
       <>
         <Route component={Navbar} />
-        <Main>
+        <Main role="main">
           <ErrorBoundary fallback={ErrorFallback}>
             <Suspense fallback={<Spinner />}>
               <Switch>
