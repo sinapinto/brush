@@ -66,6 +66,7 @@ export const resolvers: IResolver = {
     search: async (_, { query }: { query: string }) => {
       const posts = await Post.createQueryBuilder('post')
         .where('post.title ILIKE :query', { query: `%${query}%` })
+        .orWhere('post.rawBody ILIKE :query', { query: `%${query}%` })
         .getMany();
       const users = await User.createQueryBuilder('user')
         .where('user.username ILIKE :query', { query: `%${query}%` })
