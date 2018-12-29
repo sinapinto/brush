@@ -7,9 +7,10 @@ import theme from '../../styles/theme';
 
 const SearchBar: React.FunctionComponent<RouteComponentProps> = ({
   history,
+  location,
 }) => {
-  const [value, setValue] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState(location.search.replace(/^\?q=/, ''));
+  const [isFocused, setIsFocused] = useState(!!value);
   return (
     <Container>
       <SearchIcon size={20} isFocused={isFocused} />
@@ -52,6 +53,7 @@ const SearchIcon = styled(({ isFocused, ...rest }) => <MdSearch {...rest} />)`
 
 const Input = styled(({ isFocused, ...rest }) => <input {...rest} />)`
   background-color: ${theme.brand.alt}
+  width: 280px;
   border: none;
   border-radius: 8px;
   font-size: 15px;
