@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
   JoinTable,
 } from 'typeorm';
-import { Length } from 'class-validator';
+import { Length, MaxLength, ValidateIf } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { Post } from './Post';
 
@@ -31,7 +31,8 @@ export class User extends BaseEntity {
   avatar: string;
 
   @Column({ default: '' })
-  @Length(0, 100)
+  @ValidateIf(o => o.bio !== undefined)
+  @MaxLength(100)
   bio: string;
 
   @CreateDateColumn()

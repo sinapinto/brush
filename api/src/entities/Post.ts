@@ -17,10 +17,16 @@ export class Post extends BaseEntity {
   id: string;
 
   @Column()
+  @IsDefined()
   title: string;
 
   @Column('text')
+  @IsDefined()
   body: string;
+
+  @Column('text')
+  @IsDefined()
+  rawBody: string;
 
   @Column('uuid')
   authorId: string;

@@ -42,6 +42,7 @@ export const typeDefs = gql`
   input CreatePostInput {
     title: String!
     body: String!
+    rawBody: String!
   }
 
   type User {

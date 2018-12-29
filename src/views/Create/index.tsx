@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Mutation, FetchResult } from 'react-apollo';
 import styled from 'styled-components';
 import { Value } from 'slate';
+import Plain from 'slate-plain-serializer';
 
 import TextEditor from '../../components/TextEditor';
 import { Input, Card, ErrorMessage } from '../../components/globals';
@@ -26,7 +27,15 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     createPost: any
   ) => {
     e.preventDefault();
-    createPost().then(({ data }: any) => {
+    createPost({
+      variables: {
+        input: {
+          title,
+          body: JSON.stringify(editorValue.toJSON()),
+          rawBody: Plain.serialize(editorValue),
+        },
+      },
+    }).then(({ data }: any) => {
       history.push(`/p/${data.createPost.id}`);
     });
   };
@@ -35,9 +44,6 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     <Card>
       <CreatePostMutation
         mutation={createPostMutation}
-        variables={{
-          input: { title, body: JSON.stringify(editorValue.toJSON()) },
-        }}
         update={(proxy, response: FetchResult) => {
           localStorage.removeItem('draft');
           localStorage.removeItem('title');

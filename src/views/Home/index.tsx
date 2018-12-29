@@ -13,7 +13,7 @@ export const Home: React.FunctionComponent = () => {
   return (
     <Card>
       {!data.getPosts || !data.getPosts.posts.length ? (
-        <BlankSlate>Nothing here yet..</BlankSlate>
+        <BlankSlate>No posts yet. Be the first!</BlankSlate>
       ) : (
         <SpacedContent f={4}>
           {data.getPosts.posts.map(post => (
