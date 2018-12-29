@@ -9,14 +9,6 @@ export const typeDefs = gql`
     search(query: String!): PaginatedSearchResults!
   }
 
-  union SearchResult = Post | User
-
-  type PaginatedSearchResults {
-    cursor: String
-    hasMore: Boolean
-    results: [SearchResult!]!
-  }
-
   type Mutation {
     login(username: String!, password: String!): User
     register(username: String!, password: String!): User
@@ -26,6 +18,14 @@ export const typeDefs = gql`
     subscribeToUser(id: ID!): User
     unsubscribeToUser(id: ID!): User
     editProfile(input: EditProfileInput!): User
+  }
+
+  union SearchResult = Post | User
+
+  type PaginatedSearchResults {
+    cursor: String
+    hasMore: Boolean
+    results: [SearchResult!]!
   }
 
   type PaginatedPosts {
@@ -43,6 +43,7 @@ export const typeDefs = gql`
     title: String!
     body: String!
     rawBody: String!
+    categories: [String!]!
   }
 
   type User {
@@ -64,7 +65,14 @@ export const typeDefs = gql`
     title: String!
     body: String!
     author: User!
+    categories: [Category!]
     createdAt: String!
     updatedAt: String!
+  }
+
+  type Category {
+    id: ID
+    name: String!
+    posts: [Post!]
   }
 `;

@@ -9,6 +9,7 @@ export interface CreatePostInput {
   title: string;
   body: string;
   rawBody: string;
+  categories: string[];
 }
 
 export interface EditProfileInput {

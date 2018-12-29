@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
 
+import TagSelect from './TagSelect';
 import TextEditor from '../../components/TextEditor';
 import { Input, Card, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
@@ -19,6 +20,7 @@ import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 
 const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
+  const [tags, setTags] = useState<string[]>([]);
   const [title, setTitle] = useState(() => getInitialTitle());
   const [editorValue, setEditorValue] = useState(() => getInitialEditorValue());
 
@@ -33,6 +35,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
           title,
           body: JSON.stringify(editorValue.toJSON()),
           rawBody: Plain.serialize(editorValue),
+          categories: tags,
         },
       },
     }).then(({ data }: any) => {
@@ -84,6 +87,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
                 setEditorValue(value);
               }}
             />
+            <TagSelect onChange={tags => setTags(tags)} />
             <ErrorMessage>{error && JSON.stringify(error)}</ErrorMessage>
             <CTAButton type="submit" disabled={loading}>
               Create

@@ -14,7 +14,7 @@ import { Length, MaxLength, ValidateIf } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { Post } from './Post';
 
-@Entity('users')
+@Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

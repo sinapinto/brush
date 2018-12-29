@@ -4,14 +4,17 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
   AfterLoad,
 } from 'typeorm';
 import { IsDefined } from 'class-validator';
 import { User } from './User';
+import { Category } from './Category';
 
-@Entity('posts')
+@Entity()
 export class Post extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -34,6 +37,10 @@ export class Post extends BaseEntity {
   @ManyToOne(() => User, user => user.posts)
   @IsDefined()
   author: User;
+
+  @ManyToMany(() => Category, category => category.posts)
+  @JoinTable()
+  categories: Category[];
 
   @CreateDateColumn()
   createdAt: Date;

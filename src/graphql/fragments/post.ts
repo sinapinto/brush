@@ -6,5 +6,8 @@ export const postInfoFragment = gql`
     title
     body
     updatedAt
+    categories {
+      name
+    }
   }
 `;

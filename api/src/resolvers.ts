@@ -4,10 +4,11 @@ import {
   UserInputError,
 } from 'apollo-server-express';
 import * as bcrypt from 'bcrypt';
-import { Not } from 'typeorm';
+import { getConnection, Not } from 'typeorm';
 import { validate } from 'class-validator';
 import { Post } from './entities/Post';
 import { User } from './entities/User';
+import { Category } from './entities/Category';
 import { paginateResults, IResolver } from './utils';
 import {
   CreatePostInput,
@@ -34,7 +35,7 @@ export const resolvers: IResolver = {
     },
 
     getPost: async (_, { id }) => {
-      return Post.findOne(id);
+      return Post.findOne(id, { relations: ['categories'] });
     },
 
     getPosts: async (
@@ -47,6 +48,7 @@ export const resolvers: IResolver = {
     }> => {
       const allPosts = await Post.find({
         order: { createdAt: 'DESC' },
+        relations: ['categories'],
       });
       const posts = paginateResults({
         results: allPosts,
@@ -119,18 +121,33 @@ export const resolvers: IResolver = {
       if (!session.userId) {
         return new AuthenticationError('Not logged in');
       }
-      const post = Post.create(args.input);
-      const user = await User.findOne(session.userId);
-      if (!user) {
-        return new UserInputError('User not found');
-      }
-      post.author = user;
-      const errors = await validate(post);
-      if (errors.length > 0) {
-        return new UserInputError('Invalid post');
-      }
-      await Post.save(post);
-      return post;
+      return getConnection().transaction(async manager => {
+        const postEntity = manager.create(Post, args.input);
+
+        const user = await manager.findOne(User, session.userId);
+        if (!user) {
+          return new UserInputError('User not found');
+        }
+        postEntity.author = user;
+        postEntity.categories = [];
+
+        const post = await manager.save(Post, postEntity);
+
+        const categories = await manager.save(
+          Category,
+          args.input.categories.map(name => ({ name }))
+        );
+
+        await manager
+          .createQueryBuilder()
+          .relation(Post, 'categories')
+          .of(post)
+          .add(categories);
+
+        return manager.findOne(Post, post.id, {
+          relations: ['author', 'categories'],
+        });
+      });
     },
 
     deletePost: async (_, { id }, { session }) => {

@@ -11,6 +11,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
 import { User } from './entities/User';
 import { Post } from './entities/Post';
+import { Category } from './entities/Category';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { createUserLoader } from './loaders/userLoader';
@@ -27,7 +28,7 @@ createConnection({
   username: <string>process.env.PG_USERNAME,
   password: <string>process.env.PG_PASSWORD,
   database: <string>process.env.PG_DATABASE,
-  entities: [User, Post],
+  entities: [User, Post, Category],
   logging: true,
   synchronize: true,
   // dropSchema: true,
