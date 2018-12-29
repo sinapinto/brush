@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 import theme from '../../styles/theme';
 
-const SearchBar = () => {
+const SearchBar: React.FunctionComponent<RouteComponentProps> = ({
+  history,
+}) => {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   return (
@@ -24,6 +27,7 @@ const SearchBar = () => {
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (e.key === 'Enter' || e.keyCode === 13) {
             e.preventDefault();
+            history.push(`/search?q=${value}`);
           }
         }}
       />
@@ -65,4 +69,4 @@ const Input = styled(({ isFocused, ...rest }) => <input {...rest} />)`
   }}
 `;
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -6,6 +6,15 @@ export const typeDefs = gql`
     user(username: String!): User
     getPost(id: ID!): Post
     getPosts(pageSize: Int, after: String): PaginatedPosts!
+    search(query: String!): PaginatedSearchResults!
+  }
+
+  union SearchResult = Post | User
+
+  type PaginatedSearchResults {
+    cursor: String
+    hasMore: Boolean
+    results: [SearchResult!]!
   }
 
   type Mutation {

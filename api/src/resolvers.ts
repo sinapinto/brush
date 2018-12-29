@@ -62,6 +62,19 @@ export const resolvers: IResolver = {
           : false,
       };
     },
+
+    search: async (_, { query }: { query: string }) => {
+      const posts = await Post.createQueryBuilder('post')
+        .where('post.title ILIKE :query', { query: `%${query}%` })
+        .getMany();
+      const users = await User.createQueryBuilder('user')
+        .where('user.username ILIKE :query', { query: `%${query}%` })
+        .getMany();
+      const results = posts.concat(users as any);
+      return {
+        results,
+      };
+    },
   },
 
   Mutation: {
@@ -238,6 +251,18 @@ export const resolvers: IResolver = {
   Post: {
     author: async (post, _, { userLoader }) => {
       return userLoader.load(post.authorId);
+    },
+  },
+
+  SearchResult: {
+    __resolveType: obj => {
+      if (obj instanceof User) {
+        return 'User';
+      }
+      if (obj instanceof Post) {
+        return 'Post';
+      }
+      return null;
     },
   },
 };

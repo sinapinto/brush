@@ -13,6 +13,7 @@ const User = React.lazy(() => import('./views/User'));
 const Post = React.lazy(() => import('./views/Post'));
 const Create = React.lazy(() => import('./views/Create'));
 const Settings = React.lazy(() => import('./views/Settings'));
+const Search = React.lazy(() => import('./views/Search'));
 
 const ErrorFallback = () => (
   <ErrorMessage>An unexpected error occured.</ErrorMessage>
@@ -49,6 +50,10 @@ const Routes = () => {
                 />
                 <Route path="/create" component={requireAuth(Create)} />
                 <Route path="/settings" component={requireAuth(Settings)} />
+                <Route
+                  path="/search"
+                  render={({ ...props }) => <Search {...props} />}
+                />
                 <Route render={() => <h1>not found</h1>} />
               </Switch>
             </Suspense>

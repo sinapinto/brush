@@ -1,11 +1,21 @@
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { toIdValue } from 'apollo-utilities';
 
+import introspectionQueryResultData from './fragmentTypes.json';
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
+
 const cache: any = new InMemoryCache({
+  fragmentMatcher,
   cacheRedirects: {
     Query: {
       getPost: (_, { id }) => {
