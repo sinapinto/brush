@@ -18,7 +18,7 @@ import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 
 const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(() => getInitialTitle());
   const [editorValue, setEditorValue] = useState(() => getInitialEditorValue());
 
   const handleSubmit = (
@@ -40,6 +40,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
         }}
         update={(proxy, response: FetchResult) => {
           localStorage.removeItem('draft');
+          localStorage.removeItem('title');
           try {
             const data: GetPosts | null = proxy.readQuery({
               query: getPostsQuery,
@@ -60,7 +61,10 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
               type="text"
               placeholder="Title"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={e => {
+                setTitle(e.target.value);
+                localStorage.setItem('title', e.target.value);
+              }}
             />
             <TextEditor
               placeholder="Start writing..."
@@ -102,6 +106,10 @@ const TitleInput = styled(Input)`
   font-style: italic;
   border: none;
 `;
+
+const getInitialTitle = () => {
+  return localStorage.getItem('title') || '';
+};
 
 const getInitialEditorValue = () => {
   const existingValue = JSON.parse(localStorage.getItem('draft') || 'null');
