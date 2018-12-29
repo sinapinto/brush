@@ -4,8 +4,8 @@ import { MdSettings as SettingsIcon } from 'react-icons/md';
 
 import theme from '../../styles/theme';
 import { useCurrentUser } from '../../utils/useCurrentUser';
-import FollowersPane from './FollowersPane';
-import FollowingPane from './FollowingPane';
+import FollowersList from './FollowersList';
+import FollowingList from './FollowingList';
 import FollowButton from './FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
 import {
@@ -64,14 +64,14 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
           <TabPane label="Followers" key={Tab.Followers}>
             <Suspense fallback={<Spinner size="small" />}>
               <SpacedContent f={4}>
-                <FollowersPane username={user.username} />
+                <FollowersList username={user.username} />
               </SpacedContent>
             </Suspense>
           </TabPane>
           <TabPane label="Following" key={Tab.Following}>
             <Suspense fallback={<Spinner size="small" />}>
               <SpacedContent f={4}>
-                <FollowingPane username={user.username} />
+                <FollowingList username={user.username} />
               </SpacedContent>
             </Suspense>
           </TabPane>

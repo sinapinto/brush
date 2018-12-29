@@ -13,7 +13,7 @@ type Props = {
   username: string;
 };
 
-const FollowingPane: React.FunctionComponent<Props> = ({ username }) => {
+const FollowingList: React.FunctionComponent<Props> = ({ username }) => {
   const { data } = useQuery<
     GetSubscriptionsByUsername,
     GetSubscriptionsByUsernameVariables
@@ -39,4 +39,4 @@ const FollowingPane: React.FunctionComponent<Props> = ({ username }) => {
   );
 };
 
-export default FollowingPane;
+export default FollowingList;
