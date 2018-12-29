@@ -39,14 +39,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
         <TabPane label="Posts" key={Tab.Posts}>
           <SpacedContent f={4}>
             {postResults.length ? (
-              postResults.map(item => (
-                <PostPreview
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  author={item.author}
-                />
-              ))
+              postResults.map(post => <PostPreview key={post.id} post={post} />)
             ) : (
               <BlankSlate>No posts found</BlankSlate>
             )}

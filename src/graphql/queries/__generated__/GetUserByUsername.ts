@@ -5,11 +5,17 @@
 // GraphQL query operation: GetUserByUsername
 // ====================================================
 
+export interface GetUserByUsername_user_posts_categories {
+  __typename: "Category";
+  name: string;
+}
+
 export interface GetUserByUsername_user_posts {
   __typename: "Post";
   id: string;
   title: string;
   createdAt: string;
+  categories: GetUserByUsername_user_posts_categories[];
 }
 
 export interface GetUserByUsername_user {

@@ -23,6 +23,9 @@ export const getUserByUsernameQuery = gql`
       posts {
         id
         title
+        categories {
+          name
+        }
         createdAt
       }
     }

@@ -7,6 +7,11 @@ import { CreatePostInput } from "./../../../../__generated__/globalTypes";
 // GraphQL mutation operation: CreatePost
 // ====================================================
 
+export interface CreatePost_createPost_categories {
+  __typename: "Category";
+  name: string;
+}
+
 export interface CreatePost_createPost_author {
   __typename: "User";
   id: string;
@@ -21,6 +26,7 @@ export interface CreatePost_createPost {
   title: string;
   body: string;
   updatedAt: string;
+  categories: CreatePost_createPost_categories[];
   author: CreatePost_createPost_author;
 }
 

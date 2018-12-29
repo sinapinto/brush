@@ -235,7 +235,15 @@ export const resolvers: IResolver = {
 
   User: {
     posts: async user => {
-      const u = await User.findOne(user.id, { relations: ['posts'] });
+      const u = await User.findOne(user.id, {
+        join: {
+          alias: 'user',
+          leftJoinAndSelect: {
+            posts: 'user.posts',
+            categories: 'posts.categories',
+          },
+        },
+      });
       return u!.posts;
     },
 

@@ -13,6 +13,11 @@ export interface Search_search_results_User {
   avatar: string;
 }
 
+export interface Search_search_results_Post_categories {
+  __typename: "Category";
+  name: string;
+}
+
 export interface Search_search_results_Post_author {
   __typename: "User";
   id: string;
@@ -27,6 +32,7 @@ export interface Search_search_results_Post {
   title: string;
   body: string;
   updatedAt: string;
+  categories: Search_search_results_Post_categories[];
   author: Search_search_results_Post_author;
 }
 

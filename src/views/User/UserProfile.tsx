@@ -54,7 +54,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
             {user.posts.length ? (
               <SpacedContent f={4}>
                 {user.posts.map(post => (
-                  <PostPreview key={post.id} {...post} author={user} />
+                  <PostPreview key={post.id} post={{ ...post, author: user }} />
                 ))}
               </SpacedContent>
             ) : (

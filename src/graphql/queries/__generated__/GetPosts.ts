@@ -5,6 +5,11 @@
 // GraphQL query operation: GetPosts
 // ====================================================
 
+export interface GetPosts_getPosts_posts_categories {
+  __typename: "Category";
+  name: string;
+}
+
 export interface GetPosts_getPosts_posts_author {
   __typename: "User";
   id: string;
@@ -19,6 +24,7 @@ export interface GetPosts_getPosts_posts {
   title: string;
   body: string;
   updatedAt: string;
+  categories: GetPosts_getPosts_posts_categories[];
   author: GetPosts_getPosts_posts_author;
 }
 
