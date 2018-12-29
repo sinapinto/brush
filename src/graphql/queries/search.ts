@@ -3,7 +3,7 @@ import { postInfoFragment } from '../fragments/post';
 import { userInfoFragment } from '../fragments/user';
 
 export const searchQuery = gql`
-  query SearchPosts($query: String!) {
+  query Search($query: String!) {
     search(query: $query) {
       results {
         ... on User {

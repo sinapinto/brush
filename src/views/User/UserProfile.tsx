@@ -48,7 +48,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
           </OutlineButtonLink>
         )}
       </ProfileContainer>
-      <Card>
+      <Card p={0}>
         <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
           <TabPane label="Posts" key={Tab.Posts}>
             {user.posts.length ? (
@@ -87,7 +87,6 @@ const Container = styled.div`
     display: flex;
     flex-flow: column;
     flex-grow: 1;
-    padding: 0;
   }
 `;
 

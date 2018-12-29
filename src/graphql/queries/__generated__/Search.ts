@@ -2,10 +2,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SearchPosts
+// GraphQL query operation: Search
 // ====================================================
 
-export interface SearchPosts_search_results_User {
+export interface Search_search_results_User {
   __typename: "User";
   id: string;
   username: string;
@@ -13,7 +13,7 @@ export interface SearchPosts_search_results_User {
   avatar: string;
 }
 
-export interface SearchPosts_search_results_Post_author {
+export interface Search_search_results_Post_author {
   __typename: "User";
   id: string;
   username: string;
@@ -21,26 +21,26 @@ export interface SearchPosts_search_results_Post_author {
   avatar: string;
 }
 
-export interface SearchPosts_search_results_Post {
+export interface Search_search_results_Post {
   __typename: "Post";
   id: string;
   title: string;
   body: string;
   updatedAt: string;
-  author: SearchPosts_search_results_Post_author;
+  author: Search_search_results_Post_author;
 }
 
-export type SearchPosts_search_results = SearchPosts_search_results_User | SearchPosts_search_results_Post;
+export type Search_search_results = Search_search_results_User | Search_search_results_Post;
 
-export interface SearchPosts_search {
+export interface Search_search {
   __typename: "PaginatedSearchResults";
-  results: SearchPosts_search_results[];
+  results: Search_search_results[];
 }
 
-export interface SearchPosts {
-  search: SearchPosts_search;
+export interface Search {
+  search: Search_search;
 }
 
-export interface SearchPostsVariables {
+export interface SearchVariables {
   query: string;
 }

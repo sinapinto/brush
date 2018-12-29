@@ -55,7 +55,7 @@ const TabContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 1px solid ${theme.bg.border};
-  padding-left: 48px;
+  padding-left: 32px;
   padding-top: 8px;
   background-image: linear-gradient(transparent 70%, rgba(0, 0, 0, 0.02));
 `;
