@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { H3i, P } from '../../components/globals';
+import { H3, P } from '../../components/globals';
 
 type Props = {
   id: string;
@@ -14,9 +14,9 @@ type Props = {
 const PostPreview: React.FunctionComponent<Props> = ({ id, title, author }) => {
   return (
     <Container>
-      <H3i>
+      <H3 i>
         <Link to={`/p/${id}`}>{title}</Link>
-      </H3i>
+      </H3>
       <P>
         <Link to={`/u/${author.username}`}>{author.username}</Link>
       </P>

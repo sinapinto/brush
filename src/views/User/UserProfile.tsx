@@ -8,7 +8,7 @@ import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
 import FollowButton from './FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
-import { H1i, P, BlankSlate, Spinner, Card } from '../../components/globals';
+import { H1, P, BlankSlate, Spinner, Card } from '../../components/globals';
 import Tabs, { TabPane } from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
@@ -30,7 +30,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
     <Container>
       <ProfileContainer>
         <Avatar />
-        <H1i>{user.username}</H1i>
+        <H1 i>{user.username}</H1>
         <Bio>{user.bio}</Bio>
         {!currentUser ? null : currentUser.id !== user.id ? (
           <FollowButton isFollowing={user.subscribed} userId={user.id} />

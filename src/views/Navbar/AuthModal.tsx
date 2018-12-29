@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
-import { P, H2i, Input } from '../../components/globals';
+import { P, H2, Input } from '../../components/globals';
 import theme from '../../styles/theme';
 
 interface Props {
@@ -37,7 +37,7 @@ export default function AuthModal({
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
       <Container>
-        <H2i>{title}</H2i>
+        <H2 i>{title}</H2>
         <P>
           {subtitle}
           <TextButton onClick={() => onChangeType(otherType)}>

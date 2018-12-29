@@ -1,45 +1,37 @@
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import theme from '../../styles/theme';
 
-export const H1 = styled.h1`
+export const H1 = styled(({ i, ...rest }) => <h1 {...rest} />)`
   color: ${theme.text.secondary};
   font-weight: 700;
   font-size: 38px;
   line-height: 46px;
+  ${({ i }) => i && 'font-style: italic;'}
 `;
 
-export const H2 = styled.h2`
+export const H2 = styled(({ i, ...rest }) => <h2 {...rest} />)`
   color: ${theme.text.secondary};
   font-weight: 700;
   font-size: 30px;
   line-height: 38px;
+  ${({ i }) => i && 'font-style: italic;'}
 `;
 
-export const H3 = styled.h3`
+export const H3 = styled(({ i, ...rest }) => <h3 {...rest} />)`
   color: ${theme.text.secondary};
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
+  ${({ i }) => i && 'font-style: italic;'}
 `;
 
-export const H4 = styled.h4`
+export const H4 = styled(({ i, ...rest }) => <h4 {...rest} />)`
   color: ${theme.text.secondary};
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
-`;
-
-export const H1i = styled(H1)`
-  font-style: italic;
-`;
-export const H2i = styled(H2)`
-  font-style: italic;
-`;
-export const H3i = styled(H3)`
-  font-style: italic;
-`;
-export const H4i = styled(H4)`
-  font-style: italic;
+  ${({ i }) => i && 'font-style: italic;'}
 `;
 
 export const BlankSlate = styled(H4)`
