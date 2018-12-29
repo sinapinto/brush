@@ -43,13 +43,6 @@ const Container = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  padding: 24px 32px;
-  :first-child {
-    padding-top: 32px;
-  }
-  :last-child {
-    padding-bottom: 32px;
-  }
 `;
 
 const UserContainer = styled.div`

@@ -8,11 +8,9 @@ type TabsProps = {
   children: any;
 };
 
-const Tabs: React.FunctionComponent<TabsProps> = ({
-  activeKey,
-  onChange,
-  children,
-}) => {
+const Tabs: React.FunctionComponent<TabsProps> & {
+  TabPane: React.FunctionComponent<TabPaneProps>;
+} = ({ activeKey, onChange, children }) => {
   return (
     <>
       <TabContainer>
@@ -78,4 +76,5 @@ const Tab = styled('button')<{ isSelected: boolean }>`
       : '4px solid transparent'};
 `;
 
+Tabs.TabPane = TabPane;
 export default Tabs;

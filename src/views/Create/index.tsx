@@ -86,12 +86,11 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 };
 
 const Form = styled.form`
-  padding: 24px;
   display: flex;
   flex-flow: column nowrap;
   font-size: 20px;
   line-height: 28px;
-  > * {
+  > *:not(:last-child) {
     margin-bottom: 32px;
   }
 `;

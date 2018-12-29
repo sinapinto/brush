@@ -24,14 +24,6 @@ const PostPreview: React.FunctionComponent<Props> = ({ id, title, author }) => {
   );
 };
 
-const Container = styled.div`
-  padding: 24px 32px;
-  :first-child {
-    padding-top: 32px;
-  }
-  :last-child {
-    padding-bottom: 32px;
-  }
-`;
+const Container = styled.div``;
 
 export default PostPreview;

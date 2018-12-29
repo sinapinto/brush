@@ -8,8 +8,15 @@ import FollowersPane from './FollowersPane';
 import FollowingPane from './FollowingPane';
 import FollowButton from './FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
-import { H1, P, BlankSlate, Spinner, Card } from '../../components/globals';
-import Tabs, { TabPane } from '../../components/Tabs';
+import {
+  H1,
+  P,
+  BlankSlate,
+  Spinner,
+  Card,
+  SpacedContent,
+} from '../../components/globals';
+import Tabs from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
 
@@ -45,21 +52,27 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
         <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
           <TabPane label="Posts" key={Tab.Posts}>
             {user.posts.length ? (
-              user.posts.map(post => (
-                <PostPreview key={post.id} {...post} author={user} />
-              ))
+              <SpacedContent f={4}>
+                {user.posts.map(post => (
+                  <PostPreview key={post.id} {...post} author={user} />
+                ))}
+              </SpacedContent>
             ) : (
               <BlankSlate>This user hasn't posted anything</BlankSlate>
             )}
           </TabPane>
           <TabPane label="Followers" key={Tab.Followers}>
             <Suspense fallback={<Spinner size="small" />}>
-              <FollowersPane username={user.username} />
+              <SpacedContent f={4}>
+                <FollowersPane username={user.username} />
+              </SpacedContent>
             </Suspense>
           </TabPane>
           <TabPane label="Following" key={Tab.Following}>
             <Suspense fallback={<Spinner size="small" />}>
-              <FollowingPane username={user.username} />
+              <SpacedContent f={4}>
+                <FollowingPane username={user.username} />
+              </SpacedContent>
             </Suspense>
           </TabPane>
         </Tabs>
@@ -76,6 +89,10 @@ const Container = styled.div`
     flex-grow: 1;
     padding: 0;
   }
+`;
+
+const TabPane = styled(Tabs.TabPane)`
+  padding: 32px;
 `;
 
 const ProfileContainer = styled.div`

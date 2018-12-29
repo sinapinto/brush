@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
-import { BlankSlate, Card } from '../../components/globals';
+import { BlankSlate, Card, SpacedContent } from '../../components/globals';
 import { getPostsQuery } from '../../graphql/queries/post';
 import PostPreview from '../../partials/PostPreview';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
@@ -11,11 +11,11 @@ export const Home: React.FunctionComponent = () => {
     variables: { pageSize: 25 },
   });
   return (
-    <Card padding="0">
+    <Card>
       {!data.getPosts || !data.getPosts.posts.length ? (
         <BlankSlate>Nothing here yet..</BlankSlate>
       ) : (
-        <>
+        <SpacedContent f={4}>
           {data.getPosts.posts.map(post => (
             <PostPreview
               key={post.id}
@@ -24,7 +24,7 @@ export const Home: React.FunctionComponent = () => {
               author={post.author}
             />
           ))}
-        </>
+        </SpacedContent>
       )}
     </Card>
   );
