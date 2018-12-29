@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 import theme from '../../styles/theme';
 
 export const Button = styled.button`
@@ -23,7 +24,7 @@ export const Button = styled.button`
   }
 
   :hover:not([disabled]) {
-    filter: brightness(95%);
+    color: ${shade(0.1, theme.text.reverse)};
   }
 
   > svg {
@@ -31,14 +32,14 @@ export const Button = styled.button`
   }
 `;
 
-export const DangerousButton = styled(Button)`
-  background: ${theme.warn.default};
-`;
-
 export const OutlineButton = styled(Button)`
   background: transparent;
-  color: ${theme.brand.default};
   border: 2px solid ${theme.brand.default};
+  color: ${theme.brand.default};
+  :hover:not([disabled]) {
+    color: ${theme.brand.default};
+    background: transparent;
+  }
 `;
 
 export const TextButton = styled(OutlineButton)`
@@ -46,6 +47,18 @@ export const TextButton = styled(OutlineButton)`
   padding: 0px 12px;
 `;
 
+export const DangerousButton = styled(Button)`
+  background: ${theme.warn.default};
+  :hover:not([disabled]) {
+    background: ${shade(0.05, theme.warn.default)};
+    color: ${theme.text.reverse};
+  }
+`;
+
 export const CTAButton = styled(Button)`
   background: ${theme.success.default};
+  :hover:not([disabled]) {
+    background: ${shade(0.05, theme.success.default)};
+    color: ${theme.text.reverse};
+  }
 `;

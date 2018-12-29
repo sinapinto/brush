@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { shade } from 'polished';
 import { MdCreate as CreateIcon } from 'react-icons/md';
 import { MdPerson as AccountIcon } from 'react-icons/md';
 
@@ -96,11 +97,10 @@ const ButtonContainer = styled.div`
 const LogoLink = styled(Link)`
   font-size: 24px;
   font-weight: 900;
-  color: #fff;
+  color: ${theme.text.reverse};
   text-decoration: underline;
   :hover {
-    filter: brightness(95%);
-  }
+    color: ${shade(0.1, theme.text.reverse)}
 `;
 
 export default Navbar;

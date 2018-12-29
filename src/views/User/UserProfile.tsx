@@ -121,7 +121,6 @@ const Avatar = styled.div`
   height: 120px;
   border-radius: 50%;
   background: url(/avatar.jpg);
-  filter: brightness(118%);
 `;
 
 export default UserProfile;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import { shade } from 'polished';
 import theme from '../../styles/theme';
 
 type Props = {
@@ -54,7 +55,7 @@ const CloseButton = styled.button`
   color: ${theme.text.alt};
   user-select: none;
   :hover {
-    filter: brightness(95%);
+    color: ${shade(0.05, theme.text.alt)};
   }
 `;
 
