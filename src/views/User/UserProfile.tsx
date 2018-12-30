@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
 
 import theme from '../../styles/theme';
+import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../utils/useCurrentUser';
 import FollowersList from './FollowersList';
 import FollowingList from './FollowingList';
@@ -36,7 +37,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
   return (
     <Container>
       <ProfileContainer>
-        <Avatar />
+        <Avatar size="lg" src={user.avatar} />
         <H1 i>{user.username}</H1>
         <Bio>{user.bio}</Bio>
         {!currentUser ? null : currentUser.id !== user.id ? (
@@ -54,7 +55,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
             {user.posts.length ? (
               <SpacedContent f={4}>
                 {user.posts.map(post => (
-                  <PostPreview key={post.id} post={{ ...post, author: user }} />
+                  <PostPreview key={post.id} post={{ ...post, author: user }} showAuthor={false} />
                 ))}
               </SpacedContent>
             ) : (
@@ -114,13 +115,6 @@ const Bio = styled.span`
   color: ${theme.text.secondary};
   margin-bottom: 24px;
   margin-top: 8px;
-`;
-
-const Avatar = styled.div`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: url(/avatar.jpg);
 `;
 
 export default UserProfile;

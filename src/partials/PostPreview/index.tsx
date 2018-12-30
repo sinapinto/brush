@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { H3, P } from '../../components/globals';
-import TagList from './TagList';
+import TagList from '../TagList';
+import Author from '../../partials/Author';
 import {
   GetPosts_getPosts_posts_author,
   GetPosts_getPosts_posts_categories,
@@ -18,9 +19,13 @@ type Props = {
     categories: GetPosts_getPosts_posts_categories[];
     author: GetPosts_getPosts_posts_author;
   };
+  showAuthor?: boolean;
 };
 
-const PostPreview: React.FunctionComponent<Props> = ({ post }) => {
+const PostPreview: React.FunctionComponent<Props> = ({
+  post,
+  showAuthor = true,
+}) => {
   return (
     <Container>
       <H3 i>
@@ -28,10 +33,7 @@ const PostPreview: React.FunctionComponent<Props> = ({ post }) => {
       </H3>
       <P>{post.rawBody.slice(0, 200)}</P>
       <SpaceBetween>
-        <UserContainer>
-          <Avatar size={32} src={post.author.avatar} />
-          <Link to={`/u/${post.author.username}`}>{post.author.username}</Link>
-        </UserContainer>
+        {showAuthor && <Author user={post.author} />}
         <TagList categories={post.categories} />
       </SpaceBetween>
     </Container>
@@ -45,21 +47,6 @@ const SpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const UserContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Avatar = styled(({ src, size, ...rest }) => <div {...rest} />)`
-  width: ${props => `${props.size}px`};
-  height: ${props => `${props.size}px`};
-  margin-right: 8px;
-  border-radius: 50%;
-  background-image: ${props => `url(${props.src || '/avatar.jpg'})`};
-  background-size: ${props => `${props.size}px`};
-  flex-shrink: 0;
 `;
 
 export default PostPreview;

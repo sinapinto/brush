@@ -26,14 +26,8 @@ const FollowersList: React.FunctionComponent<Props> = ({ username }) => {
     return <BlankSlate>This user has no followers</BlankSlate>;
   return (
     <>
-      {data.user.subscribers.map(sub => (
-        <FollowerItem
-          key={sub.id}
-          id={sub.id}
-          username={sub.username}
-          bio={sub.bio}
-          isFollowing={sub.subscribed}
-        />
+      {data.user.subscribers.map(user => (
+        <FollowerItem key={user.id} user={user} />
       ))}
     </>
   );

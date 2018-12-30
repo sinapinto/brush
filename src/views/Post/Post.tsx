@@ -3,8 +3,16 @@ import { useCurrentUser } from '../../utils/useCurrentUser';
 import { Value } from 'slate';
 import styled from 'styled-components';
 
+import TagList from '../../partials/TagList';
+import Author from '../../partials/Author';
 import DeleteButton from './DeleteButton';
-import { H1, H4, P, ErrorMessage } from '../../components/globals';
+import {
+  H1,
+  H4,
+  P,
+  ErrorMessage,
+  SpacedContent,
+} from '../../components/globals';
 import TextEditor from '../../components/TextEditor';
 import { GetPostById_getPost } from '../../graphql/queries/__generated__/GetPostById';
 
@@ -19,14 +27,15 @@ const Post: React.FunctionComponent<Props> = ({ post }) => {
   const isAuthor = currentUser && currentUser.id === post.author.id;
 
   return (
-    <>
+    <SpacedContent f={3}>
       <HeaderWrap>
         <H1 i>{post.title}</H1>
         {isAuthor && <DeleteButton postId={post.id} />}
       </HeaderWrap>
       <TextEditor readOnly value={editorValue} />
-      <P>By {post.author.username}</P>
-    </>
+      <TagList categories={post.categories} />
+      <Author user={post.author} />
+    </SpacedContent>
   );
 };
 

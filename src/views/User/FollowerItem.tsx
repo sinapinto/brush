@@ -3,36 +3,32 @@ import { useQuery } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Avatar from '../../components/Avatar';
 import FollowButton from './FollowButton';
 import theme from '../../styles/theme';
 import { currentUserQuery } from '../../graphql/queries/user';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
+import { GetSubscribersByUsername_user_subscribers } from '../../graphql/queries/__generated__/GetSubscribersByUsername';
 
 type Props = {
-  id: string;
-  username: string;
-  bio: string;
-  isFollowing: boolean;
+  user: GetSubscribersByUsername_user_subscribers;
 };
 
-const FollowerItem: React.FunctionComponent<Props> = ({
-  id,
-  username,
-  bio,
-  isFollowing,
-}) => {
+const FollowerItem: React.FunctionComponent<Props> = ({ user }) => {
   const { data } = useQuery<CurrentUser>(currentUserQuery);
   return (
     <Container>
       <UserContainer>
-        <Avatar />
+        <Avatar size="md" src={user.avatar} />
         <UserInfo>
-          <UsernameLink to={`/u/${username}`}>{username}</UsernameLink>
-          <Bio>{bio}</Bio>
+          <UsernameLink to={`/u/${user.username}`}>
+            {user.username}
+          </UsernameLink>
+          <Bio>{user.bio}</Bio>
         </UserInfo>
       </UserContainer>
-      {data && data.currentUser && data.currentUser.id !== id && (
-        <FollowButton isFollowing={isFollowing} userId={id} />
+      {data && data.currentUser && data.currentUser.id !== user.id && (
+        <FollowButton isFollowing={user.subscribed} userId={user.id} />
       )}
     </Container>
   );
@@ -49,15 +45,6 @@ const UserContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-`;
-
-const Avatar = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-right: 24px;
-  border-radius: 50%;
-  background: skyblue;
-  flex-shrink: 0;
 `;
 
 const UserInfo = styled.div`
