@@ -13,16 +13,20 @@ type Props = {
 
 const Author: React.FunctionComponent<Props> = ({ user }) => {
   return (
-    <UserContainer>
+    <Container>
       <Avatar size="sm" src={user.avatar} />
-      <Link to={`/u/${user.username}`}>{user.username}</Link>
-    </UserContainer>
+      <UsernameLink to={`/u/${user.username}`}>{user.username}</UsernameLink>
+    </Container>
   );
 };
 
-const UserContainer = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const UsernameLink = styled(Link)`
+  font-size: 14px;
 `;
 
 export default Author;

@@ -63,7 +63,7 @@ const UsernameLink = styled(Link)`
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
-  color: ${theme.text.default};
+  color: ${theme.text.secondary};
 `;
 
 const Bio = styled.span`
