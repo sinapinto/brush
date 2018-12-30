@@ -23,6 +23,7 @@ export interface GetPostById_getPost {
   id: string;
   title: string;
   body: string;
+  rawBody: string;
   updatedAt: string;
   categories: GetPostById_getPost_categories[];
   author: GetPostById_getPost_author;

@@ -64,6 +64,7 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     body: String!
+    rawBody: String!
     author: User!
     categories: [Category!]!
     createdAt: String!

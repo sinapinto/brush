@@ -5,6 +5,7 @@ export const postInfoFragment = gql`
     id
     title
     body
+    rawBody
     updatedAt
     categories {
       name

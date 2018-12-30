@@ -15,6 +15,7 @@ export interface postInfo {
   id: string;
   title: string;
   body: string;
+  rawBody: string;
   updatedAt: string;
   categories: postInfo_categories[];
 }

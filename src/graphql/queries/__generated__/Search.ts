@@ -31,6 +31,7 @@ export interface Search_search_results_Post {
   id: string;
   title: string;
   body: string;
+  rawBody: string;
   updatedAt: string;
   categories: Search_search_results_Post_categories[];
   author: Search_search_results_Post_author;

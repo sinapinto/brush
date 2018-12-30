@@ -25,6 +25,7 @@ export interface CreatePost_createPost {
   id: string;
   title: string;
   body: string;
+  rawBody: string;
   updatedAt: string;
   categories: CreatePost_createPost_categories[];
   author: CreatePost_createPost_author;
