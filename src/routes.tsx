@@ -14,6 +14,7 @@ const Post = React.lazy(() => import('./views/Post'));
 const Create = React.lazy(() => import('./views/Create'));
 const Settings = React.lazy(() => import('./views/Settings'));
 const Search = React.lazy(() => import('./views/Search'));
+const TagSearch = React.lazy(() => import('./views/TagSearch'));
 
 const ErrorFallback = () => (
   <ErrorMessage>An unexpected error occured.</ErrorMessage>
@@ -48,6 +49,7 @@ const Routes = () => {
                   path="/p/:postId"
                   render={({ match }) => <Post id={match.params.postId} />}
                 />
+                <Route path="/tag/:tag" render={({ match }) => <TagSearch query={match.tag} />} />
                 <Route path="/create" component={requireAuth(Create)} />
                 <Route path="/settings" component={requireAuth(Settings)} />
                 <Route
