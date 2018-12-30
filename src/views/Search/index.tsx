@@ -38,7 +38,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
       <H3 style={{ padding: '24px 0 0 24px' }}>{`Results for “${query}”`}</H3>
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
         <TabPane label="Posts" key={Tab.Posts}>
-          <SpacedContent f={4}>
+          <SpacedContent m={4}>
             {postResults.length ? (
               postResults.map(post => <PostPreview key={post.id} post={post} />)
             ) : (
@@ -47,7 +47,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
           </SpacedContent>
         </TabPane>
         <TabPane label="Users" key={Tab.Users}>
-          <SpacedContent f={4}>
+          <SpacedContent m={4}>
             {userResults.length ? (
               userResults.map(user => <UserPreview key={user.id} user={user} />)
             ) : (

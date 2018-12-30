@@ -27,7 +27,7 @@ const Post: React.FunctionComponent<Props> = ({ post }) => {
   const isAuthor = currentUser && currentUser.id === post.author.id;
 
   return (
-    <SpacedContent f={3}>
+    <SpacedContent m={3}>
       <HeaderWrap>
         <H1 i>{post.title}</H1>
         {isAuthor && <DeleteButton postId={post.id} />}

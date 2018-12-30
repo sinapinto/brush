@@ -53,7 +53,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
         <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
           <TabPane label="Posts" key={Tab.Posts}>
             {user.posts.length ? (
-              <SpacedContent f={4}>
+              <SpacedContent m={4}>
                 {user.posts.map(post => (
                   <PostPreview
                     key={post.id}
@@ -68,14 +68,14 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
           </TabPane>
           <TabPane label="Followers" key={Tab.Followers}>
             <Suspense fallback={<Spinner size="small" />}>
-              <SpacedContent f={4}>
+              <SpacedContent m={4}>
                 <FollowersList username={user.username} />
               </SpacedContent>
             </Suspense>
           </TabPane>
           <TabPane label="Following" key={Tab.Following}>
             <Suspense fallback={<Spinner size="small" />}>
-              <SpacedContent f={4}>
+              <SpacedContent m={4}>
                 <FollowingList username={user.username} />
               </SpacedContent>
             </Suspense>

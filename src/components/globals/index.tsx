@@ -136,10 +136,10 @@ export const Spinner = styled.span<SpinnerProps>`
   }
 `;
 
-export const SpacedContent = styled(({ f = 1, ...rest }) => <div {...rest} />)`
+export const SpacedContent = styled(({ m = 1, ...rest }) => <div {...rest} />)`
   > * {
-    margin-top: ${({ f }) => f * 8}px;
-    margin-bottom: ${({ f }) => f * 8}px;
+    margin-top: ${({ m }) => m * 8}px;
+    margin-bottom: ${({ m }) => m * 8}px;
 
     &:first-child {
       margin-top: 0;

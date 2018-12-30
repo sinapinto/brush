@@ -15,7 +15,7 @@ export const Home: React.FunctionComponent = () => {
       {!data.getPosts || !data.getPosts.posts.length ? (
         <BlankSlate>No posts yet. Be the first!</BlankSlate>
       ) : (
-        <SpacedContent f={4}>
+        <SpacedContent m={4}>
           {data.getPosts.posts.map(post => (
             <PostPreview
               key={post.id}
