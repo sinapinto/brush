@@ -80,7 +80,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
               value={editorValue}
               onChange={({ value }: any) => {
                 // Check to see if the document has changed before saving.
-                if (value.document != editorValue.document) {
+                if (value.document !== editorValue.document) {
                   const content = JSON.stringify(value.toJSON());
                   localStorage.setItem('draft', content);
                 }

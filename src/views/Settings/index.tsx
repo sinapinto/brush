@@ -8,7 +8,6 @@ import {
   GetUserByUsernameVariables,
   GetUserByUsername,
 } from '../../graphql/queries/__generated__/GetUserByUsername';
-import { CurrentUser_currentUser } from '../../graphql/queries/__generated__/CurrentUser';
 
 type Props = {};
 

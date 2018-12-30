@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { shade } from 'polished';
@@ -12,7 +11,6 @@ import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
 import LogoutButton from './LogoutButton';
-import { currentUserQuery } from '../../graphql/queries/user';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 import theme from '../../styles/theme';
 

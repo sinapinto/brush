@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import { RouteProps } from 'react-router';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -49,7 +48,10 @@ const Routes = () => {
                   path="/p/:postId"
                   render={({ match }) => <Post id={match.params.postId} />}
                 />
-                <Route path="/tag/:tag" render={({ match }) => <TagSearch query={match.tag} />} />
+                <Route
+                  path="/tag/:tag"
+                  render={({ match }) => <TagSearch query={match.tag} />}
+                />
                 <Route path="/create" component={requireAuth(Create)} />
                 <Route path="/settings" component={requireAuth(Settings)} />
                 <Route

@@ -3,7 +3,7 @@ import { MdDelete } from 'react-icons/md';
 import { useMutation } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
-import { H4, P, ErrorMessage } from '../../components/globals';
+import { H4 } from '../../components/globals';
 import Modal from '../../components/Modal';
 import { DangerousButton } from '../../components/Button';
 import { deletePostMutation } from '../../graphql/mutations/post';

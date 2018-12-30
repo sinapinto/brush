@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
 import Post from './Post';
-import { Card, BlankSlate, ErrorMessage } from '../../components/globals';
+import { Card, BlankSlate } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
 import {
   GetPostById,

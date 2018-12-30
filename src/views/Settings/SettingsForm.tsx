@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { editProfileMutation } from '../../graphql/mutations/user';
 import { Input, Label, ErrorMessage } from '../../components/globals';
-import theme from '../../styles/theme';
 import { CTAButton } from '../../components/Button';
 import {
   EditProfileMutation,

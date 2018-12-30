@@ -1,6 +1,5 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
 
 import { Button } from '../../components/Button';
 import { logoutUserMutation as MUTATION } from '../../graphql/mutations/user';

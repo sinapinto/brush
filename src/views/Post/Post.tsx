@@ -6,13 +6,7 @@ import styled from 'styled-components';
 import TagList from '../../partials/TagList';
 import Author from '../../partials/Author';
 import DeleteButton from './DeleteButton';
-import {
-  H1,
-  H4,
-  P,
-  ErrorMessage,
-  SpacedContent,
-} from '../../components/globals';
+import { H1, SpacedContent } from '../../components/globals';
 import TextEditor from '../../components/TextEditor';
 import { GetPostById_getPost } from '../../graphql/queries/__generated__/GetPostById';
 

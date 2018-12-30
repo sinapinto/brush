@@ -17,10 +17,7 @@ export const Home: React.FunctionComponent = () => {
       ) : (
         <SpacedContent m={4}>
           {data.getPosts.posts.map(post => (
-            <PostPreview
-              key={post.id}
-              post={post}
-            />
+            <PostPreview key={post.id} post={post} />
           ))}
         </SpacedContent>
       )}

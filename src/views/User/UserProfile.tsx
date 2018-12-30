@@ -11,7 +11,6 @@ import FollowButton from '../../partials/FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
 import {
   H1,
-  P,
   BlankSlate,
   Spinner,
   Card,

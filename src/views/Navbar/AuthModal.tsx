@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
-import { P, H2, Input } from '../../components/globals';
+import { P, H2 } from '../../components/globals';
 import theme from '../../styles/theme';
 
 interface Props {

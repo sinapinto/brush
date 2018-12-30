@@ -66,7 +66,8 @@
     "apollo": "^2.1.8",
     "prettier": "1.15.3",
     "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "typescript-eslint-parser": "^21.0.2"
   },
   "scripts": {
     "dev:web": "react-scripts start",
@@ -83,9 +84,11 @@
     "plugins": [
       "react-hooks"
     ],
+    "parser": "typescript-eslint-parser",
     "rules": {
       "react-hooks/rules-of-hooks": "error",
-      "prefer-const": "error"
+      "prefer-const": "error",
+      "no-unused-vars": "error"
     }
   },
   "babel": {
