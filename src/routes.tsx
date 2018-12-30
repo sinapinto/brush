@@ -50,7 +50,7 @@ const Routes = () => {
                 />
                 <Route
                   path="/tag/:tag"
-                  render={({ match }) => <TagSearch query={match.params.tag} />}
+                  render={({ match }) => <TagSearch tag={match.params.tag} />}
                 />
                 <Route path="/create" component={requireAuth(Create)} />
                 <Route path="/settings" component={requireAuth(Settings)} />

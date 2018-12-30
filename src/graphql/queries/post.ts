@@ -31,3 +31,18 @@ export const getPostByIdQuery = gql`
   ${postInfoFragment}
   ${userInfoFragment}
 `;
+
+export const getPostsByCategory = gql`
+  query GetPostsByCategory($category: String!) {
+    getPostsByCategory(category: $category) {
+      posts {
+        ...postInfo
+        author {
+          ...userInfo
+        }
+      }
+    }
+  }
+  ${postInfoFragment}
+  ${userInfoFragment}
+`;

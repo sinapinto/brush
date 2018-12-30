@@ -65,6 +65,32 @@ export const resolvers: IResolver = {
       };
     },
 
+    getPostsByCategory: async (
+      _,
+      { category }: { category: string }
+    ): Promise<{
+      posts: Array<Post>;
+      cursor: string | null;
+      hasMore: boolean;
+    }> => {
+      const found = await Category.findOne({
+        where: { name: category },
+        order: { createdAt: 'DESC' },
+        join: {
+          alias: 'category',
+          leftJoinAndSelect: {
+            posts: 'category.posts',
+            categories: 'posts.categories',
+          },
+        },
+      });
+      return {
+        posts: found ? found.posts : [],
+        cursor: null,
+        hasMore: false,
+      };
+    },
+
     search: async (_, { query }: { query: string }) => {
       const posts = await Post.createQueryBuilder('post')
         .where('post.title ILIKE :query', { query: `%${query}%` })

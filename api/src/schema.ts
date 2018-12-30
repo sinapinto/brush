@@ -6,6 +6,7 @@ export const typeDefs = gql`
     user(username: String!): User
     getPost(id: ID!): Post
     getPosts(pageSize: Int, after: String): PaginatedPosts!
+    getPostsByCategory(category: String!): PaginatedPosts!
     search(query: String!): PaginatedSearchResults!
   }
 
