@@ -14,7 +14,7 @@ import {
 import { Card, H3, BlankSlate, SpacedContent } from '../../components/globals';
 import Tabs from '../../components/Tabs';
 import PostPreview from '../../partials/PostPreview';
-import UserPreview from './UserPreview';
+import UserPreview from '../../partials/UserPreview';
 
 enum Tab {
   Posts = 'Posts',
@@ -25,6 +25,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
   location,
 }) => {
   const [activeTab, setActiveTab] = useState(Tab.Posts);
+  // TODO: make this more robust
   const query = location.search.replace(/^\?q=/, '');
   const { data } = useQuery<Search, SearchVariables>(searchQuery, {
     variables: { query },
@@ -48,9 +49,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
         <TabPane label="Users" key={Tab.Users}>
           <SpacedContent f={4}>
             {userResults.length ? (
-              userResults.map(item => (
-                <UserPreview key={item.id} username={item.username} />
-              ))
+              userResults.map(user => <UserPreview key={user.id} user={user} />)
             ) : (
               <BlankSlate>No users found</BlankSlate>
             )}

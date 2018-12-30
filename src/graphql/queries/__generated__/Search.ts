@@ -11,6 +11,7 @@ export interface Search_search_results_User {
   username: string;
   bio: string;
   avatar: string;
+  subscribed: boolean;
 }
 
 export interface Search_search_results_Post_categories {

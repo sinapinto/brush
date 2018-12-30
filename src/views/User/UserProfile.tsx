@@ -7,7 +7,7 @@ import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../utils/useCurrentUser';
 import FollowersList from './FollowersList';
 import FollowingList from './FollowingList';
-import FollowButton from './FollowButton';
+import FollowButton from '../../partials/FollowButton';
 import { OutlineButtonLink } from '../../components/ButtonLink';
 import {
   H1,
@@ -55,7 +55,11 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
             {user.posts.length ? (
               <SpacedContent f={4}>
                 {user.posts.map(post => (
-                  <PostPreview key={post.id} post={{ ...post, author: user }} showAuthor={false} />
+                  <PostPreview
+                    key={post.id}
+                    post={{ ...post, author: user }}
+                    showAuthor={false}
+                  />
                 ))}
               </SpacedContent>
             ) : (

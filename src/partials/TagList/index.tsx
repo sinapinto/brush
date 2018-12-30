@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { shade } from 'polished';
 
@@ -12,7 +13,9 @@ const TagList: React.FunctionComponent<Props> = ({ categories }) => {
   return (
     <Container>
       {categories.map(c => (
-        <Tag key={c.name}>{c.name}</Tag>
+        <TagLink key={c.name} to={`/tag/${c.name}`}>
+          {c.name}
+        </TagLink>
       ))}
     </Container>
   );
@@ -24,7 +27,7 @@ const Container = styled.div`
   }
 `;
 
-const Tag = styled.span`
+const TagLink = styled(Link)`
   font-size: 10px;
   font-weight: 400;
   background: ${theme.bg.inactive};

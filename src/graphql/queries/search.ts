@@ -8,6 +8,7 @@ export const searchQuery = gql`
       results {
         ... on User {
           ...userInfo
+          subscribed
         }
         ... on Post {
           ...postInfo

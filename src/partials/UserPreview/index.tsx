@@ -4,18 +4,25 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Avatar from '../../components/Avatar';
-import FollowButton from './FollowButton';
+import FollowButton from '../FollowButton';
 import theme from '../../styles/theme';
 import { currentUserQuery } from '../../graphql/queries/user';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
-import { GetSubscribersByUsername_user_subscribers } from '../../graphql/queries/__generated__/GetSubscribersByUsername';
 
 type Props = {
-  user: GetSubscribersByUsername_user_subscribers;
+  user: {
+    id: string;
+    username: string;
+    bio: string;
+    avatar: string;
+    subscribed: boolean;
+  };
 };
 
-const FollowerItem: React.FunctionComponent<Props> = ({ user }) => {
-  const { data } = useQuery<CurrentUser>(currentUserQuery);
+const UserPreview: React.FunctionComponent<Props> = ({ user }) => {
+  const {
+    data: { currentUser },
+  } = useQuery<CurrentUser>(currentUserQuery);
   return (
     <Container>
       <UserContainer>
@@ -27,7 +34,7 @@ const FollowerItem: React.FunctionComponent<Props> = ({ user }) => {
           <Bio>{user.bio}</Bio>
         </UserInfo>
       </UserContainer>
-      {data && data.currentUser && data.currentUser.id !== user.id && (
+      {currentUser && currentUser.id !== user.id && (
         <FollowButton isFollowing={user.subscribed} userId={user.id} />
       )}
     </Container>
@@ -66,4 +73,4 @@ const Bio = styled.span`
   color: ${theme.text.secondary};
 `;
 
-export default FollowerItem;
+export default UserPreview;

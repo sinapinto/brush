@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
 import { BlankSlate } from '../../components/globals';
-import FollowerItem from './FollowerItem';
+import UserPreview from '../../partials/UserPreview';
 import { getSubscriptionsByUsername } from '../../graphql/queries/user';
 import {
   GetSubscriptionsByUsername,
@@ -27,7 +27,7 @@ const FollowingList: React.FunctionComponent<Props> = ({ username }) => {
   return (
     <>
       {data.user.subscriptions.map(user => (
-        <FollowerItem key={user.id} user={user} />
+        <UserPreview key={user.id} user={user} />
       ))}
     </>
   );
