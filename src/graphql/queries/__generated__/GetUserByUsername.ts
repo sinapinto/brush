@@ -14,6 +14,7 @@ export interface GetUserByUsername_user_posts {
   __typename: "Post";
   id: string;
   title: string;
+  rawBody: string;
   categories: GetUserByUsername_user_posts_categories[];
   createdAt: string;
 }

@@ -23,6 +23,7 @@ export const getUserByUsernameQuery = gql`
       posts {
         id
         title
+        rawBody
         categories {
           name
         }
