@@ -17,20 +17,16 @@ import { resolvers } from './resolvers';
 import { createUserLoader } from './loaders/userLoader';
 import { TContext } from './utils';
 
-const redis = new Redis();
+const redis = new Redis(<string>process.env.REDIS_URL);
 const RedisStore = ConnectRedis(session);
 const redisStore = new RedisStore({ prefix: 'sess:' });
 
 createConnection({
   type: 'postgres',
-  host: <string>process.env.PG_HOST,
-  port: Number(<string>process.env.PG_PORT),
-  username: <string>process.env.PG_USERNAME,
-  password: <string>process.env.PG_PASSWORD,
-  database: <string>process.env.PG_DATABASE,
+  url: <string>process.env.DATABASE_URL,
   entities: [User, Post, Category],
-  logging: true,
-  synchronize: true,
+  logging: process.env.NODE_ENV === 'development' ? true : ['error'],
+  synchronize: process.env.NODE_ENV === 'development',
   // dropSchema: true,
 })
   .then(async () => {
