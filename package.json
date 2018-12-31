@@ -70,7 +70,7 @@
     "typescript-eslint-parser": "^21.0.2"
   },
   "scripts": {
-    "start": "npm run build:api && NODE_ENV=production node ./build-api/api/src/index.js",
+    "start": "npm install && npm run build:api && NODE_ENV=production node ./build-api/api/src/index.js",
     "dev:web": "react-scripts start",
     "dev:api": "NODE_ENV=development ts-node --project api/tsconfig.json api/src/index.ts",
     "build:web": "react-scripts build",
