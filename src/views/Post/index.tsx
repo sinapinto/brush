@@ -20,7 +20,7 @@ const PostContainer: React.FunctionComponent<Props> = ({ id }) => {
   );
   return (
     <Card>
-      {data && data.getPost ? (
+      {data.getPost ? (
         <Post post={data.getPost} />
       ) : (
         <BlankSlate>This post no longer exists</BlankSlate>

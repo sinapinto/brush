@@ -2,24 +2,24 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
 import { BlankSlate, Card, SpacedContent } from '../../components/globals';
-import { getPostsQuery } from '../../graphql/queries/post';
 import PostPreview from '../../partials/PostPreview';
+import { getPostsQuery } from '../../graphql/queries/post';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
 export const Home: React.FunctionComponent = () => {
-  const { data } = useQuery<GetPosts>(getPostsQuery, {
-    variables: { pageSize: 25 },
-  });
+  const {
+    data: { getPosts },
+  } = useQuery<GetPosts>(getPostsQuery);
   return (
     <Card>
-      {!data.getPosts || !data.getPosts.posts.length ? (
-        <BlankSlate>No posts yet. Be the first!</BlankSlate>
-      ) : (
+      {getPosts && getPosts.posts.length ? (
         <SpacedContent m={4}>
-          {data.getPosts.posts.map(post => (
+          {getPosts.posts.map(post => (
             <PostPreview key={post.id} post={post} />
           ))}
         </SpacedContent>
+      ) : (
+        <BlankSlate>No posts yet. Be the first!</BlankSlate>
       )}
     </Card>
   );

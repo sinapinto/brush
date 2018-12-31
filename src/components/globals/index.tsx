@@ -1,37 +1,35 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import theme from '../../styles/theme';
 
-export const H1 = styled(({ i, ...rest }) => <h1 {...rest} />)`
+const headerStyles = css`
   color: ${theme.text.secondary};
   font-weight: 700;
+  ${({ i }: { i: boolean }) => i && 'font-style: italic;'}
+`;
+
+export const H1 = styled(({ i, ...rest }) => <h1 {...rest} />)`
   font-size: 38px;
   line-height: 46px;
-  ${({ i }) => i && 'font-style: italic;'}
+  ${headerStyles}
 `;
 
 export const H2 = styled(({ i, ...rest }) => <h2 {...rest} />)`
-  color: ${theme.text.secondary};
-  font-weight: 700;
   font-size: 30px;
   line-height: 38px;
-  ${({ i }) => i && 'font-style: italic;'}
+  ${headerStyles}
 `;
 
 export const H3 = styled(({ i, ...rest }) => <h3 {...rest} />)`
-  color: ${theme.text.secondary};
-  font-weight: 700;
   font-size: 24px;
   line-height: 32px;
-  ${({ i }) => i && 'font-style: italic;'}
+  ${headerStyles}
 `;
 
 export const H4 = styled(({ i, ...rest }) => <h4 {...rest} />)`
-  color: ${theme.text.secondary};
-  font-weight: 700;
   font-size: 20px;
   line-height: 28px;
-  ${({ i }) => i && 'font-style: italic;'}
+  ${headerStyles}
 `;
 
 export const BlankSlate = styled(H4)`
