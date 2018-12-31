@@ -1,5 +1,5 @@
 {
-  "name": "microblog",
+  "name": "brush",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -70,15 +70,17 @@
     "typescript-eslint-parser": "^21.0.2"
   },
   "scripts": {
+    "start": "npm run build:api && NODE_ENV=production node ./build-api/api/src/index.js",
     "dev:web": "react-scripts start",
     "dev:api": "NODE_ENV=development ts-node --project api/tsconfig.json api/src/index.ts",
+    "build:web": "react-scripts build",
+    "build:api": "NODE_ENV=production tsc --build ./api/tsconfig.json",
     "prettier": "prettier --write '{src,api}/**/*.[tj]s{x,}' '!**/__generated__/**'",
     "codegen": "npm run codegen:clean && npm run codegen:download && npm run codegen:generate && npm run codegen:introspect",
     "codegen:clean": "rm -rf **/__generated__",
     "codegen:download": "apollo service:download --endpoint=http://localhost:4000/graphql",
     "codegen:generate": "apollo client:codegen --includes=./src/**/*.ts* --localSchemaFile=schema.json --target=typescript",
-    "codegen:introspect": "node ./introspectionQuery.js",
-    "build": "react-scripts build"
+    "codegen:introspect": "node ./introspectionQuery.js"
   },
   "eslintConfig": {
     "extends": "react-app",
