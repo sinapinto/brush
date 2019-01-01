@@ -27,6 +27,11 @@ const cache: any = new InMemoryCache({
   },
 });
 
+const uri =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_API_URL
+    : 'http://localhost:3000/graphql';
+
 export const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
@@ -37,8 +42,8 @@ export const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: 'http://localhost:3000/graphql',
-      credentials: 'same-origin',
+      uri,
+      credentials: 'include',
     }),
   ]),
   cache,
