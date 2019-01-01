@@ -13,3 +13,4 @@
 .env
 npm-debug.log*
 /.vscode
+.netlify/
