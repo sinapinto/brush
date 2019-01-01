@@ -62,7 +62,10 @@ createConnection({
       app,
       cors: {
         credentials: true,
-        origin: '*',
+        origin:
+          process.env.NODE_ENV === 'production'
+            ? process.env.FRONTEND_HOST
+            : '*',
       },
     });
 
