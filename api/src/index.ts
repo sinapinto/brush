@@ -38,6 +38,7 @@ createConnection({
         secret: <string>process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        proxy: true,
         cookie: {
           sameSite: 'lax',
           httpOnly: true,
