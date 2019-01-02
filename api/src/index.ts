@@ -26,7 +26,7 @@ createConnection({
   url: <string>process.env.DATABASE_URL,
   entities: [User, Post, Category],
   logging: process.env.NODE_ENV === 'development' ? true : ['error'],
-  synchronize: process.env.NODE_ENV === 'development',
+  synchronize: true,
   // dropSchema: true,
 })
   .then(async () => {
