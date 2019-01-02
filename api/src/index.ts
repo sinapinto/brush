@@ -19,7 +19,7 @@ import { TContext } from './utils';
 
 const redis = new Redis(<string>process.env.REDIS_URL);
 const RedisStore = ConnectRedis(session);
-const redisStore = new RedisStore({ prefix: 'sess:' });
+const redisStore = new RedisStore({ prefix: 'sess:', client: redis as any });
 
 createConnection({
   type: 'postgres',
