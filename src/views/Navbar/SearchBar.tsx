@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 import theme from '../../styles/theme';
+import { placeholder } from '../../utils/css';
 
 const SearchBar: React.FunctionComponent<RouteComponentProps> = ({
   history,
@@ -69,6 +70,7 @@ const Input = styled(({ isFocused, ...rest }) => <input {...rest} />)`
     }
     return '';
   }}
+  ${placeholder()}
 `;
 
 export default withRouter(SearchBar);

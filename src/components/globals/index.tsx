@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+
 import theme from '../../styles/theme';
+import { placeholder } from '../../utils/css';
 
 const headerStyles = css`
   color: ${theme.text.secondary};
@@ -73,16 +75,7 @@ export const Input = styled.input`
     outline: 0;
     border-bottom-color: ${theme.brand.default};
   }
-
-  &::-webkit-input-placeholder {
-    color: ${theme.text.placeholder};
-  }
-  &:-moz-placeholder {
-    color: ${theme.text.placeholder};
-  }
-  &:-ms-input-placeholder {
-    color: ${theme.text.placeholder};
-  }
+  ${placeholder()}
 `;
 
 export const Label = styled.label`
