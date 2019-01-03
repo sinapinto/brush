@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
 import theme from '../styles/theme';
 
 export const placeholder = (color?: string) => {
@@ -17,3 +17,31 @@ export const placeholder = (color?: string) => {
     }
   `;
 };
+
+const sizes: { [k: string]: number } = {
+  desktop: 992,
+  tablet: 768,
+  phone: 576,
+};
+
+export const media = Object.keys(sizes).reduce(
+  (acc, label) => {
+    return {
+      ...acc,
+      [label]: (
+        literals: TemplateStringsArray,
+        ...placeholders: string[]
+      ) => css`
+        @media (max-width: ${sizes[label]}px) {
+          ${css(literals, ...placeholders)}
+        }
+      `,
+    };
+  },
+  {} as {
+    [k: string]: (
+      literals: TemplateStringsArray,
+      ...placeholders: string[]
+    ) => FlattenSimpleInterpolation;
+  }
+);

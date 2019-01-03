@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+
 import theme from '../../styles/theme';
+import { media } from '../../utils/css';
 
 export const Button = styled.button`
   display: inline-flex;
@@ -30,6 +32,10 @@ export const Button = styled.button`
   > svg {
     margin-right: 4px;
   }
+
+  ${media.phone`
+    padding: 8px;
+  `}
 `;
 
 export const OutlineButton = styled(Button)`

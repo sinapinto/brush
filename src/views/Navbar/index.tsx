@@ -13,6 +13,7 @@ import ButtonLink from '../../components/ButtonLink';
 import LogoutButton from './LogoutButton';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 import theme from '../../styles/theme';
+import { media } from '../../utils/css';
 
 const Navbar: React.FunctionComponent = () => {
   const { currentUser, refetch } = useCurrentUser({ suspend: false });
@@ -98,7 +99,11 @@ const LogoLink = styled(Link)`
   color: ${theme.text.reverse};
   text-decoration: underline;
   :hover {
-    color: ${shade(0.1, theme.text.reverse)}
+    color: ${shade(0.1, theme.text.reverse)};
+  }
+  ${media.phone`
+    font-size: 18px;
+  `}
 `;
 
 export default Navbar;
