@@ -21,7 +21,7 @@ const Navbar: React.FunctionComponent = () => {
   return (
     <Container>
       <NavbarContainer>
-        <LogoLink to="/">microblog</LogoLink>
+        <LogoLink to="/">brush</LogoLink>
         <SearchBar />
         {currentUser ? (
           <ButtonContainer>
