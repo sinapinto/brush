@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 import { MdCreate as CreateIcon } from 'react-icons/md';
 import { MdPerson as AccountIcon } from 'react-icons/md';
+import { FaBrush as BrushIcon } from 'react-icons/fa';
 
 import SearchBar from './SearchBar';
 import { useCurrentUser } from '../../utils/useCurrentUser';
@@ -21,7 +22,10 @@ const Navbar: React.FunctionComponent = () => {
   return (
     <Container>
       <NavbarContainer>
-        <LogoLink to="/">brush</LogoLink>
+        <LogoLink to="/">
+          <BrushIcon size={16} />
+          brush
+        </LogoLink>
         <SearchBar />
         {currentUser ? (
           <ButtonContainer>
@@ -95,11 +99,12 @@ const ButtonContainer = styled.div`
 
 const LogoLink = styled(Link)`
   font-size: 24px;
+  line-height: 32px;
   font-weight: 900;
   color: ${theme.text.reverse};
-  text-decoration: underline;
-  :hover {
-    color: ${shade(0.1, theme.text.reverse)};
+  white-space: nowrap;
+  & > svg {
+    margin-right: 4px;
   }
   ${media.phone`
     font-size: 18px;

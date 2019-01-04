@@ -121,8 +121,7 @@ export const Spinner = styled.span<SpinnerProps>`
     border-radius: 50%;
     border-width: ${props => (props.size === 'small' ? '3px' : '6px')};
     border-style: solid;
-    border-color: ${theme.brand.default} transparent ${theme.brand.default}
-      transparent;
+    border-color: ${theme.brand.alt} transparent ${theme.brand.alt} transparent;
     animation: ${spin} 2s linear infinite;
   }
 `;
