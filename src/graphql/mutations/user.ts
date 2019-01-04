@@ -60,7 +60,6 @@ export const subscribeToUserMutation = gql`
     subscribeToUser(id: $userId) {
       id
       subscribed
-      isSubscriber
     }
   }
 `;
@@ -70,7 +69,6 @@ export const unsubscribeToUserMutation = gql`
     unsubscribeToUser(id: $userId) {
       id
       subscribed
-      isSubscriber
     }
   }
 `;

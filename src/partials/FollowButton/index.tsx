@@ -20,9 +20,23 @@ const FollowButton: React.FunctionComponent<Props> = ({
 }) => {
   const unsubscribe = useMutation(unsubscribeToUserMutation, {
     variables: { userId },
+    optimisticResponse: {
+      unsubscribeToUser: {
+        id: userId,
+        subscribed: false,
+        __typename: 'User',
+      },
+    },
   });
   const subscribe = useMutation(subscribeToUserMutation, {
     variables: { userId },
+    optimisticResponse: {
+      subscribeToUser: {
+        id: userId,
+        subscribed: true,
+        __typename: 'User',
+      },
+    },
   });
   const Btn = isFollowing ? Button : OutlineButton;
   return (
