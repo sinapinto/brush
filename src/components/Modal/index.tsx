@@ -22,6 +22,9 @@ const Modal: React.FunctionComponent<Props> = ({
       {...otherProps}
       appElement={appRoot}
       style={{
+        overlay: {
+          backgroundColor: 'rgba(0,0,0,0.4)',
+        },
         content: {
           top: '50%',
           left: '50%',
@@ -30,7 +33,7 @@ const Modal: React.FunctionComponent<Props> = ({
           transform: 'translate(-50%, -50%)',
           overflowX: 'none',
           overflowY: 'auto',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.06)',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
           border: '0',
           borderRadius: '16px',
         },
