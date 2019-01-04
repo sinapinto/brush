@@ -72,7 +72,7 @@ const Input = styled(({ isFocused, ...rest }) => <input {...rest} />)`
   }}
   ${placeholder()}
   ${media.tablet`
-    width: 124px;
+    width: 160px;
   `}
 `;
 

@@ -11,7 +11,6 @@ import { useCurrentUser } from '../../utils/useCurrentUser';
 import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
-import LogoutButton from './LogoutButton';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
 import theme from '../../styles/theme';
 import { media } from '../../utils/css';
@@ -37,7 +36,6 @@ const Navbar: React.FunctionComponent = () => {
               <AccountIcon size="1.4em" />
               <span>{currentUser.username.slice(0, 16)}</span>
             </NavLink>
-            <LogoutButton />
           </ButtonContainer>
         ) : (
           <ButtonContainer>
@@ -88,6 +86,9 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 0 28px;
+  ${media.tablet`
+    margin: 0;
+  `}
 `;
 
 const ButtonContainer = styled.div`
@@ -97,7 +98,7 @@ const ButtonContainer = styled.div`
   align-items: center;
   margin-left: 28px;
   ${media.tablet`
-    justify-content: space-between;
+    justify-content: space-evenly;
   `}
 `;
 

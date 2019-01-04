@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { editProfileMutation } from '../../graphql/mutations/user';
 import { Input, Label, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
+import LogoutButton from './LogoutButton';
 import {
   EditProfileMutation,
   EditProfileMutationVariables,
@@ -66,6 +67,7 @@ const SettingsForm: React.FunctionComponent<Props> = props => {
         <Label htmlFor="bio">Bio</Label>
         <Input type="text" id="bio" defaultValue={bio} />
       </Row>
+      <LogoutButton />
       <ErrorMessage>{error}</ErrorMessage>
       <CTAButton type="submit" disabled={!canSubmit}>
         Save Changes
