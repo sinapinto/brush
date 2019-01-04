@@ -53,7 +53,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
           localStorage.removeItem('draft');
           localStorage.removeItem('title');
           try {
-            const data: GetPosts | null = proxy.readQuery({
+            const data = proxy.readQuery<GetPosts>({
               query: getPostsQuery,
             });
             if (data && data.getPosts && response.data) {

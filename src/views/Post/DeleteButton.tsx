@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
+import { FetchResult } from 'react-apollo';
 import { useMutation } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
@@ -11,18 +13,35 @@ import {
   DeletePostVariables,
   DeletePost,
 } from '../../graphql/mutations/__generated__/DeletePost';
+import { getPostsQuery } from '../../graphql/queries/post';
+import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
-type Props = {
+interface Props extends RouteComponentProps {
   postId: string;
-};
+}
 
-const DeleteButton: React.FunctionComponent<Props> = ({ postId }) => {
+const DeleteButton: React.FunctionComponent<Props> = ({ postId, history }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const deletePost = useMutation<DeletePost, DeletePostVariables>(
     deletePostMutation,
     {
       variables: { id: postId },
+      update: (proxy, response: FetchResult) => {
+        try {
+          const data = proxy.readQuery<GetPosts>({
+            query: getPostsQuery,
+          });
+          if (data && data.getPosts) {
+            data.getPosts.posts = data.getPosts.posts.filter(
+              p => p.id !== postId
+            );
+            proxy.writeQuery({ query: getPostsQuery, data });
+          }
+        } catch (e) {
+          // have never run `getPostsQuery` before
+        }
+      },
     }
   );
 
@@ -37,8 +56,12 @@ const DeleteButton: React.FunctionComponent<Props> = ({ postId }) => {
             onClick={() => {
               setLoading(true);
               deletePost()
-                .then(() => setModalOpen(false))
-                .finally(() => setLoading(false));
+                .then(() => {
+                  setModalOpen(false);
+                  setLoading(false);
+                  history.push('/');
+                })
+                .catch(() => setLoading(false));
             }}
           >
             Yes, Delete
@@ -64,4 +87,4 @@ const ModalBody = styled.div`
   }
 `;
 
-export default DeleteButton;
+export default withRouter(DeleteButton);
