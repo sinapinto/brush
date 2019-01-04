@@ -23,20 +23,20 @@ const Navbar: React.FunctionComponent = () => {
     <Container>
       <NavbarContainer>
         <LogoLink to="/">
-          <BrushIcon size={16} />
-          brush
+          <BrushIcon size="0.7em" />
+          <span>Brush</span>
         </LogoLink>
         <SearchBar />
         {currentUser ? (
           <ButtonContainer>
-            <ButtonLink to="/create">
-              <CreateIcon size={20} />
-              Create
-            </ButtonLink>
-            <ButtonLink to={`/u/${currentUser.username}`}>
-              <AccountIcon size={20} />
-              {currentUser.username.slice(0, 16)}
-            </ButtonLink>
+            <NavLink to="/create">
+              <CreateIcon size="1.4em" />
+              <span>Create</span>
+            </NavLink>
+            <NavLink to={`/u/${currentUser.username}`}>
+              <AccountIcon size="1.4em" />
+              <span>{currentUser.username.slice(0, 16)}</span>
+            </NavLink>
             <LogoutButton />
           </ButtonContainer>
         ) : (
@@ -73,6 +73,7 @@ const Navbar: React.FunctionComponent = () => {
 const Container = styled.nav`
   height: 60px;
   width: 100%;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,6 +96,9 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-left: 28px;
+  ${media.tablet`
+    justify-content: space-between;
+  `}
 `;
 
 const LogoLink = styled(Link)`
@@ -104,10 +108,22 @@ const LogoLink = styled(Link)`
   color: ${theme.text.reverse};
   white-space: nowrap;
   & > svg {
-    margin-right: 4px;
+    margin-right: 8px;
   }
   ${media.phone`
+    font-size: 32px;
+    & > span {
+      display: none;
+    }
+  `}
+`;
+
+const NavLink = styled(ButtonLink)`
+  ${media.tablet`
     font-size: 18px;
+    & > span {
+      display: none;
+    }
   `}
 `;
 

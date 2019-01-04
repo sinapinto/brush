@@ -24,7 +24,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [title, setTitle] = useState(() => getInitialTitle());
   const [editorValue, setEditorValue] = useState(() => getInitialEditorValue());
-  useTitle('Create')
+  useTitle('Create');
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
