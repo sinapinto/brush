@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
+import useTitle from '../../utils/useTitle';
 import { Card, BlankSlate } from '../../components/globals';
 import UserProfile from './UserProfile';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
@@ -20,6 +21,7 @@ export const User: React.FunctionComponent<Props> = ({ username }) => {
       variables: { username },
     }
   );
+  useTitle(`Brushes by ${data.user ? data.user.username : ''}`);
   return data.user ? (
     <UserProfile key={data.user.id} user={data.user} />
   ) : (

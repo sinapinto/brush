@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
+import useTitle from '../../utils/useTitle';
 import { Card, H3, BlankSlate, SpacedContent } from '../../components/globals';
 import PostPreview from '../../partials/PostPreview';
 import { getPostsByCategory } from '../../graphql/queries/post';
@@ -23,6 +24,7 @@ const TagSearch: React.FunctionComponent<Props> = ({ tag }) => {
     }
   );
   const { posts } = data.getPostsByCategory;
+  useTitle(`Tagged with "${tag}"`);
   return (
     <Card>
       <SpacedContent m={4}>

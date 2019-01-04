@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
 
+import useTitle from '../../utils/useTitle';
 import TagSelect from './TagSelect';
 import TextEditor from '../../components/TextEditor';
 import { Input, Card, ErrorMessage } from '../../components/globals';
@@ -23,6 +24,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [tags, setTags] = useState<string[]>([]);
   const [title, setTitle] = useState(() => getInitialTitle());
   const [editorValue, setEditorValue] = useState(() => getInitialEditorValue());
+  useTitle('Create')
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,

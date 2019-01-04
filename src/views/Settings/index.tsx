@@ -1,5 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
+
+import useTitle from '../../utils/useTitle';
 import SettingsForm from './SettingsForm';
 import { useCurrentUser } from '../../utils/useCurrentUser';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
@@ -19,6 +21,7 @@ const Settings: React.FunctionComponent<Props> = () => {
       variables: { username: currentUser!.username },
     }
   );
+  useTitle('Settings');
   return (
     <Card>
       {data.user && (

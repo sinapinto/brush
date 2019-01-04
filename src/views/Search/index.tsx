@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 
+import useTitle from '../../utils/useTitle';
 import { searchQuery } from '../../graphql/queries/search';
 import {
   Search,
@@ -30,6 +31,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
   const { data } = useQuery<Search, SearchVariables>(searchQuery, {
     variables: { query },
   });
+  useTitle(`Results for ${query}`);
   const { results } = data.search;
   const postResults = results.filter(isPost);
   const userResults = results.filter(isUser);

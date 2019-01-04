@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
+import useTitle from '../../utils/useTitle';
 import Post from './Post';
 import { Card, BlankSlate } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
@@ -18,6 +19,7 @@ const PostContainer: React.FunctionComponent<Props> = ({ id }) => {
     getPostByIdQuery,
     { variables: { id } }
   );
+  useTitle(data.getPost ? data.getPost.title : '');
   return (
     <Card>
       {data.getPost ? (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 
+import useTitle from '../../utils/useTitle';
 import { BlankSlate, Card, SpacedContent } from '../../components/globals';
 import PostPreview from '../../partials/PostPreview';
 import { getPostsQuery } from '../../graphql/queries/post';
@@ -10,6 +11,7 @@ export const Home: React.FunctionComponent = () => {
   const {
     data: { getPosts },
   } = useQuery<GetPosts>(getPostsQuery);
+  useTitle('Brush');
   return (
     <Card>
       {getPosts && getPosts.posts.length ? (
