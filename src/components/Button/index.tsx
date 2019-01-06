@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 import { media } from '../../utils/css';
 
-
 export const Button = styled.button`
   display: inline-flex;
   justify-content: center;
