@@ -1,15 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { H3, P } from '../../components/globals';
-import TagList from '../TagList';
-import Author from '../../partials/Author';
-import {
-  GetPosts_getPosts_posts_author,
-  GetPosts_getPosts_posts_categories,
-} from '../../graphql/queries/__generated__/GetPosts';
+import { GetPosts_getPosts_posts_author, GetPosts_getPosts_posts_categories } from '../../graphql/queries/__generated__/GetPosts';
+import { Author } from '../../partials/Author';
+import { TagList } from '../TagList';
 
-type Props = {
+type PostPreviewProps = {
   post: {
     id: string;
     title: string;
@@ -22,10 +19,10 @@ type Props = {
   showAuthor?: boolean;
 };
 
-const PostPreview: React.FunctionComponent<Props> = ({
+export const PostPreview = ({
   post,
   showAuthor = true,
-}) => {
+}: PostPreviewProps) => {
   return (
     <Container>
       <H3 i>
@@ -48,5 +45,3 @@ const SpaceBetween = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-export default PostPreview;

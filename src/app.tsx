@@ -1,17 +1,16 @@
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
-
-import Routes from './routes';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { client } from './graphql';
-import ErrorBoundary from './components/ErrorBoundary';
-import GlobalStyles from './styles/globalStyles';
+import { Routes } from './routes';
+import { AppGlobalStyles } from './styles/AppGlobalStyles';
 
-const App: React.FunctionComponent = () => {
+export const App = () => {
   return (
     <ApolloProvider client={client}>
       <ApolloHooksProvider client={client}>
-        <GlobalStyles />
+        <AppGlobalStyles />
         <ErrorBoundary>
           <Routes />
         </ErrorBoundary>
@@ -19,5 +18,3 @@ const App: React.FunctionComponent = () => {
     </ApolloProvider>
   );
 };
-
-export default App;

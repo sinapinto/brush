@@ -1,8 +1,8 @@
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import { userInfoFragment } from '../fragments/user';
-import { RegisterUserVariables } from './__generated__/RegisterUser';
 import { LoginUserVariables } from './__generated__/LoginUser';
+import { RegisterUserVariables } from './__generated__/RegisterUser';
 
 const registerUserMutation = gql`
   mutation RegisterUser($username: String!, $password: String!) {

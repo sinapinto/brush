@@ -1,20 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
-
-import useTitle from '../../utils/useTitle';
-import Post from './Post';
-import { Card, BlankSlate } from '../../components/globals';
+import { BlankSlate, Card } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
-import {
-  GetPostById,
-  GetPostByIdVariables,
-} from '../../graphql/queries/__generated__/GetPostById';
+import { GetPostById, GetPostByIdVariables } from '../../graphql/queries/__generated__/GetPostById';
+import { useTitle } from '../../utils/useTitle';
+import Post from './Post';
 
-type Props = {
+type PostContainerProps = {
   id: string;
 };
 
-const PostContainer: React.FunctionComponent<Props> = ({ id }) => {
+const PostContainer = ({ id }: PostContainerProps) => {
   const { data } = useQuery<GetPostById, GetPostByIdVariables>(
     getPostByIdQuery,
     { variables: { id } }

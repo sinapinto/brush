@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
+import { FaBrush as BrushIcon } from 'react-icons/fa';
+import { MdCreate as CreateIcon, MdPerson as AccountIcon } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { shade } from 'polished';
-import { MdCreate as CreateIcon } from 'react-icons/md';
-import { MdPerson as AccountIcon } from 'react-icons/md';
-import { FaBrush as BrushIcon } from 'react-icons/fa';
-
-import SearchBar from './SearchBar';
-import { useCurrentUser } from '../../utils/useCurrentUser';
-import AuthModal, { ModalType } from './AuthModal';
 import { Button } from '../../components/Button';
-import ButtonLink from '../../components/ButtonLink';
-import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
-import theme from '../../styles/theme';
+import { ButtonLink } from '../../components/ButtonLink';
+import { theme } from '../../styles/theme';
 import { media } from '../../utils/css';
+import { useCurrentUser } from '../../utils/useCurrentUser';
+import { AuthModal, ModalType } from './AuthModal';
+import { SearchBar } from './SearchBar';
 
-const Navbar: React.FunctionComponent = () => {
+export const Navbar = () => {
   const { currentUser, refetch } = useCurrentUser({ suspend: false });
   const [activeModal, setActiveModal] = useState(ModalType.Closed);
   return (
@@ -127,5 +123,3 @@ const NavLink = styled(ButtonLink)`
     }
   `}
 `;
-
-export default Navbar;

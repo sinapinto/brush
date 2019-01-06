@@ -1,5 +1,5 @@
 import React from 'react';
-import FallbackComponent from './FallbackComponent';
+import { FallbackComponent } from './FallbackComponent';
 
 type Props = {
   fallback?: React.ComponentType;
@@ -9,7 +9,7 @@ type State = {
   hasError: boolean;
 };
 
-class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, State> {
   state: State = { hasError: false };
 
   static defaultProps = {
@@ -34,5 +34,3 @@ class ErrorBoundary extends React.Component<Props, State> {
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;

@@ -1,33 +1,28 @@
 import React, { useState } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { MdDelete } from 'react-icons/md';
-import { FetchResult } from 'react-apollo';
 import { useMutation } from 'react-apollo-hooks';
+import { MdDelete } from 'react-icons/md';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { H4 } from '../../components/globals';
-import Modal from '../../components/Modal';
 import { DangerousButton } from '../../components/Button';
+import { H4 } from '../../components/globals';
+import { Modal } from '../../components/Modal';
 import { deletePostMutation } from '../../graphql/mutations/post';
-import {
-  DeletePostVariables,
-  DeletePost,
-} from '../../graphql/mutations/__generated__/DeletePost';
+import { DeletePost, DeletePostVariables } from '../../graphql/mutations/__generated__/DeletePost';
 import { getPostsQuery } from '../../graphql/queries/post';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
-interface Props extends RouteComponentProps {
+interface DeleteButtonProps extends RouteComponentProps {
   postId: string;
 }
 
-const DeleteButton: React.FunctionComponent<Props> = ({ postId, history }) => {
+const DeleteButtonComponent = ({ postId, history }: DeleteButtonProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const deletePost = useMutation<DeletePost, DeletePostVariables>(
     deletePostMutation,
     {
       variables: { id: postId },
-      update: (proxy, response: FetchResult) => {
+      update: (proxy) => {
         try {
           const data = proxy.readQuery<GetPosts>({
             query: getPostsQuery,
@@ -87,4 +82,4 @@ const ModalBody = styled.div`
   }
 `;
 
-export default withRouter(DeleteButton);
+export const DeleteButton = withRouter(DeleteButtonComponent);

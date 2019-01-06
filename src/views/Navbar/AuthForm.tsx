@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { compose } from 'react-apollo';
 import styled from 'styled-components';
-
-import { loginUser, registerUser } from '../../graphql/mutations/user';
-import { Input, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
+import { ErrorMessage, Input } from '../../components/globals';
+import { loginUser, registerUser } from '../../graphql/mutations/user';
 import { ModalType } from './AuthModal';
 
-interface Props {
+interface AuthFormProps {
   type: ModalType;
   onSuccess: () => void;
   loginUser: any;
   registerUser: any;
 }
 
-function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
+const AuthFormComponent = ({ type, onSuccess, loginUser, registerUser }: AuthFormProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +24,7 @@ function AuthForm({ type, onSuccess, loginUser, registerUser }: Props) {
     setIsLoading(true);
     const mutate = type === ModalType.Login ? loginUser : registerUser;
     mutate({ username, password })
-      .then((data: any) => {
+      .then(() => {
         setIsLoading(false);
         setError('');
         onSuccess();
@@ -86,7 +85,7 @@ const Form = styled.form`
   }
 `;
 
-export default compose(
+export const AuthForm = compose(
   loginUser,
   registerUser
-)(AuthForm);
+)(AuthFormComponent);

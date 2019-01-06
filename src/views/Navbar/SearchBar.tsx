@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import styled, { css } from 'styled-components';
 import { MdSearch } from 'react-icons/md';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { theme } from '../../styles/theme';
+import { media, placeholder } from '../../utils/css';
 
-import theme from '../../styles/theme';
-import { placeholder, media } from '../../utils/css';
-
-const SearchBar: React.FunctionComponent<RouteComponentProps> = ({
+const SearchBarComponent: React.FunctionComponent<RouteComponentProps> = ({
   history,
   location,
 }) => {
@@ -36,6 +35,8 @@ const SearchBar: React.FunctionComponent<RouteComponentProps> = ({
     </Container>
   );
 };
+
+export const SearchBar = withRouter(SearchBarComponent);
 
 const Container = styled.div`
   position: relative;
@@ -75,5 +76,3 @@ const Input = styled(({ isFocused, ...rest }) => <input {...rest} />)`
     width: 160px;
   `}
 `;
-
-export default withRouter(SearchBar);

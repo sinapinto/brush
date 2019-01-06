@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { useQuery } from 'react-apollo-hooks';
+import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
-
-import useTitle from '../../utils/useTitle';
+import { BlankSlate, Card, H3, SpacedContent } from '../../components/globals';
+import { TabPane, Tabs } from '../../components/Tabs';
 import { searchQuery } from '../../graphql/queries/search';
-import {
-  Search,
-  SearchVariables,
-  Search_search_results_Post,
-  Search_search_results,
-  Search_search_results_User,
-} from '../../graphql/queries/__generated__/Search';
-import { Card, H3, BlankSlate, SpacedContent } from '../../components/globals';
-import Tabs from '../../components/Tabs';
-import PostPreview from '../../partials/PostPreview';
-import UserPreview from '../../partials/UserPreview';
+import { Search, SearchVariables, Search_search_results, Search_search_results_Post, Search_search_results_User } from '../../graphql/queries/__generated__/Search';
+import { PostPreview } from '../../partials/PostPreview';
+import { UserPreview } from '../../partials/UserPreview';
+import { useTitle } from '../../utils/useTitle';
 
 enum Tab {
   Posts = 'Posts',
@@ -39,7 +32,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
     <Card p={0}>
       <H3 style={{ padding: '24px 0 0 24px' }}>{`Results for “${query}”`}</H3>
       <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
-        <TabPane label="Posts" key={Tab.Posts}>
+        <Pane label="Posts" key={Tab.Posts}>
           <SpacedContent m={4}>
             {postResults.length ? (
               postResults.map(post => <PostPreview key={post.id} post={post} />)
@@ -47,8 +40,8 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
               <BlankSlate>No posts found</BlankSlate>
             )}
           </SpacedContent>
-        </TabPane>
-        <TabPane label="Users" key={Tab.Users}>
+        </Pane>
+        <Pane label="Users" key={Tab.Users}>
           <SpacedContent m={4}>
             {userResults.length ? (
               userResults.map(user => <UserPreview key={user.id} user={user} />)
@@ -56,7 +49,7 @@ const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
               <BlankSlate>No users found</BlankSlate>
             )}
           </SpacedContent>
-        </TabPane>
+        </Pane>
       </Tabs>
     </Card>
   );
@@ -74,7 +67,7 @@ const isUser = (
   return item.__typename === 'User';
 };
 
-const TabPane = styled(Tabs.TabPane)`
+const Pane = styled(TabPane)`
   padding: 32px;
 `;
 

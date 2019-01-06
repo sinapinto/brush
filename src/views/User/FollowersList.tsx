@@ -1,19 +1,15 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
-
 import { BlankSlate } from '../../components/globals';
-import UserPreview from '../../partials/UserPreview';
 import { getSubscribersByUsername } from '../../graphql/queries/user';
-import {
-  GetSubscribersByUsername,
-  GetSubscribersByUsernameVariables,
-} from '../../graphql/queries/__generated__/GetSubscribersByUsername';
+import { GetSubscribersByUsername, GetSubscribersByUsernameVariables } from '../../graphql/queries/__generated__/GetSubscribersByUsername';
+import { UserPreview } from '../../partials/UserPreview';
 
-type Props = {
+type FollowersListProps = {
   username: string;
 };
 
-const FollowersList: React.FunctionComponent<Props> = ({ username }) => {
+export const FollowersList = ({ username }: FollowersListProps) => {
   const { data } = useQuery<
     GetSubscribersByUsername,
     GetSubscribersByUsernameVariables
@@ -32,5 +28,3 @@ const FollowersList: React.FunctionComponent<Props> = ({ username }) => {
     </>
   );
 };
-
-export default FollowersList;

@@ -1,23 +1,16 @@
 import React from 'react';
 import { useMutation } from 'react-apollo-hooks';
 import { MdPersonAdd as FollowIcon } from 'react-icons/md';
+import { Button, OutlineButton } from '../../components/Button';
+import { subscribeToUserMutation, unsubscribeToUserMutation } from '../../graphql/mutations/user';
+import { MdHowToReg as UnfollowIcon } from './MdHowToReg';
 
-import { default as UnfollowIcon } from './MdHowToReg';
-import { OutlineButton, Button } from '../../components/Button';
-import {
-  subscribeToUserMutation,
-  unsubscribeToUserMutation,
-} from '../../graphql/mutations/user';
-
-type Props = {
+type FollowButtonProps = {
   isFollowing: boolean;
   userId: string;
 };
 
-const FollowButton: React.FunctionComponent<Props> = ({
-  isFollowing,
-  userId,
-}) => {
+export const FollowButton = ({ isFollowing, userId }: FollowButtonProps) => {
   const unsubscribe = useMutation(unsubscribeToUserMutation, {
     variables: { userId },
     optimisticResponse: {
@@ -49,5 +42,3 @@ const FollowButton: React.FunctionComponent<Props> = ({
     </Btn>
   );
 };
-
-export default FollowButton;

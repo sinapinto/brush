@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import theme from './theme';
+import { theme } from './theme';
 
-export default createGlobalStyle`
+export const AppGlobalStyles = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: inherit;
   }

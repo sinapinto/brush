@@ -1,24 +1,17 @@
 import React, { Suspense, useState } from 'react';
-import styled from 'styled-components';
 import { MdSettings as SettingsIcon } from 'react-icons/md';
-
-import theme from '../../styles/theme';
-import Avatar from '../../components/Avatar';
-import { useCurrentUser } from '../../utils/useCurrentUser';
-import FollowersList from './FollowersList';
-import FollowingList from './FollowingList';
-import FollowButton from '../../partials/FollowButton';
+import styled from 'styled-components';
+import { Avatar } from '../../components/Avatar';
 import { OutlineButtonLink } from '../../components/ButtonLink';
-import {
-  H1,
-  BlankSlate,
-  Spinner,
-  Card,
-  SpacedContent,
-} from '../../components/globals';
-import Tabs from '../../components/Tabs';
-import PostPreview from '../../partials/PostPreview';
+import { BlankSlate, Card, H1, SpacedContent, Spinner } from '../../components/globals';
+import { TabPane, Tabs } from '../../components/Tabs';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
+import { FollowButton } from '../../partials/FollowButton';
+import { PostPreview } from '../../partials/PostPreview';
+import { theme } from '../../styles/theme';
+import { useCurrentUser } from '../../utils/useCurrentUser';
+import { FollowersList } from './FollowersList';
+import { FollowingList } from './FollowingList';
 
 enum Tab {
   Posts = 'Posts',
@@ -26,11 +19,11 @@ enum Tab {
   Following = 'Following',
 }
 
-type Props = {
+type UserProfileProps = {
   user: GetUserByUsername_user;
 };
 
-const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
+export const UserProfile = ({ user }: UserProfileProps) => {
   const { currentUser } = useCurrentUser();
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   return (
@@ -50,7 +43,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
       </ProfileContainer>
       <Card p={0}>
         <Tabs activeKey={activeTab} onChange={key => setActiveTab(key)}>
-          <TabPane label="Posts" key={Tab.Posts}>
+          <Pane label="Posts" key={Tab.Posts}>
             {user.posts.length ? (
               <SpacedContent m={4}>
                 {user.posts.map(post => (
@@ -64,21 +57,21 @@ const UserProfile: React.FunctionComponent<Props> = ({ user }) => {
             ) : (
               <BlankSlate>This user hasn't posted anything</BlankSlate>
             )}
-          </TabPane>
-          <TabPane label="Followers" key={Tab.Followers}>
+          </Pane>
+          <Pane label="Followers" key={Tab.Followers}>
             <Suspense fallback={<Spinner size="small" />}>
               <SpacedContent m={4}>
                 <FollowersList username={user.username} />
               </SpacedContent>
             </Suspense>
-          </TabPane>
-          <TabPane label="Following" key={Tab.Following}>
+          </Pane>
+          <Pane label="Following" key={Tab.Following}>
             <Suspense fallback={<Spinner size="small" />}>
               <SpacedContent m={4}>
                 <FollowingList username={user.username} />
               </SpacedContent>
             </Suspense>
-          </TabPane>
+          </Pane>
         </Tabs>
       </Card>
     </Container>
@@ -94,7 +87,7 @@ const Container = styled.div`
   }
 `;
 
-const TabPane = styled(Tabs.TabPane)`
+const Pane = styled(TabPane)`
   padding: 32px;
 `;
 
@@ -119,5 +112,3 @@ const Bio = styled.span`
   margin-bottom: 24px;
   margin-top: 8px;
 `;
-
-export default UserProfile;

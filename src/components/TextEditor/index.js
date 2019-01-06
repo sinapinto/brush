@@ -1,19 +1,9 @@
 // @ts-ignore
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Editor } from 'slate-react';
 import { isKeyHotkey } from 'is-hotkey';
-import {
-  MdFormatBold,
-  MdFormatItalic,
-  MdFormatUnderlined,
-  MdCode,
-  MdLooksOne,
-  MdLooksTwo,
-  MdFormatQuote,
-  MdFormatListNumbered,
-  MdFormatListBulleted,
-} from 'react-icons/md';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { MdCode, MdFormatBold, MdFormatItalic, MdFormatListBulleted, MdFormatListNumbered, MdFormatQuote, MdFormatUnderlined, MdLooksOne, MdLooksTwo } from 'react-icons/md';
+import { Editor } from 'slate-react';
 import { Button, Toolbar } from './components';
 
 const DEFAULT_NODE = 'paragraph';
@@ -35,7 +25,7 @@ const icons = {
   'bulleted-list': <MdFormatListBulleted />,
 };
 
-export default class TextEditor extends React.Component {
+export class TextEditor extends React.Component {
   hasMark = type => {
     const { value } = this.props;
     return value.activeMarks.some(mark => mark.type === type);

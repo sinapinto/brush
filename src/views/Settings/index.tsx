@@ -1,19 +1,13 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
-
-import useTitle from '../../utils/useTitle';
-import SettingsForm from './SettingsForm';
-import { useCurrentUser } from '../../utils/useCurrentUser';
-import { getUserByUsernameQuery } from '../../graphql/queries/user';
 import { Card } from '../../components/globals';
-import {
-  GetUserByUsernameVariables,
-  GetUserByUsername,
-} from '../../graphql/queries/__generated__/GetUserByUsername';
+import { getUserByUsernameQuery } from '../../graphql/queries/user';
+import { GetUserByUsername, GetUserByUsernameVariables } from '../../graphql/queries/__generated__/GetUserByUsername';
+import { useCurrentUser } from '../../utils/useCurrentUser';
+import { useTitle } from '../../utils/useTitle';
+import { SettingsForm } from './SettingsForm';
 
-type Props = {};
-
-const Settings: React.FunctionComponent<Props> = () => {
+export const Settings = () => {
   const { currentUser } = useCurrentUser();
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
@@ -30,5 +24,3 @@ const Settings: React.FunctionComponent<Props> = () => {
     </Card>
   );
 };
-
-export default Settings;

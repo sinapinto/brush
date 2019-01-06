@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-
-import theme from '../../styles/theme';
+import { theme } from '../../styles/theme';
 import { placeholder } from '../../utils/css';
+
 
 const headerStyles = css`
   color: ${theme.text.secondary};

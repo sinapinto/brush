@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import { shade } from 'polished';
-
-import theme from '../../styles/theme';
+import styled from 'styled-components';
+import { theme } from '../../styles/theme';
 import { media } from '../../utils/css';
+
 
 export const Button = styled.button`
   display: inline-flex;

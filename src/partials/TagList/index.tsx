@@ -1,15 +1,14 @@
+import { shade } from 'polished';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { shade } from 'polished';
+import { theme } from '../../styles/theme';
 
-import theme from '../../styles/theme';
-
-type Props = {
+type TagListProps = {
   categories: { name: string }[];
 };
 
-const TagList: React.FunctionComponent<Props> = ({ categories }) => {
+export const TagList = ({ categories }: TagListProps) => {
   return (
     <Container>
       {categories.map(c => (
@@ -40,5 +39,3 @@ const TagLink = styled(Link)`
     color: ${shade(0.05, theme.text.secondary)};
   }
 `;
-
-export default TagList;

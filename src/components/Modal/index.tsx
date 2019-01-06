@@ -1,10 +1,10 @@
+import { shade } from 'polished';
 import React from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { shade } from 'polished';
-import theme from '../../styles/theme';
+import { theme } from '../../styles/theme';
 
-type Props = {
+type ModalProps = {
   hasCloseButton?: boolean;
   onRequestClose: () => void;
   isOpen: boolean;
@@ -12,7 +12,7 @@ type Props = {
 
 const appRoot = document.getElementById('app-root') as HTMLElement;
 
-const Modal: React.FunctionComponent<Props> = ({
+export const Modal: React.FunctionComponent<ModalProps> = ({
   children,
   hasCloseButton = true,
   ...otherProps
@@ -71,5 +71,3 @@ const Toolbar = styled.div`
 const ModalContent = styled.div`
   padding: 0 16px 16px;
 `;
-
-export default Modal;

@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Button, OutlineButton } from '../Button';
 
-type Props = {
+type ButtonLinkProps = {
   history: any;
   location: any;
   match: any;
@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ButtonLink({ to, history, onClick, children, ...rest }: Props) {
+function ButtonLinkComp({ to, history, onClick, children, ...rest }: ButtonLinkProps) {
   return (
     <Button
       {...rest}
@@ -31,7 +31,7 @@ function OutlineButtonLinkComp({
   onClick,
   children,
   ...rest
-}: Props) {
+}: ButtonLinkProps) {
   return (
     <OutlineButton
       {...rest}
@@ -45,5 +45,5 @@ function OutlineButtonLinkComp({
   );
 }
 
-export default withRouter<Props>(ButtonLink);
-export const OutlineButtonLink = withRouter<Props>(OutlineButtonLinkComp);
+export const ButtonLink = withRouter<ButtonLinkProps>(ButtonLinkComp);
+export const OutlineButtonLink = withRouter<ButtonLinkProps>(OutlineButtonLinkComp);

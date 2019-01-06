@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-apollo-hooks';
 import styled from 'styled-components';
-
-import { editProfileMutation } from '../../graphql/mutations/user';
-import { Input, Label, ErrorMessage } from '../../components/globals';
 import { CTAButton } from '../../components/Button';
-import LogoutButton from './LogoutButton';
-import {
-  EditProfileMutation,
-  EditProfileMutationVariables,
-} from '../../graphql/mutations/__generated__/EditProfileMutation';
+import { ErrorMessage, Input, Label } from '../../components/globals';
+import { editProfileMutation } from '../../graphql/mutations/user';
+import { EditProfileMutation, EditProfileMutationVariables } from '../../graphql/mutations/__generated__/EditProfileMutation';
+import { LogoutButton } from './LogoutButton';
 
-type Props = {
+type SettingsFormProps = {
   username: string;
   bio: string;
 };
 
-const SettingsForm: React.FunctionComponent<Props> = props => {
+export const SettingsForm = (props: SettingsFormProps) => {
   const [username, setUsername] = useState(props.username);
   const [bio, setBio] = useState(props.bio);
   const [canSubmit, setCanSubmit] = useState(false);
@@ -88,5 +84,3 @@ const Form = styled.form`
 const Row = styled.div`
   margin: 16px 0;
 `;
-
-export default SettingsForm;

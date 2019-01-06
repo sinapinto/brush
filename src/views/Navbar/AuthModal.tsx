@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import Modal from '../../components/Modal';
-import AuthForm from './AuthForm';
 import { TextButton } from '../../components/Button';
-import { P, H2 } from '../../components/globals';
-import theme from '../../styles/theme';
+import { H2, P } from '../../components/globals';
+import { Modal } from '../../components/Modal';
+import { theme } from '../../styles/theme';
+import { AuthForm } from './AuthForm';
 
-interface Props {
+interface AuthModalProps {
   type: ModalType;
   onChangeType: (t: ModalType) => void;
   onRequestClose: () => void;
@@ -20,13 +19,13 @@ export enum ModalType {
   Signup,
 }
 
-export default function AuthModal({
+export const AuthModal = ({
   isOpen,
   onRequestClose,
   type,
   onChangeType,
   onSuccess,
-}: Props & ReactModal.Props) {
+}: AuthModalProps & ReactModal.Props) => {
   const title = type === ModalType.Login ? 'Log In' : 'Sign Up';
   const subtitle =
     type === ModalType.Login

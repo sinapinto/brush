@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Mutation, FetchResult } from 'react-apollo';
-import styled from 'styled-components';
+import { FetchResult, Mutation } from 'react-apollo';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
-
-import useTitle from '../../utils/useTitle';
-import TagSelect from './TagSelect';
-import TextEditor from '../../components/TextEditor';
-import { Input, Card, ErrorMessage } from '../../components/globals';
+import styled from 'styled-components';
 import { CTAButton } from '../../components/Button';
+import { Card, ErrorMessage, Input } from '../../components/globals';
+import { TextEditor } from '../../components/TextEditor';
 import { createPostMutation } from '../../graphql/mutations/post';
+import { CreatePost, CreatePostVariables } from '../../graphql/mutations/__generated__/CreatePost';
 import { getPostsQuery } from '../../graphql/queries/post';
-import {
-  CreatePost,
-  CreatePostVariables,
-} from '../../graphql/mutations/__generated__/CreatePost';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
+import { useTitle } from '../../utils/useTitle';
+import { TagSelect } from './TagSelect';
 
 class CreatePostMutation extends Mutation<CreatePost, CreatePostVariables> {}
 

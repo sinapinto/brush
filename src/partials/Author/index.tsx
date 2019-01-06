@@ -1,17 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Avatar } from '../../components/Avatar';
 
-import Avatar from '../../components/Avatar';
-
-type Props = {
+type AuthorProps = {
   user: {
     avatar: string;
     username: string;
   };
 };
 
-const Author: React.FunctionComponent<Props> = ({ user }) => {
+export const Author = ({ user }: AuthorProps) => {
   return (
     <Container>
       <Avatar size="sm" src={user.avatar} />
@@ -28,5 +27,3 @@ const Container = styled.div`
 const UsernameLink = styled(Link)`
   font-size: 14px;
 `;
-
-export default Author;

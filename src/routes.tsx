@@ -1,17 +1,16 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ErrorMessage, Spinner } from './components/globals';
 import { useCurrentUser } from './utils/useCurrentUser';
-import ErrorBoundary from './components/ErrorBoundary';
-import { Spinner, ErrorMessage } from './components/globals';
-import Navbar from './views/Navbar';
+import { Home } from './views/Home';
+import { Navbar } from './views/Navbar';
+import { Settings } from './views/Settings';
 
-const Home = React.lazy(() => import('./views/Home'));
 const User = React.lazy(() => import('./views/User'));
 const Post = React.lazy(() => import('./views/Post'));
 const Create = React.lazy(() => import('./views/Create'));
-const Settings = React.lazy(() => import('./views/Settings'));
 const Search = React.lazy(() => import('./views/Search'));
 const TagSearch = React.lazy(() => import('./views/TagSearch'));
 
@@ -28,7 +27,7 @@ const requireAuth = (Comp: React.ComponentType<any>) => {
   return C;
 };
 
-const Routes = () => {
+export const Routes = () => {
   return (
     <BrowserRouter>
       <>
@@ -74,5 +73,3 @@ const Main = styled.main`
   box-sizing: border-box;
   padding: 24px;
 `;
-
-export default Routes;

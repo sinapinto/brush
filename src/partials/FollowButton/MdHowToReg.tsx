@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-type Props = {
+type MdHowToRegProps = {
   size?: string | number;
 };
 
-const MdHowToReg: React.FunctionComponent<Props> = ({ size = '1em' }) => {
+export const MdHowToReg = ({ size = '1em' }: MdHowToRegProps) => {
   return (
     <svg
       stroke="currentColor"
@@ -25,5 +25,3 @@ const MdHowToReg: React.FunctionComponent<Props> = ({ size = '1em' }) => {
     </svg>
   );
 };
-
-export default MdHowToReg;

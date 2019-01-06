@@ -2,14 +2,13 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-import Avatar from '../../components/Avatar';
-import FollowButton from '../FollowButton';
-import theme from '../../styles/theme';
+import { Avatar } from '../../components/Avatar';
 import { currentUserQuery } from '../../graphql/queries/user';
 import { CurrentUser } from '../../graphql/queries/__generated__/CurrentUser';
+import { theme } from '../../styles/theme';
+import { FollowButton } from '../FollowButton';
 
-type Props = {
+type UserPreviewProps = {
   user: {
     id: string;
     username: string;
@@ -19,7 +18,7 @@ type Props = {
   };
 };
 
-const UserPreview: React.FunctionComponent<Props> = ({ user }) => {
+export const UserPreview = ({ user }: UserPreviewProps) => {
   const {
     data: { currentUser },
   } = useQuery<CurrentUser>(currentUserQuery);
@@ -72,5 +71,3 @@ const Bio = styled.span`
   line-height: 24px;
   color: ${theme.text.secondary};
 `;
-
-export default UserPreview;

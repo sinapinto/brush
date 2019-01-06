@@ -13,12 +13,12 @@ const margins = {
   lg: 0,
 };
 
-type Props = {
+type AvatarProps = {
   src: string;
   size: 'sm' | 'md' | 'lg';
 };
 
-const Avatar = styled(({ src, size, ...rest }: Props) => <div {...rest} />)`
+export const Avatar = styled(({ src, size, ...rest }: AvatarProps) => <div {...rest} />)`
   width: ${props => `${sizes[props.size]}px`};
   height: ${props => `${sizes[props.size]}px`};
   margin-right: ${props => `${margins[props.size]}px`};
@@ -27,5 +27,3 @@ const Avatar = styled(({ src, size, ...rest }: Props) => <div {...rest} />)`
   background-size: ${props => `${sizes[props.size]}px`};
   flex-shrink: 0;
 `;
-
-export default Avatar;

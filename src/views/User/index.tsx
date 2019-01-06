@@ -1,20 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
-
-import useTitle from '../../utils/useTitle';
-import { Card, BlankSlate } from '../../components/globals';
-import UserProfile from './UserProfile';
+import { BlankSlate, Card } from '../../components/globals';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
-import {
-  GetUserByUsername,
-  GetUserByUsernameVariables,
-} from '../../graphql/queries/__generated__/GetUserByUsername';
+import { GetUserByUsername, GetUserByUsernameVariables } from '../../graphql/queries/__generated__/GetUserByUsername';
+import { useTitle } from '../../utils/useTitle';
+import { UserProfile } from './UserProfile';
 
-interface Props {
+interface UserProps {
   username: string;
 }
 
-export const User: React.FunctionComponent<Props> = ({ username }) => {
+const User = ({ username }: UserProps) => {
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
     {

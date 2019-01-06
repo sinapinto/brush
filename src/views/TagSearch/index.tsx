@@ -1,20 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
-
-import useTitle from '../../utils/useTitle';
-import { Card, H3, BlankSlate, SpacedContent } from '../../components/globals';
-import PostPreview from '../../partials/PostPreview';
+import { BlankSlate, Card, H3, SpacedContent } from '../../components/globals';
 import { getPostsByCategory } from '../../graphql/queries/post';
-import {
-  GetPostsByCategory,
-  GetPostsByCategoryVariables,
-} from '../../graphql/queries/__generated__/GetPostsByCategory';
+import { GetPostsByCategory, GetPostsByCategoryVariables } from '../../graphql/queries/__generated__/GetPostsByCategory';
+import { PostPreview } from '../../partials/PostPreview';
+import { useTitle } from '../../utils/useTitle';
 
-type Props = {
+type TagSearchProps = {
   tag: string;
 };
 
-const TagSearch: React.FunctionComponent<Props> = ({ tag }) => {
+const TagSearch = ({ tag }: TagSearchProps) => {
   const { data } = useQuery<GetPostsByCategory, GetPostsByCategoryVariables>(
     getPostsByCategory,
     {
