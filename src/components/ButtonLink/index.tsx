@@ -11,7 +11,13 @@ type ButtonLinkProps = {
   children: React.ReactNode;
 };
 
-function ButtonLinkComp({ to, history, onClick, children, ...rest }: ButtonLinkProps) {
+function ButtonLinkComp({
+  to,
+  history,
+  onClick,
+  children,
+  ...rest
+}: ButtonLinkProps) {
   return (
     <Button
       {...rest}
@@ -46,4 +52,6 @@ function OutlineButtonLinkComp({
 }
 
 export const ButtonLink = withRouter<ButtonLinkProps>(ButtonLinkComp);
-export const OutlineButtonLink = withRouter<ButtonLinkProps>(OutlineButtonLinkComp);
+export const OutlineButtonLink = withRouter<ButtonLinkProps>(
+  OutlineButtonLinkComp
+);

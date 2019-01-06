@@ -2,7 +2,10 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { BlankSlate, Card } from '../../components/globals';
 import { getUserByUsernameQuery } from '../../graphql/queries/user';
-import { GetUserByUsername, GetUserByUsernameVariables } from '../../graphql/queries/__generated__/GetUserByUsername';
+import {
+  GetUserByUsername,
+  GetUserByUsernameVariables,
+} from '../../graphql/queries/__generated__/GetUserByUsername';
 import { useTitle } from '../../utils/useTitle';
 import { UserProfile } from './UserProfile';
 

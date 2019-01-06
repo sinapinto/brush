@@ -2,7 +2,10 @@ import React from 'react';
 import { useMutation } from 'react-apollo-hooks';
 import { MdPersonAdd as FollowIcon } from 'react-icons/md';
 import { Button, OutlineButton } from '../../components/Button';
-import { subscribeToUserMutation, unsubscribeToUserMutation } from '../../graphql/mutations/user';
+import {
+  subscribeToUserMutation,
+  unsubscribeToUserMutation,
+} from '../../graphql/mutations/user';
 import { MdHowToReg as UnfollowIcon } from './MdHowToReg';
 
 type FollowButtonProps = {

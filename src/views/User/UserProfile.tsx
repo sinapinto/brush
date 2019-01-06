@@ -3,7 +3,13 @@ import { MdSettings as SettingsIcon } from 'react-icons/md';
 import styled from 'styled-components';
 import { Avatar } from '../../components/Avatar';
 import { OutlineButtonLink } from '../../components/ButtonLink';
-import { BlankSlate, Card, H1, SpacedContent, Spinner } from '../../components/globals';
+import {
+  BlankSlate,
+  Card,
+  H1,
+  SpacedContent,
+  Spinner,
+} from '../../components/globals';
 import { TabPane, Tabs } from '../../components/Tabs';
 import { GetUserByUsername_user } from '../../graphql/queries/__generated__/GetUserByUsername';
 import { FollowButton } from '../../partials/FollowButton';

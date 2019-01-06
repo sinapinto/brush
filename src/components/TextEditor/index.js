@@ -2,7 +2,17 @@
 import { isKeyHotkey } from 'is-hotkey';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { MdCode, MdFormatBold, MdFormatItalic, MdFormatListBulleted, MdFormatListNumbered, MdFormatQuote, MdFormatUnderlined, MdLooksOne, MdLooksTwo } from 'react-icons/md';
+import {
+  MdCode,
+  MdFormatBold,
+  MdFormatItalic,
+  MdFormatListBulleted,
+  MdFormatListNumbered,
+  MdFormatQuote,
+  MdFormatUnderlined,
+  MdLooksOne,
+  MdLooksTwo,
+} from 'react-icons/md';
 import { Editor } from 'slate-react';
 import { Button, Toolbar } from './components';
 

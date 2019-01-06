@@ -3,7 +3,6 @@ import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../styles/theme';
 import { placeholder } from '../../utils/css';
 
-
 const headerStyles = css`
   color: ${theme.text.secondary};
   font-weight: 700;

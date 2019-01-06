@@ -18,7 +18,9 @@ type AvatarProps = {
   size: 'sm' | 'md' | 'lg';
 };
 
-export const Avatar = styled(({ src, size, ...rest }: AvatarProps) => <div {...rest} />)`
+export const Avatar = styled(({ src, size, ...rest }: AvatarProps) => (
+  <div {...rest} />
+))`
   width: ${props => `${sizes[props.size]}px`};
   height: ${props => `${sizes[props.size]}px`};
   margin-right: ${props => `${margins[props.size]}px`};

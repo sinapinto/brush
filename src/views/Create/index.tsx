@@ -8,7 +8,10 @@ import { CTAButton } from '../../components/Button';
 import { Card, ErrorMessage, Input } from '../../components/globals';
 import { TextEditor } from '../../components/TextEditor';
 import { createPostMutation } from '../../graphql/mutations/post';
-import { CreatePost, CreatePostVariables } from '../../graphql/mutations/__generated__/CreatePost';
+import {
+  CreatePost,
+  CreatePostVariables,
+} from '../../graphql/mutations/__generated__/CreatePost';
 import { getPostsQuery } from '../../graphql/queries/post';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 import { useTitle } from '../../utils/useTitle';

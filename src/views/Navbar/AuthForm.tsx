@@ -13,7 +13,12 @@ interface AuthFormProps {
   registerUser: any;
 }
 
-const AuthFormComponent = ({ type, onSuccess, loginUser, registerUser }: AuthFormProps) => {
+const AuthFormComponent = ({
+  type,
+  onSuccess,
+  loginUser,
+  registerUser,
+}: AuthFormProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +75,7 @@ const AuthFormComponent = ({ type, onSuccess, loginUser, registerUser }: AuthFor
       </CTAButton>
     </Form>
   );
-}
+};
 
 const Form = styled.form`
   width: 100%;

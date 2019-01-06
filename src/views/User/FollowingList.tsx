@@ -2,7 +2,10 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { BlankSlate } from '../../components/globals';
 import { getSubscriptionsByUsername } from '../../graphql/queries/user';
-import { GetSubscriptionsByUsername, GetSubscriptionsByUsernameVariables } from '../../graphql/queries/__generated__/GetSubscriptionsByUsername';
+import {
+  GetSubscriptionsByUsername,
+  GetSubscriptionsByUsernameVariables,
+} from '../../graphql/queries/__generated__/GetSubscriptionsByUsername';
 import { UserPreview } from '../../partials/UserPreview';
 
 type FollowingListProps = {

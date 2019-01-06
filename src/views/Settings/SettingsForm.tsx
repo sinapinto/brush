@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { CTAButton } from '../../components/Button';
 import { ErrorMessage, Input, Label } from '../../components/globals';
 import { editProfileMutation } from '../../graphql/mutations/user';
-import { EditProfileMutation, EditProfileMutationVariables } from '../../graphql/mutations/__generated__/EditProfileMutation';
+import {
+  EditProfileMutation,
+  EditProfileMutationVariables,
+} from '../../graphql/mutations/__generated__/EditProfileMutation';
 import { LogoutButton } from './LogoutButton';
 
 type SettingsFormProps = {

@@ -8,7 +8,11 @@ type TabsProps = {
   children: any;
 };
 
-export const Tabs: React.FunctionComponent<TabsProps> = ({ activeKey, onChange, children }) => {
+export const Tabs: React.FunctionComponent<TabsProps> = ({
+  activeKey,
+  onChange,
+  children,
+}) => {
   return (
     <>
       <TabContainer>

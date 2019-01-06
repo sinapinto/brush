@@ -7,7 +7,10 @@ import { DangerousButton } from '../../components/Button';
 import { H4 } from '../../components/globals';
 import { Modal } from '../../components/Modal';
 import { deletePostMutation } from '../../graphql/mutations/post';
-import { DeletePost, DeletePostVariables } from '../../graphql/mutations/__generated__/DeletePost';
+import {
+  DeletePost,
+  DeletePostVariables,
+} from '../../graphql/mutations/__generated__/DeletePost';
 import { getPostsQuery } from '../../graphql/queries/post';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
 
@@ -22,7 +25,7 @@ const DeleteButtonComponent = ({ postId, history }: DeleteButtonProps) => {
     deletePostMutation,
     {
       variables: { id: postId },
-      update: (proxy) => {
+      update: proxy => {
         try {
           const data = proxy.readQuery<GetPosts>({
             query: getPostsQuery,

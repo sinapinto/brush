@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FaBrush as BrushIcon } from 'react-icons/fa';
-import { MdCreate as CreateIcon, MdPerson as AccountIcon } from 'react-icons/md';
+import {
+  MdCreate as CreateIcon,
+  MdPerson as AccountIcon,
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';

@@ -2,7 +2,10 @@ import React from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import { BlankSlate, Card } from '../../components/globals';
 import { getPostByIdQuery } from '../../graphql/queries/post';
-import { GetPostById, GetPostByIdVariables } from '../../graphql/queries/__generated__/GetPostById';
+import {
+  GetPostById,
+  GetPostByIdVariables,
+} from '../../graphql/queries/__generated__/GetPostById';
 import { useTitle } from '../../utils/useTitle';
 import Post from './Post';
 

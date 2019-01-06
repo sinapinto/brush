@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { H3, P } from '../../components/globals';
-import { GetPosts_getPosts_posts_author, GetPosts_getPosts_posts_categories } from '../../graphql/queries/__generated__/GetPosts';
+import {
+  GetPosts_getPosts_posts_author,
+  GetPosts_getPosts_posts_categories,
+} from '../../graphql/queries/__generated__/GetPosts';
 import { Author } from '../../partials/Author';
 import { TagList } from '../TagList';
 
@@ -19,10 +22,7 @@ type PostPreviewProps = {
   showAuthor?: boolean;
 };
 
-export const PostPreview = ({
-  post,
-  showAuthor = true,
-}: PostPreviewProps) => {
+export const PostPreview = ({ post, showAuthor = true }: PostPreviewProps) => {
   return (
     <Container>
       <H3 i>

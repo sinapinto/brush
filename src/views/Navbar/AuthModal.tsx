@@ -47,7 +47,7 @@ export const AuthModal = ({
       </Container>
     </Modal>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;

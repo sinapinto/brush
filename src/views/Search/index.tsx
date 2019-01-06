@@ -5,7 +5,13 @@ import styled from 'styled-components';
 import { BlankSlate, Card, H3, SpacedContent } from '../../components/globals';
 import { TabPane, Tabs } from '../../components/Tabs';
 import { searchQuery } from '../../graphql/queries/search';
-import { Search, SearchVariables, Search_search_results, Search_search_results_Post, Search_search_results_User } from '../../graphql/queries/__generated__/Search';
+import {
+  Search,
+  SearchVariables,
+  Search_search_results,
+  Search_search_results_Post,
+  Search_search_results_User,
+} from '../../graphql/queries/__generated__/Search';
 import { PostPreview } from '../../partials/PostPreview';
 import { UserPreview } from '../../partials/UserPreview';
 import { useTitle } from '../../utils/useTitle';
