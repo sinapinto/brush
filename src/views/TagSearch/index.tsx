@@ -13,7 +13,7 @@ type TagSearchProps = {
   tag: string;
 };
 
-const TagSearch = ({ tag }: TagSearchProps) => {
+export const TagSearch = ({ tag }: TagSearchProps) => {
   const { data } = useQuery<GetPostsByCategory, GetPostsByCategoryVariables>(
     getPostsByCategory,
     {
@@ -37,5 +37,3 @@ const TagSearch = ({ tag }: TagSearchProps) => {
     </Card>
   );
 };
-
-export default TagSearch;

@@ -6,7 +6,7 @@ import { BlankSlate, Card, H3, SpacedContent } from '../../components/globals';
 import { TabPane, Tabs } from '../../components/Tabs';
 import { searchQuery } from '../../graphql/queries/search';
 import {
-  Search,
+  Search as SearchConfig,
   SearchVariables,
   Search_search_results,
   Search_search_results_Post,
@@ -21,13 +21,13 @@ enum Tab {
   Users = 'Users',
 }
 
-const SearchContainer: React.FunctionComponent<RouteComponentProps> = ({
+export const Search: React.FunctionComponent<RouteComponentProps> = ({
   location,
 }) => {
   const [activeTab, setActiveTab] = useState(Tab.Posts);
   // TODO: make this more robust
   const query = location.search.replace(/^\?q=/, '');
-  const { data } = useQuery<Search, SearchVariables>(searchQuery, {
+  const { data } = useQuery<SearchConfig, SearchVariables>(searchQuery, {
     variables: { query },
   });
   useTitle(`Results for ${query}`);
@@ -76,5 +76,3 @@ const isUser = (
 const Pane = styled(TabPane)`
   padding: 32px;
 `;
-
-export default SearchContainer;

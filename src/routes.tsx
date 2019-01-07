@@ -6,13 +6,13 @@ import { ErrorMessage, Spinner } from './components/globals';
 import { useCurrentUser } from './utils/useCurrentUser';
 import { Home } from './views/Home';
 import { Navbar } from './views/Navbar';
+import { Search } from './views/Search';
 import { Settings } from './views/Settings';
+import { TagSearch } from './views/TagSearch';
+import { User } from './views/User';
 
-const User = React.lazy(() => import('./views/User'));
 const Post = React.lazy(() => import('./views/Post'));
 const Create = React.lazy(() => import('./views/Create'));
-const Search = React.lazy(() => import('./views/Search'));
-const TagSearch = React.lazy(() => import('./views/TagSearch'));
 
 const ErrorFallback = () => (
   <ErrorMessage>An unexpected error occured.</ErrorMessage>

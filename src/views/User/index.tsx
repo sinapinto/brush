@@ -13,7 +13,7 @@ interface UserProps {
   username: string;
 }
 
-const User = ({ username }: UserProps) => {
+export const User = ({ username }: UserProps) => {
   const { data } = useQuery<GetUserByUsername, GetUserByUsernameVariables>(
     getUserByUsernameQuery,
     {
@@ -29,5 +29,3 @@ const User = ({ username }: UserProps) => {
     </Card>
   );
 };
-
-export default User;
