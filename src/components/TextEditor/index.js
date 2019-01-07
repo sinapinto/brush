@@ -14,7 +14,16 @@ import {
   MdLooksTwo,
 } from 'react-icons/md';
 import { Editor } from 'slate-react';
-import { Button, Toolbar } from './components';
+import {
+  Blockquote,
+  Button,
+  Code,
+  H1,
+  H2,
+  Ol,
+  Toolbar,
+  Ul,
+} from './components';
 
 const DEFAULT_NODE = 'paragraph';
 
@@ -123,17 +132,17 @@ export class TextEditor extends React.Component {
 
     switch (node.type) {
       case 'block-quote':
-        return <blockquote {...attributes}>{children}</blockquote>;
+        return <Blockquote {...attributes}>{children}</Blockquote>;
       case 'bulleted-list':
-        return <ul {...attributes}>{children}</ul>;
+        return <Ul {...attributes}>{children}</Ul>;
       case 'heading-one':
-        return <h1 {...attributes}>{children}</h1>;
+        return <H1 {...attributes}>{children}</H1>;
       case 'heading-two':
-        return <h2 {...attributes}>{children}</h2>;
+        return <H2 {...attributes}>{children}</H2>;
       case 'list-item':
         return <li {...attributes}>{children}</li>;
       case 'numbered-list':
-        return <ol {...attributes}>{children}</ol>;
+        return <Ol {...attributes}>{children}</Ol>;
       default:
         return next();
     }
@@ -146,7 +155,7 @@ export class TextEditor extends React.Component {
       case 'bold':
         return <strong {...attributes}>{children}</strong>;
       case 'code':
-        return <code {...attributes}>{children}</code>;
+        return <Code {...attributes}>{children}</Code>;
       case 'italic':
         return <em {...attributes}>{children}</em>;
       case 'underlined':

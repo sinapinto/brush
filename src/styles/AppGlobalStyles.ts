@@ -58,4 +58,8 @@ export const AppGlobalStyles = createGlobalStyle`
   ::-moz-selection {
     background: ${theme.brand.highlight};
   }
+
+  [data-slate-editor] > * {
+    margin-bottom: 16px;
+  }
 `;
