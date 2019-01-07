@@ -2,19 +2,20 @@ require('dotenv').config();
 if (!process.env.SESSION_SECRET) {
   throw 'you need to configure SESSION_SECRET in .env';
 }
-import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server-express';
+import * as ConnectRedis from 'connect-redis';
 import * as express from 'express';
 import * as session from 'express-session';
-import * as ConnectRedis from 'connect-redis';
+import * as helmet from 'helmet';
 import * as Redis from 'ioredis';
-import { ApolloServer } from 'apollo-server-express';
+import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { User } from './entities/User';
-import { Post } from './entities/Post';
 import { Category } from './entities/Category';
-import { typeDefs } from './schema';
-import { resolvers } from './resolvers';
+import { Post } from './entities/Post';
+import { User } from './entities/User';
 import { createUserLoader } from './loaders/userLoader';
+import { resolvers } from './resolvers';
+import { typeDefs } from './schema';
 import { TContext } from './utils';
 
 const redis = new Redis(<string>process.env.REDIS_URL);
@@ -27,10 +28,11 @@ createConnection({
   entities: [User, Post, Category],
   logging: process.env.NODE_ENV === 'development' ? true : ['error'],
   synchronize: true,
-  // dropSchema: true,
 })
   .then(async () => {
     const app = express();
+
+    app.use(helmet());
 
     app.use(
       session({
@@ -72,6 +74,7 @@ createConnection({
     });
 
     const port = process.env.PORT || 4000;
+
     app.listen({ port }, () =>
       console.log(
         `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`

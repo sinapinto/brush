@@ -104,7 +104,7 @@ const ButtonContainer = styled.div`
 const LogoLink = styled(Link)`
   font-size: 24px;
   line-height: 32px;
-  font-weight: 900;
+  font-weight: 700;
   color: ${theme.text.reverse};
   white-space: nowrap;
   & > svg {
