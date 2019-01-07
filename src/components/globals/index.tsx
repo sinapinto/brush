@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../styles/theme';
 import { placeholder } from '../../utils/css';
@@ -6,28 +5,28 @@ import { placeholder } from '../../utils/css';
 const headerStyles = css`
   color: ${theme.text.secondary};
   font-weight: 700;
-  ${({ i }: { i: boolean }) => i && 'font-style: italic;'}
+  ${({ i }: { i?: boolean }) => i && 'font-style: italic;'}
 `;
 
-export const H1 = styled(({ i, ...rest }) => <h1 {...rest} />)`
+export const H1 = styled.h1<{ i?: boolean }>`
   font-size: 38px;
   line-height: 46px;
   ${headerStyles}
 `;
 
-export const H2 = styled(({ i, ...rest }) => <h2 {...rest} />)`
+export const H2 = styled.h2<{ i?: boolean }>`
   font-size: 30px;
   line-height: 38px;
   ${headerStyles}
 `;
 
-export const H3 = styled(({ i, ...rest }) => <h3 {...rest} />)`
+export const H3 = styled.h3<{ i?: boolean }>`
   font-size: 24px;
   line-height: 32px;
   ${headerStyles}
 `;
 
-export const H4 = styled(({ i, ...rest }) => <h4 {...rest} />)`
+export const H4 = styled.h4<{ i?: boolean }>`
   font-size: 20px;
   line-height: 28px;
   ${headerStyles}
@@ -125,10 +124,10 @@ export const Spinner = styled.span<SpinnerProps>`
   }
 `;
 
-export const SpacedContent = styled(({ m = 1, ...rest }) => <div {...rest} />)`
+export const SpacedContent = styled.div<{ m?: number }>`
   > * {
-    margin-top: ${({ m }) => m * 8}px;
-    margin-bottom: ${({ m }) => m * 8}px;
+    margin-top: ${({ m = 1 }) => m * 8}px;
+    margin-bottom: ${({ m = 1 }) => m * 8}px;
 
     &:first-child {
       margin-top: 0;
