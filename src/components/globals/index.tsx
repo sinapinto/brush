@@ -56,6 +56,7 @@ export const Card = styled.div<{ p?: number }>`
 
 export const Input = styled.input`
   border: 0;
+  border-radius: 0;
   border-bottom: 2px solid #c4c4c4;
   color: ${theme.text.default};
   font-size: 22px;

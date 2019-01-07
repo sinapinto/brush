@@ -40,12 +40,6 @@ export const Navbar = () => {
           <ButtonContainer>
             <Button
               type="button"
-              onClick={() => setActiveModal(ModalType.Login)}
-            >
-              Log In
-            </Button>
-            <Button
-              type="button"
               onClick={() => setActiveModal(ModalType.Signup)}
             >
               Sign Up
