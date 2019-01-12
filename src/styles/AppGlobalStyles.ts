@@ -59,6 +59,9 @@ export const AppGlobalStyles = createGlobalStyle`
     background: ${theme.brand.highlight};
   }
 
+  [data-slate-editor] {
+    min-height: 128px;
+  }
   [data-slate-editor] > * {
     margin-bottom: 16px;
   }

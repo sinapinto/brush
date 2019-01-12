@@ -36,6 +36,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
           boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
           border: '0',
           borderRadius: '16px',
+          padding: '16px',
         },
       }}
     >

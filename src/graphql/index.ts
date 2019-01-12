@@ -34,11 +34,13 @@ const uri =
 export const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors)
-        graphQLErrors.forEach(({ message, path }) =>
-          console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`)
-        );
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (process.env.NODE_ENV !== 'production') {
+        if (graphQLErrors)
+          graphQLErrors.forEach(({ message, path }) =>
+            console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`)
+          );
+        if (networkError) console.log(`[Network error]: ${networkError}`);
+      }
     }),
     new HttpLink({
       uri,
