@@ -24,4 +24,9 @@ export const theme = {
   warn: {
     default: '#C21F3A',
   },
+  accent: {
+    default: '#ff0053',
+    alt: '#ffe5ed',
+    wash: '#fff3f7',
+  },
 };

@@ -1,4 +1,3 @@
-import { shade } from 'polished';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,15 +26,14 @@ const Container = styled.div`
 `;
 
 const TagLink = styled(Link)`
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
-  background: ${theme.bg.inactive};
-  color: ${theme.text.secondary};
+  background: ${theme.accent.wash};
+  color: ${theme.accent.default};
   padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
   :hover {
-    background: ${shade(0.05, theme.bg.inactive)};
-    color: ${shade(0.05, theme.text.secondary)};
+    background: ${theme.accent.alt};
   }
 `;
