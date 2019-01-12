@@ -90,7 +90,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
             />
             <TagSelect onChange={tags => setTags(tags)} />
             <ErrorMessage>{error && JSON.stringify(error)}</ErrorMessage>
-            <CTAButton type="submit" disabled={loading}>
+            <CTAButton type="submit" disabled={loading || !title}>
               Create
             </CTAButton>
           </Form>
