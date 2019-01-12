@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FetchResult, Mutation } from 'react-apollo';
+import { FetchResult, Mutation, MutationFn } from 'react-apollo';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
@@ -27,7 +27,7 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
-    createPost: any
+    createPost: MutationFn<CreatePost, CreatePostVariables>
   ) => {
     e.preventDefault();
     createPost({
@@ -39,8 +39,13 @@ const Create: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
           categories: tags,
         },
       },
-    }).then(({ data }: any) => {
-      history.push(`/p/${data.createPost.id}`);
+    }).then(result => {
+      if (result && result.data && result.data.createPost) {
+        history.push(`/p/${result.data.createPost.id}`);
+      } else {
+        console.warn('response missing post id', result);
+        history.push('/');
+      }
     });
   };
 
