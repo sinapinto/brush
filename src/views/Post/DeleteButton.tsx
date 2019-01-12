@@ -13,6 +13,7 @@ import {
 } from '../../graphql/mutations/__generated__/DeletePost';
 import { getPostsQuery } from '../../graphql/queries/post';
 import { GetPosts } from '../../graphql/queries/__generated__/GetPosts';
+import { iconStyles } from './styles';
 
 interface DeleteButtonProps extends RouteComponentProps {
   postId: string;
@@ -71,12 +72,7 @@ const DeleteButtonComponent = ({ postId, history }: DeleteButtonProps) => {
 };
 
 const DeleteIcon = styled(MdDelete)`
-  color: #ccc;
-  font-size: 24px;
-  :hover {
-    color: black;
-    cursor: pointer;
-  }
+  ${iconStyles}
 `;
 
 const ModalBody = styled.div`

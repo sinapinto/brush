@@ -6,10 +6,9 @@
 // ====================================================
 
 export interface UnsubscribeToUserMutation_unsubscribeToUser {
-  __typename: "User";
+  __typename: 'User';
   id: string;
   subscribed: boolean;
-  isSubscriber: boolean;
 }
 
 export interface UnsubscribeToUserMutation {

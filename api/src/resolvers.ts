@@ -1,19 +1,20 @@
 import {
-  ForbiddenError,
   AuthenticationError,
+  ForbiddenError,
   UserInputError,
 } from 'apollo-server-express';
 import * as bcrypt from 'bcrypt';
-import { getConnection, Not } from 'typeorm';
 import { validate } from 'class-validator';
-import { Post } from './entities/Post';
-import { User } from './entities/User';
-import { Category } from './entities/Category';
-import { paginateResults, IResolver } from './utils';
+import { getConnection, Not } from 'typeorm';
 import {
   CreatePostInput,
+  EditPostInput,
   EditProfileInput,
 } from '../../__generated__/globalTypes';
+import { Category } from './entities/Category';
+import { Post } from './entities/Post';
+import { User } from './entities/User';
+import { IResolver, paginateResults } from './utils';
 
 export const resolvers: IResolver = {
   Query: {
@@ -174,6 +175,24 @@ export const resolvers: IResolver = {
         return manager.findOne(Post, post.id, {
           relations: ['author', 'categories'],
         });
+      });
+    },
+
+    editPost: async (_, args: { input: EditPostInput }, { session }) => {
+      if (!session.userId) {
+        return new AuthenticationError('Not logged in');
+      }
+      const { input } = args;
+      const post = await Post.findOne(input.id);
+      if (!post) {
+        return new UserInputError('Post not found');
+      }
+      if (post.authorId !== session.userId) {
+        return new ForbiddenError('You are not the author of this post');
+      }
+      await Post.update(input.id, input);
+      return Post.findOne(input.id, {
+        relations: ['author', 'categories'],
       });
     },
 

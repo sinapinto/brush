@@ -12,6 +12,12 @@ export interface CreatePostInput {
   categories: string[];
 }
 
+export interface EditPostInput {
+  id: string;
+  body: string;
+  rawBody: string;
+}
+
 export interface EditProfileInput {
   username: string;
   bio: string;

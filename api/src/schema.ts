@@ -15,6 +15,7 @@ export const typeDefs = gql`
     register(username: String!, password: String!): User
     logout: Boolean
     createPost(input: CreatePostInput!): Post
+    editPost(input: EditPostInput!): Post
     deletePost(id: ID!): Boolean
     subscribeToUser(id: ID!): User
     unsubscribeToUser(id: ID!): User
@@ -45,6 +46,12 @@ export const typeDefs = gql`
     body: String!
     rawBody: String!
     categories: [String!]!
+  }
+
+  input EditPostInput {
+    id: ID!
+    body: String!
+    rawBody: String!
   }
 
   type User {

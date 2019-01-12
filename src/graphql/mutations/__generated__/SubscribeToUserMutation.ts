@@ -6,10 +6,9 @@
 // ====================================================
 
 export interface SubscribeToUserMutation_subscribeToUser {
-  __typename: "User";
+  __typename: 'User';
   id: string;
   subscribed: boolean;
-  isSubscriber: boolean;
 }
 
 export interface SubscribeToUserMutation {
