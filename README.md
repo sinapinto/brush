@@ -61,6 +61,14 @@ I'll go over some of the tradeoffs i've found so far for each.
 
 ### React Suspense API
 
+## To-do
+
+- [ ] pagination
+- [ ] edit post
+- [ ] feed
+- [ ] comments
+- [ ] profile image upload
+- [ ] search suggestions
 
 ## Attribution
 
