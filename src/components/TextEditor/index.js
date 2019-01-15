@@ -1,5 +1,6 @@
 // @ts-ignore
 import { isKeyHotkey } from 'is-hotkey';
+import isUrl from 'is-url';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -10,11 +11,13 @@ import {
   MdFormatListNumbered,
   MdFormatQuote,
   MdFormatUnderlined,
+  MdLink,
   MdLooksOne,
   MdLooksTwo,
 } from 'react-icons/md';
-import { Editor } from 'slate-react';
+import { Editor, getEventTransfer } from 'slate-react';
 import {
+  A,
   Blockquote,
   Button,
   Code,
@@ -37,6 +40,7 @@ const icons = {
   italic: <MdFormatItalic />,
   underlined: <MdFormatUnderlined />,
   code: <MdCode />,
+  link: <MdLink />,
   'heading-one': <MdLooksOne />,
   'heading-two': <MdLooksTwo />,
   'block-quote': <MdFormatQuote />,
@@ -53,6 +57,11 @@ export class TextEditor extends React.Component {
   hasBlock = type => {
     const { value } = this.props;
     return value.blocks.some(node => node.type === type);
+  };
+
+  hasLinks = () => {
+    const { value } = this.props;
+    return value.inlines.some(inline => inline.type === 'link');
   };
 
   ref = editor => {
@@ -73,16 +82,18 @@ export class TextEditor extends React.Component {
             {this.renderBlockButton('block-quote')}
             {this.renderBlockButton('numbered-list')}
             {this.renderBlockButton('bulleted-list')}
+            {this.renderLinkButton('link')}
           </Toolbar>
         )}
         <Editor
-          spellCheck
+          spellCheck={false}
           readOnly={this.props.readOnly}
           placeholder={this.props.placeholder}
           ref={this.ref}
           value={this.props.value}
           onChange={this.props.onChange}
           onKeyDown={this.onKeyDown}
+          onPaste={this.onPaste}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
         />
@@ -127,7 +138,16 @@ export class TextEditor extends React.Component {
     );
   };
 
-  renderNode = (props, editor, next) => {
+  renderLinkButton = type => {
+    let isActive = this.hasLinks(type);
+    return (
+      <Button active={isActive} onMouseDown={this.onClickLink}>
+        {icons[type]}
+      </Button>
+    );
+  };
+
+  renderNode = (props, _editor, next) => {
     const { attributes, children, node } = props;
 
     switch (node.type) {
@@ -143,12 +163,26 @@ export class TextEditor extends React.Component {
         return <li {...attributes}>{children}</li>;
       case 'numbered-list':
         return <Ol {...attributes}>{children}</Ol>;
+      case 'link': {
+        const { data } = node;
+        const href = data.get('href');
+        return (
+          <A
+            {...attributes}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {children}
+          </A>
+        );
+      }
       default:
         return next();
     }
   };
 
-  renderMark = (props, editor, next) => {
+  renderMark = (props, _editor, next) => {
     const { children, mark, attributes } = props;
 
     switch (mark.type) {
@@ -232,7 +266,72 @@ export class TextEditor extends React.Component {
       }
     }
   };
+
+  onClickLink = e => {
+    e.preventDefault();
+
+    const { editor } = this;
+    const { value } = editor;
+    const hasLinks = this.hasLinks();
+
+    if (hasLinks) {
+      editor.command(unwrapLink);
+    } else if (value.selection.isExpanded) {
+      const href = window.prompt('Enter the URL of the link:');
+
+      if (href === null) {
+        return;
+      }
+
+      editor.command(wrapLink, href);
+    } else {
+      const href = window.prompt('Enter the URL of the link:');
+
+      if (href === null) {
+        return;
+      }
+
+      const text = window.prompt('Enter the text for the link:');
+
+      if (text === null) {
+        return;
+      }
+
+      editor
+        .insertText(text)
+        .moveFocusBackward(text.length)
+        .command(wrapLink, href);
+    }
+  };
+
+  onPaste = (event, editor, next) => {
+    if (editor.value.selection.isCollapsed) return next();
+
+    const transfer = getEventTransfer(event);
+    const { type, text } = transfer;
+    if (type !== 'text' && type !== 'html') return next();
+    if (!isUrl(text)) return next();
+
+    if (this.hasLinks()) {
+      editor.command(unwrapLink);
+    }
+
+    editor.command(wrapLink, text);
+  };
 }
+
+const wrapLink = (editor, href) => {
+  editor.wrapInline({
+    type: 'link',
+    data: { href },
+  });
+
+  editor.moveToEnd();
+};
+
+const unwrapLink = editor => {
+  editor.unwrapInline('link');
+};
 
 TextEditor.propTypes = {
   onChange: PropTypes.func,

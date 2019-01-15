@@ -54,3 +54,8 @@ export const Blockquote = styled.blockquote`
   margin-right: 0;
   padding-left: 16px;
 `;
+
+export const A = styled.a`
+  color: ${theme.accent.default};
+  text-decoration: underline;
+`;
