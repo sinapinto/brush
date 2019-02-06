@@ -103,11 +103,23 @@ export class TextEditor extends React.Component {
 
   renderMarkButton = type => {
     const isActive = this.hasMark(type);
+    let title =
+      type === 'bold'
+        ? 'b'
+        : type === 'italic'
+        ? 'i'
+        : type === 'underlined'
+        ? 'u'
+        : type === 'code'
+        ? '`'
+        : null;
+    if (title) title = `Ctrl-${title}`;
 
     return (
       <Button
         active={isActive}
         onMouseDown={event => this.onClickMark(event, type)}
+        title={title}
       >
         {icons[type]}
       </Button>
